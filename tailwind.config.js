@@ -9,9 +9,14 @@ module.exports = {
         primary: "#175C8C",
         secondary: "#FFFFFF",
       },
+
       fontFamily: {
         poppins: ["Poppins"],
       },
+
+      backgroundImage: {
+        'bg-vvm': "url('../assets/vvm.png')",
+      }
     },
   },
   plugins: [],
