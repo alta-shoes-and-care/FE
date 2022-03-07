@@ -56,7 +56,7 @@ function History() {
   return (
     <div className={`flex justify-center items-center ${styles.historybg}`}>
       <div
-        className={` w-[700px] h-screen my-8 p-4 flex justify-cente flex-col items-center ${styles.historyGlass}`}
+        className={` w-[700px] h-screen my-8 p-4 flex flex-col items-center ${styles.historyGlass}`}
       >
         <h1 className=" text-3xl text-center  font-bold my-3 ">
           History Order
