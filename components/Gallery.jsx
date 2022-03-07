@@ -52,7 +52,7 @@ export default function Gallery(props) {
         <h1 className="font-bold text-black text-[48px] text-center mb-8">Gallery</h1>
         <div className="flex flex-row flex-wrap justify-center mb-[10px]">
         {images.map((src, index) => (
-          <div className="relative w-[350px] h-[200px] m-1">
+          <div key={index} className="relative w-[350px] h-[200px] m-1">
           <motion.div
             initial={"hidden"}
             animate={animationControls}

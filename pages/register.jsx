@@ -13,74 +13,81 @@ export default function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const [nameErr, setNameErr] = useState({});
-  const [emailErr, setEmailErr] = useState({});
-  const [passwordErr, setPasswordErr] = useState({});
-
   const [loading, setLoading] = useState(false);
+  const [show, setShow] = useState(false);
 
   const router = useRouter();
 
-  // Function Handle Button
-  function handleRegister(e){
+  function validateRegister(e) {
     e.preventDefault();
-    const isValid = formValidation();
-    if (isValid) {
-      const data = {name, email, password};
-      setLoading(true);
-      axios
-        .post('', data)
-        .then(({data}) => {
-          if (data) {
-            setName('');
-            setEmail('');
-            setPassword('');
-            Toast.fire({
-              icon: 'success',
-              title: 'Success Regist, you can login now!'
-            })
-            router.push('/login')
-          }
-        })
-        .catch((err) => {
-          if (err) {
-            Swal.fire({
-              icon: 'error',
-              title: 'Error',
-              text: 'Invalid Passowrd / Email'
-            })
-          }
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+
+    if (name === '' && email === '' && password === '') {
+      Swal.fire('Invalid!', 'Data cannot be empty!', 'error')
+    }
+    else if (name.trim().length <= 3) {
+      // nama boleh ada spasi, boleh ada huruf besar, boleh ada spesial karakter, angka, dll yang penting tidak boleh kurang dari 3
+      setShow(true);
+      Swal.fire('Invalid!','Name must be more than 3 characters.','error')
+    }  
+    else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
+      setShow(true);
+      Swal.fire('Invalid!','Email format is not valid.','error')
+    }
+    else if (!/^(?!.*\s).{5,8}$/.test(password)) {
+      /* 
+      password tidak boleh ada spasi
+      min 5, max 8
+      boleh huruf besar, huruf kecil, angka, dan spesial karakter
+      */
+      setShow(true);
+      Swal.fire('Invalid!','Password must not contain spaces, minimum 5 characters, and maximum 8 characters.', 'error')
+    } else {
+      handleRegister()
     }
   }
 
-  // Function Validation
-  function formValidation() {
-    const nameErr = {};
-    const emailErr = {};
-    const passwordErr = {};
-    let isValid = true;
+  function handleRegister() {
+    setLoading(true);
+    const body = {
+      name,
+      email,
+      password,
+      is_admin : false
+    }
+    axios
+    .post('http://3.1.211.120:8081/users', body)
+    .then((data) => {
+      Swal.fire(
+        'Success Regist',
+        'you can login now',
+        'success'
+      )
+      console.log(data);
+      setShow(true);
+      setName('');
+      setEmail('');
+      setPassword('');
+      router.push('/login')
+    })
+    .catch((err) => {
+      Swal.fire('Error', 'The data you entered is already registered', 'error');
+      console.log(err);
+      setShow(true);
 
-    if (name.trim().length <= 3) {
-      nameErr.nameShort = "Name too very short";
-      isValid = false;
-    }
-    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
-      emailErr.mailtag = "Invalid Email";
-      isValid = false;
-    }
-    if (password.length <= 8) {
-        passwordErr.passleng = "Password must be at least 8 chars long";
-        isValid = false;
-    }
-    setNameErr(nameErr);
-    setEmailErr(emailErr);
-    setPasswordErr(passwordErr);
-    return isValid;
-  };
+      setName('');
+      setEmail('');
+      setPassword('');
+    })
+    .finally(() => {
+      setLoading(false);
+    })
+  }
+
+  if (loading) {
+    return (
+        <Loading />
+    );
+}
 
   return (
     <div className='container min-h-screen min-w-full flex justify-center text-center bg-cover bg-no-repeat' style={{backgroundImage: "url(https://images.unsplash.com/photo-1509472290917-08d8d47c5fca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80)"}}>
@@ -102,14 +109,8 @@ export default function Register() {
                 autoComplete="off" 
                 required 
                 className="h-[50px] bg-transparent appearance-none rounded-xl relative block w-full px-3 py-2 border-2 border-primary placeholder-gray-700 text-black md:text-[18px] focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
-                onChange={e => { setName(e.target.value)}}
                 value={name}
-                {...Object.keys(nameErr).map((key) => {
-                  return
-                    <div className='text-red-500 text-md text-left italic p-2'>
-                      {nameErr[key]}
-                    </div>
-                })}
+                onChange={(e) => { setName(e.target.value)}}
                 />
               </div>
 
@@ -124,14 +125,8 @@ export default function Register() {
                 autoComplete="off" 
                 required 
                 className="h-[50px] bg-transparent appearance-none rounded-xl relative block w-full px-3 py-2 border-2 border-primary placeholder-gray-700 text-black md:text-[18px] focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
-                onChange={e => { setEmail(e.target.value)}}
                 value={email}
-                {...Object.keys(emailErr).map((key) => {
-                  return
-                    <div className='text-red-500 text-md text-left italic p-2'>
-                      {emailErr[key]}
-                    </div>
-                })}
+                onChange={(e) => { setEmail(e.target.value)}}
                 />
               </div>
 
@@ -145,21 +140,15 @@ export default function Register() {
                 autoComplete="off" 
                 required 
                 className="h-[50px] bg-transparent appearance-none relative block w-full px-3 py-2 border-2 border-primary placeholder-gray-700 text-black md:text-[18px] rounded-xl focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
-                onChange={e => { setPassword(e.target.value)}}
                 value={password}
-                {...Object.keys(passwordErr).map((key) => {
-                  return
-                    <div className='text-red-500 text-md text-left italic p-2'>
-                      {passwordErr[key]}
-                    </div>
-                })}
+                onChange={(e) => { setPassword(e.target.value)}}
                 />
               </div>
 
               <div className='flex justify-center'>
                 <button
                 className="w-[250px] h-[50px] mt-10 text-center text-[18px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium rounded-xl text-white bg-primary hover:bg-transparent hover:border-primary hover:border-2 hover:text-primary hover:font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
-                onClick={handleRegister}
+                onClick={validateRegister}
                 >
                   Sign up
                 </button>

@@ -1,6 +1,7 @@
 import React from "react";
 import Navicon from "../assets/nav-icon.png";
 import Image from "next/image";
+import Link from "next/link";
 import {
   FaFacebook,
   FaTwitter,
@@ -15,12 +16,15 @@ function FooterComponent() {
   return (
     <div className=" flex justify-between px-24 items-center py-2 border-t-2">
       {/* logo nav */}
-      <div
-        onClick={() => router.push("/")}
-        className=" relative h-20 w-32 mb-3"
-      >
-        <Image src={Navicon} layout="fill"></Image>
-      </div>
+      <Link href='/'>
+        <a>
+          <div
+            className=" relative h-20 w-32 mb-3"
+          >
+            <Image src={Navicon} layout="fill" />
+          </div>
+        </a>
+      </Link>
       {/* social media */}
       <div className=" grid justify-center items-center content-evenly justify-items-center">
         <h1 className=" text-primary text-2xl my-1">Contatc Us</h1>

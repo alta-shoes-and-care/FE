@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import Swal from "sweetalert2";
 import Navicon from "../assets/nav-icon.png";
 import { useRouter } from "next/router";
 
 function NavbarCompoent() {
-  const Swal = require("sweetalert2");
   const router = useRouter();
   const [showOption, setShowOpt] = useState(false);
 
@@ -41,10 +42,18 @@ function NavbarCompoent() {
         return (
           <div className=" flex">
             <h1 className=" mx-3 text-xl text-primary hover:text-orange-600">
-              <a href="">Service</a>
+              <Link href="/services">
+                <a>
+                  Service
+                </a>
+              </Link>
             </h1>
             <h1 className=" mx-3 text-xl text-primary hover:text-orange-600">
-              <a href="">About Us</a>
+            <Link href="/about">
+                <a>
+                  About Us
+                </a>
+              </Link>
             </h1>
 
             {/* dropdown */}
@@ -67,9 +76,9 @@ function NavbarCompoent() {
                     aria-hidden="true"
                   >
                     <path
-                      fill-rule="evenodd"
+                      fillRule="evenodd"
                       d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                      clip-rule="evenodd"
+                      clipRule="evenodd"
                     />
                   </svg>
                 </button>
@@ -81,27 +90,29 @@ function NavbarCompoent() {
                   role="menu"
                   aria-orientation="vertical"
                   aria-labelledby="menu-button"
-                  tabindex="-1"
+                  tabIndex="-1"
                 >
                   <div className="py-1" role="none">
-                    <a
-                      href="/login"
+                    <Link href="/login">
+                      <a
                       className="text-primary block px-4 py-2 text-l  hover:text-orange-600 "
                       role="menuitem"
-                      tabindex="-1"
+                      tabIndex="-1"
                       id="menu-item-0"
-                    >
-                      Login
-                    </a>
-                    <a
-                      href="/register"
+                      >
+                        Login
+                      </a>
+                    </Link>
+                    <Link href="/register">
+                      <a
                       className="text-primary block px-4 py-2 text-l  hover:text-orange-600 "
                       role="menuitem"
-                      tabindex="-1"
+                      tabIndex="-1"
                       id="menu-item-0"
-                    >
-                      Register
-                    </a>
+                      >
+                        Register
+                      </a>
+                    </Link>
                   </div>
                 </div>
               )}
@@ -116,13 +127,13 @@ function NavbarCompoent() {
         return (
           <div className=" flex">
             <h1 className=" mx-3 text-xl text-primary hover:text-orange-600">
-              <a href="">Service</a>
+              <Link href="/services"><a>Service</a></Link>
             </h1>
             <h1 className=" mx-3 text-xl text-primary hover:text-orange-600">
-              <a href="">About Us</a>
+              <Link href="/about"><a>About Us</a></Link>
             </h1>
             <h1 className=" mx-3 text-xl text-primary hover:text-orange-600">
-              <a href="">Order</a>
+              <Link href="/order"><a>Order</a></Link>
             </h1>
 
             {/* dropdown */}
@@ -145,9 +156,9 @@ function NavbarCompoent() {
                     aria-hidden="true"
                   >
                     <path
-                      fill-rule="evenodd"
+                      fillRule="evenodd"
                       d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                      clip-rule="evenodd"
+                      clipRule="evenodd"
                     />
                   </svg>
                 </button>
@@ -168,7 +179,7 @@ function NavbarCompoent() {
                       }}
                       className="text-primary block px-4 py-2 text-l  hover:text-orange-600 "
                       role="menuitem"
-                      tabindex="-1"
+                      tabIndex="-1"
                       id="menu-item-0"
                     >
                       Logout
@@ -187,13 +198,13 @@ function NavbarCompoent() {
         return (
           <div className=" flex">
             <h1 className=" mx-3 text-xl text-primary hover:text-orange-600">
-              <a href="">Service</a>
+            <Link href="/services"><a>Service</a></Link>
             </h1>
             <h1 className=" mx-3 text-xl text-primary hover:text-orange-600">
-              <a href="">About Us</a>
+            <Link href="/about"><a>About Us</a></Link>
             </h1>
             <h1 className=" mx-3 text-xl text-primary hover:text-orange-600">
-              <a href="">Store</a>
+            <Link href="/store"><a>Store</a></Link>
             </h1>
 
             {/* dropdown */}
@@ -216,9 +227,9 @@ function NavbarCompoent() {
                     aria-hidden="true"
                   >
                     <path
-                      fill-rule="evenodd"
+                      fillRule="evenodd"
                       d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                      clip-rule="evenodd"
+                      clipRule="evenodd"
                     />
                   </svg>
                 </button>
@@ -230,7 +241,7 @@ function NavbarCompoent() {
                   role="menu"
                   aria-orientation="vertical"
                   aria-labelledby="menu-button"
-                  tabindex="-1"
+                  tabIndex="-1"
                 >
                   <div className="py-1" role="none">
                     <a
@@ -239,7 +250,7 @@ function NavbarCompoent() {
                       }}
                       className="text-primary block px-4 py-2 text-l  hover:text-orange-600 "
                       role="menuitem"
-                      tabindex="-1"
+                      tabIndex="-1"
                       id="menu-item-0"
                     >
                       Logout
@@ -256,12 +267,15 @@ function NavbarCompoent() {
   return (
     <div className=" flex justify-between px-24 items-center shadow-md bg-white sticky top-0 z-10 ">
       {/* logo nav */}
-      <div
-        onClick={() => router.push("/")}
-        className=" relative h-20 w-32 mb-3"
-      >
-        <Image src={Navicon} layout="fill"></Image>
-      </div>
+      <Link href='/'>
+        <a>
+          <div
+            className=" relative h-20 w-32 mb-3"
+          >
+            <Image src={Navicon} layout="fill" />
+          </div>
+        </a>
+      </Link>
       {/* Toggle */}
       {returnNav()}
     </div>

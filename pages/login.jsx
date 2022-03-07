@@ -11,85 +11,62 @@ function Login() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [emailErr, setEmailErr] = useState({});
-  const [passwordErr, setPasswordErr] = useState({});
+
   const [loading, setLoading] = useState(false);
+  const [show, setShow] = useState(false);
 
   const router = useRouter();
 
-  function handleLogin(e) {
+  function validateLogin(e) {
     e.preventDefault();
-    const isValid = formValidation();
-    if (isValid) {
-      const data = {email, password};
-      setLoading(true)
-      axios
-      .post("", data)
-      .then(({data}) => {
-        if (data) {
-          setEmail('');
-          setPassword('');
-          Toast.fire({
-            icon: 'success',
-            title: 'Welcome to S3'
-          })
-          localStorage.setItem('token', data.data.token)
-          router.push("/")
-        }
-      })
-      .catch((err) => {
-        setEmail('');
-        setPassword('');
-        if (err) {
-          Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: 'Invalid Email / Password'
-          })
-        }
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+
+    if (email === '' && password === '') {
+      Swal.fire('Invalid!', 'Email / Password cannot be empty.', 'error');
+    }
+    else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
+      Swal.fire('Invalid!', 'Email format is not valid.', 'error');
+    }
+    else if (!/^(?!.*\s).{5,8}$/.test(password)) {
+      Swal.fire('Invalid!', 'Password must not contain spaces, minimum 5 characters, and maximum 8 characters.', 'error');
+    }
+    else {
+      handleLogin()
     }
   }
 
-  // Function Validation
-  function formValidation() {
-    const emailErr = {};
-    const passwordErr = {};
-    let isValid = true;
-
-    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
-      emailErr.mailtag = "Invalid Email";
-      isValid = false;
+  function handleLogin() {
+    setLoading(true);
+    const body = {
+      email,
+      password,
     }
-    if (password.length <= 8) {
-        passwordErr.passleng = "Password must be at least 8 chars long";
-        isValid = false;
-    }
-
-    setEmailErr(emailErr);
-    setPasswordErr(passwordErr);
-    setTimeout(() => {
-        setEmailErr('');
-        setPasswordErr('');
-    }, 2000);
-    return isValid;
-    };
-
-    // Notif success
-    const Toast = Swal.mixin({
-      toast: true,
-      position: 'top-end',
-      showConfirmButton: false,
-      timer: 3000,
-      timerProgressBar: true,
-      didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer)
-          toast.addEventListener('mouseleave', Swal.resumeTimer)
+    axios
+    .post('http://3.1.211.120:8081/login', body)
+    .then(({data}) => {
+      if(data) {
+        console.log(data);
+        setShow(true);;
+        setEmail('');
+        setPassword('');
+        Swal.fire('Success Login!', 'You can start using the S3 service now.', 'success')
+      localStorage.setItem('token', data.data)
+      router.push('/')
+        }
+    })
+    .catch((err) => {
+      if(err) {
+        console.log(err);
+        setShow(true);
+        setEmail('');
+        setPassword('');
+        Swal.fire('Error!', 'The data you entered was not found.', 'error');
       }
     })
+    .finally(() => {
+      setLoading(false);
+    })
+  }
+
 
     if (loading) {
       return (
@@ -116,14 +93,8 @@ function Login() {
                 autoComplete="off" 
                 required 
                 className="h-[50px] bg-transparent appearance-none rounded-xl relative block w-full px-3 py-2 border-2 border-primary placeholder-gray-700 text-black md:text-[18px] focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
-                onChange={e => { setEmail(e.target.value)}}
                 value={email}
-                {...Object.keys(emailErr).map((key) => {
-                  return
-                    <div className='text-red-500 text-md text-left italic p-2'>
-                      {emailErr[key]}
-                    </div>
-                })}
+                onChange={(e) => { setEmail(e.target.value)}}
                 />
               </div>
 
@@ -137,21 +108,15 @@ function Login() {
                 autoComplete="off" 
                 required 
                 className="h-[50px] bg-transparent appearance-none relative block w-full px-3 py-2 border-2 border-primary placeholder-gray-700 text-black md:text-[18px] rounded-xl focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
-                onChange={e => { setPassword(e.target.value)}}
                 value={password}
-                {...Object.keys(passwordErr).map((key) => {
-                  return
-                    <div className='text-red-500 text-md text-left italic p-2'>
-                      {passwordErr[key]}
-                    </div>
-                })}
+                onChange={(e) => { setPassword(e.target.value)}}
                 />
               </div>
 
               <div className='flex justify-center'>
                 <button
                 className="w-[250px] h-[50px] mt-10 text-center text-[18px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium rounded-xl text-white bg-primary hover:bg-transparent hover:border-primary hover:border-2 hover:text-primary hover:font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
-                onClick={handleLogin}
+                onClick={validateLogin}
                 >
                   Sign in
                 </button>
