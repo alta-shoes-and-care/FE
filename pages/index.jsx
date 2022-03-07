@@ -5,16 +5,8 @@ import ReactStars from "react-rating-stars-component";
 import Iframe from "react-iframe";
 import Image from "next/image";
 
-import g1 from "../assets/gallery/g1.png";
-import g2 from "../assets/gallery/g2.png";
-import g3 from "../assets/gallery/g3.png";
-import g4 from "../assets/gallery/g4.png";
-import g5 from "../assets/gallery/g5.png";
-import g6 from "../assets/gallery/g6.png";
-import g7 from "../assets/gallery/g7.png";
-import g8 from "../assets/gallery/g8.png";
-import g9 from "../assets/gallery/g9.png";
 import vvm from "../assets/vvm.png";
+import Gallery from "../components/Gallery";
 
 const starReview = {
   size: 30,
@@ -96,28 +88,7 @@ export default function Home() {
       </div>
 
       <div className="py-10 w-full">
-        <h1 className="font-bold text-black text-[48px] text-center mb-8">
-          Gallery
-        </h1>
-        <div className="flex justify-center mb-[10px]">
-          <div className="relative w-[400px] h-[230px] mr-10">
-            <Image src={g1} alt="g1" layout="fill" />
-          </div>
-          <Image src={g2} alt="g2" width="260px" height="230px" className="pr-2" />
-          <Image src={g3} alt="g3" width="260px" height="230px" />
-        </div>
-
-        <div className="flex justify-center mb-[10px]">
-          <Image src={g4} alt="g4" width="360px" height="230px" />
-          <Image src={g5} alt="g5" width="500px" height="230px" />
-          <Image src={g6} alt="g6" width="360px" height="230px" />
-        </div>
-
-        <div className="flex justify-center">
-          <Image src={g7} alt="g7" width="360px" height="230px" />
-          <Image src={g8} alt="g8" width="360px" height="230px" />
-          <Image src={g9} alt="g9" width="500px" height="230px" />
-        </div>
+        <Gallery />
       </div>
 
       <div className="w-full mb-10">
