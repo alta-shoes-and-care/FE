@@ -22,3 +22,17 @@
 .inputbg {
   background: #ffffffb8;
 }
+
+.adminbg {
+  background: url(../assets/admin-bg1.png);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.adminbg2 {
+  background: url(../assets/admin-bg2.png);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}

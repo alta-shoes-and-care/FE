@@ -34,7 +34,7 @@ function History() {
     },
   ];
 
-  function handleConfirm() {
+  function handleConfirm(el) {
     return Swal.fire({
       title: "Confirm Order?",
       text: "",
@@ -47,7 +47,7 @@ function History() {
       if (result.isConfirmed) {
         Swal.fire("Thank you :)", "", "success");
         setTimeout(() => {
-          router.push("/review");
+          router.push(`/review/${el.id}`);
         }, 2000);
       }
     });
@@ -94,7 +94,7 @@ function History() {
                 <p>{el.id}</p>
               </div>
               <div
-                onClick={handleConfirm}
+                onClick={() => handleConfirm(el)}
                 className=" flex hover:animate-pulse hover:text-primary"
               >
                 <p className="text-xl mt-0.5 mr-0.5">

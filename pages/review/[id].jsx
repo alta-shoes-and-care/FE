@@ -28,9 +28,8 @@ function Review() {
           <form className=" w-[528px]" action="#" method="POST">
             <div>
               <input
-                id="email-address"
-                name="email"
-                type="email"
+                name="name"
+                type="text"
                 placeholder="input your name"
                 autoComplete="off"
                 required
@@ -38,9 +37,8 @@ function Review() {
               />
             </div>
             <h1 className=" text-3xl mb-[-13px]">Rate</h1>
-            <p className="">
-              <ReactStars {...starReview} onChange={ratingChanged} />
-            </p>
+
+            <ReactStars {...starReview} onChange={ratingChanged} />
 
             <h1 className=" text-3xl mb-3">Comentar</h1>
             <textarea
