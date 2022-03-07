@@ -16,7 +16,7 @@ export default function Service() {
 
   return (
     <div className='container max-w-screen-xl m-auto p-10'>
-      <h1 className='font-bold text-black text-[48px] text-center mb-8'>Our Service</h1>
+      <h1 className='font-bold text-black text-[48px] text-center mb-8'>Our Services</h1>
 
       <div className='mt-6 space-y-12 lg:space-y-0 lg:grid lg:grid-cols-4 lg:gap-x-3'>
         {listService.map((el, i) => (
