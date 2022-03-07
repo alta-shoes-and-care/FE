@@ -25,7 +25,7 @@ const starReview = {
 export default function Home() {
   return (
     <div>
-      <div className="w-full h-[700px] flex justify-center items-center">
+      <div>
         <Carousel />
       </div>
 
@@ -44,9 +44,7 @@ export default function Home() {
               <ReactStars {...starReview} />
             </div>
             <blockquote className="italic font-thin text-[18px]">
-              "Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Reprehenderit libero vero inventore eos voluptatibus. Asperiores
-              aperiam exercitationem soluta recusandae harum."
+              "Recommend for cleaning shoes, there is a 1 day package, suitable for cleaning safety shoes too"
             </blockquote>
           </div>
 
@@ -56,9 +54,7 @@ export default function Home() {
               <ReactStars {...starReview} />
             </div>
             <blockquote className="italic font-thin text-[18px]">
-              "Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Reprehenderit libero vero inventore eos voluptatibus. Asperiores
-              aperiam exercitationem soluta recusandae harum."
+              "Good place. Recommended laundry for shoes."
             </blockquote>
           </div>
 
@@ -68,9 +64,7 @@ export default function Home() {
               <ReactStars {...starReview} />
             </div>
             <blockquote className="italic font-thin text-[18px]">
-              "Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Reprehenderit libero vero inventore eos voluptatibus. Asperiores
-              aperiam exercitationem soluta recusandae harum."
+              "The process is fast. The service is also good and friendly. The premium cleaning results are satisfactory. Love it!"
             </blockquote>
           </div>
         </div>
@@ -91,16 +85,11 @@ export default function Home() {
           </div>
 
           <div className="w-2/5 ml-1">
-            <p className="text-[24px] text-justify">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facilis
-              quam, nostrum asperiores earum temporibus culpa expedita harum
-              ipsa excepturi veritatis nihil error sit quas ea officia tempora
-              est quae quod voluptatibus. Optio consequuntur deserunt ullam
-              laudantium consequatur laboriosam corrupti autem odio dolore
-              aperiam. Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Quaerat nisi, iste laboriosam temporibus provident molestiae!
-              Optio consequuntur deserunt llam laudantium consequatur laboriosam
-              corrupti autem.
+            <p className="text-[20px] text-justify">
+            Shoes Service Station is a business engaged in laundry and care services for washing quality shoes from Indonesia. <br/>
+            We offer various services such as washing and re-staining your shoes to restore the glory of your shoes. To date, we have completed many pairs of shoes and will continue to grow.<br/>
+            The name Shoes Service Station means that everyone can wash their shoes at our place with affordable prices and quality service. We hope to provide the best for you.<br/>
+            In addition, we also support the #zerowaste program by not using plastic laundry bags like most shoe laundry in general. Laundry bags from Shoes Service Store can be used repeatedly without polluting the environment. We hope that with a small gesture from us and with your help, we can reduce the amount of plastic use in Indonesia.
             </p>
           </div>
         </div>
@@ -108,54 +97,55 @@ export default function Home() {
 
       <div className="py-10 w-full">
         <h1 className="font-bold text-black text-[48px] text-center mb-8">
-          Galley
+          Gallery
         </h1>
-        <div className="flex justify-between mb-[10px]">
-          <Image src={g1} alt="g1" width="560px" height="289px" />
-          <Image src={g2} alt="g2" width="420px" height="289px" />
-          <Image src={g3} alt="g3" width="420px" height="289px" />
+        <div className="flex justify-center mb-[10px]">
+          <div className="relative w-[400px] h-[230px] mr-10">
+            <Image src={g1} alt="g1" layout="fill" />
+          </div>
+          <Image src={g2} alt="g2" width="260px" height="230px" className="pr-2" />
+          <Image src={g3} alt="g3" width="260px" height="230px" />
         </div>
 
-        <div className="flex justify-between mb-[10px]">
-          <Image src={g4} alt="g4" width="420px" height="289px" />
-          <Image src={g5} alt="g5" width="560px" height="289px" />
-          <Image src={g6} alt="g6" width="420px" height="289px" />
+        <div className="flex justify-center mb-[10px]">
+          <Image src={g4} alt="g4" width="360px" height="230px" />
+          <Image src={g5} alt="g5" width="500px" height="230px" />
+          <Image src={g6} alt="g6" width="360px" height="230px" />
         </div>
 
-        <div className="flex justify-between">
-          <Image src={g7} alt="g7" width="420px" height="289px" />
-          <Image src={g8} alt="g8" width="420px" height="289px" />
-          <Image src={g9} alt="g9" width="560px" height="289px" />
+        <div className="flex justify-center">
+          <Image src={g7} alt="g7" width="360px" height="230px" />
+          <Image src={g8} alt="g8" width="360px" height="230px" />
+          <Image src={g9} alt="g9" width="500px" height="230px" />
         </div>
       </div>
 
       <div className="w-full mb-10">
         <div className="w-full bg-cover bg-no-repeat bg-bg-vvm">
           <div className="w-full bg-[#f0f0f0] bg-cover bg-opacity-30 py-10 px-36 flex justify-between">
-            <div className="w-[350px] h-[490px] bg-white bg-opacity-80 backdrop-blur-[10px] flex flex-col justify-center items-center text-center p-10 rounded-2xl">
-              <h1 className="text-[36px] text-black mb-5">Value</h1>
+            <div className="w-80 h-[400px] bg-white bg-opacity-80 backdrop-blur-[10px] flex flex-col justify-center items-center text-center p-10 rounded-2xl hover:scale-105">
+              <h1 className="text-[36px] text-black font-bold my-auto">Value</h1>
               <p className="text-[20px] text-black">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Provident culpa aliquid dolores, cum qui, recusandae, nisi
-                obcaecati accusamus praesentium commodi doloremque?
+              Respect <br/>
+              Responsibility <br/>
+              Caring <br/>
+              Excellence <br/>
+              Integrity <br/>
+              Innovation 
               </p>
             </div>
 
-            <div className="w-[350px] h-[490px] bg-white bg-opacity-80 backdrop-blur-[10px] flex flex-col justify-center items-center text-center p-10 rounded-2xl">
-              <h1 className="text-[36px] text-black mb-5">Vision</h1>
+            <div className="w-80 h-[400px] bg-white bg-opacity-80 backdrop-blur-[10px] flex flex-col justify-center items-center text-center p-10 rounded-2xl hover:scale-105">
+              <h1 className="text-[36px] text-black font-bold my-auto">Vision</h1>
               <p className="text-[20px] text-black">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Provident culpa aliquid dolores, cum qui, recusandae, nisi
-                obcaecati accusamus praesentium commodi doloremque?
+              To make footwear hygiene and shoe care a part of every individual's lifestyle by making S3 services available to everyone everywhere & have a positive environmental impact. 
               </p>
             </div>
 
-            <div className="w-[350px] h-[490px] bg-white bg-opacity-80 backdrop-blur-[10px] flex flex-col justify-center items-center text-center p-10 rounded-2xl">
-              <h1 className="text-[36px] text-black mb-5">Mission</h1>
+            <div className="w-80 h-[400px] bg-white bg-opacity-80 backdrop-blur-[10px] flex flex-col justify-center items-center text-center p-10 rounded-2xl hover:scale-105">
+              <h1 className="text-[36px] text-black font-bold my-auto">Mission</h1>
               <p className="text-[20px] text-black">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Provident culpa aliquid dolores, cum qui, recusandae, nisi
-                obcaecati accusamus praesentium commodi doloremque?
+              To provide a world class professional footwear laundry & refurbishing service, of the highest quality & highest level of convenience to everyone, everywhere. 
               </p>
             </div>
           </div>
