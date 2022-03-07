@@ -10,6 +10,7 @@ body {
   margin: 0;
   font-family: "Poppins";
   background-color: white;
+  overflow-x: hidden;
 }
 
 a {
@@ -20,4 +21,5 @@ a {
 * {
   font-family: "Poppins", sans-serif;
   box-sizing: border-box;
+  transition: all ease 0.2s;
 }

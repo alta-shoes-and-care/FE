@@ -35,18 +35,32 @@ export default function Carousel() {
         className="mySwiper"
       >
         <SwiperSlide>
-          <div className="w-screen h-[600px]">
-            <Image src={s1} alt="Slide 1" layout="fill" />
+          <div className="">
+            <Image src={s1} alt="Slide 1" layout="fill" className="relative brightness-50" />
+              <div className="absolute text-white font-bold flex items-center justify-center flex-col text-center w-screen h-[650px]">
+                <h2 className="text-4xl">Welcome to</h2>
+                <h1 className="text-6xl uppercase">Shoes Service Station</h1>
+              </div>
           </div>
         </SwiperSlide>
+
         <SwiperSlide>
-          <div className="w-screen h-[600px]">
-            <Image src={s2} alt="Slide 2" layout="fill" />
+          <div>
+            <Image src={s2} alt="Slide 2" layout="fill" className="relative brightness-50" />
+            <div className="absolute text-white font-bold flex items-center justify-center flex-col text-center w-screen h-[650px]">
+                <h1 className="text-6xl uppercase">respect your shoes</h1>
+                <h2 className="text-4xl">We'll be there to care for your loved ones when you cannot.</h2>
+              </div>
           </div>
         </SwiperSlide>
+
         <SwiperSlide>
-          <div className="w-screen h-[600px]">
-            <Image src={s3} alt="Slide 3" layout="fill" />
+          <div>
+            <Image src={s3} alt="Slide 3" layout="fill" className="relative brightness-50" />
+            <div className="absolute text-white font-bold flex items-center justify-center flex-col text-center w-screen h-[650px]">
+                <h1 className="text-6xl uppercase">Make your shoes look better</h1>
+                <h2 className="text-4xl">Wear it with pride.</h2>
+              </div>
           </div>
         </SwiperSlide>
       </Swiper>
@@ -54,7 +68,7 @@ export default function Carousel() {
       <style jsx global>{`
       .swiper {
         width: 100%;
-        height: 600px;
+        height: 670px;
       }
 
       .swiper-slide {
@@ -64,7 +78,7 @@ export default function Carousel() {
       .swiper-slide img {
         display: block;
         width: 100%;
-        height: 600px;
+        height: 670px;
       }
       `}</style>
     </>

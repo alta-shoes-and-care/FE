@@ -16,7 +16,7 @@ module.exports = {
 
       backgroundImage: {
         'bg-vvm': "url('../assets/vvm.png')",
-      }
+      },
     },
   },
   plugins: [],
