@@ -87,7 +87,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="py-10 w-full">
+      <div className="p-10">
         <Gallery />
       </div>
 
