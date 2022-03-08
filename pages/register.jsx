@@ -56,9 +56,9 @@ export default function Register() {
     }
     axios
     .post('https://ynwahid.cloud.okteto.net/users', body)
-    .then((data) => {
+    .then(({data}) => {
       Swal.fire(
-        'Success Regist',
+        `Success Regist! - ${data.code}`,
         'you can login now',
         'success'
       )
@@ -69,14 +69,14 @@ export default function Register() {
       setPassword('');
       router.push('/login')
     })
-    .catch((err) => {
-      Swal.fire('Error', 'The data you entered is already registered', 'error');
-      console.log(err);
-      setShow(true);
-
-      setName('');
-      setEmail('');
-      setPassword('');
+    .catch((error) => {
+      if(error) {
+        Swal.fire(`Error! - ${error}`, 'The data you entered is already registered', 'error');
+        setShow(true);
+        setName('');
+        setEmail('');
+        setPassword('');
+      }
     })
     .finally(() => {
       setLoading(false);

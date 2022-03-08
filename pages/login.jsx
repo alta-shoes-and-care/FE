@@ -44,23 +44,25 @@ function Login() {
     .post('https://ynwahid.cloud.okteto.net/login', body)
     .then(({data}) => {
       if(data) {
-        console.log(data);
-        setShow(true);;
+        setShow(true);
         setEmail('');
         setPassword('');
-        Swal.fire('Success Login!', 'You can start using the S3 service now.', 'success')
+        Swal.fire(`Success login! - ${data.code}`, 'You can start using the S3 service now.', 'success')
       localStorage.setItem('token', data.data.token)
       localStorage.setItem('is_admin', data.data.is_admin)
       router.push('/')
         }
     })
-    .catch((err) => {
-      if(err) {
-        console.log(err);
+
+    /* 
+    catch( error => { return Promise.reject(error.response.data.error); });
+    */
+    .catch((error) => {
+      if(error) {
         setShow(true);
         setEmail('');
         setPassword('');
-        Swal.fire('Error!', 'The data you entered was not found.', 'error');
+        Swal.fire(`${error}`, 'The data you entered was not found.', 'error');
       }
     })
     .finally(() => {

@@ -66,6 +66,7 @@ export default function Gallery(props) {
               layout="fill"
               key={ index }
               className='m-1 grayscale hover:grayscale-0'
+              objectFit="cover"
               alt=""
             />
             </motion.div>
