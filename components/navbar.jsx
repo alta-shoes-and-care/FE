@@ -121,7 +121,7 @@ function NavbarCompoent() {
         );
         // token = true & admin = false
       } else if (
-        localStorage.getItem("admin") == "false" &&
+        localStorage.getItem("is_admin") == "false" &&
         localStorage.getItem("token")
       ) {
         return (
@@ -192,14 +192,11 @@ function NavbarCompoent() {
         );
         // token = true & admin = true
       } else if (
-        localStorage.getItem("admin") == "true" &&
+        localStorage.getItem("is_admin") == "true" &&
         localStorage.getItem("token")
       ) {
         return (
           <div className=" flex">
-            <h1 className=" mx-3 text-xl text-primary hover:text-orange-600">
-            <Link href="/services"><a>Service</a></Link>
-            </h1>
             <h1 className=" mx-3 text-xl text-primary hover:text-orange-600">
             <Link href="/find-us"><a>Find Us</a></Link>
             </h1>

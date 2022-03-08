@@ -55,7 +55,7 @@ export default function Register() {
       is_admin : false
     }
     axios
-    .post('http://3.1.211.120:8081/users', body)
+    .post('https://ynwahid.cloud.okteto.net/users', body)
     .then((data) => {
       Swal.fire(
         'Success Regist',

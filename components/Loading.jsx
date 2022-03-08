@@ -16,3 +16,14 @@ export default function Loading() {
     </>
   )
 }
+
+/* 
+  Swal.fire({
+    title: 'Please Wait !',
+    html: "This may take a few seconds, please don't close this page.",
+    allowOutsideClick: false,
+    onBeforeOpen: () => {
+        Swal.showLoading()
+    },
+  })
+*/
