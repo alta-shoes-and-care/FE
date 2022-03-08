@@ -20,7 +20,7 @@ export default function services() {
             <div class="z-0 grid grid-cols-1 h-[650px] bg-cover mt-[-100px]" style={{backgroundImage: `url('https://www.thespruce.com/thmb/NuFOlvnclSdD92adneqIHjhgBC8=/700x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/remove-salt-stains-from-shoes-clothes-2147178-01-5616c76b4c2941f0963e00d83e2e16e5.jpg')`}}> 
                 <div className='z-1 w-[100vw] h-[650px] bg-[#000009] bg-opacity-30 text-center'>
                     <div class="z-2 grid grid-cols-2 gap-4 bg-cover mt-[100px]">
-                        {/* Desc Card */}
+                        {/* Desc Card */} 
                         <div className='ml-[15vh] mt-[10vh] z-3 w-[75vh] h-[60vh] bg-[#ffffff] bg-opacity-60 hover:bg-opacity-80 text-left rounded-lg'>
                             <p className="text-black bold text-4xl mt-[3.5vh] ml-[5vh]">
                                 Regular Cleaning  

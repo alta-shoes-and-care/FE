@@ -28,24 +28,22 @@ function Review() {
           <form className=" w-[528px]" action="#" method="POST">
             <div>
               <input
-                id="email-address"
-                name="email"
-                type="email"
+                name="name"
+                type="text"
                 placeholder="input your name"
                 autoComplete="off"
                 required
-                className={` h-12 mb-5 form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700  bg-clip-padding border border-solid border-gray-300 rounded-lg transition ease-in-out m-0 focus:text-gray-700 focus:border-blue-600 focus:outline-none ${styles.inputbg}`}
+                className={` h-12 mb-5 form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700  bg-clip-padding border border-solid border-gray-300 rounded-lg transition ease-in-out m-0 focus:text-gray-700 focus:border-blue-600 focus:outline-none focus:bg-white ${styles.inputbg}`}
               />
             </div>
             <h1 className=" text-3xl mb-[-13px]">Rate</h1>
-            <p className="">
-              <ReactStars {...starReview} onChange={ratingChanged} />
-            </p>
+
+            <ReactStars {...starReview} onChange={ratingChanged} />
 
             <h1 className=" text-3xl mb-3">Comentar</h1>
             <textarea
               required
-              className={`form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700  bg-clip-padding border border-solid border-gray-300 rounded-lg transition ease-in-out m-0 focus:text-gray-700 focus:border-blue-600 focus:outline-none ${styles.inputbg}`}
+              className={`form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700  bg-clip-padding border border-solid border-gray-300 rounded-lg transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none ${styles.inputbg}`}
               id="exampleFormControlTextarea1"
               rows="3"
               placeholder="Your message"
