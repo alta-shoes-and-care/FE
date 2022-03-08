@@ -27,8 +27,8 @@ export default function Register() {
     else if (name.trim().length <= 3) {
       // nama boleh ada spasi, boleh ada huruf besar, boleh ada spesial karakter, angka, dll yang penting tidak boleh kurang dari 3
       setShow(true);
-      Swal.fire('Invalid!','Name must be more than 3 characters.','error')
-    }  
+      Swal.fire('Invalid!','Name must be more than 3 characters and less than 30 characters.','error')
+    }
     else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
       setShow(true);
       Swal.fire('Invalid!','Email format is not valid.','error')
@@ -105,6 +105,7 @@ export default function Register() {
                 id="name-user" 
                 name="name" 
                 type="text"
+                maxLength="30"
                 placeholder="Name"
                 autoComplete="off" 
                 required 
