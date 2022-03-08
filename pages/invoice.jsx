@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import Image from "next/image";
-import bgImage from "../assets/form.png"
 import style from "../styles/formpayment.module.css";
 
 import { useRouter } from 'next/router';
@@ -9,16 +8,16 @@ export default function invoice() {
 
     return (
         <section>
-            <div class="z-0 grid grid-cols-1 h-[650px] bg-cover mt-[-100px]" style={{ backgroundImage: `url('${bgImage}')` }}> 
-                <div className='z-1 w-[100vw] h-[650px] bg-[#000009] bg-opacity-30 text-left'>
+            <div className={`z-0 grid grid-cols-1 h-[650px] bg-cover mt-[-100px] ${style.bgImage2}  `}>  
+                <div className='z-1 w-[100vw] h-[650px] bg-[#000009] bg-opacity-0 text-left'>
                     <div class="z-2 grid grid-cols-1 gap-4 bg-cover mt-[100px]">
-                        <div className="mt-[0.5vh] ml-[20vh]">
-                            <p className="text-4xl text-black">
+                        <div className="mt-[2vh]">
+                            <p className="text-4xl text-center text-white">
                                 Payment Invoice
                             </p>
                         </div>
                         {/* Desc Card */}
-                        <div className='ml-[30vw] mt-[-2vh] z-3 w-[40vw] h-[60vh] bg-[#ffffff] bg-opacity-60 hover:bg-opacity-80 text-left rounded-lg'>
+                        <div className='ml-[30vw] mt-[-2vh] z-3 w-[40vw] h-[60vh] bg-[#ffffff] bg-opacity-80 hover:bg-opacity-100 text-left rounded-lg'>
                             <div className="grid grid-cols-1 text-left px-10 py-2">
                                 <p className="text-black bold text-2xl">
                                     Service type: Regular Cleaning  
@@ -87,11 +86,11 @@ export default function invoice() {
                         </div>
                         {/* Desc Card End*/}
                         {/* Button Subtotal*/}
-                        <div className="ml-[25vw] mt-[-2vh] text-center">
+                        <div className="ml-[25vw] mt-[-1vh] text-center">
                             <div className="bold text-xl">
                                 Subtotal : Rp.25.000
                             </div>
-                            <button class="ml-[3vw] bg-[#175C8C] hover:bg-white text-white hover:text-black font-bold py-2 px-3 border border-black rounded-lg">
+                            <button class="mt-[1vh] ml-[3vw] bg-[#175C8C] hover:bg-white text-white hover:text-black font-bold py-2 px-3 border border-black rounded-lg">
                                 <p className="text-md text-center rounded-xl"> Confirm Payment </p>
                             </button>
                         </div>
