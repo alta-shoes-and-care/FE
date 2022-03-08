@@ -14,6 +14,7 @@ function NavbarCompoent() {
   }
 
   function handleLogout() {
+    setShowOpt(false);
     return Swal.fire({
       title: "Are you sure?",
       text: "You want to log out?",
@@ -43,16 +44,12 @@ function NavbarCompoent() {
           <div className=" flex">
             <h1 className=" mx-3 text-xl text-primary hover:text-orange-600">
               <Link href="/find-us">
-                <a>
-                  Find Us
-                </a>
+                <a>Find Us</a>
               </Link>
             </h1>
             <h1 className=" mx-3 text-xl text-primary hover:text-orange-600">
-            <Link href="/about">
-                <a>
-                  About Us
-                </a>
+              <Link href="/about-us">
+                <a>About Us</a>
               </Link>
             </h1>
 
@@ -95,20 +92,22 @@ function NavbarCompoent() {
                   <div className="py-1" role="none">
                     <Link href="/login">
                       <a
-                      className="text-primary block px-4 py-2 text-l  hover:text-orange-600 "
-                      role="menuitem"
-                      tabIndex="-1"
-                      id="menu-item-0"
+                        onClick={() => setShowOpt(false)}
+                        className="text-primary block px-4 py-2 text-l  hover:text-orange-600 "
+                        role="menuitem"
+                        tabIndex="-1"
+                        id="menu-item-0"
                       >
                         Login
                       </a>
                     </Link>
                     <Link href="/register">
                       <a
-                      className="text-primary block px-4 py-2 text-l  hover:text-orange-600 "
-                      role="menuitem"
-                      tabIndex="-1"
-                      id="menu-item-0"
+                        onClick={() => setShowOpt(false)}
+                        className="text-primary block px-4 py-2 text-l  hover:text-orange-600 "
+                        role="menuitem"
+                        tabIndex="-1"
+                        id="menu-item-0"
                       >
                         Register
                       </a>
@@ -127,13 +126,19 @@ function NavbarCompoent() {
         return (
           <div className=" flex">
             <h1 className=" mx-3 text-xl text-primary hover:text-orange-600">
-              <Link href="/find-us"><a>Find Us</a></Link>
+              <Link href="/find-us">
+                <a>Find Us</a>
+              </Link>
             </h1>
             <h1 className=" mx-3 text-xl text-primary hover:text-orange-600">
-              <Link href="/about"><a>About Us</a></Link>
+              <Link href="/about-us">
+                <a>About Us</a>
+              </Link>
             </h1>
             <h1 className=" mx-3 text-xl text-primary hover:text-orange-600">
-              <Link href="/order"><a>Order</a></Link>
+              <Link href="/history-order">
+                <a>Order</a>
+              </Link>
             </h1>
 
             {/* dropdown */}
@@ -198,10 +203,14 @@ function NavbarCompoent() {
         return (
           <div className=" flex">
             <h1 className=" mx-3 text-xl text-primary hover:text-orange-600">
-            <Link href="/find-us"><a>Find Us</a></Link>
+              <Link href="/find-us">
+                <a>Find Us</a>
+              </Link>
             </h1>
             <h1 className=" mx-3 text-xl text-primary hover:text-orange-600">
-            <Link href="/store"><a>Store</a></Link>
+              <Link href="/admin">
+                <a>Store</a>
+              </Link>
             </h1>
 
             {/* dropdown */}
@@ -264,11 +273,9 @@ function NavbarCompoent() {
   return (
     <div className=" flex justify-between px-24 items-center shadow-md bg-white sticky top-0 z-10 ">
       {/* logo nav */}
-      <Link href='/'>
+      <Link href="/">
         <a>
-          <div
-            className=" relative h-20 w-32 mb-3"
-          >
+          <div className=" relative h-20 w-32 mb-3">
             <Image src={Navicon} layout="fill" />
           </div>
         </a>
