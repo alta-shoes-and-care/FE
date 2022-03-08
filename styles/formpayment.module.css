@@ -1,0 +1,162 @@
+.background{
+  color: #29738F;
+}
+
+.content{
+  backdrop-filter: blur(20px) saturate(100%);
+  -webkit-backdrop-filter: blur(20px) saturate(200%);
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 0.5rem 0px 0px 0.5rem;
+  border: 1px solid rgba(209, 213, 219, 0.3);
+  position: relative;
+  opacity: 95%;
+}
+
+.form{
+  background: #fcfffeb2;
+  padding: 1.5rem 4rem;
+  border-radius: 1rem;
+  text-align: center;
+}
+
+.form form{
+  margin: 0.5rem 0px;
+}
+
+.form h1{
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.form h2{
+  font-size: 1.5rem;
+  color: black;
+  font-weight: bold;  
+}
+
+.form button{
+  color: #fff;
+  background: #29738F;
+  padding: 0.5rem 1rem;
+}
+
+.form button svg{
+  display: inline-block;
+}
+
+.input{
+  position: relative;
+}
+
+.input label{
+  opacity: 0;
+  right: 1rem;    
+  position: absolute;
+}
+
+.input input:focus + label{
+  opacity: 1;
+}
+
+.input {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  background-color: #fff;
+  border: #29738F 2px solid;
+  border-radius: 0.5rem;
+  margin: 0px auto;
+  margin-bottom: 0.5rem;
+  max-width: 16vw;
+}
+
+.input2 {
+  display: flex;
+  align-items: center;
+  height: 15vh;
+  background-color: #fff;
+  border: #29738F 2px solid;
+  border-radius: 0.5rem;
+  margin: 0px auto;
+  margin-bottom: 0.5rem;
+  max-width: 34vw;
+}
+
+.input input{
+  width: 15vw;
+  height: 20px;
+  border-left: #29738F 2px solid;
+  padding: 0px 1rem;
+}
+
+.input2 input{
+  width: 31.2vw;
+  height: 13.8vh;
+  border-left: #29738F 2px solid;
+  padding: 0px 1rem;
+}
+
+.input input:focus{
+  outline: none;
+}
+
+.input2 input:focus{
+  outline: none;
+}
+
+.input svg{
+  font-size: 1.35rem;
+  display: inline-block;
+  position: relative;
+  top: 50%;
+  left: 0rem;
+  transform: translateY(calc(-50% - 0.5rem));
+  margin: 0px 0.7rem;
+}
+
+.input2 svg{
+  font-size: 1.35rem;
+  display: inline-block;
+  position: relative;
+  top: 50%;
+  left: 0rem;
+  transform: translateY(calc(-50% - 0.5rem));
+  margin: 0px 0.7rem;
+}
+
+.overflow {
+  overflow-y: scroll;
+  height: 90vh;
+}
+
+.separator {
+  width: 670px;
+  height: 1px;
+  background-color: #0000007a;
+  margin-top: 15px;
+  margin-bottom: 25px;
+}
+
+.miniSeparator {
+  width: 40vh;
+  height: 1px;
+  background-color: #0000002d;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.imageCard {
+  width: 70vh;
+  height: 30vh;
+  cursor: pointer;
+  transition: 1s;
+}
+
+.facilities {
+  max-width: 40vh;
+  color: #3d3d3d93;
+}
+.overflow {
+  overflow-y: scroll;
+  height: 90vh;
+}
