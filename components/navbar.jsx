@@ -42,9 +42,9 @@ function NavbarCompoent() {
         return (
           <div className=" flex">
             <h1 className=" mx-3 text-xl text-primary hover:text-orange-600">
-              <Link href="/services">
+              <Link href="/find-us">
                 <a>
-                  Service
+                  Find Us
                 </a>
               </Link>
             </h1>
@@ -127,7 +127,7 @@ function NavbarCompoent() {
         return (
           <div className=" flex">
             <h1 className=" mx-3 text-xl text-primary hover:text-orange-600">
-              <Link href="/services"><a>Service</a></Link>
+              <Link href="/find-us"><a>Find Us</a></Link>
             </h1>
             <h1 className=" mx-3 text-xl text-primary hover:text-orange-600">
               <Link href="/about"><a>About Us</a></Link>
@@ -201,7 +201,7 @@ function NavbarCompoent() {
             <Link href="/services"><a>Service</a></Link>
             </h1>
             <h1 className=" mx-3 text-xl text-primary hover:text-orange-600">
-            <Link href="/about"><a>About Us</a></Link>
+            <Link href="/find-us"><a>Find Us</a></Link>
             </h1>
             <h1 className=" mx-3 text-xl text-primary hover:text-orange-600">
             <Link href="/store"><a>Store</a></Link>
