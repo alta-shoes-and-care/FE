@@ -96,7 +96,7 @@ export default function formpayment() {
                                         <p className="text-2xl text-center bold ">Subtotal</p>
                                         <h1 className="text-2xl text-center bold ">Rp.25.000</h1>
                                     </div>
-                                    <button class="bg-[#175C8C] hover:bg-white text-white hover:text-black font-bold py-2 px-3 border border-black rounded-lg mt-[1vh] ml-[2vw]cle">
+                                    <button class="bg-[#175C8C] hover:bg-white text-white hover:text-black font-bold py-2 px-3 border border-black rounded-lg mt-[1vh] ml-[2vw]">
                                         <p className="text-md text-center rounded-xl"> Confirm Order </p>
                                     </button>
                                 </div>
