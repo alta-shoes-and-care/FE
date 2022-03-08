@@ -21,7 +21,7 @@ function NewItem() {
                 placeholder="Input title"
                 autoComplete="off"
                 required
-                className={` h-12 mb-5 form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700  bg-clip-padding border border-solid border-gray-300 rounded-lg transition ease-in-out m-0 focus:text-gray-700 focus:border-blue-600 focus:outline-none ${styles.inputbg}`}
+                className={` h-12 mb-5 form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700  bg-clip-padding border border-solid border-gray-300 rounded-lg transition ease-in-out m-0 focus:text-gray-700 focus:border-blue-600 focus:bg-white focus:outline-none ${styles.inputbg}`}
               />
             </div>
 
@@ -33,7 +33,7 @@ function NewItem() {
                 placeholder="30.000"
                 autoComplete="off"
                 required
-                className={` h-12 mb-5 form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700  bg-clip-padding border border-solid border-gray-300 rounded-lg transition ease-in-out m-0 focus:text-gray-700 focus:border-blue-600 focus:outline-none ${styles.inputbg}`}
+                className={` h-12 mb-5 form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700  bg-clip-padding border border-solid border-gray-300 rounded-lg transition ease-in-out m-0 focus:bg-white focus:text-gray-700 focus:border-blue-600 focus:outline-none ${styles.inputbg}`}
               />
             </div>
 
@@ -46,20 +46,20 @@ function NewItem() {
                 placeholder=""
                 autoComplete="off"
                 required
-                className={` h-12 mb-5 px-3 py-2 text-gray-700 border border-solid border-gray-300 rounded-lg transition ease-in-out m-0 focus:text-gray-700 focus:border-blue-600 focus:outline-none ${styles.inputbg}`}
+                className={` h-12 mb-5 px-3 py-2 text-gray-700 border border-solid border-gray-300 rounded-lg transition ease-in-out m-0 focus:text-gray-700 focus:border-blue-600 focus:bg-white focus:outline-none ${styles.inputbg}`}
               />
             </div>
             <h1 className=" text-3xl mb-2">Description</h1>
             <textarea
               required
-              className={`form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700  bg-clip-padding border border-solid border-gray-300 rounded-lg transition ease-in-out m-0 focus:text-gray-700 focus:border-blue-600 focus:outline-none ${styles.inputbg}`}
+              className={`form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700  bg-clip-padding border border-solid border-gray-300 rounded-lg transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none ${styles.inputbg}`}
               id="exampleFormControlTextarea1"
               rows="3"
               placeholder="Input description"
             ></textarea>
 
             <div className="flex justify-center">
-              <button className="w-[250px] h-[50px] mt-10 text-center text-[18px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium rounded-xl text-white bg-primary hover:bg-transparent hover:border-white hover:border-2 hover:text-white hover:font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary  transition ease-linear duration-500">
+              <button className="w-[250px] h-[50px] mt-10 text-center text-[18px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium rounded-xl text-white bg-primary hover:bg-transparent hover:border-white hover:border-2 hover:text-white hover:font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:bg-white focus:ring-primary  transition ease-linear duration-500">
                 Submit
               </button>
             </div>
