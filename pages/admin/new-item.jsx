@@ -28,6 +28,7 @@ function NewItem() {
             <h1 className=" text-3xl mb-2">Price</h1>
             <div>
               <input
+                min="0"
                 name="price"
                 type="number"
                 placeholder="30.000"
