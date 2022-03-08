@@ -6,6 +6,10 @@
   background:url(../assets/form.png)  
 }
 
+.bgImage2{
+  background:url(../assets/invoice.png)  
+}
+
 .content{
   backdrop-filter: blur(20px) saturate(100%);
   -webkit-backdrop-filter: blur(20px) saturate(200%);
