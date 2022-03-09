@@ -1,7 +1,7 @@
-import { getServiceAction, setService } from "./getServiceAction";
+import { getAllService, setService } from "./getAllService";
 
 const allStore = {
-  getServiceAction,
+  getAllService,
   setService
 }
 

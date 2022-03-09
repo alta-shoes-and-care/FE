@@ -17,7 +17,7 @@ export default function invoice() {
                             </p>
                         </div>
                         {/* Desc Card */}
-                        <div className='ml-[30vw] mt-[-2vh] z-3 w-[40vw] h-[60vh] bg-[#ffffff] bg-opacity-80 hover:bg-opacity-100 text-left rounded-lg'>
+                        <div className='ml-[30vw] mt-[-2vh] z-3 w-[40vw] h-[65vh] bg-[#ffffff] bg-opacity-80 hover:bg-opacity-100 text-left rounded-lg'>
                             <div className="grid grid-cols-1 text-left px-10 py-2">
                                 <p className="text-black bold text-2xl">
                                     Service type: Regular Cleaning  

@@ -18,7 +18,7 @@ export default function formpayment() {
                             </p>
                         </div>
                         {/* Desc Card */}
-                        <div className='my-auto ml-[25vw] z-3 w-[50vw] h-[65vh] bg-[#ffffff] bg-opacity-60 hover:bg-opacity-80 text-left rounded-lg'>
+                        <div className='my-auto ml-[25vw] z-3 w-[50vw] h-[70vh] bg-[#ffffff] bg-opacity-60 hover:bg-opacity-80 text-left rounded-lg'>
                             <div className="grid grid-cols-1 text-center mt-[1vh]  px-10 py-2">
                                 <p className="text-black bold text-xl">
                                     Service type: Regular Cleaning  
