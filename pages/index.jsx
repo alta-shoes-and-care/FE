@@ -21,11 +21,11 @@ export default function Home() {
         <Carousel />
       </div>
 
-      <div className="w-full bg-[#f0f0f0]">
+      <div className="w-full bg-[#f0f0f0] py-20">
         <Service />
       </div>
 
-      <div className="py-10 px-20">
+      <div className="p-20">
         <h1 className="font-bold text-black text-[48px] text-center mb-8">
           What is everyone saying?
         </h1>
@@ -62,7 +62,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="w-full bg-[#f0f0f0] py-10 px-20">
+      <div className="w-full bg-[#f0f0f0] py-20">
         <h1 className="font-bold text-black text-[48px] text-center mb-8">
           About S3
         </h1>
@@ -87,11 +87,11 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="p-10">
+      <div className="p-20">
         <Gallery />
       </div>
 
-      <div className="w-full mb-10">
+      <div className="w-full my-20">
         <div className="w-full bg-cover bg-no-repeat bg-bg-vvm">
           <div className="w-full bg-[#f0f0f0] bg-cover bg-opacity-30 py-10 px-36 flex justify-between">
             <div className="w-80 h-[400px] bg-white bg-opacity-80 backdrop-blur-[10px] flex flex-col justify-center items-center text-center p-10 rounded-2xl hover:scale-105">
@@ -123,15 +123,19 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="w-full bg-[#f0f0f0] p-10 text-center">
-        <Iframe
+      <div className="w-full relative bg-[#f0f0f0] py-20 text-center">
+        {/* <Iframe
           url="http://www.youtube.com/embed/kyGR47nDrus"
           width="80%"
           height="500px"
           allow="fullscreen"
           display="initial"
           position="relative"
-        />
+        /> */}
+        <iframe width="70%" height="500" 
+          src="https://www.youtube.com/embed/kyGR47nDrus" frameBorder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
+          gyroscope; picture-in-picture" allowFullScreen className="inline"></iframe>
       </div>
     </div>
   );

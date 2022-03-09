@@ -5,8 +5,6 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { FaArrowRight } from 'react-icons/fa';
 
-import Loading from '../components/Loading';
-
 export default function Register() {
 
   const [name, setName] = useState('');
@@ -66,25 +64,22 @@ export default function Register() {
     axios
     .post('https://ynwahid.cloud.okteto.net/users', body)
     .then(({data}) => {
-      Swal.fire(
-        `Success create account!`,
-        'You can login now.',
-        'success'
-      )
-      console.log(data);
-      setShow(true);
-      setName('');
-      setEmail('');
-      setPassword('');
-      router.push('/login')
-    })
-    .catch((error) => {
-      if(error) {
-        Swal.fire(`Failed create account!`, 'The data you entered may already be registered', 'error');
+      if(data) {
         setShow(true);
         setName('');
         setEmail('');
         setPassword('');
+        Swal.fire(`Success create account!`, 'You can login now.', 'success');
+        router.push('/login');
+      }
+    })
+    .catch((error) => {
+      if(error) {
+        setShow(true);
+        setName('');
+        setEmail('');
+        setPassword('');
+        Swal.fire(`Failed create account!`, 'The data you entered may already be registered', 'error');
       }
     })
     .finally(() => {
@@ -93,10 +88,16 @@ export default function Register() {
   }
 
   if (loading) {
-    return (
-        <Loading />
-    );
-}
+    Swal.fire({
+      title: 'Please Wait!',
+      html: "This may take a few seconds, please don't close this page.",
+      allowOutsideClick: false,
+      showConfirmButton: false,
+      willOpen: () => {
+          Swal.showLoading()
+      },
+    })
+  }
 
   return (
     <div className='container min-h-screen min-w-full flex justify-center text-center bg-cover bg-no-repeat' style={{backgroundImage: "url(https://images.unsplash.com/photo-1509472290917-08d8d47c5fca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80)"}}>

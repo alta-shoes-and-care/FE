@@ -5,8 +5,6 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { FaArrowRight } from 'react-icons/fa';
 
-import Loading from '../components/Loading';
-
 function Login() {
 
   const [email, setEmail] = useState('');
@@ -48,15 +46,11 @@ function Login() {
         setEmail('');
         setPassword('');
         Swal.fire(`Success login!`, 'You can start using the S3 service now.', 'success')
-      localStorage.setItem('token', data.data.token)
-      localStorage.setItem('is_admin', data.data.is_admin)
-      router.push('/')
-        }
+        localStorage.setItem('token', data.data.token)
+        localStorage.setItem('is_admin', data.data.is_admin)
+        router.push('/')
+      }
     })
-
-    /* 
-    catch( error => { return Promise.reject(error.response.data.error); });
-    */
     .catch((error) => {
       if(error) {
         setShow(true);
@@ -70,23 +64,17 @@ function Login() {
     })
   }
 
-
     if (loading) {
-      return (
-        <Loading />
-      );
-  }
-
-  /* 
-  Swal.fire({
-    title: 'Please Wait !',
-    html: "This may take a few seconds, please don't close this page."",
-    allowOutsideClick: false,
-    onBeforeOpen: () => {
-        Swal.showLoading()
-    },
-  })
-  */
+        Swal.fire({
+          title: 'Please Wait!',
+          html: "This may take a few seconds, please don't close this page.",
+          allowOutsideClick: false,
+          showConfirmButton: false,
+          willOpen: () => {
+              Swal.showLoading()
+          },
+        })
+    }
 
   return (
     <div className='container min-h-screen min-w-full flex justify-center text-center bg-cover bg-no-repeat' style={{backgroundImage: "url(https://images.unsplash.com/photo-1495555961986-6d4c1ecb7be3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80)"}}>
