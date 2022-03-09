@@ -24,14 +24,23 @@ export default function Register() {
     if (name === '' && email === '' && password === '') {
       Swal.fire('Invalid!', 'Data cannot be empty!', 'error')
     }
-    else if (name.trim().length <= 3) {
-      // nama boleh ada spasi, boleh ada huruf besar, boleh ada spesial karakter, angka, dll yang penting tidak boleh kurang dari 3
+    else if (!/^[A-Za-z0-9](?!.*?\s$)(?![0-9]+$)[A-Za-z0-9\s]{3,30}$/gm.test(name)) {
+      /* 
+      nama boleh ada spasi, tetapi tidak boleh didepan dan belakang
+      nama boleh ada angka, tetapi tidak boleh jika angka semua
+      nama tidak boleh ada spesial karakter
+      minimal 4, maksimal 30
+      */
       setShow(true);
-      Swal.fire('Invalid!','Name must be more than 3 characters and less than 30 characters.','error')
+      Swal.fire('Invalid!','Name cannot contain spaces at the beginning and end, minimum 4 characters, and maximum 30 characters.','error')
     }
     else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
+      /* 
+      email tidak boleh ada spasi (depan, tengah, belakang)
+      email harus ada @ dan domain
+      */
       setShow(true);
-      Swal.fire('Invalid!','Email format is not valid.','error')
+      Swal.fire('Invalid!','Email format is not valid, email cannot contain spaces.','error')
     }
     else if (!/^(?!.*\s).{5,8}$/.test(password)) {
       /* 
@@ -40,7 +49,7 @@ export default function Register() {
       boleh huruf besar, huruf kecil, angka, dan spesial karakter
       */
       setShow(true);
-      Swal.fire('Invalid!','Password must not contain spaces, minimum 5 characters, and maximum 8 characters.', 'error')
+      Swal.fire('Invalid!','Password cannot contain spaces, minimum 5 characters, and maximum 8 characters.', 'error')
     } else {
       handleRegister()
     }
@@ -115,13 +124,12 @@ export default function Register() {
                 />
               </div>
 
-
               <div className='mt-8'>
                 <label htmlFor="email-address" className="sr-only">Email</label>
                 <input 
                 id="email-address" 
                 name="email" 
-                type="email"
+                type="text"
                 placeholder="Email"
                 autoComplete="off" 
                 required 
@@ -135,7 +143,8 @@ export default function Register() {
                 <label htmlFor="password" className="sr-only">Password</label>
                 <input 
                 id="password" 
-                name="password" 
+                name="password"
+                maxLength="8"
                 type="password"
                 placeholder="Password"
                 autoComplete="off" 

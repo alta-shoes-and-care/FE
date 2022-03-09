@@ -24,10 +24,10 @@ function Login() {
       Swal.fire('Invalid!', 'Email / Password cannot be empty.', 'error');
     }
     else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
-      Swal.fire('Invalid!', 'Email format is not valid.', 'error');
+      Swal.fire('Invalid!', 'Email format is not valid, email cannot contain spaces.', 'error');
     }
     else if (!/^(?!.*\s).{5,8}$/.test(password)) {
-      Swal.fire('Invalid!', 'Password must not contain spaces, minimum 5 characters, and maximum 8 characters.', 'error');
+      Swal.fire('Invalid!', 'Password cannot contain spaces, minimum 5 characters, and maximum 8 characters.', 'error');
     }
     else {
       handleLogin()
@@ -102,7 +102,7 @@ function Login() {
                 <input 
                 id="email-address" 
                 name="email" 
-                type="email"
+                type="text"
                 placeholder="Email"
                 autoComplete="off" 
                 required 
@@ -118,6 +118,7 @@ function Login() {
                 id="password" 
                 name="password" 
                 type="password"
+                maxLength="8"
                 placeholder="Password"
                 autoComplete="off" 
                 required 
