@@ -5,8 +5,6 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { FaArrowRight } from 'react-icons/fa';
 
-import Loading from '../components/Loading';
-
 function Login() {
 
   const [email, setEmail] = useState('');
@@ -24,10 +22,10 @@ function Login() {
       Swal.fire('Invalid!', 'Email / Password cannot be empty.', 'error');
     }
     else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
-      Swal.fire('Invalid!', 'Email format is not valid.', 'error');
+      Swal.fire('Invalid!', 'Email format is not valid, email cannot contain spaces.', 'error');
     }
     else if (!/^(?!.*\s).{5,8}$/.test(password)) {
-      Swal.fire('Invalid!', 'Password must not contain spaces, minimum 5 characters, and maximum 8 characters.', 'error');
+      Swal.fire('Invalid!', 'Password cannot contain spaces, minimum 5 characters, and maximum 8 characters.', 'error');
     }
     else {
       handleLogin()
@@ -44,23 +42,21 @@ function Login() {
     .post('https://ynwahid.cloud.okteto.net/login', body)
     .then(({data}) => {
       if(data) {
-        console.log(data);
-        setShow(true);;
-        setEmail('');
-        setPassword('');
-        Swal.fire('Success Login!', 'You can start using the S3 service now.', 'success')
-      localStorage.setItem('token', data.data.token)
-      localStorage.setItem('is_admin', data.data.is_admin)
-      router.push('/')
-        }
-    })
-    .catch((err) => {
-      if(err) {
-        console.log(err);
         setShow(true);
         setEmail('');
         setPassword('');
-        Swal.fire('Error!', 'The data you entered was not found.', 'error');
+        Swal.fire(`Success login!`, 'You can start using the S3 service now.', 'success')
+        localStorage.setItem('token', data.data.token)
+        localStorage.setItem('is_admin', data.data.is_admin)
+        router.push('/')
+      }
+    })
+    .catch((error) => {
+      if(error) {
+        setShow(true);
+        setEmail('');
+        setPassword('');
+        Swal.fire(`Ooppss!!`, 'Invalid Email / Password', 'error');
       }
     })
     .finally(() => {
@@ -68,23 +64,17 @@ function Login() {
     })
   }
 
-
     if (loading) {
-      return (
-        <Loading />
-      );
-  }
-
-  /* 
-  Swal.fire({
-    title: 'Please Wait !',
-    html: "This may take a few seconds, please don't close this page."",
-    allowOutsideClick: false,
-    onBeforeOpen: () => {
-        Swal.showLoading()
-    },
-  })
-  */
+        Swal.fire({
+          title: 'Please Wait!',
+          html: "This may take a few seconds, please don't close this page.",
+          allowOutsideClick: false,
+          showConfirmButton: false,
+          willOpen: () => {
+              Swal.showLoading()
+          },
+        })
+    }
 
   return (
     <div className='container min-h-screen min-w-full flex justify-center text-center bg-cover bg-no-repeat' style={{backgroundImage: "url(https://images.unsplash.com/photo-1495555961986-6d4c1ecb7be3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80)"}}>
@@ -100,7 +90,7 @@ function Login() {
                 <input 
                 id="email-address" 
                 name="email" 
-                type="email"
+                type="text"
                 placeholder="Email"
                 autoComplete="off" 
                 required 
@@ -116,6 +106,7 @@ function Login() {
                 id="password" 
                 name="password" 
                 type="password"
+                maxLength="8"
                 placeholder="Password"
                 autoComplete="off" 
                 required 
@@ -130,14 +121,14 @@ function Login() {
                 className="w-[250px] h-[50px] mt-10 text-center text-[18px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium rounded-xl text-white bg-primary hover:bg-transparent hover:border-primary hover:border-2 hover:text-primary hover:font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                 onClick={validateLogin}
                 >
-                  Sign in
+                  Login
                 </button>
               </div>
 
               <p className='text-[18px]'>Don't have an account?
                 <Link href="/register">
                   <a>
-                    <span className='font-bold'> Register <FaArrowRight className='inline' /></span> 
+                    <span className='font-bold'> Sign up <FaArrowRight className='inline' /></span> 
                   </a>
                 </Link>
               </p>

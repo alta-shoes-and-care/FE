@@ -95,9 +95,9 @@ function ListOrder() {
         {/* Card */}
         <div className=" h-[73vh] w-[1200px] flex flex-wrap overflow-y-scroll">
           {data.map((el, i) => (
-            <div className=" p-2 mb-5 rounded-lg pl-3 bg-[#9e9e9ea4] w-[480px] mx-3">
+            <div className=" p-2 mb-5 rounded-lg pl-3 bg-[#ffffff93] backdrop-blur-[5px] w-[480px] mx-3">
               <div
-                className={` w-[450px] flex py-2 px-5 my-3 ${styles.historyCard}`}
+                className={` w-[450px] flex py-2 px-5 my-3 bg-[#ffffffaf] backdrop-blur-[10px] rounded-lg `}
               >
                 <div>
                   <h1 className=" text-xl">{el.title}</h1>
@@ -133,7 +133,7 @@ function ListOrder() {
               </div>
               {/* edit status */}
               <div
-                className={` w-[370px] flex py-2 px-3 my-3 ${styles.historyCard}`}
+                className={` w-[370px] flex py-2 px-3 my-3 bg-[#ffffffaf] backdrop-blur-[10px] rounded-lg`}
               >
                 <div className=" flex justify-between w-[350px]">
                   <button className=" border-2 px-2 border-black rounded-md hover:text-primary hover:animate-pulse hover:border-primary">

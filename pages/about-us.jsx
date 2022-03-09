@@ -88,7 +88,7 @@ function AboutUs() {
           </div>
 
           <h1 className="mt-8 text-xl font-semibold text-center">
-            Aditya Fabio
+            Aditya Fabio Hariawan
           </h1>
           <h1 className=" text-center mb-1">Frontend Developer</h1>
           <div className="flex justify-center">

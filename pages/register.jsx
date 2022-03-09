@@ -5,8 +5,6 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { FaArrowRight } from 'react-icons/fa';
 
-import Loading from '../components/Loading';
-
 export default function Register() {
 
   const [name, setName] = useState('');
@@ -24,14 +22,23 @@ export default function Register() {
     if (name === '' && email === '' && password === '') {
       Swal.fire('Invalid!', 'Data cannot be empty!', 'error')
     }
-    else if (name.trim().length <= 3) {
-      // nama boleh ada spasi, boleh ada huruf besar, boleh ada spesial karakter, angka, dll yang penting tidak boleh kurang dari 3
+    else if (!/^[A-Za-z0-9](?!.*?\s$)(?![0-9]+$)[A-Za-z0-9\s]{3,30}$/gm.test(name)) {
+      /* 
+      nama boleh ada spasi, tetapi tidak boleh didepan dan belakang
+      nama boleh ada angka, tetapi tidak boleh jika angka semua
+      nama tidak boleh ada spesial karakter
+      minimal 4, maksimal 30
+      */
       setShow(true);
-      Swal.fire('Invalid!','Name must be more than 3 characters.','error')
-    }  
+      Swal.fire('Invalid!','Name cannot contain spaces at the beginning and end, minimum 4 characters, and maximum 30 characters.','error')
+    }
     else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
+      /* 
+      email tidak boleh ada spasi (depan, tengah, belakang)
+      email harus ada @ dan domain
+      */
       setShow(true);
-      Swal.fire('Invalid!','Email format is not valid.','error')
+      Swal.fire('Invalid!','Email format is not valid, email cannot contain spaces.','error')
     }
     else if (!/^(?!.*\s).{5,8}$/.test(password)) {
       /* 
@@ -40,7 +47,7 @@ export default function Register() {
       boleh huruf besar, huruf kecil, angka, dan spesial karakter
       */
       setShow(true);
-      Swal.fire('Invalid!','Password must not contain spaces, minimum 5 characters, and maximum 8 characters.', 'error')
+      Swal.fire('Invalid!','Password cannot contain spaces, minimum 5 characters, and maximum 8 characters.', 'error')
     } else {
       handleRegister()
     }
@@ -56,27 +63,24 @@ export default function Register() {
     }
     axios
     .post('https://ynwahid.cloud.okteto.net/users', body)
-    .then((data) => {
-      Swal.fire(
-        'Success Regist',
-        'you can login now',
-        'success'
-      )
-      console.log(data);
-      setShow(true);
-      setName('');
-      setEmail('');
-      setPassword('');
-      router.push('/login')
+    .then(({data}) => {
+      if(data) {
+        setShow(true);
+        setName('');
+        setEmail('');
+        setPassword('');
+        Swal.fire(`Success create account!`, 'You can login now.', 'success');
+        router.push('/login');
+      }
     })
-    .catch((err) => {
-      Swal.fire('Error', 'The data you entered is already registered', 'error');
-      console.log(err);
-      setShow(true);
-
-      setName('');
-      setEmail('');
-      setPassword('');
+    .catch((error) => {
+      if(error) {
+        setShow(true);
+        setName('');
+        setEmail('');
+        setPassword('');
+        Swal.fire(`Failed create account!`, 'The data you entered may already be registered', 'error');
+      }
     })
     .finally(() => {
       setLoading(false);
@@ -84,10 +88,16 @@ export default function Register() {
   }
 
   if (loading) {
-    return (
-        <Loading />
-    );
-}
+    Swal.fire({
+      title: 'Please Wait!',
+      html: "This may take a few seconds, please don't close this page.",
+      allowOutsideClick: false,
+      showConfirmButton: false,
+      willOpen: () => {
+          Swal.showLoading()
+      },
+    })
+  }
 
   return (
     <div className='container min-h-screen min-w-full flex justify-center text-center bg-cover bg-no-repeat' style={{backgroundImage: "url(https://images.unsplash.com/photo-1509472290917-08d8d47c5fca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80)"}}>
@@ -105,6 +115,7 @@ export default function Register() {
                 id="name-user" 
                 name="name" 
                 type="text"
+                maxLength="30"
                 placeholder="Name"
                 autoComplete="off" 
                 required 
@@ -114,13 +125,12 @@ export default function Register() {
                 />
               </div>
 
-
               <div className='mt-8'>
                 <label htmlFor="email-address" className="sr-only">Email</label>
                 <input 
                 id="email-address" 
                 name="email" 
-                type="email"
+                type="text"
                 placeholder="Email"
                 autoComplete="off" 
                 required 
@@ -134,7 +144,8 @@ export default function Register() {
                 <label htmlFor="password" className="sr-only">Password</label>
                 <input 
                 id="password" 
-                name="password" 
+                name="password"
+                maxLength="8"
                 type="password"
                 placeholder="Password"
                 autoComplete="off" 
