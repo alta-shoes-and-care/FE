@@ -133,14 +133,14 @@ function Login() {
                 className="w-[250px] h-[50px] mt-10 text-center text-[18px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium rounded-xl text-white bg-primary hover:bg-transparent hover:border-primary hover:border-2 hover:text-primary hover:font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                 onClick={validateLogin}
                 >
-                  Sign in
+                  Login
                 </button>
               </div>
 
               <p className='text-[18px]'>Don't have an account?
                 <Link href="/register">
                   <a>
-                    <span className='font-bold'> Register <FaArrowRight className='inline' /></span> 
+                    <span className='font-bold'> Sign up <FaArrowRight className='inline' /></span> 
                   </a>
                 </Link>
               </p>
