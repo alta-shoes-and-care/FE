@@ -10,7 +10,7 @@ export default function Layout({ children }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(allStore.getServiceAction());
+    dispatch(allStore.getAllService());
   }, [dispatch]);
 
   return (
