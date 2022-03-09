@@ -67,8 +67,8 @@ export default function Register() {
     .post('https://ynwahid.cloud.okteto.net/users', body)
     .then(({data}) => {
       Swal.fire(
-        `Success Regist!`,
-        'you can login now',
+        `Success create account!`,
+        'You can login now.',
         'success'
       )
       console.log(data);
@@ -80,7 +80,7 @@ export default function Register() {
     })
     .catch((error) => {
       if(error) {
-        Swal.fire(`Failed create new account!`, 'The data you entered may already be registered', 'error');
+        Swal.fire(`Failed create account!`, 'The data you entered may already be registered', 'error');
         setShow(true);
         setName('');
         setEmail('');

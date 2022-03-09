@@ -109,7 +109,7 @@ function NavbarCompoent() {
                         tabIndex="-1"
                         id="menu-item-0"
                       >
-                        Register
+                        Sign up
                       </a>
                     </Link>
                   </div>
