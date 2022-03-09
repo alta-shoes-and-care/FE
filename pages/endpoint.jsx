@@ -12,72 +12,36 @@ export default function endpoint() {
                 <div className='z-1 w-[100vw] h-[650px] bg-[#000009] bg-opacity-0 text-left'>
                     <div class="z-2 grid grid-cols-1 gap-4 bg-cover mt-[100px]">
                         {/* Desc Card */}
-                        <div className='ml-[20vw] mt-[8vh] z-3 w-[40vw] h-[60vh] bg-[#ffffff] bg-opacity-80 hover:bg-opacity-100 text-left rounded-lg'>
-                            <div className="grid grid-cols-1 text-left px-10 py-2">
-                                <p className="text-black bold text-2xl">
-                                    Service type: Regular Cleaning  
+                        <div className='ml-[20vw] mt-[8vh] z-3 w-[40vw] h-[65vh] bg-[#ffffff] bg-opacity-60 hover:bg-opacity-80 text-left rounded-lg'>
+                            <div className="grid grid-cols-1 text-center px-10 py-3">
+                                <p className="text-black text-center bold text-3xl">
+                                    Thankyou for using our services
                                 </p>
-                                <p className="text-black text-sm"> 
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dignissim feugiat ut montes, diam malesuada auctor nunc. Aliquam habitant nulla rhoncus sapien.  Lorem ipsum dolor sit amet, consectetur adipiscing elit.  
+                                <p className="text-black text-md text-center"> 
+                                    If you already finished the payment, click to check the payment status
                                 </p>
                             </div>
-                            {/*Invoice Section */}
-                            {/*quantity */}
-                            <div className="grid grid-cols-2">
-                                <h1 className="text-left text-black bold text-lg ml-[3vw]">
-                                    Quantity (Pairs): 1
-                                </h1>
+                            <div className="grid grid-cols-1 text-center w-[20vw] mt-[2vh] ml-[10vw]">
+                                <button class="bg-[#175C8C] hover:bg-white text-white hover:text-black font-bold py-2 px-2 border border-black rounded-lg">
+                                    <p className="text-md text-center rounded-xl"> Check Payment </p>
+                                </button>
                             </div>
-                            {/*quantity end*/}
-                            {/*patment - phone number */}
-                            <div className="grid grid-cols-2">
-                                <h1 className="text-left text-black bold text-lg ml-[3vw]">
-                                    Payment Method  :
-                                </h1>
-                                <h1 className="text-left text-black bold text-lg ml-[3vw]">
-                                    Phone Number :
-                                </h1>
+                            <div className="grid grid-cols-1 text-center px-10 py-3">
+                                <p className="text-black text-center bold text-2xl">
+                                    Check Payment Status
+                                </p>
+                                <p className="text-red-600 text-center bold text-xl mt-[2vh]">
+                                    Not Completed
+                                </p>
+                                <p className="text-green-600 text-center bold text-xl mt-[2vh]">
+                                    Completed
+                                </p>
                             </div>
-                            <div className="grid grid-cols-2 mb-1">
-                                <h1 className="text-left text-black bold text-md ml-[3vw]">
-                                    Go-Pay
-                                </h1>
-                                <h1 className="text-left text-black bold text-md ml-[3vw]">
-                                    0812345678910
-                                </h1>
+                            <div className="grid grid-cols-1 text-center w-[20vw] mt-[3vh] ml-[10vw]">
+                                <button class="bg-[#175C8C] hover:bg-white text-white hover:text-black font-bold py-2 px-2 border border-black rounded-lg">
+                                    <p className="text-md text-center rounded-xl"> Order History </p>
+                                </button>
                             </div>
-                            {/*payment-phone number end */}
-                            {/*city - pickup date*/}
-                            <div className="grid grid-cols-2">
-                                <h1 className="text-left text-black bold text-lg ml-[3vw]">
-                                    City  :
-                                </h1>
-                                <h1 className="text-left text-black bold text-lg ml-[3vw]">
-                                    Pick-Up Date :
-                                </h1>
-                            </div>
-                            <div className="grid grid-cols-2 mb-1">
-                                <h1 className="text-left text-black bold text-md ml-[3vw]">
-                                    Jakarta
-                                </h1>
-                                <h1 className="text-left text-black bold text-md ml-[3vw]">
-                                    2022-3-8
-                                </h1>
-                            </div>
-                            {/*city - pickup date */}
-                            {/*Adress - Subtotal*/}
-                            <div className="grid grid-cols-2">
-                                <h1 className="text-left text-black bold text-lg ml-[3vw]">
-                                    Adress  :
-                                </h1>
-                            </div>
-                            <div className="grid grid-cols-1 max-w-[38vw] mb-1">
-                                <h1 className="text-left text-black bold text-md ml-[3vw]">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dignissim feugiat ut montes, diam malesuada auctor nunc. Aliquam habitant nulla rhoncus sapien.  Lorem ipsum dolor sit amet, consectetur adipiscing elit.  
-                                </h1>
-                            </div>
-                            {/*Adress - subtotal end*/}
-                            {/*Invoice end */}
                         </div>
                         {/* Desc Card End*/}
                     </div>
