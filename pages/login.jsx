@@ -47,7 +47,7 @@ function Login() {
         setShow(true);
         setEmail('');
         setPassword('');
-        Swal.fire(`Success login! - ${data.code}`, 'You can start using the S3 service now.', 'success')
+        Swal.fire(`Success login!`, 'You can start using the S3 service now.', 'success')
       localStorage.setItem('token', data.data.token)
       localStorage.setItem('is_admin', data.data.is_admin)
       router.push('/')
@@ -62,7 +62,7 @@ function Login() {
         setShow(true);
         setEmail('');
         setPassword('');
-        Swal.fire(`${error}`, 'The data you entered was not found.', 'error');
+        Swal.fire(`Ooppss!!`, 'Invalid Email / Password', 'error');
       }
     })
     .finally(() => {
