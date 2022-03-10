@@ -208,6 +208,11 @@ function NavbarCompoent() {
               </Link>
             </h1>
             <h1 className=" mx-3 text-xl text-primary hover:text-orange-600">
+              <Link href="/about-us">
+                <a>About Us</a>
+              </Link>
+            </h1>
+            <h1 className=" mx-3 text-xl text-primary hover:text-orange-600">
               <Link href="/admin">
                 <a>Store</a>
               </Link>

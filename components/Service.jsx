@@ -8,6 +8,8 @@ import { useSelector } from 'react-redux';
 export default function Service() {
 
   const router = useRouter();
+  const query = router.query;
+  const id = query.id;
   const listService = useSelector(({getServiceReducer}) => getServiceReducer)
 
   useEffect(() => {
@@ -21,7 +23,7 @@ export default function Service() {
       <div className='mt-6 space-y-12 lg:space-y-0 lg:grid lg:grid-cols-4 lg:gap-x-3'>
         {listService.map((el, i) => (
           <div key={i}>
-          <Link href='/'>
+          <Link href={`/services/${el.id}`}>
             <a>
               <div className='relative cursor-pointer w-[298px] h-[241px] bg-cover mb-1 hover:drop-shadow-2xl' style={{backgroundImage: `url('${el.image}')`}}>
                 <div className='absolute w-[298px] h-[241px] bg-[#000009] bg-opacity-30 hover:bg-[#c6c6c6] hover:bg-opacity-50 text-center bottom-0 inset-x-0'>
