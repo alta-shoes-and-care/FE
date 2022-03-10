@@ -1,79 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../../styles/History.module.css";
 import { VscNewFile } from "react-icons/vsc";
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 import Swal from "sweetalert2";
 import { useRouter } from "next/router";
+import Loading from "../../components/Loading";
+import axios from "axios";
 
 function Admin() {
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const data = [
-    {
-      title: "Regular Cleaning",
-      price: "30.000",
-      date: "22 Feb 2022",
-      status: "Pending",
-      id: "003",
-    },
-    {
-      title: "Regular Express",
-      price: "60.000",
-      date: "25 Feb 2022",
-      status: "On Process",
-      id: "001",
-    },
-    {
-      title: "Repaint Medium",
-      price: "100.000",
-      date: "22 Feb 2022",
-      status: "Pick Up",
-      id: "002",
-    },
-    {
-      title: "Regular Cleaning",
-      price: "30.000",
-      date: "22 Feb 2022",
-      status: "Pending",
-      id: "003",
-    },
-    {
-      title: "Regular Express",
-      price: "60.000",
-      date: "25 Feb 2022",
-      status: "On Process",
-      id: "001",
-    },
-    {
-      title: "Repaint Medium",
-      price: "100.000",
-      date: "22 Feb 2022",
-      status: "Pick Up",
-      id: "002",
-    },
-    {
-      title: "Regular Cleaning",
-      price: "30.000",
-      date: "22 Feb 2022",
-      status: "Pending",
-      id: "003",
-    },
-    {
-      title: "Regular Express",
-      price: "60.000",
-      date: "25 Feb 2022",
-      status: "On Process",
-      id: "001",
-    },
-    {
-      title: "Repaint Medium",
-      price: "100.000",
-      date: "22 Feb 2022",
-      status: "Pick Up",
-      id: "002",
-    },
-  ];
+  const [product, setProduct] = useState([]);
 
-  function handleDelete() {
+  useEffect(() => {
+    axios
+      .get("https://ynwahid.cloud.okteto.net/services")
+      .then(({ data }) => {
+        setProduct(data.data);
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err, "error");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  function handleDelete(el) {
     return Swal.fire({
       title: "Delete this product?",
       text: "",
@@ -83,8 +41,29 @@ function Admin() {
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes",
     }).then((result) => {
+      const token = localStorage.getItem("token");
+      const config = {
+        headers: { Authorization: `Bearer ${token}` },
+      };
       if (result.isConfirmed) {
-        Swal.fire("Deleted", "", "success");
+        setLoading(true);
+        axios
+          .delete(
+            `https://ynwahid.cloud.okteto.net/services/jwt/${el.id}`,
+            config
+          )
+          .then(({ data }) => {
+            Swal.fire("Deleted", "", "success");
+            setTimeout(() => {
+              location.reload();
+            }, 1000);
+          })
+          .catch((err) => {
+            console.log(err, "error");
+          })
+          .finally(() => {
+            setLoading(false);
+          });
       }
     });
   }
@@ -101,7 +80,7 @@ function Admin() {
       if (result.isConfirmed) {
         setTimeout(() => {
           router.push(`/admin/${el.id}`);
-        }, 2000);
+        }, 1000);
       }
     });
   }
@@ -132,19 +111,26 @@ function Admin() {
           New Item
         </button>
         {/* Card */}
-        <div className=" h-[75vh] overflow-y-scroll w-full">
-          {data.map((el, i) => (
+        <div className=" h-[75vh] overflow-y-scroll w-full transition ease-linear duration-1000">
+          {product.map((el, i) => (
             <div
-              className={` w-[800px] flex py-2 px-3 my-3 ${styles.historyCard}`}
+              key={i}
+              className={` w-[800px] flex py-2 px-3 my-3 ${styles.historyCard} transition ease-linear duration-1000 hover:bg-[#719ad881] `}
             >
-              <div className=" w-[70px] h-[70px] bg-gray-500 mr-5"></div>
+              <div>
+                <img
+                  className=" w-[70px] h-[70px] mr-5 rounded-md"
+                  src={el.image}
+                  alt=""
+                />
+              </div>
               <div>
                 <h1 className=" text-xl">{el.title}</h1>
                 <div className=" bg-gray-600 w-[200px] my-1 h-0.5"></div>
                 <div className=" flex ">
                   <div
                     onClick={() => handleEdit(el)}
-                    className=" flex mr-8 hover:text-primary hover:animate-pulse"
+                    className=" flex mr-8 hover:text-white"
                   >
                     <p className=" text-xl mt-0.5 mr-1">
                       <AiOutlineEdit />
@@ -152,8 +138,8 @@ function Admin() {
                     <button>Edit</button>
                   </div>
                   <div
-                    onClick={handleDelete}
-                    className=" flex hover:text-primary hover:animate-pulse"
+                    onClick={() => handleDelete(el)}
+                    className=" flex hover:text-white"
                   >
                     <p className="  text-xl mt-0.5 mr-1">
                       <AiOutlineDelete />
