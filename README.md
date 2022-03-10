@@ -8,7 +8,7 @@
   src="https://i.imgur.com/5JACEh6.png"
   alt="Alt text"
   title="Optional title"
-  style="display: inline-block; margin: 0 auto; max-width: 400px">
+  style="display: inline-block; margin: 0 auto; max-width: 300px">
 
 ## About the Project
 Nowadays, some people are very busy and don't even have time to clean their shoes. Therefore we need a platform that is able to connect customers with shoes washing service provider.
@@ -88,22 +88,22 @@ Nowadays, some people are very busy and don't even have time to clean their shoe
 ```sh
 final-project-shoes-group-2
 ├─ assets
-│  ├─ admin-bg1.png
-│  ├─ admin-bg2.png
 │  ├─ carousel
 │  │  ├─ s6.png
 │  │  ├─ s7.png
 │  │  └─ s8.png
+│  ├─ logo
+│  │  ├─ logo.png
+│  │  ├─ new icon 1logo.png
+│  │  └─ new icon 1logo2x.png
+│  ├─ admin-bg1.png
+│  ├─ admin-bg2.png
 │  ├─ endpoint.png
 │  ├─ fav.ico
 │  ├─ fav.png
 │  ├─ form.png
 │  ├─ history-bg.png
 │  ├─ invoice.png
-│  ├─ logo
-│  │  ├─ logo.png
-│  │  ├─ new icon 1logo.png
-│  │  └─ new icon 1logo2x.png
 │  ├─ nav-icon.png
 │  ├─ profile.png
 │  ├─ shoes.png
