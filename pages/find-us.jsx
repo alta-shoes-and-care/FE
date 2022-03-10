@@ -76,16 +76,20 @@ const data = [
 
 export default function FindUs() {
   return (
-    <div className='container mx-auto my-8 divide-y-[1px] divide-gray-500'>
+    <div className='bg-no-repeat bg-cover' style={{
+      backgroundImage:
+        "url(https://images.unsplash.com/photo-1581007036738-f2fabcd681c4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80)",
+    }}>
+    <div className='container mx-auto py-8 divide-y-[1px] divide-gray-500'>
       <div>
-        <h1 className='text-[48px] font-bold text-center'>Find Us</h1>
-        <h2 className='font-medium text-[24px] text-center mb-10'>Our branches throughout Indonesia :</h2>
+        <h1 className='text-[48px] text-white font-bold text-center'>Find Us</h1>
+        <h2 className='font-medium text-white text-[24px] text-center mb-10'>Our branches throughout Indonesia :</h2>
       </div>
 
       <div className='flex flex-row flex-wrap mx-auto w-3/4'>
       {data.map((el, i) => (
-        <div className='mt-10 flex justify-between w-1/2'>
-          <div className='w-1/5 pl-5'>
+        <div className='mt-10 mx-auto flex justify-between w-[45%] bg-white bg-opacity-70 backdrop-blur-[5px]'>
+          <div className='w-1/5 pl-5 pt-1'>
             <FaMapMarkerAlt className='w-[45px] h-[60px] text-primary' />
           </div>
 
@@ -97,6 +101,7 @@ export default function FindUs() {
         </div>
       ))}
       </div>
+    </div>
     </div>
   )
 }

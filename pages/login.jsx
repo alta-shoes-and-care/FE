@@ -79,10 +79,26 @@ function Login() {
       })
       .catch((error) => {
         if (error) {
+          console.log(error.response.status);
           setShow(true);
           setEmail("");
           setPassword("");
-          Swal.fire(`Ooppss!!`, "Invalid Email / Password", "error");
+          Swal.fire(`Ooppss!!`, "Invalid Email / Password.", "error");
+        } else if(error.response.status === 401) {
+          Swal.fire({
+            title: "Your session has ended!",
+            text: "Please login again to continue.",
+            icon: "error",
+            showCancelButton: false,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Ok",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              router.push("/login");
+              localStorage.clear();
+            }
+          });
         }
       })
       .finally(() => {
