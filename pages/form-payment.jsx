@@ -11,7 +11,7 @@ export default function formpayment() {
         <section>
             <div className={`z-0 grid grid-cols-1 h-[650px] bg-cover mt-[-100px] ${style.bgImage}  `}> 
                 <div className='z-1 w-[100vw] h-[650px] bg-[#000009] bg-opacity-30 text-center'>
-                    <div class="z-2 grid grid-cols-1 gap-4 bg-cover mt-[100px]">
+                    <div className="z-2 grid grid-cols-1 gap-4 bg-cover mt-[100px]">
                         <div className="mt-[0.5vh]">
                             <p className="text-3xl text-white">
                                 Confirm your order
