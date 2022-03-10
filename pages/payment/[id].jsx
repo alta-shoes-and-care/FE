@@ -68,7 +68,7 @@ export default function formpayment(props) {
                                 <h1 className="text-left text-[#175C8C] bold text-lg ml-[3vw]">
                                     Payment Method<dot className="text-red-600">*</dot>
                                 </h1>
-                                <h1 className="text-left text-[#175C8C] bold text-lg">
+                                <h1 className="text-left text-[#175C8C] bold text-lg ml-[0.7vw]">
                                     Phone Number<dot className="text-red-600">*</dot>
                                 </h1>
                                 <h1 className="text-center text-[#175C8C] bold text-lg">
@@ -140,14 +140,14 @@ export default function formpayment(props) {
                                 <h1 className="text-left text-[#175C8C] bold text-lg ml-[3vw]">
                                     City<dot className="text-red-600">*</dot>
                                 </h1>
-                                <h1 className="text-left text-[#175C8C] bold text-lg ">
+                                <h1 className="text-left text-[#175C8C] bold text-lg ml-[0.7vw]">
                                     Pick-Up Date<dot className="text-red-600">*</dot>
                                 </h1>
                             </div>
 
-                            <div className="grid grid-cols-3 ">
+                            <div className="grid grid-cols-3 ml-[0.5vw]">
                                 <div className={style.input}>
-                                    <select className="text-gray-500">
+                                    <select className="text-gray-500 w-[11.5vw]">
                                         <option selected disabled>
                                             Choose City
                                         </option>
@@ -180,7 +180,7 @@ export default function formpayment(props) {
                                         placeholder="Pick Up Date"
                                         autoComplete="off"
                                         required
-                                        className="ml-[0.3vw] h-[30px] bg-transparent appearance-none relative block w-full px-3 py-2 border-2 border-primary placeholder-gray-500 text-gray-500 md:text-[18px] rounded-lg focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+                                        className="ml-[0.1vw] h-[30px] bg-transparent appearance-none relative block w-full px-3 py-2 border-2 border-primary placeholder-gray-500 text-gray-500 md:text-[18px] rounded-lg focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
                                         value={""}
                                         onChange={(e) => {
                                         setPhonenumber(e.target.value);
