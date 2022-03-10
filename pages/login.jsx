@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Link from 'next/link';
 import Swal from 'sweetalert2';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { FaArrowRight } from 'react-icons/fa';
 
@@ -14,6 +14,12 @@ function Login() {
   const [show, setShow] = useState(false);
 
   const router = useRouter();
+
+  useEffect(() => { 
+        if (localStorage.getItem("token")) { 
+          router.push("/"); 
+        }
+  })
 
   function validateLogin(e) {
     e.preventDefault();
@@ -141,4 +147,4 @@ function Login() {
   )
 }
 
-export default Login
+export default Login;
