@@ -17,7 +17,19 @@ function Login() {
 
   useEffect(() => { 
         if (localStorage.getItem("token")) { 
-          router.push("/"); 
+      Swal.fire({
+        title: 'You are logged in',
+        text: "Please return to the landing page",
+        icon: 'info',
+        showCancelButton: false,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ok'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          router.push("/"); 
+        }
+      })
         }
   })
 
