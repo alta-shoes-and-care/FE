@@ -25,6 +25,18 @@ function NewItem() {
     },
   });
 
+  function validateButton() {
+    if (title === "" || price === "" || description === "" || image === null) {
+      Swal.fire(
+        "Invalid!",
+        "Forms can't be empty,please fill out the fields.",
+        "error"
+      );
+    } else {
+      handleButton();
+    }
+  }
+
   function handleButton() {
     const formData = new FormData();
     formData.append("title", title);
@@ -65,7 +77,7 @@ function NewItem() {
             }, 2000);
           })
           .catch((err) => {
-            console.log(err, "error");
+            Swal.fire("Invalid!", "Forms can't be empty", "error");
           })
           .finally(() => {
             setLoading(false);
@@ -94,6 +106,7 @@ function NewItem() {
             <h1 className=" text-3xl mb-2">Service Title</h1>
             <div>
               <input
+                minLength="5"
                 maxLength="30"
                 onChange={(e) => {
                   setTitle(e.target.value);
@@ -113,8 +126,8 @@ function NewItem() {
                 onChange={(e) => {
                   setPrice(e.target.value);
                 }}
+                max="1000000000"
                 min="0"
-                name="price"
                 type="number"
                 placeholder="30.000"
                 autoComplete="off"
@@ -150,6 +163,7 @@ function NewItem() {
               onChange={(e) => {
                 setDescription(e.target.value);
               }}
+              type="text"
               maxLength="320"
               required
               className={`form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700  bg-clip-padding border border-solid border-gray-300 rounded-lg transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none ${styles.inputbg}`}
@@ -157,11 +171,10 @@ function NewItem() {
               rows="5"
               placeholder="Input description"
             ></textarea>
-
             <div className="flex justify-center">
               <button
                 type="button"
-                onClick={handleButton}
+                onClick={validateButton}
                 className="w-[250px] h-[50px] mt-10 text-center text-[18px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium rounded-xl text-white bg-primary hover:bg-transparent hover:border-white hover:border-2 hover:text-white hover:font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:bg-white focus:ring-primary  transition ease-linear duration-500"
               >
                 Submit

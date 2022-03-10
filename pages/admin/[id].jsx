@@ -36,6 +36,18 @@ function EditItem() {
       });
   }, []);
 
+  function validateButton() {
+    if (title === "" || price === "" || description === "" || image === null) {
+      Swal.fire(
+        "Invalid!",
+        "Forms can't be empty,please fill out the fields.",
+        "error"
+      );
+    } else {
+      handleEdit();
+    }
+  }
+
   function handleEdit(el) {
     return Swal.fire({
       title: "Update this service?",
@@ -107,6 +119,7 @@ function EditItem() {
             <div>
               <input
                 value={title}
+                minLength="5"
                 maxLength="30"
                 onChange={(e) => setTitle(e.target.value)}
                 name="title"
@@ -124,6 +137,7 @@ function EditItem() {
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
                 min="0"
+                max="1000000000"
                 name="price"
                 type="number"
                 placeholder="30.000"
@@ -156,6 +170,7 @@ function EditItem() {
             </div>
             <h1 className=" text-3xl mb-2">Description</h1>
             <textarea
+              type="text"
               value={description}
               maxLength="320"
               onChange={(e) => setDescription(e.target.value)}
@@ -168,7 +183,7 @@ function EditItem() {
 
             <div className="flex justify-center">
               <button
-                onClick={handleEdit}
+                onClick={validateButton}
                 type="button"
                 className="w-[250px] h-[50px] mt-10 text-center text-[18px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium rounded-xl text-white bg-primary hover:bg-transparent hover:border-white hover:border-2 hover:text-white hover:font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary  transition ease-linear duration-500"
               >
