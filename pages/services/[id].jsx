@@ -59,7 +59,7 @@ export default function services() {
                                 <NumberFormat value={services.price} displayType={'text'} decimalSeparator={','} thousandSeparator={'.'} prefix={'Rp'} />,00
                             </p>
                             <button class="bg-[#175C8C] hover:bg-white text-white hover:text-black font-bold py-4 px-6 border border-black rounded-lg"
-                            onClick={() => router.push('/form-payment')} >
+                            onClick={() => router.push(`/payment/${services.id}`)} >
                                 <p className="text-xl rounded-xl"> Book a service </p>
                             </button>
                         </div>
