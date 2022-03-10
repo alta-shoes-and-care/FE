@@ -192,9 +192,9 @@ function Login() {
                       </button>
                     </div>
 
-                    <p className="text-[18px]">
+                    <p className="text-[18px] mt-3">
                       Don't have an account?
-                      <Link href="/register">
+                      <Link href="/signup">
                         <a>
                           <span className="font-bold">
                             {" "}

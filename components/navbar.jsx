@@ -101,7 +101,7 @@ function NavbarCompoent() {
                         Login
                       </a>
                     </Link>
-                    <Link href="/register">
+                    <Link href="/signup">
                       <a
                         onClick={() => setShowOpt(false)}
                         className="text-primary block px-4 py-2 text-l  hover:text-orange-600 "
