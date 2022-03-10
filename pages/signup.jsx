@@ -180,7 +180,7 @@ export default function Register() {
                 </button>
               </div>
 
-              <p className='text-[18px]'>Already have an account?
+              <p className='text-[18px] mt-3'>Already have an account?
                 <Link href="/login">
                   <a>
                     <span className='font-bold'> Login <FaArrowRight className='inline' /></span> 
