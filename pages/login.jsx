@@ -195,11 +195,29 @@ function Login() {
         );
       } else if (localStorage.getItem("token")) {
         return (
-          <div className=" h-screen flex justify-center items-center">
-            <div className=" flex flex-col">
-              <h1 className=" text-4xl text-center">You are logged in</h1>
-              <h1 className=" text-4xl">Please return to the landing page</h1>
-              <button onClick={() => router.push("/")}>Oke</button>
+          <div
+            className="container min-h-screen min-w-full flex justify-center text-center bg-cover bg-no-repeat"
+            style={{
+              backgroundImage:
+                "url(https://images.unsplash.com/photo-1495555961986-6d4c1ecb7be3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80)",
+            }}
+          >
+            <div className="container min-h-screen min-w-full flex justify-center text-center bg-[#f0f0f0] bg-opacity-30">
+              <div className="w-[600px] h-[500px] bg-white bg-opacity-50 backdrop-blur-[10px] my-auto flex justify-center items-center rounded-2xl">
+                <div className="text-center mx-auto">
+                  <h1 className="font-bold text-[40px] text-primary text-center">
+                  You are logged in!
+                  </h1>
+                  <h4 className="font-md text-[20px] text-black text-center">
+                  Please return to the landing page.
+                  </h4>
+                  <button
+                  className="w-[150px] h-[50px] mt-10 mx-auto text-center text-[18px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium rounded-xl text-white bg-primary hover:bg-transparent hover:border-primary hover:border-2 hover:text-primary hover:font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                  onClick={() => router.push("/")}>
+                    Oke
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         );
