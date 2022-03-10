@@ -1,29 +1,41 @@
 import React, {useEffect, useState} from "react";
-import Image from "next/image";
-import bgImage from "../../assets/form.png"
 import style from "../../styles/formpayment.module.css";
 
 import { useRouter } from 'next/router';
 import axios from "axios";
+import NumberFormat from 'react-number-format';
 
 export default function formpayment(props) {
 
     const router = useRouter();
-    const {id} = router.query;
-
-    const [payments, setPayments] = useState([]);
+    let {id}=router.query
+    console.log(router.query.id)
 
     useEffect(() => {
-        axios
-          .get(`https://ynwahid.cloud.okteto.net/payments`, {headers : {authorization:`bearer ${localStorage.getItem("token")}`}})
-          .then(({ data }) => {
-            console.log(data)
-            setPayments(data.data)
-          })
-          .catch((err) => {
-            console.log(err, "cannot get data city");
-          });
-      }, []);
+        if(id!=='undefined'){
+            console.log('running use effect')
+
+            axios
+                .get(`https://ynwahid.cloud.okteto.net/services/${id}`)
+                .then(({ data }) => {
+                    setServices(data.data)
+                    console.log(data.data,'berhasil get')
+                })
+                .catch((err) => {
+                    console.log(err, "error bang");
+                });
+            }
+        }, [id]);
+
+        const [services, setServices] = useState({
+            'city': ""
+            ,'description': ""
+            ,'id': 0
+            ,'name': ""
+            ,'price': 0
+            ,'user_id': 0
+        });
+        console.log(services)
 
     return (
         <section>
@@ -39,10 +51,10 @@ export default function formpayment(props) {
                         <div className='my-auto ml-[25vw] z-3 w-[50vw] h-[70vh] bg-[#ffffff] bg-opacity-60 hover:bg-opacity-80 text-left rounded-lg'>
                             <div className="grid grid-cols-1 text-center mt-[1vh]  px-10 py-2">
                                 <p className="text-black bold text-xl">
-                                    Service type: Regular Cleaning  
+                                    Service type: {services.title}
                                 </p>
                                 <p className="text-black text-sm mt-[1vh]"> 
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dignissim feugiat ut montes, diam malesuada auctor nunc. Aliquam habitant nulla rhoncus sapien.  Lorem ipsum dolor sit amet, consectetur adipiscing elit.  
+                                    {services.description}
                                 </p>
                             </div>
                             {/*form Section */}
@@ -60,15 +72,10 @@ export default function formpayment(props) {
                             </div>
                             <div className="grid grid-cols-3 ml-[5vh]">
                                 <div className={style.input}>
-                                <select>
+                                    <select>
                                         <option selected disabled>
                                             Choose Payment
                                         </option>
-                                        {payments.map((payment, i) => (
-                                        <option key={i}>
-                                            {payment.name}
-                                        </option>
-                                        ))}
                                     </select>
                                 </div>
                                 <div className={style.input}>
@@ -128,7 +135,9 @@ export default function formpayment(props) {
                                 <div className="ml-[10vw]">
                                     <div className="ml-[-1vh]">
                                         <p className="text-2xl text-center bold">Subtotal</p>
-                                        <h1 className="text-2xl text-center bold">Rp.25.000</h1>
+                                        <h1 className="text-2xl text-center bold">
+                                            <NumberFormat value={services.price} displayType={'text'} decimalSeparator={','} thousandSeparator={'.'} prefix={'Rp'} />,00
+                                        </h1>
                                     </div>
                                     <button class="bg-[#175C8C] hover:bg-white text-white hover:text-black font-bold py-2 px-3 border border-black rounded-lg mt-[1vh] ml-[2vw]">
                                         <p className="text-md text-center rounded-xl"> Confirm Order </p>

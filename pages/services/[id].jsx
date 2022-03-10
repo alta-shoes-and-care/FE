@@ -43,7 +43,7 @@ export default function services() {
                 <div className='z-1 w-[100vw] h-[650px] bg-[#000009] bg-opacity-30 text-center'>
                     <div class="z-2 grid grid-cols-2 gap-4 bg-cover mt-[100px]">
                         {/* Desc Card */} 
-                        <div className='ml-[15vh] mt-[10vh] z-3 w-[75vh] h-[60vh] bg-[#ffffff] bg-opacity-60 hover:bg-opacity-80 text-left rounded-lg'>
+                        <div className='ml-[15vh] mt-[10vh] z-3 w-[75vh] h-[60vh] bg-[#ffffff] bg-opacity-90  text-left rounded-lg'>
                             <p className="text-black bold text-4xl mt-[3.5vh] ml-[5vh]">
                                 {services.title}  
                             </p>
@@ -55,7 +55,7 @@ export default function services() {
                         {/* Desc Card End*/}
                         {/* Price and Button*/}
                         <div class="z-4 object-bottom ml-[5vh]">
-                            <p className="z-5 text-white text-6xl hover:text-7xl mt-[55vh] mb-[3vh]"> 
+                            <p className="z-5 text-white text-6xl mt-[55vh] mb-[3vh]"> 
                                 <NumberFormat value={services.price} displayType={'text'} decimalSeparator={','} thousandSeparator={'.'} prefix={'Rp'} />,00
                             </p>
                             <button class="bg-[#175C8C] hover:bg-white text-white hover:text-black font-bold py-4 px-6 border border-black rounded-lg"
