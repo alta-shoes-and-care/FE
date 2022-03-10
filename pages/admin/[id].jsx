@@ -1,7 +1,97 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import styles from "../../styles/History.module.css";
+import Loading from "../../components/Loading";
+import { useRouter } from "next/router";
+import Swal from "sweetalert2";
 
 function EditItem() {
+  const router = useRouter();
+  const query = router.query;
+  const id = query.id;
+  const [product, setProduct] = useState([]);
+  const [title, setTitle] = useState("");
+  const [price, setPrice] = useState("");
+  const [description, setDescription] = useState("");
+  const [image, setImage] = useState(null);
+  const [idProduct, setidProduct] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const id = query.id;
+    axios
+      .get(`https://ynwahid.cloud.okteto.net/services/${id}`)
+      .then(({ data }) => {
+        setProduct(data.data);
+        setTitle(data.data.title);
+        setPrice(data.data.price);
+        setDescription(data.data.description);
+        setidProduct(data.data.id);
+      })
+      .catch((err) => {
+        console.log(err, "error");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+
+  function handleEdit(el) {
+    return Swal.fire({
+      title: "Update this service?",
+      text: "",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      const token = localStorage.getItem("token");
+      const config = {
+        headers: { Authorization: `Bearer ${token}` },
+      };
+
+      const configImg = {
+        headers: { Authorization: `Bearer ${token}` },
+        "Content-Type": "multipart/form-data",
+      };
+      const formData = new FormData();
+      formData.append("file", image);
+
+      const dataUpdate = {
+        id: idProduct,
+        title: title,
+        price: price,
+        description: description,
+      };
+
+      if (result.isConfirmed) {
+        setLoading(true);
+        axios
+          .put(
+            `https://ynwahid.cloud.okteto.net/services/jwt`,
+            dataUpdate,
+            config
+          )
+          .then(({ data }) => {
+            Swal.fire("Updated", "", "success");
+            setTimeout(() => {
+              router.push("/admin");
+            }, 3000);
+          })
+          .catch((err) => {
+            console.log(err, "error");
+          })
+          .finally(() => {
+            setLoading(false);
+          });
+      }
+    });
+  }
+
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <div className={`flex justify-center items-center ${styles.adminbg2}`}>
       <div
@@ -16,6 +106,9 @@ function EditItem() {
             <h1 className=" text-3xl mb-2">Service Title</h1>
             <div>
               <input
+                value={title}
+                maxLength="30"
+                onChange={(e) => setTitle(e.target.value)}
                 name="title"
                 type="text"
                 placeholder="Input title"
@@ -28,6 +121,8 @@ function EditItem() {
             <h1 className=" text-3xl mb-2">Price</h1>
             <div>
               <input
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
                 min="0"
                 name="price"
                 type="number"
@@ -41,9 +136,18 @@ function EditItem() {
             <h1 className=" text-3xl mb-2">Image</h1>
             <div>
               <input
+                onChange={(e) => {
+                  setImage(e.target.files[0]);
+                  if (e.target.files[0].size > 500000) {
+                    Swal.fire(
+                      "The size of the image should not be more than 500 Kb"
+                    );
+                    setImage(null);
+                  }
+                }}
+                accept="image/png, image/jpg, image/jpeg"
                 name="image"
                 type="file"
-                accept="image/*"
                 placeholder=""
                 autoComplete="off"
                 required
@@ -52,6 +156,9 @@ function EditItem() {
             </div>
             <h1 className=" text-3xl mb-2">Description</h1>
             <textarea
+              value={description}
+              maxLength="320"
+              onChange={(e) => setDescription(e.target.value)}
               required
               className={`form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700  bg-clip-padding border border-solid border-gray-300 rounded-lg transition ease-in-out m-0 focus:text-gray-700 focus:border-blue-600 focus:outline-none ${styles.inputbg}`}
               id="exampleFormControlTextarea1"
@@ -60,7 +167,11 @@ function EditItem() {
             ></textarea>
 
             <div className="flex justify-center">
-              <button className="w-[250px] h-[50px] mt-10 text-center text-[18px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium rounded-xl text-white bg-primary hover:bg-transparent hover:border-white hover:border-2 hover:text-white hover:font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary  transition ease-linear duration-500">
+              <button
+                onClick={handleEdit}
+                type="button"
+                className="w-[250px] h-[50px] mt-10 text-center text-[18px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium rounded-xl text-white bg-primary hover:bg-transparent hover:border-white hover:border-2 hover:text-white hover:font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary  transition ease-linear duration-500"
+              >
                 Submit
               </button>
             </div>
