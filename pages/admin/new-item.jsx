@@ -68,6 +68,10 @@ function NewItem() {
             config
           )
           .then(({ data }) => {
+            setTitle("");
+            setPrice("");
+            setDescription("");
+            setImage(null);
             Toast.fire({
               icon: "success",
               title: "Success add new service",
@@ -89,13 +93,21 @@ function NewItem() {
   }
 
   if (loading) {
-    return <Loading />;
+    Swal.fire({
+      title: "Please Wait!",
+      html: "This may take a few seconds, please don't close this page.",
+      allowOutsideClick: false,
+      showConfirmButton: false,
+      willOpen: () => {
+        Swal.showLoading();
+      },
+    });
   }
 
   return (
     <div className={`flex justify-center items-center ${styles.adminbg2}`}>
       <div
-        className={` w-[700px] h-screen my-8 p-4 flex justify-center flex-col items-center ${styles.historyGlass}`}
+        className={` w-[700px] h-screen my-8 p-4 flex justify-center flex-col items-center backdrop-blur-[5px] bg-[#ffffffd3] rounded-xl`}
       >
         {/* content */}
         <h1 className=" text-5xl text-center  font-bold mb-12 ">
@@ -106,6 +118,7 @@ function NewItem() {
             <h1 className=" text-3xl mb-2">Service Title</h1>
             <div>
               <input
+                value={title}
                 minLength="5"
                 maxLength="30"
                 onChange={(e) => {
@@ -116,13 +129,14 @@ function NewItem() {
                 placeholder="Input title"
                 autoComplete="off"
                 required
-                className={` h-12 mb-5 form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700  bg-clip-padding border border-solid border-gray-300 rounded-lg transition ease-in-out m-0 focus:text-gray-700 focus:border-blue-600 focus:bg-white focus:outline-none ${styles.inputbg}`}
+                className={` h-12 mb-5 form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700  bg-clip-padding border-solid border-black border-2 rounded-lg transition ease-in-out m-0 focus:text-gray-700 focus:border-primary focus:outline-none bg-transparent`}
               />
             </div>
 
             <h1 className=" text-3xl mb-2">Price</h1>
             <div>
               <input
+                value={price}
                 onChange={(e) => {
                   setPrice(e.target.value);
                 }}
@@ -132,7 +146,7 @@ function NewItem() {
                 placeholder="30.000"
                 autoComplete="off"
                 required
-                className={` h-12 mb-5 form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700  bg-clip-padding border border-solid border-gray-300 rounded-lg transition ease-in-out m-0 focus:bg-white focus:text-gray-700 focus:border-blue-600 focus:outline-none ${styles.inputbg}`}
+                className={` h-12 mb-5 form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700  bg-clip-padding border-2 border-solid border-black rounded-lg transition ease-in-out m-0  focus:text-gray-700 focus:border-primary focus:outline-none bg-transparent`}
               />
             </div>
 
@@ -155,18 +169,19 @@ function NewItem() {
                 placeholder=""
                 autoComplete="off"
                 required
-                className={` h-12 mb-5 px-3 py-2 text-gray-700 border border-solid border-gray-300 rounded-lg transition ease-in-out m-0 focus:text-gray-700 focus:border-blue-600 focus:bg-white focus:outline-none ${styles.inputbg}`}
+                className={` h-12 mb-5 px-3 py-2 text-gray-700 border-2 border-black rounded-lg transition ease-in-out m-0 focus:text-gray-700 focus:border-primary focus:outline-none bg-transparent`}
               />
             </div>
             <h1 className=" text-3xl mb-2">Description</h1>
             <textarea
+              value={description}
               onChange={(e) => {
                 setDescription(e.target.value);
               }}
               type="text"
               maxLength="320"
               required
-              className={`form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700  bg-clip-padding border border-solid border-gray-300 rounded-lg transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none ${styles.inputbg}`}
+              className={`form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700  bg-clip-padding border-2 border-solid border-black rounded-lg transition ease-in-out m-0 focus:text-gray-700  focus:border-primary focus:outline-none bg-transparent`}
               id="exampleFormControlTextarea1"
               rows="5"
               placeholder="Input description"
@@ -175,7 +190,7 @@ function NewItem() {
               <button
                 type="button"
                 onClick={validateButton}
-                className="w-[250px] h-[50px] mt-10 text-center text-[18px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium rounded-xl text-white bg-primary hover:bg-transparent hover:border-white hover:border-2 hover:text-white hover:font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:bg-white focus:ring-primary  transition ease-linear duration-500"
+                className="w-[250px] h-[50px] mt-10 text-center text-[18px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium rounded-xl text-white bg-primary hover:bg-transparent hover:border-black hover:border-2 hover:text-black hover:font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:bg-white focus:ring-primary  transition ease-linear duration-500"
               >
                 Submit
               </button>

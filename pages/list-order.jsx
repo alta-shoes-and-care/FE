@@ -12,8 +12,21 @@ import NumberFormat from "react-number-format";
 import moment from "moment";
 
 function ListOrder() {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [listOrder, setlistOrder] = useState([[]]);
+
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 2000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -21,7 +34,7 @@ function ListOrder() {
       headers: { Authorization: `Bearer ${token}` },
     };
     axios
-      .get(`https://ynwahid.cloud.okteto.net/orders/jwt`, config)
+      .get(`https://ynwahid.cloud.okteto.net/orders`, config)
       .then(({ data }) => {
         setlistOrder(data.data);
       })
@@ -33,16 +46,76 @@ function ListOrder() {
       });
   }, []);
 
-  const router = useRouter();
-  const data = [
-    {
-      title: "Regular Cleaning",
-      price: "30.000",
-      date: "22 Feb 2022",
-      status: "Pending",
-      id: "003",
-    },
-  ];
+  function getOrder(params) {
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+    axios
+      .get(`https://ynwahid.cloud.okteto.net/orders`, config)
+      .then(({ data }) => {
+        setlistOrder(data.data);
+      })
+      .catch((err) => {
+        console.log(err, "error");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }
+
+  function handleAccept(el) {
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+    setLoading(true);
+    axios
+      .put(
+        `https://ynwahid.cloud.okteto.net/orders/accept/${el.id}`,
+        {},
+        config
+      )
+      .then(({ data }) => {
+        Toast.fire({
+          icon: "success",
+          title: "Success changed status",
+        });
+        return getOrder();
+      })
+      .catch((err) => {
+        console.log(err.response, "error");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }
+  function handleOnprocess(el) {
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+    setLoading(true);
+    axios
+      .put(
+        `https://ynwahid.cloud.okteto.net/orders/process/${el.id}`,
+        {},
+        config
+      )
+      .then(({ data }) => {
+        Toast.fire({
+          icon: "success",
+          title: "Success changed status",
+        });
+        return getOrder();
+      })
+      .catch((err) => {
+        console.log(err.response, "error");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }
 
   if (loading) {
     return <Loading />;
@@ -63,16 +136,16 @@ function ListOrder() {
       </div>
 
       {/* right */}
-      <div className=" w-[1200px] h-auto mt-7 flex">
+      <div className=" w-[1200px] h-auto mt-7 flex ">
         {/* Card */}
-        <div className=" h-[73vh] w-[1200px] flex flex-wrap overflow-y-scroll content-start">
+        <div className="  h-[73vh] w-[1200px] flex flex-wrap overflow-y-scroll content-start">
           {listOrder.map((el, i) => (
             <div
               key={i}
-              className=" p-2 mb-5 rounded-lg pl-3 bg-[#ffffff93] backdrop-blur-[5px] h-[180px] w-[480px] mx-3 transition ease-linear duration-1000 hover:bg-[#b2b9be81] "
+              className=" p-2 mb-5 rounded-lg pl-3 bg-[#ffffffe3] backdrop-blur-[5px] h-[180px] w-[480px] mx-3 transition ease-linear duration-1000 ] "
             >
               <div
-                className={` w-[450px] flex py-2 px-5 my-3 bg-[#ffffffaf] backdrop-blur-[10px] rounded-lg `}
+                className={` w-[450px] flex py-2 px-5 my-3 bg-white shadow-md rounded-lg `}
               >
                 <div>
                   <h1 className=" text-xl">{el.service_title}</h1>
@@ -114,20 +187,24 @@ function ListOrder() {
                 </div>
               </div>
               {/* edit status */}
-              <div
-                className={` w-[370px] flex py-2 px-3 my-3 bg-[#ffffffaf] backdrop-blur-[10px] rounded-lg`}
-              >
+              <div className={` w-[370px] flex py-2  rounded-lg`}>
                 <div className=" flex justify-between w-[350px]">
-                  <button className=" border-2 px-2 border-black rounded-md hover:text-primary hover:animate-pulse hover:border-primary">
+                  <button
+                    onClick={() => handleAccept(el)}
+                    className=" px-2 py-1 bg-white shadow-md rounded-md hover:text-red-500"
+                  >
                     Accept
                   </button>
-                  <button className=" border-2 px-2 border-black rounded-md hover:text-primary hover:animate-pulse hover:border-primary">
+                  <button
+                    onClick={() => handleOnprocess(el)}
+                    className=" px-2 bg-white shadow-md rounded-md hover:text-red-500"
+                  >
                     On Process
                   </button>
-                  <button className=" border-2 px-2 border-black rounded-md hover:text-primary hover:animate-pulse hover:border-primary">
+                  <button className=" px-2 bg-white shadow-md rounded-md hover:text-red-500">
                     Delivery
                   </button>
-                  <button className=" border-2 px-2 border-black rounded-md hover:text-primary hover:animate-pulse hover:border-primary">
+                  <button className=" px-2 bg-white shadow-md rounded-md hover:text-red-500">
                     Cancel
                   </button>
                 </div>
