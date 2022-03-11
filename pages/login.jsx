@@ -130,12 +130,12 @@ function Login() {
             }}
           >
             <div className="container min-h-screen min-w-full flex justify-center text-center bg-[#f0f0f0] bg-opacity-30">
-              <div className="w-[600px] h-[600px] bg-white bg-opacity-50 backdrop-blur-[10px] my-auto flex justify-center items-center rounded-2xl">
+              <div className="w-[70%] h-[60%] lg:w-[600px] lg:h-[600px] bg-white bg-opacity-50 backdrop-blur-[10px] my-auto flex justify-center items-center rounded-2xl">
                 <div>
-                  <h1 className="font-bold text-[40px] text-primary">
+                  <h1 className="font-bold text-[30px] lg:text-[40px] text-primary">
                     Welcome back!
                   </h1>
-                  <h4 className="font-md text-[20px] text-black">
+                  <h4 className="font-md text-[14px] lg:text-[20px] text-black">
                     Login to your account.
                   </h4>
 
@@ -155,7 +155,7 @@ function Login() {
                         placeholder="Email"
                         autoComplete="off"
                         required
-                        className="h-[50px] bg-transparent appearance-none rounded-xl relative block w-full px-3 py-2 border-2 border-primary placeholder-gray-700 text-black md:text-[18px] focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+                        className="lg:h-[50px] h-[30px] lg:w-full w-[50%] bg-transparent appearance-none lg:rounded-xl rounded-md relative px-3 py-2 border-2 border-primary placeholder-gray-700 text-black lg:text-[18px] text-[15px] focus:outline-none focus:ring-primary focus:border-primary focus:z-10"
                         value={email}
                         onChange={(e) => {
                           setEmail(e.target.value);
@@ -163,7 +163,7 @@ function Login() {
                       />
                     </div>
 
-                    <div className="mt-8">
+                    <div className="mt-4 lg:mt-8">
                       <label htmlFor="password" className="sr-only">
                         Password
                       </label>
@@ -175,7 +175,7 @@ function Login() {
                         placeholder="Password"
                         autoComplete="off"
                         required
-                        className="h-[50px] bg-transparent appearance-none relative block w-full px-3 py-2 border-2 border-primary placeholder-gray-700 text-black md:text-[18px] rounded-xl focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+                        className="lg:h-[50px] h-[30px] lg:w-full w-[50%] bg-transparent appearance-none lg:rounded-xl rounded-md relative px-3 py-2 border-2 border-primary placeholder-gray-700 text-black lg:text-[18px] text-[15px] focus:outline-none focus:ring-primary focus:border-primary focus:z-10"
                         value={password}
                         onChange={(e) => {
                           setPassword(e.target.value);
@@ -185,14 +185,14 @@ function Login() {
 
                     <div className="flex justify-center">
                       <button
-                        className="w-[250px] h-[50px] mt-10 text-center text-[18px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium rounded-xl text-white bg-primary hover:bg-transparent hover:border-primary hover:border-2 hover:text-primary hover:font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                        className="lg:h-[50px] h-[30px] lg:w-full w-[20%] mt-5 lg:mt-10 text-center lg:text-[18px] text-[15px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium lg:rounded-xl rounded-md text-white bg-primary hover:bg-transparent hover:border-primary hover:border-2 hover:text-primary hover:font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                         onClick={validateLogin}
                       >
                         Login
                       </button>
                     </div>
 
-                    <p className="text-[18px] mt-3">
+                    <p className="text-[15px] lg:text-[18px] mt-3">
                       Don't have an account?
                       <Link href="/signup">
                         <a>
@@ -219,16 +219,16 @@ function Login() {
             }}
           >
             <div className="container min-h-screen min-w-full flex justify-center text-center bg-[#f0f0f0] bg-opacity-30">
-              <div className="w-[600px] h-[500px] bg-white bg-opacity-50 backdrop-blur-[10px] my-auto flex justify-center items-center rounded-2xl">
+              <div className="w-[70%] h-[60%] lg:w-[600px] lg:h-[600px] bg-white bg-opacity-50 backdrop-blur-[10px] my-auto flex justify-center items-center rounded-2xl">
                 <div className="text-center mx-auto">
-                  <h1 className="font-bold text-[40px] text-primary text-center">
+                  <h1 className="font-bold text-[30px] lg:text-[40px] text-primary">
                   You are logged in!
                   </h1>
-                  <h4 className="font-md text-[20px] text-black text-center">
+                  <h4 className="font-md text-[14px] lg:text-[20px] text-black">
                   Please return to the landing page.
                   </h4>
                   <button
-                  className="w-[150px] h-[50px] mt-10 mx-auto text-center text-[18px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium rounded-xl text-white bg-primary hover:bg-transparent hover:border-primary hover:border-2 hover:text-primary hover:font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                  className="lg:h-[50px] h-[30px] lg:w-full w-[30%] mt-5 lg:mt-10 text-center mx-auto lg:text-[18px] text-[14px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium lg:rounded-xl rounded-md text-white bg-primary hover:bg-transparent hover:border-primary hover:border-2 hover:text-primary hover:font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                   onClick={() => router.push("/")}>
                     Oke
                   </button>

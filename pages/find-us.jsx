@@ -82,21 +82,21 @@ export default function FindUs() {
     }}>
     <div className='container mx-auto py-8 divide-y-[1px] divide-gray-500'>
       <div>
-        <h1 className='text-[48px] text-white font-bold text-center'>Find Us</h1>
-        <h2 className='font-medium text-white text-[24px] text-center mb-10'>Our branches throughout Indonesia :</h2>
+        <h1 className='lg:text-[48px] text-[36px] text-white font-bold text-center'>Find Us</h1>
+        <h2 className='font-medium text-white lg:text-[24px] text-[18px] text-center mb-10'>Our branches throughout Indonesia :</h2>
       </div>
 
-      <div className='flex flex-row flex-wrap mx-auto w-3/4'>
+      <div className='flex flex-col lg:flex-row lg:flex-wrap mx-auto lg:w-3/4 w-full'>
       {data.map((el, i) => (
-        <div className='mt-10 mx-auto flex justify-between w-[45%] bg-white bg-opacity-70 backdrop-blur-[5px]'>
+        <div className='mt-10 mx-auto flex justify-between lg:w-[45%] w-[80%] rounded-md bg-white bg-opacity-80 backdrop-blur-[7px] drop-shadow hover:bg-opacity-90 cursor-pointer'>
           <div className='w-1/5 pl-5 pt-1'>
-            <FaMapMarkerAlt className='w-[45px] h-[60px] text-primary' />
+            <FaMapMarkerAlt className='lg:w-[45px] w-[30px] lg:h-[60px] h-[45px] text-primary' />
           </div>
 
           <div className='w-4/5 py-5'>
-            <p className='text-[18px] font-semibold'>{el.branch}</p>
-            <p className='text-[18px]'>{el.address}</p>
-            <p className='text[18px]'><FaEnvelope className='text-primary inline' /> {el.email}</p>
+            <p className='lg:text-[18px] text-[16px] font-semibold'>{el.branch}</p>
+            <p className='lg:text-[18px] text-[16px]'>{el.address}</p>
+            <p className='lg:text[18px] text-[16px]'><FaEnvelope className='text-primary inline' /> {el.email}</p>
           </div>
         </div>
       ))}
