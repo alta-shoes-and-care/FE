@@ -42,7 +42,12 @@ function Admin() {
   useEffect(() => {
     if (typeof window !== "undefined") {
       if (!localStorage.getItem("token")) {
-        router.push("/login");
+        router.push("/404");
+      } else if (
+        localStorage.getItem("is_admin") == "false" &&
+        localStorage.getItem("token")
+      ) {
+        router.push("/404");
       }
     }
 
