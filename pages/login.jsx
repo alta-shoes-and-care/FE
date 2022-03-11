@@ -130,7 +130,7 @@ function Login() {
             }}
           >
             <div className="container min-h-screen min-w-full flex justify-center text-center bg-[#f0f0f0] bg-opacity-30">
-              <div className="w-[70%] h-[60%] lg:w-[600px] lg:h-[600px] bg-white bg-opacity-50 backdrop-blur-[10px] my-auto flex justify-center items-center rounded-2xl">
+              <div className="w-[70%] h-[50%] lg:w-[600px] lg:h-[600px] bg-white bg-opacity-50 backdrop-blur-[10px] my-auto flex justify-center items-center rounded-2xl">
                 <div>
                   <h1 className="font-bold text-[30px] lg:text-[40px] text-primary">
                     Welcome back!
