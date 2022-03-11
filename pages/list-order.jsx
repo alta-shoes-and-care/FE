@@ -184,7 +184,7 @@ function ListOrder() {
   }
   function handleReject(el) {
     return Swal.fire({
-      title: "Cancel this order?",
+      title: "Reject this order?",
       text: "",
       icon: "warning",
       showCancelButton: true,
