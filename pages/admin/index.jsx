@@ -12,6 +12,18 @@ function Admin() {
   const router = useRouter();
   const [product, setProduct] = useState([]);
 
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "center",
+    showConfirmButton: false,
+    timer: 2000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
+
   function getData() {
     axios
       .get("https://ynwahid.cloud.okteto.net/services")
@@ -71,7 +83,10 @@ function Admin() {
             config
           )
           .then(({ data }) => {
-            Swal.fire("Deleted", "", "success");
+            Toast.fire({
+              icon: "success",
+              title: "Deleted",
+            });
             return getData();
           })
           .catch((err) => {

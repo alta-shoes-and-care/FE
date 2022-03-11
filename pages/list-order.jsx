@@ -18,7 +18,7 @@ function ListOrder() {
 
   const Toast = Swal.mixin({
     toast: true,
-    position: "top-end",
+    position: "center",
     showConfirmButton: false,
     timer: 2000,
     timerProgressBar: true,
@@ -80,7 +80,7 @@ function ListOrder() {
       .then(({ data }) => {
         Toast.fire({
           icon: "success",
-          title: "Success changed status",
+          title: "Success update status",
         });
         return getOrder();
       })
@@ -106,7 +106,7 @@ function ListOrder() {
       .then(({ data }) => {
         Toast.fire({
           icon: "success",
-          title: "Success changed status",
+          title: "Success update status",
         });
         return getOrder();
       })
@@ -133,7 +133,7 @@ function ListOrder() {
       .then(({ data }) => {
         Toast.fire({
           icon: "success",
-          title: "Success changed status",
+          title: "Success update status",
         });
         return getOrder();
       })
@@ -169,7 +169,7 @@ function ListOrder() {
           .then(({ data }) => {
             Toast.fire({
               icon: "success",
-              title: "Success changed status",
+              title: "Success update status",
             });
             return getOrder();
           })
@@ -207,7 +207,7 @@ function ListOrder() {
           .then(({ data }) => {
             Toast.fire({
               icon: "success",
-              title: "Success changed status",
+              title: "Success update status",
             });
             return getOrder();
           })
