@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "../styles/History.module.css";
+import styles from "../styles/ListOrder.module.css";
 import { FaMoneyBillAlt } from "react-icons/fa";
 import { FcCalendar } from "react-icons/fc";
 import { RiMessage2Line } from "react-icons/ri";
@@ -226,9 +226,11 @@ function ListOrder() {
   }
   return (
     <div className={` ${styles.adminbg2}`}>
-      <div className=" backdrop-blur-[7px]  grid grid-cols-4 min-h-full">
+      <div
+        className={` backdrop-blur-[7px]  lg:grid lg:grid-cols-4 min-h-full ${styles.bgblur}`}
+      >
         {/* left */}
-        <div className=" pl-24">
+        <div className={`pl-24 ${styles.left}`}>
           <button
             onClick={() => router.push("/admin")}
             className="w-[150px] h-[40px] mt-10 my-4 text-center text-[18px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium rounded-lg text-primary bg-white hover:bg-transparent hover:border-primary hover:border-2 hover:text-white hover:font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary  transition ease-linear duration-500"
@@ -241,22 +243,26 @@ function ListOrder() {
         </div>
 
         {/* right */}
-        <div className=" w-[1200px] h-auto mt-7 flex ">
+        <div className={`w-[1200px] h-auto mt-7 flex ${styles.right}`}>
           {/* Card */}
-          <div className="  h-[75vh] w-[1200px] flex flex-wrap overflow-y-scroll content-start">
+          <div
+            className={`h-[75vh] w-[1200px] flex flex-wrap overflow-y-scroll content-start ${styles.bgcard}`}
+          >
             {listOrder.map((el, i) => (
               <div
                 key={i}
-                className=" p-3 mb-5 rounded-lg pl-3 bg-[#ffffffab] backdrop-blur-[5px] h-auto w-[480px] mx-3 transition ease-linear duration-1000 ] "
+                className={`p-3 mb-5 rounded-lg pl-3 bg-[#ffffffab] backdrop-blur-[5px] h-auto w-[480px] mx-3 transition ease-linear duration-1000 ]  ${styles.bgcard1}`}
               >
                 <div
-                  className={` w-[450px] flex py-2 px-5 my-2 bg-white shadow-md rounded-lg `}
+                  className={` w-[450px] flex py-2 px-5 my-2 bg-white shadow-md rounded-lg ${styles.card1} `}
                 >
                   <div>
                     <h1 className=" text-xl">{el.service_title}</h1>
                     <div className=" bg-gray-600 w-[200px] my-1 h-0.5"></div>
                     {/* status */}
-                    <div className=" flex justify-between w-[400px]">
+                    <div
+                      className={` flex justify-between w-[400px] ${styles.iconstatus}`}
+                    >
                       <div className=" flex">
                         <p className=" text-green-600 text-xl mt-0.5 mr-1">
                           <FaMoneyBillAlt />
@@ -293,7 +299,9 @@ function ListOrder() {
                 </div>
                 {/* edit status */}
                 <div className={` w-[450px] flex py-2  rounded-lg`}>
-                  <div className=" flex justify-between w-[450px]">
+                  <div
+                    className={` flex justify-between w-[450px] ${styles.accept}`}
+                  >
                     <button
                       onClick={() => handleAccept(el)}
                       className=" px-2 py-1 bg-white shadow-md rounded-md hover:text-green-500"
@@ -320,7 +328,7 @@ function ListOrder() {
                     </button>
                     <button
                       onClick={() => handleCancel(el)}
-                      className=" px-2 bg-white shadow-md rounded-md hover:text-red-500"
+                      className={`px-2 bg-white shadow-md rounded-md hover:text-red-500 ${styles.icon2}`}
                     >
                       Cancel
                     </button>

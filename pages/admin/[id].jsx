@@ -46,12 +46,7 @@ function EditItem() {
   }, []);
 
   function validateButton() {
-    if (
-      title === "" ||
-      price === "" ||
-      description === "" ||
-      files.length == 0
-    ) {
+    if (title === "" || price === "" || description === "") {
       Swal.fire(
         "Invalid!",
         "Forms can't be empty,please fill out the fields.",
@@ -60,6 +55,33 @@ function EditItem() {
     } else {
       handleEdit();
     }
+  }
+
+  function editImage() {
+    const formData = new FormData();
+    formData.append("file", files[0].file);
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+      "Content-Type": "multipart/form-data",
+    };
+
+    axios
+      .put(
+        `https://ynwahid.cloud.okteto.net/services/jwt/${idProduct}`,
+        formData,
+        config
+      )
+      .then(({ data }) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+        Swal.fire("Invalid!", "Forms can't be empty", "error");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }
 
   function handleEdit(el) {
@@ -76,13 +98,6 @@ function EditItem() {
       const config = {
         headers: { Authorization: `Bearer ${token}` },
       };
-
-      const configImg = {
-        headers: { Authorization: `Bearer ${token}` },
-        "Content-Type": "multipart/form-data",
-      };
-      const formData = new FormData();
-      formData.append("file", files);
 
       const dataUpdate = {
         id: idProduct,
@@ -101,15 +116,16 @@ function EditItem() {
           )
           .then(({ data }) => {
             Swal.fire("Updated", "", "success");
-            setTimeout(() => {
-              router.push("/admin");
-            }, 1000);
+            return editImage();
           })
           .catch((err) => {
             console.log(err, "error");
           })
           .finally(() => {
             setLoading(false);
+            setTimeout(() => {
+              router.push("/admin");
+            }, 1000);
           });
       }
     });

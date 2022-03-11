@@ -85,7 +85,7 @@ function NewItem() {
             setTitle("");
             setPrice("");
             setDescription("");
-            setImage(null);
+            setFiles([]);
             Toast.fire({
               icon: "success",
               title: "Success add new service",
@@ -95,6 +95,7 @@ function NewItem() {
             }, 2000);
           })
           .catch((err) => {
+            console.log(err);
             Swal.fire("Invalid!", "Forms can't be empty", "error");
           })
           .finally(() => {
@@ -111,7 +112,7 @@ function NewItem() {
   }
 
   return (
-    <div className={`flex justify-center items-center ${styles.adminbg2}`}>
+    <div className={`flex justify-center items-center ${styles.adminbg}`}>
       <div
         className={` w-[700px] h-auto my-8 p-4 py-12 flex justify-center flex-col items-center backdrop-blur-[5px] bg-[#ffffffd3] rounded-xl`}
       >
