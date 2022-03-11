@@ -28,6 +28,7 @@ function Admin() {
   }
 
   useEffect(() => {
+    setLoading(true);
     axios
       .get("https://ynwahid.cloud.okteto.net/services")
       .then(({ data }) => {
@@ -88,7 +89,7 @@ function Admin() {
     <div className={`grid grid-cols-4  ${styles.adminbg}`}>
       {/* left */}
       <div className=" pl-24">
-        <button className="w-[150px] h-[40px] my-4 mt-[70px] text-center text-[18px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium rounded-lg text-white bg-primary hover:bg-transparent hover:border-primary hover:border-2 hover:text-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary  transition ease-linear duration-500">
+        <button className="w-[150px] h-[40px] my-4 mt-10 text-center text-[18px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium rounded-lg text-white bg-primary hover:bg-transparent hover:border-primary hover:border-2 hover:text-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary  transition ease-linear duration-500">
           Product
         </button>
         <button
