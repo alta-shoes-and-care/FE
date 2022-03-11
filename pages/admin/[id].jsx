@@ -125,7 +125,7 @@ function EditItem() {
             setLoading(false);
             setTimeout(() => {
               router.push("/admin");
-            }, 1000);
+            }, 3000);
           });
       }
     });
