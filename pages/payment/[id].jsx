@@ -4,16 +4,18 @@ import style from "../../styles/formpayment.module.css";
 import { useRouter } from 'next/router';
 import axios from "axios";
 import NumberFormat from 'react-number-format';
+import Swal from "sweetalert2";
 
 export default function formpayment(props) {
 
     const router = useRouter();
     let {id}=router.query
-    console.log(router.query.id)
+    const [loading, setLoading] = useState(false);
+
 
     useEffect(() => {
         if(id!=='undefined'){
-            console.log('running use effect')
+            setLoading(true);
 
             axios
                 .get(`https://ynwahid.cloud.okteto.net/services/${id}`)
@@ -36,6 +38,20 @@ export default function formpayment(props) {
             ,'user_id': 0
         });
         console.log(services)
+
+        if (loading) {
+            Swal.fire({
+              title: "Please Wait!",
+              html: "This may take a few seconds, please don't close this page.",
+              allowOutsideClick: false,
+              showConfirmButton: false,
+              timer:750,
+                
+              willOpen: () => {
+                Swal.showLoading();
+               },
+            }); 
+        }
 
     return (
         <section>
