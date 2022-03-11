@@ -12,7 +12,23 @@ function Admin() {
   const router = useRouter();
   const [product, setProduct] = useState([]);
 
+  function getData() {
+    axios
+      .get("https://ynwahid.cloud.okteto.net/services")
+      .then(({ data }) => {
+        setProduct(data.data);
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err, "error");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }
+
   useEffect(() => {
+    setLoading(true);
     axios
       .get("https://ynwahid.cloud.okteto.net/services")
       .then(({ data }) => {
@@ -26,10 +42,6 @@ function Admin() {
         setLoading(false);
       });
   }, []);
-
-  if (loading) {
-    return <Loading />;
-  }
 
   function handleDelete(el) {
     return Swal.fire({
@@ -54,9 +66,7 @@ function Admin() {
           )
           .then(({ data }) => {
             Swal.fire("Deleted", "", "success");
-            setTimeout(() => {
-              location.reload();
-            }, 1000);
+            return getData();
           })
           .catch((err) => {
             console.log(err, "error");
@@ -68,44 +78,35 @@ function Admin() {
     });
   }
   function handleEdit(el) {
-    return Swal.fire({
-      title: "Edit this product?",
-      text: "",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        setTimeout(() => {
-          router.push(`/admin/${el.id}`);
-        }, 1000);
-      }
-    });
+    router.push(`/admin/${el.id}`);
   }
+
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
-    <div className={`grid grid-cols-4 bg-blue-200 ${styles.adminbg}`}>
+    <div className={`grid grid-cols-4  ${styles.adminbg}`}>
       {/* left */}
       <div className=" pl-24">
-        <button className="w-[150px] h-[40px] my-4 mt-10 text-center text-[18px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium rounded-lg text-white bg-primary hover:bg-transparent hover:border-primary hover:border-2 hover:text-primary hover:font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary  transition ease-linear duration-500">
+        <button className="w-[150px] h-[40px] my-4 mt-10 text-center text-[18px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium rounded-lg text-white bg-primary hover:bg-transparent hover:border-primary hover:border-2 hover:text-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary  transition ease-linear duration-500">
           Product
         </button>
         <button
           onClick={() => router.push("list-order")}
-          className="w-[150px] h-[40px] my-4 text-center text-[18px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium rounded-lg text-primary bg-white hover:bg-transparent hover:border-primary hover:border-2 hover:text-white hover:font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary  transition ease-linear duration-500"
+          className="w-[150px] h-[40px] my-4 text-center text-[18px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium rounded-lg text-primary bg-white hover:bg-transparent hover:border-primary hover:border-2 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary  transition ease-linear duration-500"
         >
           List Order
         </button>
       </div>
 
       {/* right */}
-      <div className=" w-[900px] h-screen">
+      <div className=" w-[900px] h-screen backdrop-blur-[10px] bg-[#ffffff59] my-8 rounded-xl pl-12">
         <button
           onClick={() => {
             router.push("admin/new-item");
           }}
-          className="w-[150px] h-[40px] my-4 mt-10 text-center text-[18px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium rounded-lg text-white bg-primary hover:bg-transparent hover:border-primary hover:border-2 hover:text-primary hover:font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary  transition ease-linear duration-500"
+          className="w-[150px] h-[40px] my-4 mt-10 text-center text-[18px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium rounded-lg text-white bg-primary hover:bg-transparent hover:border-primary hover:border-2 hover:text-primary hover:font-bold focus:outline-none   transition ease-linear duration-500"
         >
           <VscNewFile className=" text-xl mr-2" />
           New Item
@@ -115,7 +116,7 @@ function Admin() {
           {product.map((el, i) => (
             <div
               key={i}
-              className={` w-[800px] flex py-2 px-3 my-3 ${styles.historyCard} transition ease-linear duration-1000 hover:bg-[#719ad881] `}
+              className={` w-[800px] flex py-2 px-3 my-3 bg-[#ffffffec] rounded-lg transition ease-linear duration-1000 hover:bg-[#ffffff98] `}
             >
               <div>
                 <img

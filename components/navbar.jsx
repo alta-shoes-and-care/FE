@@ -42,12 +42,12 @@ function NavbarCompoent() {
       if (!localStorage.getItem("token")) {
         return (
           <div className=" flex">
-            <h1 className=" mx-3 text-xl text-primary hover:text-orange-600">
+            <h1 className="lg:mx-3 mx-1 lg:text-xl text-md text-primary hover:text-orange-600">
               <Link href="/find-us">
                 <a>Find Us</a>
               </Link>
             </h1>
-            <h1 className=" mx-3 text-xl text-primary hover:text-orange-600">
+            <h1 className="lg:mx-3 mx-1 lg:text-xl text-md text-primary hover:text-orange-600">
               <Link href="/about-us">
                 <a>About Us</a>
               </Link>
@@ -59,14 +59,14 @@ function NavbarCompoent() {
                 <button
                   onClick={handleDropdown}
                   type="button"
-                  className="inline-flex justify-center w-full px-4  e text-xl  text-primary hover:text-orange-600 "
+                  className="inline-flex justify-center w-full lg:px-4 px-2 lg:text-xl text-md  text-primary hover:text-orange-600"
                   id="menu-button"
                   aria-expanded="true"
                   aria-haspopup="true"
                 >
                   Account
                   <svg
-                    className="-mr-1 ml-2 h-5 w-5 mt-1"
+                    className="-mr-1 ml-2 h-5 w-5 lg:mt-1"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
@@ -83,7 +83,7 @@ function NavbarCompoent() {
 
               {showOption && (
                 <div
-                  className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                  className="origin-top-right absolute right-0 mt-2 lg:w-56 w-36 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
                   role="menu"
                   aria-orientation="vertical"
                   aria-labelledby="menu-button"
@@ -93,7 +93,7 @@ function NavbarCompoent() {
                     <Link href="/login">
                       <a
                         onClick={() => setShowOpt(false)}
-                        className="text-primary block px-4 py-2 text-l  hover:text-orange-600 "
+                        className="text-primary block px-4 py-2 lg:text-lg text-sm hover:text-orange-600"
                         role="menuitem"
                         tabIndex="-1"
                         id="menu-item-0"
@@ -101,10 +101,10 @@ function NavbarCompoent() {
                         Login
                       </a>
                     </Link>
-                    <Link href="/register">
+                    <Link href="/signup">
                       <a
                         onClick={() => setShowOpt(false)}
-                        className="text-primary block px-4 py-2 text-l  hover:text-orange-600 "
+                        className="text-primary block px-4 py-2 lg:text-lg text-sm hover:text-orange-600"
                         role="menuitem"
                         tabIndex="-1"
                         id="menu-item-0"
@@ -125,17 +125,17 @@ function NavbarCompoent() {
       ) {
         return (
           <div className=" flex">
-            <h1 className=" mx-3 text-xl text-primary hover:text-orange-600">
+            <h1 className="lg:mx-3 mx-1 lg:text-xl text-md text-primary hover:text-orange-600">
               <Link href="/find-us">
                 <a>Find Us</a>
               </Link>
             </h1>
-            <h1 className=" mx-3 text-xl text-primary hover:text-orange-600">
+            <h1 className="lg:mx-3 mx-1 lg:text-xl text-md text-primary hover:text-orange-600">
               <Link href="/about-us">
                 <a>About Us</a>
               </Link>
             </h1>
-            <h1 className=" mx-3 text-xl text-primary hover:text-orange-600">
+            <h1 className="lg:mx-3 mx-1 lg:text-xl text-md text-primary hover:text-orange-600">
               <Link href="/history-order">
                 <a>Order</a>
               </Link>
@@ -147,7 +147,7 @@ function NavbarCompoent() {
                 <button
                   onClick={handleDropdown}
                   type="button"
-                  className="inline-flex justify-center w-full px-4  e text-xl  text-primary hover:text-orange-600 "
+                  className="inline-flex justify-center w-full lg:px-4 px-2 lg:text-xl text-md  text-primary hover:text-orange-600"
                   id="menu-button"
                   aria-expanded="true"
                   aria-haspopup="true"
@@ -171,7 +171,7 @@ function NavbarCompoent() {
 
               {showOption && (
                 <div
-                  className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                  className="origin-top-right absolute right-0 mt-2 lg:w-56 w-36 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
                   role="menu"
                   aria-orientation="vertical"
                   aria-labelledby="menu-button"
@@ -182,7 +182,7 @@ function NavbarCompoent() {
                       onClick={() => {
                         handleLogout();
                       }}
-                      className="text-primary block px-4 py-2 text-l  hover:text-orange-600 "
+                      className="text-primary block px-4 py-2 lg:text-lg text-sm hover:text-orange-600"
                       role="menuitem"
                       tabIndex="-1"
                       id="menu-item-0"
@@ -202,17 +202,17 @@ function NavbarCompoent() {
       ) {
         return (
           <div className=" flex">
-            <h1 className=" mx-3 text-xl text-primary hover:text-orange-600">
+            <h1 className="lg:mx-3 mx-1 lg:text-xl text-md text-primary hover:text-orange-600">
               <Link href="/find-us">
                 <a>Find Us</a>
               </Link>
             </h1>
-            <h1 className=" mx-3 text-xl text-primary hover:text-orange-600">
+            <h1 className="lg:mx-3 mx-1 lg:text-xl text-md text-primary hover:text-orange-600">
               <Link href="/about-us">
                 <a>About Us</a>
               </Link>
             </h1>
-            <h1 className=" mx-3 text-xl text-primary hover:text-orange-600">
+            <h1 className="lg:mx-3 mx-1 lg:text-xl text-md text-primary hover:text-orange-600">
               <Link href="/admin">
                 <a>Store</a>
               </Link>
@@ -224,7 +224,7 @@ function NavbarCompoent() {
                 <button
                   onClick={handleDropdown}
                   type="button"
-                  className="inline-flex justify-center w-full px-4  e text-xl  text-primary hover:text-orange-600 "
+                  className="inline-flex justify-center w-full lg:px-4 px-2 lg:text-xl text-md  text-primary hover:text-orange-600"
                   id="menu-button"
                   aria-expanded="true"
                   aria-haspopup="true"
@@ -248,7 +248,7 @@ function NavbarCompoent() {
 
               {showOption && (
                 <div
-                  className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                  className="origin-top-right absolute right-0 mt-2 lg:w-56 w-36 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"                
                   role="menu"
                   aria-orientation="vertical"
                   aria-labelledby="menu-button"
@@ -259,7 +259,7 @@ function NavbarCompoent() {
                       onClick={() => {
                         handleLogout();
                       }}
-                      className="text-primary block px-4 py-2 text-l  hover:text-orange-600 "
+                      className="text-primary block px-4 py-2 lg:text-lg text-sm hover:text-orange-600"
                       role="menuitem"
                       tabIndex="-1"
                       id="menu-item-0"
@@ -276,11 +276,11 @@ function NavbarCompoent() {
     }
   }
   return (
-    <div className=" flex justify-between px-24 items-center shadow-md bg-white sticky top-0 z-10 ">
+    <div className=" flex justify-between lg:px-24 px-5 items-center shadow-md bg-white sticky top-0 z-10 ">
       {/* logo nav */}
       <Link href="/">
         <a>
-          <div className=" relative h-20 w-32 mb-3">
+          <div className="relative lg:h-20 lg:w-32 h-[70px] w-[120px] mb-3">
             <Image src={Navicon} layout="fill" />
           </div>
         </a>

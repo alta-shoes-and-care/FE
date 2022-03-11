@@ -4,6 +4,15 @@ import styles from "../../styles/History.module.css";
 import Loading from "../../components/Loading";
 import { useRouter } from "next/router";
 import Swal from "sweetalert2";
+// filepond
+import { FilePond, registerPlugin } from "react-filepond";
+import FilePondPluginFileValidateSize from "filepond-plugin-file-validate-size";
+import "filepond/dist/filepond.min.css";
+import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
+import FilePondPluginImagePreview from "filepond-plugin-image-preview";
+import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
+registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
+registerPlugin(FilePondPluginFileValidateSize);
 
 function EditItem() {
   const router = useRouter();
@@ -13,9 +22,9 @@ function EditItem() {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
-  const [image, setImage] = useState(null);
   const [idProduct, setidProduct] = useState("");
   const [loading, setLoading] = useState(false);
+  const [files, setFiles] = useState([]);
 
   useEffect(() => {
     const id = query.id;
@@ -37,7 +46,12 @@ function EditItem() {
   }, []);
 
   function validateButton() {
-    if (title === "" || price === "" || description === "" || image === null) {
+    if (
+      title === "" ||
+      price === "" ||
+      description === "" ||
+      files.length == 0
+    ) {
       Swal.fire(
         "Invalid!",
         "Forms can't be empty,please fill out the fields.",
@@ -68,7 +82,7 @@ function EditItem() {
         "Content-Type": "multipart/form-data",
       };
       const formData = new FormData();
-      formData.append("file", image);
+      formData.append("file", files);
 
       const dataUpdate = {
         id: idProduct,
@@ -89,7 +103,7 @@ function EditItem() {
             Swal.fire("Updated", "", "success");
             setTimeout(() => {
               router.push("/admin");
-            }, 3000);
+            }, 1000);
           })
           .catch((err) => {
             console.log(err, "error");
@@ -107,7 +121,7 @@ function EditItem() {
   return (
     <div className={`flex justify-center items-center ${styles.adminbg2}`}>
       <div
-        className={` w-[700px] h-screen my-8 p-4 flex justify-center flex-col items-center ${styles.historyGlass}`}
+        className={` w-[700px] h-auto my-8 p-4 py-12 flex justify-center flex-col items-center backdrop-blur-[5px] bg-[#ffffffd3] rounded-xl`}
       >
         {/* content */}
         <h1 className=" text-5xl text-center  font-bold mb-12 ">
@@ -127,7 +141,7 @@ function EditItem() {
                 placeholder="Input title"
                 autoComplete="off"
                 required
-                className={` h-12 mb-5 form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700  bg-clip-padding border border-solid border-gray-300 rounded-lg transition ease-in-out m-0 focus:text-gray-700 focus:border-blue-600 focus:outline-none ${styles.inputbg}`}
+                className={` h-12 mb-5 form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700  bg-clip-padding border-2 border-solid border-black rounded-lg transition ease-in-out m-0 focus:text-gray-700 focus:border-primary focus:outline-none bg-transparent`}
               />
             </div>
 
@@ -143,31 +157,21 @@ function EditItem() {
                 placeholder="30.000"
                 autoComplete="off"
                 required
-                className={` h-12 mb-5 form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700  bg-clip-padding border border-solid border-gray-300 rounded-lg transition ease-in-out m-0 focus:text-gray-700 focus:border-blue-600 focus:outline-none ${styles.inputbg}`}
+                className={` h-12 mb-5 form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700  bg-clip-padding border-2 border-solid border-black rounded-lg transition ease-in-out m-0 focus:text-gray-700 focus:border-primary focus:outline-none bg-transparent`}
               />
             </div>
 
             <h1 className=" text-3xl mb-2">Image</h1>
-            <div>
-              <input
-                onChange={(e) => {
-                  setImage(e.target.files[0]);
-                  if (e.target.files[0].size > 500000) {
-                    Swal.fire(
-                      "The size of the image should not be more than 500 Kb"
-                    );
-                    setImage(null);
-                  }
-                }}
-                accept="image/png, image/jpg, image/jpeg"
-                name="image"
-                type="file"
-                placeholder=""
-                autoComplete="off"
-                required
-                className={` h-12 mb-5 px-3 py-2 text-gray-700 border border-solid border-gray-300 rounded-lg transition ease-in-out m-0 focus:text-gray-700 focus:border-blue-600 focus:outline-none ${styles.inputbg}`}
-              />
-            </div>
+            <FilePond
+              maxFileSize={500000}
+              files={files}
+              onupdatefiles={setFiles}
+              allowMultiple={false}
+              accept="image/png, image/jpeg, image/jpg"
+              maxFiles={1}
+              name="files"
+              labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
+            />
             <h1 className=" text-3xl mb-2">Description</h1>
             <textarea
               type="text"
@@ -175,7 +179,7 @@ function EditItem() {
               maxLength="320"
               onChange={(e) => setDescription(e.target.value)}
               required
-              className={`form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700  bg-clip-padding border border-solid border-gray-300 rounded-lg transition ease-in-out m-0 focus:text-gray-700 focus:border-blue-600 focus:outline-none ${styles.inputbg}`}
+              className={`form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700  bg-clip-padding border-2 border-solid border-black rounded-lg transition ease-in-out m-0 focus:text-gray-700 focus:border-primary focus:outline-none bg-transparent`}
               id="exampleFormControlTextarea1"
               rows="3"
               placeholder="Input description"
@@ -185,7 +189,7 @@ function EditItem() {
               <button
                 onClick={validateButton}
                 type="button"
-                className="w-[250px] h-[50px] mt-10 text-center text-[18px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium rounded-xl text-white bg-primary hover:bg-transparent hover:border-white hover:border-2 hover:text-white hover:font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary  transition ease-linear duration-500"
+                className="w-[250px] h-[50px] mt-10 text-center text-[18px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium rounded-xl text-white bg-primary hover:bg-transparent hover:border-black hover:border-2 hover:text-black hover:font-bold focus:outline-none transition ease-linear duration-500"
               >
                 Submit
               </button>

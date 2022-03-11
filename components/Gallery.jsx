@@ -49,10 +49,10 @@ export default function Gallery(props) {
 
   return (
     <div>
-        <h1 className="font-bold text-black text-[48px] text-center mb-8">Gallery</h1>
+        <h1 className="font-bold text-black text-[36px] lg:text-[48px] text-center mb-8">Gallery</h1>
         <div className="flex flex-row flex-wrap justify-center mb-[10px]">
         {images.map((src, index) => (
-          <div key={index} className="relative w-[350px] h-[200px] m-1">
+          <div key={index} className="relative w-[200px] h-[130px] lg:w-[350px] lg:h-[200px] m-1">
           <motion.div
             initial={"hidden"}
             animate={animationControls}

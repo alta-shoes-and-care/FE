@@ -116,11 +116,11 @@ export default function Register() {
 
   return (
     <div className='container min-h-screen min-w-full flex justify-center text-center bg-cover bg-no-repeat' style={{backgroundImage: "url(https://images.unsplash.com/photo-1509472290917-08d8d47c5fca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80)"}}>
-      <div className='container min-h-screen min-w-full flex justify-center text-center bg-[#f0f0f0] bg-opacity-30'>
-        <div className='w-[600px] h-[600px] bg-white bg-opacity-50 backdrop-blur-[10px] my-auto flex justify-center items-center rounded-2xl'>
+      <div className='container min-h-screen min-w-full flex justify-center items-center text-center bg-[#f0f0f0] bg-opacity-30'>
+        <div className='w-[70%] h-[60%] lg:w-[600px] lg:h-[600px] bg-white bg-opacity-50 backdrop-blur-[10px] my-auto flex justify-center items-center rounded-2xl'>
           <div>
-            <h1 className='font-bold text-[40px] text-primary'>Welcome to S3</h1>
-            <h4 className='font-md text-[20px] text-black'>Create new account by filling the form below.</h4>
+            <h1 className='font-bold text-[30px] lg:text-[40px] text-primary'>Welcome to S3</h1>
+            <h4 className='font-md text-[14px] lg:text-[20px] text-black'>Create new account by filling the form below.</h4>
 
             <form className="mt-8 w-[528px] mx-auto" action="#" method="POST">
 
@@ -134,13 +134,13 @@ export default function Register() {
                 placeholder="Name"
                 autoComplete="off" 
                 required 
-                className="h-[50px] bg-transparent appearance-none rounded-xl relative block w-full px-3 py-2 border-2 border-primary placeholder-gray-700 text-black md:text-[18px] focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+                className="lg:h-[50px] h-[30px] lg:w-full w-[50%] bg-transparent appearance-none lg:rounded-xl rounded-md relative px-3 py-2 border-2 border-primary placeholder-gray-700 text-black lg:text-[18px] text-[15px] focus:outline-none focus:ring-primary focus:border-primary focus:z-10"
                 value={name}
                 onChange={(e) => { setName(e.target.value)}}
                 />
               </div>
 
-              <div className='mt-8'>
+              <div className='mt-4 lg:mt-8'>
                 <label htmlFor="email-address" className="sr-only">Email</label>
                 <input 
                 id="email-address" 
@@ -149,13 +149,13 @@ export default function Register() {
                 placeholder="Email"
                 autoComplete="off" 
                 required 
-                className="h-[50px] bg-transparent appearance-none rounded-xl relative block w-full px-3 py-2 border-2 border-primary placeholder-gray-700 text-black md:text-[18px] focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+                className="lg:h-[50px] h-[30px] lg:w-full w-[50%] bg-transparent appearance-none lg:rounded-xl rounded-md relative px-3 py-2 border-2 border-primary placeholder-gray-700 text-black lg:text-[18px] text-[15px] focus:outline-none focus:ring-primary focus:border-primary focus:z-10"
                 value={email}
                 onChange={(e) => { setEmail(e.target.value)}}
                 />
               </div>
 
-              <div className='mt-8'>
+              <div className='mt-4 lg:mt-8'>
                 <label htmlFor="password" className="sr-only">Password</label>
                 <input 
                 id="password" 
@@ -165,7 +165,7 @@ export default function Register() {
                 placeholder="Password"
                 autoComplete="off" 
                 required 
-                className="h-[50px] bg-transparent appearance-none relative block w-full px-3 py-2 border-2 border-primary placeholder-gray-700 text-black md:text-[18px] rounded-xl focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+                className="lg:h-[50px] h-[30px] lg:w-full w-[50%] bg-transparent appearance-none lg:rounded-xl rounded-md relative px-3 py-2 border-2 border-primary placeholder-gray-700 text-black lg:text-[18px] text-[15px] focus:outline-none focus:ring-primary focus:border-primary focus:z-10"
                 value={password}
                 onChange={(e) => { setPassword(e.target.value)}}
                 />
@@ -173,14 +173,14 @@ export default function Register() {
 
               <div className='flex justify-center'>
                 <button
-                className="w-[250px] h-[50px] mt-10 text-center text-[18px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium rounded-xl text-white bg-primary hover:bg-transparent hover:border-primary hover:border-2 hover:text-primary hover:font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                className="lg:h-[50px] h-[30px] lg:w-full w-[20%] mt-5 lg:mt-10 text-center lg:text-[18px] text-[15px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium lg:rounded-xl rounded-md text-white bg-primary hover:bg-transparent hover:border-primary hover:border-2 hover:text-primary hover:font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                 onClick={validateRegister}
                 >
                   Sign up
                 </button>
               </div>
 
-              <p className='text-[18px]'>Already have an account?
+              <p className='text-[15px] lg:text-[18px] mt-3'>Already have an account?
                 <Link href="/login">
                   <a>
                     <span className='font-bold'> Login <FaArrowRight className='inline' /></span> 

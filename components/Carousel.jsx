@@ -37,9 +37,9 @@ export default function Carousel() {
         <SwiperSlide>
           <div className="">
             <Image src={s1} alt="Slide 1" layout="fill" className="relative brightness-50" />
-              <div className="absolute text-white font-bold flex items-center justify-center flex-col text-center w-screen h-[650px]">
-                <h2 className="text-4xl">Welcome to</h2>
-                <h1 className="text-6xl uppercase">Shoes Service Station</h1>
+              <div className="absolute text-white font-bold flex items-center justify-center flex-col text-center w-screen h-[350px] md:h-[650px]">
+                <h2 className="md:text-4xl text-2xl">Welcome to</h2>
+                <h1 className="md:text-6xl text-4xl uppercase">Shoes Service Station</h1>
               </div>
           </div>
         </SwiperSlide>
@@ -47,9 +47,9 @@ export default function Carousel() {
         <SwiperSlide>
           <div>
             <Image src={s2} alt="Slide 2" layout="fill" className="relative brightness-50" />
-            <div className="absolute text-white font-bold flex items-center justify-center flex-col text-center w-screen h-[650px]">
-                <h1 className="text-6xl uppercase">respect your shoes</h1>
-                <h2 className="text-4xl">We'll be there to care for your loved ones when you cannot.</h2>
+            <div className="absolute text-white font-bold flex items-center justify-center flex-col text-center w-screen h-[350px] md:h-[650px]">
+                <h1 className="md:text-6xl text-4xl uppercase">respect your shoes</h1>
+                <h2 className="md:text-4xl text-2xl">We'll be there to care for your loved ones when you cannot.</h2>
               </div>
           </div>
         </SwiperSlide>
@@ -57,9 +57,9 @@ export default function Carousel() {
         <SwiperSlide>
           <div>
             <Image src={s3} alt="Slide 3" layout="fill" className="relative brightness-50" />
-            <div className="absolute text-white font-bold flex items-center justify-center flex-col text-center w-screen h-[650px]">
-                <h1 className="text-6xl uppercase">Make your shoes look better</h1>
-                <h2 className="text-4xl">Wear it with pride.</h2>
+            <div className="absolute text-white font-bold flex items-center justify-center flex-col text-center w-screen h-[350px] md:h-[650px]">
+                <h1 className="md:text-6xl text-4xl uppercase">Make your shoes look better</h1>
+                <h2 className="md:text-4xl text-2xl">Wear it with pride.</h2>
               </div>
           </div>
         </SwiperSlide>
@@ -68,7 +68,7 @@ export default function Carousel() {
       <style jsx global>{`
       .swiper {
         width: 100%;
-        height: 670px;
+        height: 350px;
       }
 
       .swiper-slide {
@@ -78,7 +78,13 @@ export default function Carousel() {
       .swiper-slide img {
         display: block;
         width: 100%;
-        height: 670px;
+        height: 350px;
+      }
+
+      @media (min-width: 768px) {
+        .swiper, .swiper-slide img {
+          height: 670px;
+        }
       }
       `}</style>
     </>

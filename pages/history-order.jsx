@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../styles/History.module.css";
 import { FaMoneyBillAlt } from "react-icons/fa";
 import { FcCalendar } from "react-icons/fc";
@@ -6,16 +6,21 @@ import { RiMessage2Line } from "react-icons/ri";
 import { AiOutlineNumber, AiOutlineFileDone } from "react-icons/ai";
 import Swal from "sweetalert2";
 import { useRouter } from "next/router";
+import NumberFormat from "react-number-format";
+import moment from "moment";
+import Loading from "../components/Loading";
+import axios from "axios";
 
 function History() {
   const router = useRouter();
-
+  const [loading, setLoading] = useState(false);
+  const [history, sethistory] = useState([[]]);
   const data = [
     {
       title: "Regular Cleaning",
       price: "30.000",
       date: "22 Feb 2022",
-      status: "Pending",
+      status: "Delivering",
       id: "003",
     },
     {
@@ -76,6 +81,26 @@ function History() {
     },
   ];
 
+  useEffect(() => {
+    setLoading(true);
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+    axios
+      .get(`https://ynwahid.cloud.okteto.net/orders`, config)
+      .then(({ data }) => {
+        sethistory(data.data);
+        console.log(data.data);
+      })
+      .catch((err) => {
+        console.log(err, "error");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+
   function handleConfirm(el) {
     return Swal.fire({
       title: "Confirm Order?",
@@ -86,19 +111,41 @@ function History() {
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes",
     }).then((result) => {
+      const token = localStorage.getItem("token");
+      const config = {
+        headers: { Authorization: `Bearer ${token}` },
+      };
       if (result.isConfirmed) {
-        Swal.fire("Thank you :)", "", "success");
-        setTimeout(() => {
-          router.push(`/review/${el.id}`);
-        }, 2000);
+        setLoading(true);
+        axios
+          .put(
+            `https://ynwahid.cloud.okteto.net/orders/done/${el.id}`,
+            {},
+            config
+          )
+          .then(({ data }) => {
+            Swal.fire("Thank you :)", "", "success");
+            setTimeout(() => {
+              router.push(`/review/${el.id}`);
+            }, 2000);
+          })
+          .catch((err) => {
+            console.log(err.response, "error");
+          })
+          .finally(() => {
+            setLoading(false);
+          });
       }
     });
   }
 
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <div className={`flex justify-center items-center ${styles.historybg}`}>
       <div
-        className={` w-[700px] h-screen overflow-y-scroll my-8 p-4 flex flex-col items-center ${styles.historyGlass}`}
+        className={` rounded-xl w-[700px] h-screen overflow-y-scroll my-8 p-4 flex flex-col items-center backdrop-blur-[10px] bg-[#ffffff88]`}
       >
         <h1 className=" text-3xl text-center  font-bold my-3 ">
           History Order
@@ -106,11 +153,11 @@ function History() {
 
         {/* card */}
         <div className=" w-[700px] overflow-y-scroll flex flex-col items-center">
-          {data.map((el, i) => (
+          {history.map((el, i) => (
             <div
-              className={` w-[550px]   py-2 px-3 my-3 ${styles.historyCard}`}
+              className={` w-[550px] rounded-lg py-2 px-3 my-3 bg-white shadow-md`}
             >
-              <h1 className=" text-xl">{el.title}</h1>
+              <h1 className=" text-xl">{el.service_title}</h1>
               <div className=" bg-gray-600 w-[200px] my-1 h-0.5"></div>
               {/* status */}
               <div className=" flex mt-1 justify-between">
@@ -118,13 +165,20 @@ function History() {
                   <p className=" text-green-600 text-xl mt-0.5 mr-1">
                     <FaMoneyBillAlt />
                   </p>
-                  <p>Rp. {el.price}</p>
+                  <p>
+                    Rp.{" "}
+                    <NumberFormat
+                      value={el.total}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                    />
+                  </p>
                 </div>
                 <div className=" flex">
                   <p className="text-xl mt-0.5 mr-1">
                     <FcCalendar />
                   </p>
-                  <p>{el.date}</p>
+                  <p>{moment(el.date).format("Do MMMM YYYY")}</p>
                 </div>
                 <div className=" flex">
                   <p className="text-xl mt-0.5 mr-1">
@@ -138,15 +192,16 @@ function History() {
                   </p>
                   <p>{el.id}</p>
                 </div>
-                <div
-                  onClick={() => handleConfirm(el)}
-                  className=" flex hover:animate-pulse hover:text-primary"
-                >
-                  <p className="text-xl mt-0.5 mr-0.5">
-                    <AiOutlineFileDone />
-                  </p>
-                  <button>Confirm</button>
-                </div>
+                {el.status === "delivering" ? (
+                  <div className=" flex hover:text-primary">
+                    <p className="text-xl mt-0.5 mr-0.5">
+                      <AiOutlineFileDone />
+                    </p>
+                    <button onClick={() => handleConfirm(el)}>Confirm</button>
+                  </div>
+                ) : (
+                  <div></div>
+                )}
               </div>
             </div>
           ))}
