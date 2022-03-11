@@ -106,7 +106,7 @@ function Admin() {
           onClick={() => {
             router.push("admin/new-item");
           }}
-          className="w-[150px] h-[40px] my-4 mt-10 text-center text-[18px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium rounded-lg text-white bg-primary hover:bg-transparent hover:border-primary hover:border-2 hover:text-primary hover:font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary  transition ease-linear duration-500"
+          className="w-[150px] h-[40px] my-4 mt-10 text-center text-[18px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium rounded-lg text-white bg-primary hover:bg-transparent hover:border-primary hover:border-2 hover:text-primary hover:font-bold focus:outline-none   transition ease-linear duration-500"
         >
           <VscNewFile className=" text-xl mr-2" />
           New Item

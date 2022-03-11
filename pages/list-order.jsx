@@ -3,7 +3,7 @@ import styles from "../styles/History.module.css";
 import { FaMoneyBillAlt } from "react-icons/fa";
 import { FcCalendar } from "react-icons/fc";
 import { RiMessage2Line } from "react-icons/ri";
-import { AiOutlineNumber, AiOutlineFileDone } from "react-icons/ai";
+import { AiOutlineNumber } from "react-icons/ai";
 import Swal from "sweetalert2";
 import { useRouter } from "next/router";
 import axios from "axios";
@@ -99,7 +99,7 @@ function ListOrder() {
     setLoading(true);
     axios
       .put(
-        `https://ynwahid.cloud.okteto.net/orders/deliver/${el.id}`,
+        `https://ynwahid.cloud.okteto.net/orders/process/${el.id}`,
         {},
         config
       )
@@ -126,7 +126,7 @@ function ListOrder() {
     setLoading(true);
     axios
       .put(
-        `https://ynwahid.cloud.okteto.net/orders/process/${el.id}`,
+        `https://ynwahid.cloud.okteto.net/orders/deliver/${el.id}`,
         {},
         config
       )
