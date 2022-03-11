@@ -16,18 +16,16 @@ function FooterComponent() {
   return (
     <div className=" flex justify-between px-24 items-center py-2 border-t-2">
       {/* logo nav */}
-      <Link href='/'>
+      <Link href="/">
         <a>
-          <div
-            className=" relative h-20 w-32 mb-3"
-          >
+          <div className=" relative h-20 w-32 mb-3">
             <Image src={Navicon} layout="fill" />
           </div>
         </a>
       </Link>
       {/* social media */}
       <div className=" grid justify-center items-center content-evenly justify-items-center">
-        <h1 className=" text-primary text-2xl my-1">Contatc Us</h1>
+        <h1 className=" text-primary text-2xl my-1">Contact Us</h1>
 
         <div className="flex text-primary my-1">
           <h2 className="text-2xl mx-2 hover:animate-bounce">

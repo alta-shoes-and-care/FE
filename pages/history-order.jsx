@@ -15,7 +15,7 @@ function History() {
       title: "Regular Cleaning",
       price: "30.000",
       date: "22 Feb 2022",
-      status: "Pending",
+      status: "Delivering",
       id: "003",
     },
     {
@@ -98,7 +98,7 @@ function History() {
   return (
     <div className={`flex justify-center items-center ${styles.historybg}`}>
       <div
-        className={` w-[700px] h-screen overflow-y-scroll my-8 p-4 flex flex-col items-center ${styles.historyGlass}`}
+        className={` rounded-xl w-[700px] h-screen overflow-y-scroll my-8 p-4 flex flex-col items-center backdrop-blur-[10px] bg-[#ffffff88]`}
       >
         <h1 className=" text-3xl text-center  font-bold my-3 ">
           History Order
@@ -108,7 +108,7 @@ function History() {
         <div className=" w-[700px] overflow-y-scroll flex flex-col items-center">
           {data.map((el, i) => (
             <div
-              className={` w-[550px]   py-2 px-3 my-3 ${styles.historyCard}`}
+              className={` w-[550px] rounded-lg py-2 px-3 my-3 bg-white shadow-md`}
             >
               <h1 className=" text-xl">{el.title}</h1>
               <div className=" bg-gray-600 w-[200px] my-1 h-0.5"></div>
@@ -138,15 +138,16 @@ function History() {
                   </p>
                   <p>{el.id}</p>
                 </div>
-                <div
-                  onClick={() => handleConfirm(el)}
-                  className=" flex hover:animate-pulse hover:text-primary"
-                >
-                  <p className="text-xl mt-0.5 mr-0.5">
-                    <AiOutlineFileDone />
-                  </p>
-                  <button>Confirm</button>
-                </div>
+                {el.status === "Delivering" ? (
+                  <div className=" flex hover:text-primary">
+                    <p className="text-xl mt-0.5 mr-0.5">
+                      <AiOutlineFileDone />
+                    </p>
+                    <button onClick={() => handleConfirm(el)}>Confirm</button>
+                  </div>
+                ) : (
+                  <div></div>
+                )}
               </div>
             </div>
           ))}
