@@ -29,6 +29,17 @@ function ListOrder() {
   });
 
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      if (!localStorage.getItem("token")) {
+        router.push("/404");
+      } else if (
+        localStorage.getItem("is_admin") == "false" &&
+        localStorage.getItem("token")
+      ) {
+        router.push("/404");
+      }
+    }
+
     setLoading(true);
     const token = localStorage.getItem("token");
     const config = {

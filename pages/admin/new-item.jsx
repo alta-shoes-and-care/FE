@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import styles from "../../styles/History.module.css";
 import Loading from "../../components/Loading";
@@ -33,6 +33,19 @@ function NewItem() {
       toast.addEventListener("mouseleave", Swal.resumeTimer);
     },
   });
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      if (!localStorage.getItem("token")) {
+        router.push("/404");
+      } else if (
+        localStorage.getItem("is_admin") == "false" &&
+        localStorage.getItem("token")
+      ) {
+        router.push("/404");
+      }
+    }
+  }, []);
 
   function validateButton() {
     if (
