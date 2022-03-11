@@ -117,7 +117,7 @@ export default function Register() {
   return (
     <div className='container min-h-screen min-w-full flex justify-center text-center bg-cover bg-no-repeat' style={{backgroundImage: "url(https://images.unsplash.com/photo-1509472290917-08d8d47c5fca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80)"}}>
       <div className='container min-h-screen min-w-full flex justify-center items-center text-center bg-[#f0f0f0] bg-opacity-30'>
-        <div className='w-[70%] h-[60%] lg:w-[600px] lg:h-[600px] bg-white bg-opacity-50 backdrop-blur-[10px] my-auto flex justify-center items-center rounded-2xl'>
+        <div className='w-[70%] h-[50%] lg:w-[600px] lg:h-[600px] bg-white bg-opacity-50 backdrop-blur-[10px] my-auto flex justify-center items-center rounded-2xl'>
           <div>
             <h1 className='font-bold text-[30px] lg:text-[40px] text-primary'>Welcome to S3</h1>
             <h4 className='font-md text-[14px] lg:text-[20px] text-black'>Create new account by filling the form below.</h4>

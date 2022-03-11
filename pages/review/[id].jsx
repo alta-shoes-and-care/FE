@@ -1,11 +1,11 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import styles from "../../styles/History.module.css";
 import ReactStars from "react-rating-stars-component";
 import axios from "axios";
 import Swal from "sweetalert2";
 import {useRouter} from 'next/router';
 
-function Review() {
+export default function Review() {
   const starReview = {
     size: 50,
     value: 0,
@@ -18,21 +18,38 @@ function Review() {
   const id = query.id;
 
   const [name, setName] = useState('');
-  const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState('');
+  const [rating, setRating] = useState(null);
+  const [review, setReview] = useState('');
+  const [service_id, setService_id] = useState(0);
+  const [order_id, setOrder_id] = useState(0);
 
   const [loading, setLoading] = useState(false);
-  const [show, setShow] = useState(false);
 
   const ratingChanged = (value) => {
-    setRating({rating: value});
+    setRating(value);
     console.log(value);
   };
 
+  useEffect(() => {
+    const id = query.id;
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+    axios
+    .get(`https://ynwahid.cloud.okteto.net/orders/${id}`, config)
+    .then(({data}) => {
+      setService_id(data.data.service_id);
+      setOrder_id(data.data.id);
+    })
+    .catch((err) => {
+      console.log(err.response);
+    })
+  }, []);
+
   function validateReview(e){
     e.preventDefault();
-
-    if(name === '' && rating === 0 && comment === '') {
+    if(name === '' && rating === 0 && review === '') {
       setShow(true);
       Swal.fire('Invalid!', 'Data cannot be empty!', 'error')
     }
@@ -40,7 +57,7 @@ function Review() {
       setShow(true);
       Swal.fire('Invalid!','Name cannot contain spaces at the beginning and end, minimum 4 characters, and maximum 30 characters.','error')
     }
-    else if (comment.length >= 320) {
+    else if (review.length >= 320) {
       setShow(true);
       Swal.fire('Invalid!', 'Maximum comentar is 320 characters.', 'error')
     }
@@ -51,37 +68,43 @@ function Review() {
 
   function handleReview() {
     setLoading(true);
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
       const body = {
-        service_id: 12,
-        order_id: 1,
+        service_id,
+        order_id,
         rating,
-        comment,
+        review,
     }
     axios
-    .post(`https://ynwahid.cloud.okteto.net/reviews`, body, {headers : {authorization:`bearer ${localStorage.getItem("token")}`}})
+    .post(`https://ynwahid.cloud.okteto.net/reviews`, body, config)
     .then(({data}) => {
-      if(data) {
-        setShow(true);
-        setRating(0);
-        setComment('');
-        setName('')
+        if(data) {
+        setRating(null);
+        setReview('')
+        console.log(data);
         Swal.fire(`Thankyou!`, 'Your review means a lot to us :)', 'success');
-        router.push('/');
-      }
+        router.push('/history-order');
+        }
     })
     .catch((err) => {
-      if (err) {
-        setShow(true);
-        setRating(0);
-        setComment('');
-        setName('')
+        console.log(err.response)
         Swal.fire(`Failed add review!`, 'There seems to be a problem with our server :(', 'error');
-      }
     })
     .finally(() => {
       setLoading(false);
     })
   }
+
+// function handleCheck(e) {
+//     e.preventDefault();
+//     console.log(service_id);
+//     console.log(order_id);
+//     console.log(rating);
+//     console.log(review);
+//   }
 
   if (loading) {
     Swal.fire({
@@ -124,16 +147,14 @@ function Review() {
 
             <ReactStars {...starReview} 
             onChange={ratingChanged}
-            value={rating}
-            // onChange={(e) => { setRating(e.target.value)}}
              />
 
             <h1 className=" text-3xl mb-3">Comment</h1>
             <textarea
               required
               maxLength='320'
-              value={comment}
-              onChange={(e) => { setComment(e.target.value)}}
+              value={review}
+              onChange={(e) => { setReview(e.target.value)}}
               className={`form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700  bg-clip-padding border border-solid border-gray-300 rounded-lg transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none ${styles.inputbg}`}
               id="exampleFormControlTextarea1"
               rows="3"
@@ -142,6 +163,7 @@ function Review() {
 
             <div className="flex justify-center">
               <button 
+              type="submit"
               onClick={validateReview}
               className="w-[250px] h-[50px] mt-10 text-center text-[18px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium rounded-xl text-white bg-primary hover:bg-transparent hover:border-primary hover:border-2 hover:text-primary hover:font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary  transition ease-linear duration-500">
                 Submit
@@ -153,5 +175,3 @@ function Review() {
     </div>
   );
 }
-
-export default Review;

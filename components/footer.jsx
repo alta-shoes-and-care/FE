@@ -56,7 +56,7 @@ function FooterComponent() {
           </h2>
         </div>
 
-        <div className="flex text-primary lg:text-xl text-xs my-1">
+        <div className="flex text-primary lg:text-xl text-[10px] my-1">
           <h2>© 2022 Shoes Service Station, Inc. All rights reserved</h2>
         </div>
       </div>

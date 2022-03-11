@@ -25,9 +25,9 @@ export default function Service() {
           <div key={i}>
           <Link href={`/services/${el.id}`}>
             <a>
-              <div className='relative cursor-pointer lg:w-[298px] lg:h-[241px] w-[200px] h-[170px] bg-cover mb-1 hover:drop-shadow-2xl' style={{backgroundImage: `url('${el.image}')`}}>
-                <div className='absolute lg:w-[298px] lg:h-[241px] w-[200px] h-[170px] bg-[#000009] bg-opacity-30 hover:bg-[#c6c6c6] hover:bg-opacity-50 text-center bottom-0 inset-x-0'>
-                  <p className='absolute lg:text-[40px] text-[30px] flex justify-center align-middle items-center text-white hover:font-bold inset-0 px-[50px]'>{el.title}</p>
+              <div className='relative cursor-pointer lg:w-[298px] lg:h-[241px] w-[160px] h-[130px] bg-cover mb-1 hover:drop-shadow-2xl' style={{backgroundImage: `url('${el.image}')`}}>
+                <div className='absolute lg:w-[298px] lg:h-[241px] w-[160px] h-[130px] bg-[#000009] bg-opacity-30 hover:bg-[#c6c6c6] hover:bg-opacity-50 text-center bottom-0 inset-x-0'>
+                  <p className='absolute lg:text-[40px] text-[24px] flex justify-center align-middle items-center text-white hover:font-bold inset-0 px-[50px]'>{el.title}</p>
                 </div>
               </div>
             </a>
