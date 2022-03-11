@@ -26,6 +26,18 @@ function EditItem() {
   const [loading, setLoading] = useState(false);
   const [files, setFiles] = useState([]);
 
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "center",
+    showConfirmButton: false,
+    timer: 2000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
+
   useEffect(() => {
     const id = query.id;
     axios
@@ -115,7 +127,10 @@ function EditItem() {
             config
           )
           .then(({ data }) => {
-            Swal.fire("Updated", "", "success");
+            Toast.fire({
+              icon: "success",
+              title: "Success edit data",
+            });
             return editImage();
           })
           .catch((err) => {
