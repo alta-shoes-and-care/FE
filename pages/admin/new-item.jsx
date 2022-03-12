@@ -11,8 +11,10 @@ import "filepond/dist/filepond.min.css";
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
+import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 registerPlugin(FilePondPluginFileValidateSize);
+registerPlugin(FilePondPluginFileValidateType);
 
 function NewItem() {
   const [title, setTitle] = useState("");
@@ -48,26 +50,28 @@ function NewItem() {
     }
   }, []);
 
-  function validateButton() {
-    if (title === "") {
+  //  regex ^[0-9]+(.[0-9]{0})?$
+  function validateButton(e) {
+    e.preventDefault();
+    if (
+      title === "" &&
+      price === "" &&
+      description === "" &&
+      files.length === 0
+    ) {
       Swal.fire(
         "Invalid!",
-        "Title can't be empty,please fill out the field.",
+        "Data can't be empty,please fill out the fields.",
         "error"
       );
-    } else if (price === "") {
+    } else if (price == "") {
       Swal.fire(
         "Invalid!",
         "Price can't be empty,please fill out the field.",
         "error"
       );
-      // image
-    } else if (description === "") {
-      Swal.fire(
-        "Invalid!",
-        "Description can't be empty,please fill out the field.",
-        "error"
-      );
+    } else if (!/^[0-9]+(.[0-9]{0})?$/.test(price)) {
+      Swal.fire("Invalid!", "Incorrect format on field Price", "error");
     } else if (files.length === 0) {
       Swal.fire(
         "Invalid!",
@@ -78,6 +82,18 @@ function NewItem() {
       Swal.fire(
         "Invalid!",
         "File is too large, maximum size is 500 Kb.",
+        "error"
+      );
+    } else if (files[0].file.type !== "image/png") {
+      Swal.fire(
+        "Invalid!",
+        "Please upload file image with extension .png /.jpg /.jpeg",
+        "error"
+      );
+    } else if (description === "") {
+      Swal.fire(
+        "Invalid!",
+        "Description can't be empty,please fill out the field.",
         "error"
       );
     } else {
@@ -193,6 +209,7 @@ function NewItem() {
 
             <h1 className=" text-3xl mb-2">Image</h1>
             <FilePond
+              acceptedFileTypes={["image/png", "image/jpeg", "image/jpg"]}
               maxFileSize={500000}
               files={files}
               onupdatefiles={setFiles}
@@ -225,7 +242,6 @@ function NewItem() {
                 Cancel
               </button>
               <button
-                type="button"
                 onClick={validateButton}
                 className="w-[240px] h-[50px] mt-10 mx-5 text-center text-[18px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium rounded-xl text-white bg-primary hover:bg-transparent hover:border-black hover:border-2 hover:text-black hover:font-bold focus:outline-none transition ease-linear duration-500"
               >
