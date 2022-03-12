@@ -110,11 +110,26 @@ export default function formpayment(props) {
               title: "Order Success",
             });
             // setTimeout(() => {
-            //   router.push(`/invoice`);
+            // router.push(`/invoice`);
             // }, 2000);
           })
           .catch((err) => {
             Swal.fire("Order failed!", "catch error", "error");
+            if(err.response.status === 401) {
+                Swal.fire({title: "Your session has ended!",
+                text: "Please login again to continue.",
+                icon: "error",
+                showCancelButton: false,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Ok",
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  router.push("/login");
+                  localStorage.clear();
+                }
+              })
+            }
           })
           .finally(() => {
             setLoading(false);
@@ -175,7 +190,7 @@ export default function formpayment(props) {
   return (
     <section>
       <div
-        className={`z-0 grid grid-cols-1 h-screen bg-cover mt-[-100px] ${style.bgImage}  `}
+        className={`z-0 grid grid-cols-1 h-[675px] bg-cover mt-[-100px] ${style.bgImage}  `}
       >
         <div className="z-1 w-[100vw] h-[650px] bg-[#000009] bg-opacity-30 text-center">
           <div className="z-2 grid grid-cols-1 gap-4 bg-cover mt-[100px]">
