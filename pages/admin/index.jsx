@@ -157,7 +157,7 @@ function Admin() {
                 <div className=" flex ">
                   <div
                     onClick={() => handleEdit(el)}
-                    className=" flex mr-8 hover:text-white"
+                    className=" flex mr-8 hover:cursor-pointer"
                   >
                     <p className=" text-xl mt-0.5 mr-1">
                       <AiOutlineEdit />
@@ -166,7 +166,7 @@ function Admin() {
                   </div>
                   <div
                     onClick={() => handleDelete(el)}
-                    className=" flex hover:text-white"
+                    className=" flex hover:cursor-pointer"
                   >
                     <p className="  text-xl mt-0.5 mr-1">
                       <AiOutlineDelete />

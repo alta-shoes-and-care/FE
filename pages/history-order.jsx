@@ -23,13 +23,13 @@ function History() {
       headers: { Authorization: `Bearer ${token}` },
     };
     axios
-      .get(`https://ynwahid.cloud.okteto.net/orders`, config)
+      .get(`https://ynwahid.cloud.okteto.net/orders/me`, config)
       .then(({ data }) => {
         sethistory(data.data);
         console.log(data.data);
       })
       .catch((err) => {
-        console.log(err, "error");
+        console.log(err.response, "error");
       })
       .finally(() => {
         setLoading(false);

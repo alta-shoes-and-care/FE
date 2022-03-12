@@ -21,10 +21,11 @@ function NewItem() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const [files, setFiles] = useState([]);
+  console.log(files);
 
   const Toast = Swal.mixin({
     toast: true,
-    position: "top-end",
+    position: "center",
     showConfirmButton: false,
     timer: 2000,
     timerProgressBar: true,
@@ -48,15 +49,35 @@ function NewItem() {
   }, []);
 
   function validateButton() {
-    if (
-      title === "" ||
-      price === "" ||
-      description === "" ||
-      files.length == 0
-    ) {
+    if (title === "") {
       Swal.fire(
         "Invalid!",
-        "Forms can't be empty,please fill out the fields.",
+        "Title can't be empty,please fill out the field.",
+        "error"
+      );
+    } else if (price === "") {
+      Swal.fire(
+        "Invalid!",
+        "Price can't be empty,please fill out the field.",
+        "error"
+      );
+      // image
+    } else if (description === "") {
+      Swal.fire(
+        "Invalid!",
+        "Description can't be empty,please fill out the field.",
+        "error"
+      );
+    } else if (files.length === 0) {
+      Swal.fire(
+        "Invalid!",
+        "Image can't be empty,please choose image file.",
+        "error"
+      );
+    } else if (files[0].file.size > 500000) {
+      Swal.fire(
+        "Invalid!",
+        "File is too large, maximum size is 500 Kb.",
         "error"
       );
     } else {
@@ -163,7 +184,7 @@ function NewItem() {
                 max="1000000000"
                 min="0"
                 type="number"
-                placeholder="30.000"
+                placeholder="30000"
                 autoComplete="off"
                 required
                 className={` h-12 mb-5 form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700  bg-clip-padding border-2 border-solid border-black rounded-lg transition ease-in-out m-0  focus:text-gray-700 focus:border-primary focus:outline-none bg-transparent`}
@@ -198,8 +219,15 @@ function NewItem() {
             <div className="flex justify-center">
               <button
                 type="button"
+                onClick={() => router.push("/admin")}
+                className="w-[240px] h-[50px] mt-10 mx-5 text-center text-[18px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium rounded-xl text-white bg-red-700 hover:bg-transparent hover:border-black hover:border-2 hover:text-black hover:font-bold focus:outline-none transition ease-linear duration-500"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
                 onClick={validateButton}
-                className="w-[250px] h-[50px] mt-10 text-center text-[18px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium rounded-xl text-white bg-primary hover:bg-transparent hover:border-black hover:border-2 hover:text-black hover:font-bold focus:outline-none transition ease-linear duration-500"
+                className="w-[240px] h-[50px] mt-10 mx-5 text-center text-[18px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium rounded-xl text-white bg-primary hover:bg-transparent hover:border-black hover:border-2 hover:text-black hover:font-bold focus:outline-none transition ease-linear duration-500"
               >
                 Submit
               </button>
