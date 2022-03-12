@@ -1,20 +1,36 @@
 import Service from "../components/Service";
 import Carousel from "../components/Carousel";
+import {useState, useEffect} from "react";
 
 import ReactStars from "react-rating-stars-component";
 import Iframe from "react-iframe";
 import Image from "next/image";
+import axios from "axios";
 
 import vvm from "../assets/vvm.png";
 import Gallery from "../components/Gallery";
-
-const starReview = {
-  size: 30,
-  value: 5,
-  edit: false,
-};
+import { data } from "autoprefixer";
 
 export default function Home() {
+  
+  const [reviews, setReviews] = useState([]);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+    axios
+    .get(`https://ynwahid.cloud.okteto.net/reviews/`, config)
+    .then(({data}) => {
+      setReviews(data.data);
+      console.log(data)
+    })
+    .catch((err) => {
+      console.log(err.response);
+    })
+  }, []);
+
   return (
     <div>
       <div>
@@ -29,36 +45,21 @@ export default function Home() {
         <h1 className="font-bold text-black text-[36px] lg:text-[48px] text-center mb-8 ">
           What is everyone saying?
         </h1>
-        <div className="lg:flex lg:justify-evenly lg:flex-row flex flex-col items-center">
-          <div className="border border-primary rounded-2xl w-3/4 h-auto mb-4 lg:h-[300px] lg:my-auto lg:w-1/4 p-5 text-center">
-            <h2 className="font-bold text-[24px]">James Pattinson</h2>
+        <div className="lg:flex lg:justify-evenly lg:flex-row lg:flex-wrap flex flex-col items-center">
+        {reviews.slice(0,3).map((el, i) => (
+          <div className="border border-primary rounded-2xl w-3/4 h-auto mb-4 lg:h-[300px] lg:m-2 lg:w-1/4 p-5 text-center">
+            <h2 className="font-bold text-[24px]">{el.name}</h2>
             <div className="flex justify-center">
-              <ReactStars {...starReview} />
+              <ReactStars
+              value={el.rating}
+              edit={false}
+               />
             </div>
             <blockquote className="italic font-thin text-[18px]">
-              "Recommend for cleaning shoes, there is a 1 day package, suitable for cleaning safety shoes too"
+              "{el.review}"
             </blockquote>
           </div>
-
-          <div className="border border-primary rounded-2xl w-3/4 mb-4 lg:h-[300px] lg:my-auto lg:w-1/4 p-5 text-center">
-            <h2 className="font-bold text-[24px]">Greg Stuart</h2>
-            <div className="flex justify-center">
-              <ReactStars {...starReview} />
-            </div>
-            <blockquote className="italic font-thin text-[18px]">
-              "Good place. Recommended laundry for shoes."
-            </blockquote>
-          </div>
-
-          <div className="border border-primary rounded-2xl w-3/4 mb-4 lg:h-[300px] lg:my-auto lg:w-1/4 p-5 text-center">
-            <h2 className="font-bold text-[24px]">Trevor Mitchell</h2>
-            <div className="flex justify-center">
-              <ReactStars {...starReview} />
-            </div>
-            <blockquote className="italic font-thin text-[18px]">
-              "The process is fast. The service is also good and friendly. The premium cleaning results are satisfactory. Love it!"
-            </blockquote>
-          </div>
+          ))}
         </div>
       </div>
 
