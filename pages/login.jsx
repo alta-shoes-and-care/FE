@@ -10,7 +10,6 @@ function Login() {
   const [password, setPassword] = useState("");
 
   const [loading, setLoading] = useState(false);
-  const [show, setShow] = useState(false);
 
   const router = useRouter();
 
@@ -37,19 +36,17 @@ function Login() {
 
     if (email === "" && password === "") {
       Swal.fire("Invalid!", "Email / Password cannot be empty.", "error");
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
-      Swal.fire(
-        "Invalid!",
-        "Email format is not valid, email cannot contain spaces.",
-        "error"
-      );
-    } else if (!/^(?!.*\s).{5,8}$/.test(password)) {
-      Swal.fire(
-        "Invalid!",
-        "Password cannot contain spaces, minimum 5 characters, and maximum 8 characters.",
-        "error"
-      );
-    } else {
+    } 
+    else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email) && !/^(?!.*\s).{5,8}$/.test(password)) {
+      Swal.fire('Invalid!', 'Email / Password incorrect! please check and try again.', 'error');
+    } 
+    else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
+      Swal.fire("Invalid!", "Email format is not valid, email cannot contain spaces.", "error");
+    } 
+    else if (!/^(?!.*\s).{5,8}$/.test(password)) {
+      Swal.fire("Invalid!", "Password cannot contain spaces, minimum 5 characters, and maximum 8 characters.", "error");
+    } 
+    else {
       handleLogin();
     }
   }
@@ -64,12 +61,11 @@ function Login() {
       .post("https://ynwahid.cloud.okteto.net/login", body)
       .then(({ data }) => {
         if (data) {
-          setShow(true);
           setEmail("");
           setPassword("");
           Swal.fire(
             `Success login!`,
-            "You can start using the S3 service now.",
+            "You can use our service now.",
             "success"
           );
           localStorage.setItem("token", data.data.token);
@@ -80,7 +76,6 @@ function Login() {
       .catch((error) => {
         if (error) {
           console.log(error.response.status);
-          setShow(true);
           setEmail("");
           setPassword("");
           Swal.fire(`Ooppss!!`, "Invalid Email / Password.", "error");

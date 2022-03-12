@@ -65,7 +65,7 @@ export default function Home() {
 
       <div className="w-full bg-[#f0f0f0] lg:py-20 py-10">
         <h1 className="font-bold text-black lg:text-[48px] text-[36px] text-center mb-8">
-          About S3
+          About Shoes Service Station
         </h1>
         <div className="lg:flex lg:justify-center lg:flex-row flex flex-col items-center">
           <div className="lg:w-2/5 lg:mr-1 text-center w-3/4">
@@ -125,14 +125,6 @@ export default function Home() {
       </div>
 
       <div className="w-full relative bg-[#f0f0f0] py-20 text-center">
-        {/* <Iframe
-          url="http://www.youtube.com/embed/kyGR47nDrus"
-          width="80%"
-          height="500px"
-          allow="fullscreen"
-          display="initial"
-          position="relative"
-        /> */}
         <iframe
           src="https://www.youtube.com/embed/kyGR47nDrus" frameBorder="0" 
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
