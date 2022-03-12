@@ -18,7 +18,6 @@ export default function services() {
         setLoading(true);
         if(id!=='undefined'){
             console.log('running use effect')
-
             axios
                 .get(`https://ynwahid.cloud.okteto.net/services/${id}`)
                 .then(({ data }) => {
@@ -32,6 +31,7 @@ export default function services() {
                     setLoading(false);
                 });  
             }
+        window.scrollTo(0,0)
         }, [id]);
 
 
@@ -51,36 +51,21 @@ export default function services() {
             text: "Please confirm your order",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
+            cancelButtonColor: "#eeeee",
             confirmButtonText: "Book This Services",
             cancelButtonText: "Keep Looking",
           }).then((result) => {
             if (result.isConfirmed) {
               router.push(`/payment/${services.id}`);
-              localStorage.clear();
             }
           });
         }
 
     function handleOrder2() {
-        Swal.fire({
-            title: "You are not logged in, please login first",
-            html: "Redirecting to login page, this may take a few seconds, please don't close this page.",
-            allowOutsideClick: false,
-            showConfirmButton: false,
-            timer:4000,
-
-            willOpen: () => {
-                Swal.showLoading();
-            },
-            }).then(() => {
-                router.push(`/login`);
-                localStorage.clear();
-            });
+            router.push("/login");
         }
-    
   
-    
+
     function orderbutton(){
         if (typeof window !== "undefined") {
             // token = false
@@ -117,6 +102,8 @@ export default function services() {
            },
         }); 
     }
+
+    
 
     return (
         <section>

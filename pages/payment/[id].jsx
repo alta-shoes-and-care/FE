@@ -11,10 +11,27 @@ export default function formpayment(props) {
     const router = useRouter();
     let {id}=router.query
     const [loading, setLoading] = useState(false);
-
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener("mouseenter", Swal.stopTimer);
+          toast.addEventListener("mouseleave", Swal.resumeTimer);
+        },
+      });
 
     useEffect(() => {
-        if(id!=='undefined'){
+
+        if (!localStorage.getItem("token")) {
+            return (
+              router.push("/login")
+            );
+          } 
+        
+        else if(id!=='undefined'){
             setLoading(true);
 
             axios
@@ -39,34 +56,133 @@ export default function formpayment(props) {
         });
         console.log(services)
 
-        if (loading) {
-            Swal.fire({
-              title: "Please Wait!",
-              html: "This may take a few seconds, please don't close this page.",
-              allowOutsideClick: false,
-              showConfirmButton: false,
-              timer:750,
-                
-              willOpen: () => {
-                Swal.showLoading();
-               },
-            }); 
+        const [qty, setQty] = useState("");
+        const [payment_method_id, setPayment_method_id] = useState("");
+        const [date, setDate] = useState("");
+        const [address, setAddress] = useState("");
+        const [city, setCity] = useState("");
+        const [phone, setPhone] = useState("");
+        const total = qty * services.price;
+        const services_id= id;
+        
+        function handleButton() {
+            const formData = new FormData();
+            formData.append("services_id", services_id);
+            formData.append("qty", qty);
+            formData.append("total", total);
+            formData.append("payment_method_id", payment_method_id);
+            formData.append("date", date);
+            formData.append("address", address);
+            formData.append("city", city);
+            formData.append("phone", phone);
+
+        
+            const token = localStorage.getItem("token");
+            const config = {
+              headers: { Authorization: `Bearer ${token}` },
+              "Content-Type": "multipart/form-data",
+            };
+        
+            return Swal.fire({
+              title: "Confirm your Order?",
+              text: "",
+              icon: "warning",
+              showDenyButton: true,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Yes",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                setLoading(true);
+                axios
+                  .post(
+                    "https://ynwahid.cloud.okteto.net/orders",
+                    formData,
+                    config
+                  )
+                  .then(({ data }) => {
+                    setServices_id("");
+                    setQty("");
+                    setTotal("");
+                    setDate("");
+                    setAddress("");
+                    setPhone("");
+
+                    Toast.fire({
+                      icon: "success",
+                      title: "Order Success",
+                    });
+                    setTimeout(() => {
+                      router.push(`/invoice`);
+                    }, 2000);
+                  })
+                  .catch((err) => {
+                    Swal.fire("Order failed!", "catch error", "error");
+                  })
+                  .finally(() => {
+                    setLoading(false);
+                  });
+              } else if (result.isDenied) {
+                setLoading(false);
+                }
+            });
         }
+        
+        function validateButton() {
+
+        // validation for blank
+
+        if (
+            payment_method_id === "" ||
+            city === "" ||
+            phone === "" ||
+            date === "" ||
+            qty === "" ||
+            address === ""
+            
+        ) {
+            Swal.fire(
+            "Invalid!",
+            "Forms can't be empty, please fill out the blank fields.",
+            "error"
+            );
+
+        // validation kedua belum diganti
+
+        } else if (
+            payment_method_id === "" ||
+            city === "" ||
+            phone === "" ||
+            date === "" ||
+            qty === "" ||
+            address === ""
+            
+        ) {
+            Swal.fire(
+            "Invalid!",
+            "Forms can't be empty, please fill out the blank fields.",
+            "error"
+            );
+        
+        } else {
+            handleButton();
+        }
+        } 
 
     return (
         <section>
             <div className={`z-0 grid grid-cols-1 h-[650px] bg-cover mt-[-100px] ${style.bgImage}  `}> 
                 <div className='z-1 w-[100vw] h-[650px] bg-[#000009] bg-opacity-30 text-center'>
                     <div className="z-2 grid grid-cols-1 gap-4 bg-cover mt-[100px]">
-                        <div className="mt-[0.5vh]">
-                            <p className="text-3xl text-white">
+                        <div className="mt-[2.5vh]">
+                            <p className="text-5xl text-white">
                                 Confirm your order
                             </p>
                         </div>
 
                         {/* Desc Card */}
 
-                        <div className='my-auto ml-[25vw] z-3 w-[50vw] h-[70vh] bg-[#ffffff] bg-opacity-90 text-left rounded-lg'>
+                        <div className='my-auto ml-[25vw] z-3 w-[50vw] h-[71vh] bg-[#ffffff] bg-opacity-90 text-left rounded-lg'>
                             <div className="grid grid-cols-1 text-center mt-[1vh]  px-10 py-2">
                                 <p className="text-black bold text-2xl">
                                     Service type: {services.title}
@@ -87,7 +203,7 @@ export default function formpayment(props) {
                                 <h1 className="text-left text-[#175C8C] bold text-lg ml-[0.7vw]">
                                     Phone Number<dot className="text-red-600">*</dot>
                                 </h1>
-                                <h1 className="text-center text-[#175C8C] bold text-lg">
+                                <h1 className="text-left text-[#175C8C] bold text-lg ml-[3vw]">
                                     Quantity<dot className="text-red-600">*</dot>
                                 </h1>
                             </div>
@@ -95,13 +211,17 @@ export default function formpayment(props) {
                             <div className="grid grid-cols-3 ml-[0.5vw]">
 
                                 <div className={style.input}>
-                                    <select className="text-gray-500">
-                                        <option selected disabled>
-                                            Choose Payment
-                                        </option>
-                                        <option>
-
-                                        </option>
+                                    <select 
+                                        className="text-gray-500"
+                                        value={payment_method_id}
+                                        onChange={(e) => {
+                                        setPayment_method_id(e.target.value);
+                                        }}
+                                    >
+                                        <option value="">Choose Payment</option>
+                                        <option value="1">Payment 1</option>
+                                        <option value="2">Payment 2</option>
+                                        <option value="3">Payment 3</option>
                                     </select>
                                 </div>
 
@@ -112,20 +232,21 @@ export default function formpayment(props) {
                                     <input
                                         id="phonenumber"
                                         name="phonenumber"
-                                        type="phonenumber"
-                                        maxLength="3"
+                                        type="text"
+                                        inputMode="numeric"
+                                        maxLength="13"
                                         placeholder="Phone Number"
                                         autoComplete="off"
                                         required
                                         className="h-[30px] bg-transparent appearance-none relative block w-full px-3 py-2 border-2 border-primary placeholder-gray-500 text-gray-500 md:text-[18px] rounded-lg focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
-                                        value={""}
+                                        value={phone}
                                         onChange={(e) => {
-                                        setPhonenumber(e.target.value);
+                                        setPhone(e.target.value);
                                         }}
                                     />
                                 </div>
 
-                                 <div className="">
+                                 <div className="ml-[-6vw]">
                                     <label htmlFor="quantity" className="sr-only">
                                         Quantity
                                     </label>
@@ -133,15 +254,15 @@ export default function formpayment(props) {
                                         id="quantity"
                                         name="quantity"
                                         type="number"
-                                        maxLength="3"
-                                        placeholder="1"
+                                        maxLength="1"
+                                        placeholder="0"
                                         autoComplete="off"
                                         required
                                         className="mx-auto h-[30px] bg-transparent appearance-none relative block w-[5vw] px-3 py-2 border-2 border-primary placeholder-gray-500 text-gray-500 md:text-[18px] rounded-lg focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
-                                        value={""}
                                         min="1"
+                                        value={qty}
                                         onChange={(e) => {
-                                        setQuantity(e.target.value);
+                                        setQty(e.target.value);
                                         }}
                                     />
                                 </div>
@@ -163,24 +284,29 @@ export default function formpayment(props) {
 
                             <div className="grid grid-cols-3 ml-[0.5vw]">
                                 <div className={style.input}>
-                                    <select className="text-gray-500 w-[11.5vw]">
-                                        <option selected disabled>
+                                    <select className="text-gray-500 w-[11.5vw]"
+                                         value={city}
+                                         onChange={(e) => {
+                                         setCity(e.target.value);
+                                         }}
+                                    > 
+                                        <option value={""}>
                                             Choose City
                                         </option>
-                                        <option>Tangerang</option>
-                                        <option>Jakarta Pusat</option>
-                                        <option>Jakarta Selatan</option>
-                                        <option>Jakarta Barat</option>
-                                        <option>Depok</option>
-                                        <option>Bandung</option>
-                                        <option>Pekalongan</option>
-                                        <option>Klaten</option>
-                                        <option>Banyuwangi</option>
-                                        <option>Madura</option>
-                                        <option>Malang</option>
-                                        <option>Semarang</option>
-                                        <option>Surabaya</option>
-                                        <option>Yogyakarta</option>
+                                        <option value={"Tanggerang"}>Tangerang</option>
+                                        <option value={"Jakarta Pusat"}>Jakarta Pusat</option>
+                                        <option value={"Jakarta Selatan"}>Jakarta Selatan</option>
+                                        <option value={"Jakarta Barat"}>Jakarta Barat</option>
+                                        <option value={"Depok"}>Depok</option>
+                                        <option value={"Bandung"}>Bandung</option>
+                                        <option value={"Pekalongan"}>Pekalongan</option>
+                                        <option value={"Klaten"} >Klaten</option>
+                                        <option value={"Banyuwangi"}>Banyuwangi</option>
+                                        <option value={"Madura"} >Madura</option>
+                                        <option value={"Malang"}>Malang</option>
+                                        <option value={"Semarang"}>Semarang</option>
+                                        <option value={"Surabaya"}>Surabaya</option>
+                                        <option value={"Yogyakarta"}>Yogyakarta</option>
                                     </select>
                                 </div>
 
@@ -192,14 +318,14 @@ export default function formpayment(props) {
                                         id="pickupdate"
                                         name="pickupdate"
                                         type="date"
-                                        maxLength="3"
+                                        maxLength="100"
                                         placeholder="Pick Up Date"
                                         autoComplete="off"
                                         required
                                         className="ml-[0.1vw] h-[30px] bg-transparent appearance-none relative block w-full px-3 py-2 border-2 border-primary placeholder-gray-500 text-gray-500 md:text-[18px] rounded-lg focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
-                                        value={""}
+                                        value={date}
                                         onChange={(e) => {
-                                        setPhonenumber(e.target.value);
+                                        setDate(e.target.value);
                                         }}
                                     />
                                 </div>
@@ -208,7 +334,7 @@ export default function formpayment(props) {
 
                             {/*city - pickup date */}
 
-                            {/*Adress - Subtotal*/}
+                            {/*Address - Subtotal*/}
 
                             <div className="grid grid-cols-2">
                                 <h1 className="text-left text-[#175C8C] bold text-lg ml-[3vw]">
@@ -226,14 +352,14 @@ export default function formpayment(props) {
                                         id="Address"
                                         name="Adress"
                                         type="text"
-                                        maxLength="3"
-                                        placeholder="Adress"
+                                        maxLength="300"
+                                        placeholder="Address"
                                         autoComplete="off"
                                         required
                                         className="h-[20vh] bg-transparent appearance-none relative block w-[30.5vw] px-3 py-2 border-2 border-primary placeholder-gray-500 text-gray-500 md:text-[18px] rounded-lg focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
-                                        value={""}
+                                        value={address}
                                         onChange={(e) => {
-                                        setAdress(e.target.value);
+                                        setAddress(e.target.value);
                                         }}
                                     />
                                 </div>
@@ -242,10 +368,11 @@ export default function formpayment(props) {
                                     <div className="">
                                         <p className="text-2xl text-center bold">Subtotal</p>
                                         <h1 className="text-2xl text-center bold">
-                                            <NumberFormat value={services.price} displayType={'text'} decimalSeparator={','} thousandSeparator={'.'} prefix={'Rp'} />,00
+                                            <NumberFormat value={total} displayType={'text'} decimalSeparator={','} thousandSeparator={'.'} prefix={'Rp'} />,00
                                         </h1>
                                     </div>
-                                    <button className="ml-[2.5vw] bg-primary hover:bg-white text-white hover:text-primary font-bold py-2 px-3 border-2 border-primary rounded-lg mt-[1vh]">
+                                    <button className="ml-[2.5vw] bg-primary hover:bg-white text-white hover:text-primary font-bold py-2 px-3 border-2 border-primary rounded-lg mt-[1vh]"
+                                    onClick={validateButton}>
                                         <p className="text-md text-center rounded-xl"> Confirm Order </p>
                                     </button>
                                 </div>
