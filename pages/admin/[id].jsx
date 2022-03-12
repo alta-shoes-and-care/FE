@@ -220,7 +220,7 @@ function EditItem() {
                 max="1000000000"
                 name="price"
                 type="number"
-                placeholder="30.000"
+                placeholder="30000"
                 autoComplete="off"
                 required
                 className={` h-12 mb-5 form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700  bg-clip-padding border-2 border-solid border-black rounded-lg transition ease-in-out m-0 focus:text-gray-700 focus:border-primary focus:outline-none bg-transparent`}
