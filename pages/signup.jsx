@@ -12,7 +12,6 @@ export default function Register() {
   const [password, setPassword] = useState('');
 
   const [loading, setLoading] = useState(false);
-  const [show, setShow] = useState(false);
 
   const router = useRouter();
 
@@ -20,38 +19,65 @@ export default function Register() {
     e.preventDefault();
 
     if (name === '' && email === '' && password === '') {
-      Swal.fire('Invalid!', 'Data cannot be empty!', 'error')
-    }
+      Swal.fire('Invalid!', 'Data cannot be empty.', 'error')
+    } 
+    else if (name === '' && email === '') {
+      Swal.fire('Invalid!', 'Name & Email cannot be empty.', 'error');
+    }  
+    else if (name === '' && password === '') {
+      Swal.fire('Invalid!', 'Name & Password cannot be empty.', 'error');
+    }  
+    else if (email === '' && password === '') {
+      Swal.fire('Invalid!', 'Email & Password cannot be empty.', 'error');
+    } 
+    else if (name === '') {
+      Swal.fire('Invalid!', 'Name cannot be empty.', 'error');
+    } 
+    else if (email === '') {
+      Swal.fire('Invalid!', 'Email cannot be empty.', 'error');
+    } 
+    else if (password === '') {
+      Swal.fire('Invalid!', 'Password cannot be empty.', 'error');
+    } 
+    else if (!/^[A-Za-z0-9](?!.*?\s$)(?![0-9]+$)[A-Za-z0-9\s]{3,30}$/gm.test(name) && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email) && !/^(?!.*\s).{5,8}$/.test(password)) {
+      Swal.fire('Invalid!', 'Data is incorrect! please check and try again.', 'error');
+    }  
+    else if (!/^[A-Za-z0-9](?!.*?\s$)(?![0-9]+$)[A-Za-z0-9\s]{3,30}$/gm.test(name) && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
+      Swal.fire('Invalid!', 'Name / Email incorrect! please check and try again.', 'error');
+    }  
+    else if (!/^[A-Za-z0-9](?!.*?\s$)(?![0-9]+$)[A-Za-z0-9\s]{3,30}$/gm.test(name) && !/^(?!.*\s).{5,8}$/.test(password)) {
+      Swal.fire('Invalid!', 'Name / Password incorrect! please check and try again.', 'error');
+    }  
+    else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email) && !/^(?!.*\s).{5,8}$/.test(password)) {
+      Swal.fire('Invalid!', 'Email / Password incorrect! please check and try again.', 'error');
+    } 
     else if (!/^[A-Za-z0-9](?!.*?\s$)(?![0-9]+$)[A-Za-z0-9\s]{3,30}$/gm.test(name)) {
-      /* 
-      nama boleh ada spasi, tetapi tidak boleh didepan dan belakang
-      nama boleh ada angka, tetapi tidak boleh jika angka semua
-      nama tidak boleh ada spesial karakter
-      minimal 4, maksimal 30
-      */
-      setShow(true);
       Swal.fire('Invalid!','Name cannot contain spaces at the beginning and end, minimum 4 characters, and maximum 30 characters.','error')
-    }
+    } 
     else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
-      /* 
-      email tidak boleh ada spasi (depan, tengah, belakang)
-      email harus ada @ dan domain
-      */
-      setShow(true);
       Swal.fire('Invalid!','Email format is not valid, email cannot contain spaces.','error')
-    }
+    } 
     else if (!/^(?!.*\s).{5,8}$/.test(password)) {
-      /* 
-      password tidak boleh ada spasi
-      min 5, max 8
-      boleh huruf besar, huruf kecil, angka, dan spesial karakter
-      */
-      setShow(true);
       Swal.fire('Invalid!','Password cannot contain spaces, minimum 5 characters, and maximum 8 characters.', 'error')
-    } else {
+    } 
+    else {
       handleRegister()
     }
   }
+
+  /* 
+  nama boleh ada spasi, tetapi tidak boleh didepan dan belakang
+  nama boleh ada angka, tetapi tidak boleh jika angka semua
+  nama tidak boleh ada spesial karakter
+  minimal 4, maksimal 30
+
+  email tidak boleh ada spasi (depan, tengah, belakang)
+  email harus ada @ dan domain
+
+  password tidak boleh ada spasi
+  min 5, max 8
+  boleh huruf besar, huruf kecil, angka, dan spesial karakter
+  */
 
   function handleRegister() {
     setLoading(true);
@@ -65,7 +91,6 @@ export default function Register() {
     .post('https://ynwahid.cloud.okteto.net/users', body)
     .then(({data}) => {
       if(data) {
-        setShow(true);
         setName('');
         setEmail('');
         setPassword('');
@@ -75,7 +100,6 @@ export default function Register() {
     })
     .catch((error) => {
       if(error) {
-        setShow(true);
         setName('');
         setEmail('');
         setPassword('');
