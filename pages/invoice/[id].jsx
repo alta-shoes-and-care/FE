@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from "react";
-import style from "../styles/formpayment.module.css";
+import style from "../../styles/formpayment.module.css";
 
 import { useRouter } from 'next/router';
 import axios from "axios";
 import NumberFormat from 'react-number-format';
+import moment from "moment";
 import Swal from "sweetalert2";
 
 
@@ -12,9 +13,94 @@ export default function invoice() {
     const router = useRouter();
     let {id}=router.query
     const [loading, setLoading] = useState(false);
-
+    
+    const [invoice, setInvoice] = useState({
+        'service_title': ""
+        ,'qty': ""
+        ,'payment_method_name': ""
+        ,'city': ""
+        ,'phone': ""
+        ,'date': ""
+        ,'address': ""
+        ,'total': 0
+        ,'url': ""
+    });
+    console.log(invoice)  
+    
+    useEffect(() => {
+        setLoading(true);
+        if (!localStorage.getItem("token")) {
+            return router.push("/login");
+        }
+        else if(id!=='undefined'){
+            const token = localStorage.getItem("token");
+            const config = {
+            headers: { Authorization: `Bearer ${token}` },
+            }; 
+            axios
+                .get(`https://ynwahid.cloud.okteto.net/orders/${id}`,config)
+                .then(({ data }) => {
+                    setInvoice(data.data)
+                    console.log(data.data,'berhasil get')
+                })
+                .catch((err) => {
+                    console.log(err, "error bang");
+                    if (err.response.status === 401) {
+                        Swal.fire({
+                          title: "Your session has ended!",
+                          text: "Please login again to continue.",
+                          icon: "error",
+                          showCancelButton: false,
+                          confirmButtonColor: "#3085d6",
+                          cancelButtonColor: "#d33",
+                          confirmButtonText: "Ok",
+                        }).then((result) => {
+                          if (result.isConfirmed) {
+                            router.push("/login");
+                            localStorage.clear();
+                          }
+                        });
+                      }
+                })
+                .finally(() => {
+                    setLoading(false);
+                });  
+            }
+        }, [id]);
     
 
+        if (loading) {
+            Swal.fire({
+              title: "Please Wait!",
+              html: "This may take a few seconds, please don't close this page.",
+              allowOutsideClick: false,
+              showConfirmButton: false,
+              timer:750,
+                
+              willOpen: () => {
+                Swal.showLoading();
+               },
+            }); 
+        }
+    
+        function handleButton(){
+            return Swal.fire({
+                title: "Confirm your Payment?",
+                text: "",
+                icon: "question",
+                showDenyButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes",
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  setLoading(true);
+                  window.open(`${invoice.url}`,"_blank")
+                  router.push(`/endpoint/${id}`)
+                }
+            });
+        }
+    
     return (
         <section>
             <div className={`z-0 grid grid-cols-1 h-[650px] bg-cover mt-[-100px] ${style.bgImage2}  `}>  
@@ -28,36 +114,33 @@ export default function invoice() {
                         {/* Desc Card */}
                         <div className='ml-[30vw] mt-[-2vh] z-3 w-[40vw] h-[65vh] bg-[#ffffff] bg-opacity-80 hover:bg-opacity-100 text-left rounded-lg'>
                             <div className="grid grid-cols-1 text-left px-10 py-2">
-                                <p className="text-black bold text-2xl">
-                                    Service type: Regular Cleaning  
-                                </p>
-                                <p className="text-black text-sm"> 
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dignissim feugiat ut montes, diam malesuada auctor nunc. Aliquam habitant nulla rhoncus sapien.  Lorem ipsum dolor sit amet, consectetur adipiscing elit.  
+                                <p className="text-black text-center bold text-2xl">
+                                    Service type: {invoice.service_title}  
                                 </p>
                             </div>
                             {/*Invoice Section */}
                             {/*quantity */}
                             <div className="grid grid-cols-2">
                                 <h1 className="text-left text-black bold text-lg ml-[3vw]">
-                                    Quantity (Pairs): 1
+                                    Quantity (Pairs): {invoice.qty}
                                 </h1>
                             </div>
                             {/*quantity end*/}
                             {/*patment - phone number */}
                             <div className="grid grid-cols-2">
                                 <h1 className="text-left text-black bold text-lg ml-[3vw]">
-                                    Payment Method  :
+                                    Payment Method  : 
                                 </h1>
                                 <h1 className="text-left text-black bold text-lg ml-[3vw]">
-                                    Phone Number :
+                                    Phone Number : 
                                 </h1>
                             </div>
                             <div className="grid grid-cols-2 mb-1">
                                 <h1 className="text-left text-black bold text-md ml-[3vw]">
-                                    Go-Pay
+                                    {invoice.payment_method_name}
                                 </h1>
                                 <h1 className="text-left text-black bold text-md ml-[3vw]">
-                                    0812345678910
+                                    {invoice.phone}
                                 </h1>
                             </div>
                             {/*payment-phone number end */}
@@ -72,11 +155,11 @@ export default function invoice() {
                             </div>
                             <div className="grid grid-cols-2 mb-1">
                                 <h1 className="text-left text-black bold text-md ml-[3vw]">
-                                    Jakarta
+                                    {invoice.city}
                                 </h1>
-                                <h1 className="text-left text-black bold text-md ml-[3vw]">
-                                    2022-3-8
-                                </h1>
+                                <div className="text-left text-black bold text-md ml-[3vw]">
+                                    {moment(invoice.date).format('LL')}
+                                </div>
                             </div>
                             {/*city - pickup date */}
                             {/*Adress - Subtotal*/}
@@ -87,7 +170,7 @@ export default function invoice() {
                             </div>
                             <div className="grid grid-cols-1 max-w-[38vw] mb-1">
                                 <h1 className="text-left text-black bold text-md ml-[3vw]">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dignissim feugiat ut montes, diam malesuada auctor nunc. Aliquam habitant nulla rhoncus sapien.  Lorem ipsum dolor sit amet, consectetur adipiscing elit.  
+                                    {invoice.address} 
                                 </h1>
                             </div>
                             {/*Adress - subtotal end*/}
@@ -97,9 +180,17 @@ export default function invoice() {
                         {/* Button Subtotal*/}
                         <div className="ml-[25vw] mt-[-1vh] text-center">
                             <div className="bold text-xl">
-                                Subtotal : Rp.25.000
+                                Subtotal : <NumberFormat
+                                value={invoice.total}
+                                displayType={"text"}
+                                decimalSeparator={","}
+                                thousandSeparator={"."}
+                                prefix={"Rp"}
+                            />
                             </div>
-                            <button class="mt-[1vh] ml-[3vw] bg-[#175C8C] hover:bg-white text-white hover:text-black font-bold py-2 px-3 border border-black rounded-lg">
+                            <button class="mt-[1vh] ml-[3vw] bg-[#175C8C] hover:bg-white text-white hover:text-black font-bold py-2 px-3 border border-black rounded-lg"
+                            onClick={handleButton}
+                            type="button">
                                 <p className="text-md text-center rounded-xl"> Confirm Payment </p>
                             </button>
                         </div>
