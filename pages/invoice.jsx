@@ -1,10 +1,19 @@
 import React, {useEffect, useState} from "react";
-import Image from "next/image";
 import style from "../styles/formpayment.module.css";
 
 import { useRouter } from 'next/router';
+import axios from "axios";
+import NumberFormat from 'react-number-format';
+import Swal from "sweetalert2";
+
 
 export default function invoice() {
+
+    const router = useRouter();
+    let {id}=router.query
+    const [loading, setLoading] = useState(false);
+
+    
 
     return (
         <section>

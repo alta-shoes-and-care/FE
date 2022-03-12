@@ -56,32 +56,16 @@ export default function formpayment(props) {
         });
         console.log(services)
 
-        const [qty, setQty] = useState("");
-        const [payment_method_id, setPayment_method_id] = useState("");
+        const [qty, setQty] = useState(0);
+        const [payment_method_id, setPayment_method_id] = useState(0);
         const [date, setDate] = useState("");
         const [address, setAddress] = useState("");
         const [city, setCity] = useState("");
         const [phone, setPhone] = useState("");
         const total = qty * services.price;
-        const services_id= id;
+        const service_id= +id;
         
         function handleButton() {
-            const formData = new FormData();
-            formData.append("services_id", services_id);
-            formData.append("qty", qty);
-            formData.append("total", total);
-            formData.append("payment_method_id", payment_method_id);
-            formData.append("date", date);
-            formData.append("address", address);
-            formData.append("city", city);
-            formData.append("phone", phone);
-
-        
-            const token = localStorage.getItem("token");
-            const config = {
-              headers: { Authorization: `Bearer ${token}` },
-              "Content-Type": "multipart/form-data",
-            };
         
             return Swal.fire({
               title: "Confirm your Order?",
@@ -94,27 +78,47 @@ export default function formpayment(props) {
             }).then((result) => {
               if (result.isConfirmed) {
                 setLoading(true);
+
+                const token = localStorage.getItem("token");
+                const config = {
+                  headers: { Authorization: `Bearer ${token}` },
+                };
+
+                const body1 ={
+                    service_id: 31,
+                    qty: 2,
+                    total: 20000,
+                    payment_method_id: 1,
+                    date: "2022-03-09",
+                    address: "Jalan Soedirman no.13",
+                    city: "Semarang",
+                    phone: "081123456789"
+                }
+
+                const body = {
+                    service_id:+service_id,
+                    qty:+qty,
+                    total,
+                    payment_method_id:+payment_method_id,
+                    date,
+                    address,
+                    city,
+                    phone,
+                }
+
                 axios
                   .post(
-                    "https://ynwahid.cloud.okteto.net/orders",
-                    formData,
-                    config
-                  )
+                    "https://ynwahid.cloud.okteto.net/orders",body,config
+                    )
                   .then(({ data }) => {
-                    setServices_id("");
-                    setQty("");
-                    setTotal("");
-                    setDate("");
-                    setAddress("");
-                    setPhone("");
-
+                    console.log(data, "diisi apa gitu")
                     Toast.fire({
                       icon: "success",
                       title: "Order Success",
                     });
-                    setTimeout(() => {
-                      router.push(`/invoice`);
-                    }, 2000);
+                    // setTimeout(() => {
+                    //   router.push(`/invoice`);
+                    // }, 2000);
                   })
                   .catch((err) => {
                     Swal.fire("Order failed!", "catch error", "error");
@@ -128,6 +132,17 @@ export default function formpayment(props) {
             });
         }
         
+       function testlog(){
+           console.log(total)
+           console.log(+payment_method_id)
+           console.log(city)
+           console.log(+qty)
+           console.log(address)
+            console.log(phone)
+            console.log(date)
+            console.log(service_id)
+       }
+       
         function validateButton() {
 
         // validation for blank
@@ -165,7 +180,8 @@ export default function formpayment(props) {
             );
         
         } else {
-            handleButton();
+
+            testlog();
         }
         } 
 
@@ -218,10 +234,10 @@ export default function formpayment(props) {
                                         setPayment_method_id(e.target.value);
                                         }}
                                     >
-                                        <option value="">Choose Payment</option>
-                                        <option value="1">Payment 1</option>
-                                        <option value="2">Payment 2</option>
-                                        <option value="3">Payment 3</option>
+                                        <option value={0} disabled="true">Choose Payment</option>
+                                        <option value={1}>Payment 1</option>
+                                        <option value={2}>Payment 2</option>
+                                        <option value={3}>Payment 3</option>
                                     </select>
                                 </div>
 
@@ -290,7 +306,7 @@ export default function formpayment(props) {
                                          setCity(e.target.value);
                                          }}
                                     > 
-                                        <option value={""}>
+                                        <option value={""} disabled="true">
                                             Choose City
                                         </option>
                                         <option value={"Tanggerang"}>Tangerang</option>
