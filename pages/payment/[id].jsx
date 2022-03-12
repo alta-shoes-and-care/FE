@@ -98,7 +98,7 @@ export default function formpayment(props) {
                 const body = {
                     service_id:+service_id,
                     qty:+qty,
-                    total,
+                    total:+total,
                     payment_method_id:+payment_method_id,
                     date,
                     address,
@@ -181,7 +181,7 @@ export default function formpayment(props) {
         
         } else {
 
-            testlog();
+            handleButton();
         }
         } 
 
