@@ -16,11 +16,15 @@ export default function services() {
 
     useEffect(() => {
         setLoading(true);
-        if(id!=='undefined'){
-            console.log('running use effect')
+        if (!localStorage.getItem("token")) {
+            return router.push("/login");
+        }
+        else if(id!=='undefined'){
+            
             axios
                 .get(`https://ynwahid.cloud.okteto.net/services/${id}`)
                 .then(({ data }) => {
+                    setLoading(true);
                     setServices(data.data)
                     console.log(data.data,'berhasil get')
                 })

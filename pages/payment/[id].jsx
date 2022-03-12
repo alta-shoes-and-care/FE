@@ -10,12 +10,13 @@ export default function formpayment(props) {
   const router = useRouter();
   let { id } = router.query;
   const [loading, setLoading] = useState(false);
+  const [confirmLoading, setConfirmLoading] = useState(false);
   const [newId, setnewId] = useState(0);
   const Toast = Swal.mixin({
     toast: true,
     position: "center",
     showConfirmButton: false,
-    timer: 2000,
+    timer: 1000,
     timerProgressBar: true,
     didOpen: (toast) => {
       toast.addEventListener("mouseenter", Swal.stopTimer);
@@ -38,7 +39,10 @@ export default function formpayment(props) {
         })
         .catch((err) => {
           console.log(err, "error bang");
-        });
+        })
+        .finally(() => {
+            setLoading(false);
+        })
     }
   }, [id]);
 
@@ -72,22 +76,11 @@ export default function formpayment(props) {
       confirmButtonText: "Yes",
     }).then((result) => {
       if (result.isConfirmed) {
-        setLoading(true);
+        setConfirmLoading(true);
 
         const token = localStorage.getItem("token");
         const config = {
           headers: { Authorization: `Bearer ${token}` },
-        };
-
-        const body1 = {
-          service_id: 31,
-          qty: 2,
-          total: 20000,
-          payment_method_id: 1,
-          date: "2022-03-09",
-          address: "Jalan Soedirman no.13",
-          city: "Semarang",
-          phone: "081123456789",
         };
 
         const body = {
@@ -105,35 +98,41 @@ export default function formpayment(props) {
           .post("https://ynwahid.cloud.okteto.net/orders", body, config)
           .then(({ data }) => {
             console.log(data, "diisi apa gitu");
-            Toast.fire({
+
+            Swal.fire({
               icon: "success",
               title: "Order Success",
             });
-            // setTimeout(() => {
-            //   router.push(`/invoice`);
-            // }, 2000);
+            setTimeout(() => {
+              router.push(`/invoice/${data.data.id}`);
+            }, 750);
           })
           .catch((err) => {
             Swal.fire("Order failed!", "catch error", "error");
+            if (err.response.status === 401) {
+              Swal.fire({
+                title: "Your session has ended!",
+                text: "Please login again to continue.",
+                icon: "error",
+                showCancelButton: false,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Ok",
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  router.push("/login");
+                  localStorage.clear();
+                }
+              });
+            }
           })
           .finally(() => {
-            setLoading(false);
+            setConfirmLoading(false);
           });
       } else if (result.isDenied) {
-        setLoading(false);
+        setConfirmLoading(false);
       }
     });
-  }
-
-  function testlog() {
-    console.log(total);
-    console.log(+payment_method_id);
-    console.log(city);
-    console.log(+qty);
-    console.log(address);
-    console.log(phone);
-    console.log(date);
-    console.log(service_id);
   }
 
   function validateButton() {
@@ -172,10 +171,38 @@ export default function formpayment(props) {
     }
   }
 
+  if (loading) {
+    Swal.fire({
+      title: "Please Wait!",
+      html: "This may take a few seconds, please don't close this page.",
+      allowOutsideClick: false,
+      showConfirmButton: false,
+      timer:750,
+        
+      willOpen: () => {
+        Swal.showLoading();
+       },
+    }); 
+    }
+
+    if (confirmLoading) {
+        Swal.fire({
+          title: "Please Wait!",
+          html: "This may take a few seconds, please don't close this page.",
+          allowOutsideClick: false,
+          showConfirmButton: false,
+          timer:3000,
+            
+          willOpen: () => {
+            Swal.showLoading();
+           },
+        }); 
+        }
+
   return (
     <section>
       <div
-        className={`z-0 grid grid-cols-1 h-screen bg-cover mt-[-100px] ${style.bgImage}  `}
+        className={`z-0 grid grid-cols-1 h-[675px] bg-cover mt-[-100px] ${style.bgImage}  `}
       >
         <div className="z-1 w-[100vw] h-[650px] bg-[#000009] bg-opacity-30 text-center">
           <div className="z-2 grid grid-cols-1 gap-4 bg-cover mt-[100px]">
