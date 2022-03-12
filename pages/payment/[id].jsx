@@ -105,18 +105,20 @@ export default function formpayment(props) {
           .post("https://ynwahid.cloud.okteto.net/orders", body, config)
           .then(({ data }) => {
             console.log(data, "diisi apa gitu");
+
             Toast.fire({
               icon: "success",
               title: "Order Success",
             });
-            // setTimeout(() => {
-            // router.push(`/invoice`);
-            // }, 2000);
+            setTimeout(() => {
+              router.push(`/invoice/${data.data.id}`);
+            }, 2000);
           })
           .catch((err) => {
             Swal.fire("Order failed!", "catch error", "error");
-            if(err.response.status === 401) {
-                Swal.fire({title: "Your session has ended!",
+            if (err.response.status === 401) {
+              Swal.fire({
+                title: "Your session has ended!",
                 text: "Please login again to continue.",
                 icon: "error",
                 showCancelButton: false,
@@ -128,7 +130,7 @@ export default function formpayment(props) {
                   router.push("/login");
                   localStorage.clear();
                 }
-              })
+              });
             }
           })
           .finally(() => {
