@@ -67,40 +67,105 @@ function EditItem() {
       });
   }, []);
 
-  function validateButton() {
-    if (title === "") {
-      Swal.fire(
-        "Invalid!",
-        "Title can't be empty,please fill out the field.",
-        "error"
-      );
-    } else if (price === "") {
-      Swal.fire(
-        "Invalid!",
-        "Price can't be empty,please fill out the field.",
-        "error"
-      );
-      // image
-    } else if (description === "") {
-      Swal.fire(
-        "Invalid!",
-        "Description can't be empty,please fill out the field.",
-        "error"
-      );
-    } else if (files.length === 0) {
-      Swal.fire(
-        "Invalid!",
-        "Image can't be empty,please choose image file.",
-        "error"
-      );
-    } else if (files[0].file.size > 500000) {
-      Swal.fire(
-        "Invalid!",
-        "File is too large, maximum size is 500 Kb.",
-        "error"
-      );
-    } else {
-      handleButton();
+  function validateButton(e) {
+    e.preventDefault();
+    if (files.length === 0) {
+      if (description === "" && title === "" && price === "") {
+        Swal.fire(
+          "Invalid!",
+          "Data can't be empty,please fill out the fields.",
+          "error"
+        );
+      } else if (
+        !/^[0-9]+(.[0-9]{0})?$/.test(price) &&
+        title === "" &&
+        description === ""
+      ) {
+        Swal.fire("Invalid!", "Incorrect format on field Price", "error");
+      } else if (!/^[0-9]+(.[0-9]{0})?$/.test(price)) {
+        Swal.fire("Invalid!", "Incorrect format on field Price", "error");
+      } else if (title === "") {
+        Swal.fire(
+          "Invalid!",
+          "Data can't be empty,please fill out the fields.",
+          "error"
+        );
+      } else if (description === "") {
+        Swal.fire(
+          "Invalid!",
+          "Data can't be empty,please fill out the fields.",
+          "error"
+        );
+      } else if (price === "") {
+        Swal.fire(
+          "Invalid!",
+          "Data can't be empty,please fill out the fields.",
+          "error"
+        );
+      } else {
+        handleEdit();
+      }
+    }
+    if (files.length === 1) {
+      if (
+        description === "" &&
+        title === "" &&
+        files.length === 0 &&
+        price === ""
+      ) {
+        Swal.fire(
+          "Invalid!",
+          "Data can't be empty,please fill out the fields.",
+          "error"
+        );
+      } else if (files[0].file.size > 500000 && price === "") {
+        Swal.fire(
+          "Invalid!",
+          "File is too large, maximum size is 500 Kb.",
+          "error"
+        );
+      } else if (
+        !/^[0-9]+(.[0-9]{0})?$/.test(price) &&
+        files[0].file.size > 500000
+      ) {
+        Swal.fire(
+          "Invalid!",
+          " File is too large and incorrect format on field Price",
+          "error"
+        );
+      } else if (files.length === 0) {
+        Swal.fire(
+          "Invalid!",
+          "Data can't be empty,please fill out the fields.",
+          "error"
+        );
+      } else if (files[0].file.size > 500000) {
+        Swal.fire(
+          "Invalid!",
+          "File is too large, maximum size is 500 Kb.",
+          "error"
+        );
+      } else if (price == "") {
+        Swal.fire(
+          "Invalid!",
+          "Data can't be empty,please fill out the fields.",
+          "error"
+        );
+      } else if (files.length === 0) {
+        Swal.fire(
+          "Invalid!",
+          "Image can't be empty,please choose image file.",
+          "error"
+        );
+      } else if (description === "") {
+        Swal.fire(
+          "Invalid!",
+          "Data can't be empty,please fill out the fields.",
+          "error"
+        );
+      } else {
+        handleEdit();
+      }
     }
   }
 
@@ -169,7 +234,24 @@ function EditItem() {
             return editImage();
           })
           .catch((err) => {
-            console.log(err, "error");
+            if (err.response.status === 401) {
+              Swal.fire({
+                title: "Your session has ended!",
+                text: "Please login again to continue.",
+                icon: "error",
+                showCancelButton: false,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Ok",
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  router.push("/login");
+                  localStorage.clear();
+                }
+              });
+            } else {
+              Swal.fire("Invalid!", "Forms can't be empty", "error");
+            }
           })
           .finally(() => {
             setLoading(false);
