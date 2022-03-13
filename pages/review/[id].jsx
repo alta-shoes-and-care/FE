@@ -50,15 +50,12 @@ export default function Review() {
   function validateReview(e){
     e.preventDefault();
     if(name === '' && rating === 0 && review === '') {
-      setShow(true);
       Swal.fire('Invalid!', 'Data cannot be empty!', 'error')
     }
     else if (!/^[A-Za-z0-9](?!.*?\s$)(?![0-9]+$)[A-Za-z0-9\s]{3,30}$/gm.test(name)) {
-      setShow(true);
       Swal.fire('Invalid!','Name cannot contain spaces at the beginning and end, minimum 4 characters, and maximum 30 characters.','error')
     }
     else if (review.length >= 320) {
-      setShow(true);
       Swal.fire('Invalid!', 'Maximum comentar is 320 characters.', 'error')
     }
     else {

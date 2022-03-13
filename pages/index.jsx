@@ -46,14 +46,15 @@ export default function Home() {
           What is everyone saying?
         </h1>
         <div className="lg:flex lg:justify-evenly lg:flex-row lg:flex-wrap flex flex-col items-center">
-        {reviews.slice(0,3).map((el, i) => (
-          <div className="border border-primary rounded-2xl w-3/4 h-auto mb-4 lg:h-[300px] lg:m-2 lg:w-1/4 p-5 text-center">
+        {reviews.slice(-3).reverse().map((el, i) => (
+          <div key={i} className="border border-primary rounded-2xl w-3/4 h-auto mb-4 lg:h-[300px] lg:m-2 lg:w-1/4 p-5 text-center">
             <h2 className="font-bold text-[24px]">{el.name}</h2>
             <div className="flex justify-center">
               <ReactStars
+              size={30}
               value={el.rating}
               edit={false}
-               />
+              />
             </div>
             <blockquote className="italic font-thin text-[18px]">
               "{el.review}"
@@ -65,7 +66,7 @@ export default function Home() {
 
       <div className="w-full bg-[#f0f0f0] lg:py-20 py-10">
         <h1 className="font-bold text-black lg:text-[48px] text-[36px] text-center mb-8">
-          About Shoes Service Station
+          Our Story
         </h1>
         <div className="lg:flex lg:justify-center lg:flex-row flex flex-col items-center">
           <div className="lg:w-2/5 lg:mr-1 text-center w-3/4">
@@ -94,7 +95,7 @@ export default function Home() {
 
       <div className="w-full my-20">
         <div className="w-full bg-cover bg-no-repeat bg-bg-vvm">
-          <div className="w-full bg-[#f0f0f0] bg-cover bg-opacity-30 py-10 lg:px-36 flex lg:justify-between lg:flex-row flex-col items-center">
+          <div className="w-full bg-[#f0f0f0] bg-cover bg-opacity-30 py-10 lg:px-36 flex lg:justify-between lg:flex-row flex-col items-center cursor-pointer">
             <div className="lg:w-80 lg:h-[400px] w-3/4 mb-5 bg-white bg-opacity-80 backdrop-blur-[10px] flex flex-col justify-center items-center text-center p-10 rounded-2xl hover:scale-105">
               <h1 className="lg:text-[36px] text-[30px] text-black font-bold my-auto">Value</h1>
               <p className="lg:text-[20px] text-[18px] text-black">
@@ -107,14 +108,14 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="lg:w-80 lg:h-[400px] w-3/4 mb-5 bg-white bg-opacity-80 backdrop-blur-[10px] flex flex-col justify-center items-center text-center p-10 rounded-2xl hover:scale-105">
+            <div className="lg:w-80 lg:h-[400px] w-3/4 mb-5 bg-white bg-opacity-80 backdrop-blur-[10px] flex flex-col justify-center items-center text-center p-10 rounded-2xl hover:scale-105 cursor-pointer">
               <h1 className="lg:text-[36px] text-[30px] text-black font-bold my-auto">Vision</h1>
               <p className="lg:text-[20px] text-[18px] text-black">
               To make footwear hygiene and shoe care a part of every individual's lifestyle by making S3 services available to everyone everywhere & have a positive environmental impact. 
               </p>
             </div>
 
-            <div className="lg:w-80 lg:h-[400px] w-3/4 mb-5 bg-white bg-opacity-80 backdrop-blur-[10px] flex flex-col justify-center items-center text-center p-10 rounded-2xl hover:scale-105">
+            <div className="lg:w-80 lg:h-[400px] w-3/4 mb-5 bg-white bg-opacity-80 backdrop-blur-[10px] flex flex-col justify-center items-center text-center p-10 rounded-2xl hover:scale-105 cursor-pointer">
               <h1 className="lg:text-[36px] text-[30px] text-black font-bold my-auto">Mission</h1>
               <p className="lg:text-[20px] text-[18px] text-black">
               To provide a world class professional footwear laundry & refurbishing service, of the highest quality & highest level of convenience to everyone, everywhere. 
@@ -125,6 +126,14 @@ export default function Home() {
       </div>
 
       <div className="w-full relative bg-[#f0f0f0] py-20 text-center">
+        {/* <Iframe
+          url="http://www.youtube.com/embed/kyGR47nDrus"
+          width="80%"
+          height="500px"
+          allow="fullscreen"
+          display="initial"
+          position="relative"
+        /> */}
         <iframe
           src="https://www.youtube.com/embed/kyGR47nDrus" frameBorder="0" 
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
