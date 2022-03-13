@@ -16,18 +16,30 @@ export default function Home() {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    const config = {
-      headers: { Authorization: `Bearer ${token}` },
-    };
     axios
-    .get(`https://ynwahid.cloud.okteto.net/reviews/`, config)
+    .get(`https://ynwahid.cloud.okteto.net/reviews/`)
     .then(({data}) => {
       setReviews(data.data);
       console.log(data)
     })
     .catch((err) => {
       console.log(err.response);
+      if(err.response.status === 401) {
+        Swal.fire({
+          title: "Your session has ended!",
+          text: "Please login again to continue.",
+          icon: "error",
+          showCancelButton: false,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Ok",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            router.push("/login");
+            localStorage.clear();
+          }
+        });
+      }
     })
   }, []);
 
@@ -45,9 +57,9 @@ export default function Home() {
         <h1 className="font-bold text-black text-[36px] lg:text-[48px] text-center mb-8 ">
           What is everyone saying?
         </h1>
-        <div className="lg:flex lg:justify-evenly lg:flex-row lg:flex-wrap flex flex-col items-center">
+        <div className="lg:flex lg:justify-evenly lg:flex-row lg:flex-wrap flex flex-col items-center my-auto">
         {reviews.slice(-3).reverse().map((el, i) => (
-          <div key={i} className="border border-primary rounded-2xl w-3/4 h-auto mb-4 lg:h-[300px] lg:m-2 lg:w-1/4 p-5 text-center">
+          <div key={i} className="border border-primary rounded-2xl w-3/4 h-auto mb-4 lg:h-[250px] lg:m-2 lg:w-1/4 p-5 text-center flex items-center flex-col">
             <h2 className="font-bold text-[24px]">{el.name}</h2>
             <div className="flex justify-center">
               <ReactStars

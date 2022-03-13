@@ -98,13 +98,13 @@ export default function Register() {
         router.push('/login');
       }
     })
-    .catch((error) => {
-      if(error) {
+    .catch((err) => {
+      if(err) {
         setName('');
         setEmail('');
         setPassword('');
         Swal.fire(`Failed create account!`, 'The data you entered may already be registered', 'error');
-      } else if(error.response.status === 401) {
+      } else if(err.response.status === 401) {
         Swal.fire({
           title: "Your session has ended!",
           text: "Please login again to continue.",

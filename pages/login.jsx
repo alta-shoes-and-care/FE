@@ -73,13 +73,13 @@ function Login() {
           router.push("/");
         }
       })
-      .catch((error) => {
-        if (error) {
-          console.log(error.response.status);
+      .catch((err) => {
+        if (err) {
+          console.log(err.response.status);
           setEmail("");
           setPassword("");
           Swal.fire(`Ooppss!!`, "Invalid Email / Password.", "error");
-        } else if(error.response.status === 401) {
+        } else if(err.response.status === 401) {
           Swal.fire({
             title: "Your session has ended!",
             text: "Please login again to continue.",

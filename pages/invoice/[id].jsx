@@ -30,7 +30,7 @@ export default function invoice() {
     useEffect(() => {
         setLoading(true);
         if (!localStorage.getItem("token")) {
-            return router.push("/login");
+            router.push("/login");
         }
         else if(id!=='undefined'){
             const token = localStorage.getItem("token");
