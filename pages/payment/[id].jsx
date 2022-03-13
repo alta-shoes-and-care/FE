@@ -218,18 +218,18 @@ export default function formpayment(props) {
   return (
     <section>
       <div
-        className={`z-0 grid grid-cols-1 h-[675px] bg-cover mt-[-100px] ${style.bgImage}  `}
+        className={`z-0 grid grid-cols-1 h-screen bg-cover  ${style.bgImage}  `}
       >
-        <div className="z-1 w-[100vw] h-[650px] bg-[#000009] bg-opacity-30 text-center">
-          <div className="z-2 grid grid-cols-1 gap-4 bg-cover mt-[100px]">
+        <div className="z-1 w-[100vw] h-screen bg-[#000009] bg-opacity-30 text-center">
+          <div className="z-2 grid grid-cols-1 gap-4 bg-cover">
             <div className="mt-[2.5vh]">
               <p className="text-5xl text-white">Confirm your order</p>
             </div>
 
             {/* Desc Card */}
 
-            <div className="my-auto ml-[25vw] z-3 w-[50vw] h-[73vh] bg-[#ffffff] bg-opacity-90 text-left rounded-lg">
-              <div className="grid grid-cols-1 text-center mt-[1vh]  px-10 py-2">
+            <div className="my-auto ml-[25vw] z-3 w-[50vw] h-auto bg-[#ffffff] bg-opacity-80 text-left rounded-lg pb-5">
+              <div className="grid grid-cols-1 text-center mt-[0.5vh]  px-10 py-2">
                 <p className="text-black bold text-2xl">
                   Service type: {services.title}
                 </p>
@@ -266,9 +266,9 @@ export default function formpayment(props) {
                     <option value={0} disabled="true">
                       Choose Payment
                     </option>
-                    <option value={1}>Payment 1</option>
-                    <option value={2}>Payment 2</option>
-                    <option value={3}>Payment 3</option>
+                    <option value={1}>BCA Click Pay</option>
+                    <option value={2} disabled="true">Payment 2</option>
+                    <option value={3} disabled="true">Payment 3</option>
                   </select>
                 </div>
 

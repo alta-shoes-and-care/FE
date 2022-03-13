@@ -7,6 +7,7 @@ import axios from "axios";
 import NumberFormat from 'react-number-format';
 import moment from "moment";
 import Swal from "sweetalert2";
+import Service from "../../components/Service";
 
 
 export default function endpoint() {
@@ -97,20 +98,20 @@ export default function endpoint() {
 
     return (
         <section>
-            <div className={`z-0 grid grid-cols-1 h-[650px] bg-cover mt-[-100px] ${style.bgImage3}  `}>  
-                <div className='z-1 w-[100vw] h-[650px] bg-[#000009] bg-opacity-0 text-left'>
-                    <div class="z-2 grid grid-cols-1 gap-4 bg-cover mt-[100px]">
+            <div className={`z-0 grid grid-cols-1 h-screen bg-cover ${style.bgImage3}  `}>  
+                <div className='z-1 w-[100vw] h-screen bg-[#000009] bg-opacity-0 text-left'>
+                    <div class="z-2 grid grid-cols-1 gap-4 bg-cover">
                         {/* Desc Card */}
-                        <div className='ml-[20vw] mt-[8vh] z-3 w-[40vw] h-[65vh] bg-[#ffffff] bg-opacity-80 hover:shadow-xl text-left rounded-lg'>
+                        <div className='ml-[20vw] mt-[10vh] z-3 w-[40vw] h-auto bg-[#ffffff] bg-opacity-80 hover:shadow-xl text-left rounded-lg pb-5'>
                             <div className="grid grid-cols-1 text-center px-10 py-3">
-                                <p className="text-black text-center bold text-3xl">
+                                <p className="text-black text-center bold text-4xl">
                                     Thankyou for using our services {invoice.payment_status}
                                 </p>
-                                <p className="text-black text-md text-center mt-[0.5vh]"> 
-                                    If you already finished the payment, click to check the payment status
+                                <p className="text-gray-600 text-md text-center mt-[3vh]"> 
+                                    If you already finished the payment, click refresh to check the payment status
                                 </p>
                             </div>
-                            <div className="grid grid-cols-1 text-center w-[20vw] mt-[2vh] ml-[10vw]">
+                            <div className="grid grid-cols-1 text-center w-[20vw] mt-[1vh] ml-[10vw]">
                                 <button class="bg-[#175C8C] hover:bg-white text-white hover:text-black font-bold py-2 px-2 border border-black rounded-lg"
                                 onClick={refreshPage}>
                                     <p className="text-md text-center rounded-xl"> Refresh Payment Status</p>
@@ -128,10 +129,22 @@ export default function endpoint() {
                                     <p className="text-md text-center rounded-xl"> Order History </p>
                                 </button>
                             </div>
+                            <p className="text-gray-600 text-md text-center mt-[2.5vh]"> 
+                                Click to check your order history 
+                            </p>
+                            <p className="text-black text-md text-center mt-[1vh]"> 
+                                Or
+                            </p>
+                            <p className="text-primary text-md text-center mt-[1vh]"> 
+                                See our other services bellow on this page
+                            </p>
                         </div>
                         {/* Desc Card End*/}
                     </div>
                 </div>
+            </div>
+            <div class="grid grid-cols-1 pt-2">
+                <Service />
             </div>
         </section>
     );
