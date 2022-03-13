@@ -55,7 +55,7 @@ function EditItem() {
     axios
       .get(`https://ynwahid.cloud.okteto.net/services/${id}`)
       .then(({ data }) => {
-        setProduct(data.data);
+        setProduct(data.data, "masuk");
         setTitle(data.data.title);
         setPrice(data.data.price);
         setDescription(data.data.description);
@@ -172,30 +172,42 @@ function EditItem() {
   }
 
   function editImage() {
-    const formData = new FormData();
-    formData.append("file", files[0].file);
-    const token = localStorage.getItem("token");
-    const config = {
-      headers: { Authorization: `Bearer ${token}` },
-      "Content-Type": "multipart/form-data",
+    if (files.length === 1) {
+      const formData = new FormData();
+      formData.append("file", files[0].file);
+      const token = localStorage.getItem("token");
+      const config = {
+        headers: { Authorization: `Bearer ${token}` },
+        "Content-Type": "multipart/form-data",
+      };
+
+      axios
+        .put(
+          `https://ynwahid.cloud.okteto.net/services/jwt/${idProduct}`,
+          formData,
+          config
+        )
+        .then(({ data }) => {
+          console.log(data);
+        })
+        .catch((err) => {
+          console.log(err);
+          Swal.fire("Invalid!", "Forms can't be empty", "error");
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }
+  }
+  function handleData() {
+    const dataUpdate = {
+      id: +id,
+      title: title,
+      description: description,
+      price: +price,
     };
 
-    axios
-      .put(
-        `https://ynwahid.cloud.okteto.net/services/jwt/${idProduct}`,
-        formData,
-        config
-      )
-      .then(({ data }) => {
-        console.log(data);
-      })
-      .catch((err) => {
-        console.log(err);
-        Swal.fire("Invalid!", "Forms can't be empty", "error");
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    console.log(dataUpdate);
   }
 
   function handleEdit(el) {
@@ -214,10 +226,10 @@ function EditItem() {
       };
 
       const dataUpdate = {
-        id: idProduct,
+        id: +id,
         title: title,
-        price: price,
         description: description,
+        price: +price,
       };
 
       if (result.isConfirmed) {
@@ -252,7 +264,7 @@ function EditItem() {
                 }
               });
             } else {
-              Swal.fire("Invalid!", "Forms can't be empty", "error");
+              Swal.fire("Ooppss!", "Sorry, the server is error.", "error");
             }
           })
           .finally(() => {
@@ -323,7 +335,7 @@ function EditItem() {
               accept="image/png, image/jpeg, image/jpg"
               maxFiles={1}
               name="files"
-              labelIdle='<span class="filepond--label-action">Browse File</span>'
+              labelIdle='Please select a picture with extension /.png /.jpg /.jpeg <br/> <span class="filepond--label-action">Browse File</span>'
             />
             <h1 className=" text-3xl mb-2">Description</h1>
             <textarea
@@ -357,6 +369,13 @@ function EditItem() {
           </form>
         </div>
       </div>
+      <style jsx global>{`
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+      `}</style>
     </div>
   );
 }

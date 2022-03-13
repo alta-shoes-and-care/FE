@@ -299,7 +299,7 @@ function NewItem() {
               accept="image/png, image/jpeg, image/jpg"
               maxFiles={1}
               name="files"
-              labelIdle='<span class="filepond--label-action">Browse File</span>'
+              labelIdle='Please select a picture with extension /.png /.jpg /.jpeg <br/> <span class="filepond--label-action">Browse File</span>'
             />
             <h1 className=" text-3xl mb-2">Description</h1>
             <textarea
@@ -333,6 +333,13 @@ function NewItem() {
           </form>
         </div>
       </div>
+      <style jsx global>{`
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+      `}</style>
     </div>
   );
 }
