@@ -212,7 +212,7 @@ export default function formpayment(props) {
 
             {/* Desc Card */}
 
-            <div className="my-auto ml-[25vw] z-3 w-[50vw] h-[71vh] bg-[#ffffff] bg-opacity-90 text-left rounded-lg">
+            <div className="my-auto ml-[25vw] z-3 w-[50vw] h-[73vh] bg-[#ffffff] bg-opacity-90 text-left rounded-lg">
               <div className="grid grid-cols-1 text-center mt-[1vh]  px-10 py-2">
                 <p className="text-black bold text-2xl">
                   Service type: {services.title}
