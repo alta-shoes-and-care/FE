@@ -95,7 +95,24 @@ function Admin() {
             return getData();
           })
           .catch((err) => {
-            console.log(err, "error");
+            if (err.response.status === 401) {
+              Swal.fire({
+                title: "Your session has ended!",
+                text: "Please login again to continue.",
+                icon: "error",
+                showCancelButton: false,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Ok",
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  router.push("/login");
+                  localStorage.clear();
+                }
+              });
+            } else {
+              Swal.fire("Ooppss!", "Sorry, the server is error.", "error");
+            }
           })
           .finally(() => {
             setLoading(false);
