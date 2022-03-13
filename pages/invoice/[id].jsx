@@ -95,8 +95,8 @@ export default function invoice() {
               }).then((result) => {
                 if (result.isConfirmed) {
                   setLoading(true);
-                  window.open(`${invoice.url}`,"_blank")
                   router.push(`/endpoint/${id}`)
+                  window.open(`${invoice.url}`,"_blank")
                 }
             });
         }
@@ -112,64 +112,64 @@ export default function invoice() {
                             </p>
                         </div>
                         {/* Desc Card */}
-                        <div className='ml-[30vw] mt-[-2vh] z-3 w-[40vw] h-[65vh] bg-[#ffffff] bg-opacity-80 hover:bg-opacity-100 text-left rounded-lg'>
-                            <div className="grid grid-cols-1 text-left px-10 py-2">
+                        <div className='ml-[30vw] z-3 w-[40vw] h-[380px] bg-[#ffffff] bg-opacity-90  text-left rounded-lg'>
+                            <div className="grid grid-cols-1 text-left mt-[1vh] px-10 py-2">
                                 <p className="text-black text-center bold text-2xl">
                                     Service type: {invoice.service_title}  
                                 </p>
                             </div>
                             {/*Invoice Section */}
                             {/*quantity */}
-                            <div className="grid grid-cols-2">
-                                <h1 className="text-left text-black bold text-lg ml-[3vw]">
-                                    Quantity (Pairs): {invoice.qty}
+                            <div className="grid grid-cols-1">
+                                <h1 className="text-center text-black bold text-lg mb-[2vh]">
+                                    Quantity (Pairs): <dom className="text-primary">{invoice.qty}</dom>
                                 </h1>
                             </div>
                             {/*quantity end*/}
                             {/*patment - phone number */}
                             <div className="grid grid-cols-2">
-                                <h1 className="text-left text-black bold text-lg ml-[3vw]">
+                                <h1 className="text-left text-black bold text-lg mt-[2vh] ml-[4vw]">
                                     Payment Method  : 
                                 </h1>
-                                <h1 className="text-left text-black bold text-lg ml-[3vw]">
+                                <h1 className="text-left text-black bold text-lg mt-[2vh] ml-[4vw]">
                                     Phone Number : 
                                 </h1>
                             </div>
                             <div className="grid grid-cols-2 mb-1">
-                                <h1 className="text-left text-black bold text-md ml-[3vw]">
+                                <h1 className="text-left text-primary bold text-md ml-[4vw]">
                                     {invoice.payment_method_name}
                                 </h1>
-                                <h1 className="text-left text-black bold text-md ml-[3vw]">
+                                <h1 className="text-left text-primary bold text-md ml-[4vw]">
                                     {invoice.phone}
                                 </h1>
                             </div>
                             {/*payment-phone number end */}
                             {/*city - pickup date*/}
                             <div className="grid grid-cols-2">
-                                <h1 className="text-left text-black bold text-lg ml-[3vw]">
+                                <h1 className="text-left text-black bold text-lg mt-[2vh] ml-[4vw]">
                                     City  :
                                 </h1>
-                                <h1 className="text-left text-black bold text-lg ml-[3vw]">
+                                <h1 className="text-left text-black bold text-lg mt-[2vh] ml-[4vw]">
                                     Pick-Up Date :
                                 </h1>
                             </div>
                             <div className="grid grid-cols-2 mb-1">
-                                <h1 className="text-left text-black bold text-md ml-[3vw]">
+                                <h1 className="text-left text-primary bold text-md ml-[4vw]">
                                     {invoice.city}
                                 </h1>
-                                <div className="text-left text-black bold text-md ml-[3vw]">
+                                <div className="text-left text-primary bold text-md ml-[4vw]">
                                     {moment(invoice.date).format('LL')}
                                 </div>
                             </div>
                             {/*city - pickup date */}
                             {/*Adress - Subtotal*/}
                             <div className="grid grid-cols-2">
-                                <h1 className="text-left text-black bold text-lg ml-[3vw]">
+                                <h1 className="text-left text-black bold text-lg mt-[2vh] ml-[4vw]">
                                     Adress  :
                                 </h1>
                             </div>
                             <div className="grid grid-cols-1 max-w-[38vw] mb-1">
-                                <h1 className="text-left text-black bold text-md ml-[3vw]">
+                                <h1 className="text-left text-primary bold text-md ml-[4vw]">
                                     {invoice.address} 
                                 </h1>
                             </div>

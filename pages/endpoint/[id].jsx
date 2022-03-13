@@ -14,16 +14,10 @@ export default function endpoint() {
     const router = useRouter();
     let {id}=router.query
     const [loading, setLoading] = useState(false);
+    let statuss="";
     
     const [invoice, setInvoice] = useState({
-        'service_title': ""
-        ,'qty': ""
-        ,'payment_method_name': ""
-        ,'city': ""
-        ,'phone': ""
-        ,'date': ""
-        ,'address': ""
-        ,'total': 0
+        'is_paid': ""
         ,'url': ""
     });
     console.log(invoice)  
@@ -83,6 +77,23 @@ export default function endpoint() {
                },
             }); 
         }
+    
+        if (invoice.is_paid == false ){
+           statuss= <div className="text-red-600 text-center bold text-xl mt-[2vh]">Payment is Not Completed</div>
+        }
+        else {
+           statuss= <div className="text-green-600 text-center bold text-xl mt-[2vh]">Payment is Completed</div>
+        }
+
+        function refreshPage() {
+            window.location.reload(false);
+          }
+        
+        function handlehistory(){
+            setLoading(true);
+            router.push(`/history-order`)
+        }
+    
 
     return (
         <section>
@@ -90,33 +101,30 @@ export default function endpoint() {
                 <div className='z-1 w-[100vw] h-[650px] bg-[#000009] bg-opacity-0 text-left'>
                     <div class="z-2 grid grid-cols-1 gap-4 bg-cover mt-[100px]">
                         {/* Desc Card */}
-                        <div className='ml-[20vw] mt-[8vh] z-3 w-[40vw] h-[65vh] bg-[#ffffff] bg-opacity-60 hover:bg-opacity-80 text-left rounded-lg'>
+                        <div className='ml-[20vw] mt-[8vh] z-3 w-[40vw] h-[65vh] bg-[#ffffff] bg-opacity-80 hover:shadow-xl text-left rounded-lg'>
                             <div className="grid grid-cols-1 text-center px-10 py-3">
                                 <p className="text-black text-center bold text-3xl">
-                                    Thankyou for using our services
+                                    Thankyou for using our services {invoice.payment_status}
                                 </p>
-                                <p className="text-black text-md text-center"> 
+                                <p className="text-black text-md text-center mt-[0.5vh]"> 
                                     If you already finished the payment, click to check the payment status
                                 </p>
                             </div>
                             <div className="grid grid-cols-1 text-center w-[20vw] mt-[2vh] ml-[10vw]">
-                                <button class="bg-[#175C8C] hover:bg-white text-white hover:text-black font-bold py-2 px-2 border border-black rounded-lg">
-                                    <p className="text-md text-center rounded-xl"> Check Payment </p>
+                                <button class="bg-[#175C8C] hover:bg-white text-white hover:text-black font-bold py-2 px-2 border border-black rounded-lg"
+                                onClick={refreshPage}>
+                                    <p className="text-md text-center rounded-xl"> Refresh Payment Status</p>
                                 </button>
                             </div>
                             <div className="grid grid-cols-1 text-center px-10 py-3">
                                 <p className="text-black text-center bold text-2xl">
-                                    Check Payment Status
+                                    Payment Status :
                                 </p>
-                                <p className="text-red-600 text-center bold text-xl mt-[2vh]">
-                                    Not Completed
-                                </p>
-                                <p className="text-green-600 text-center bold text-xl mt-[2vh]">
-                                    Completed
-                                </p>
+                                {statuss}
                             </div>
                             <div className="grid grid-cols-1 text-center w-[20vw] mt-[3vh] ml-[10vw]">
-                                <button class="bg-[#175C8C] hover:bg-white text-white hover:text-black font-bold py-2 px-2 border border-black rounded-lg">
+                                <button class="bg-[#175C8C] hover:bg-white text-white hover:text-black font-bold py-2 px-2 border border-black rounded-lg"
+                                onClick={handlehistory}>
                                     <p className="text-md text-center rounded-xl"> Order History </p>
                                 </button>
                             </div>
