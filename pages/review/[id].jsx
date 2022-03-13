@@ -31,7 +31,11 @@ export default function Review() {
   };
 
   useEffect(() => {
-    const id = query.id;
+
+  if (!localStorage.getItem("token")) {
+    return router.push("/login");
+  } 
+  else if(id!=='undefined'){
     const token = localStorage.getItem("token");
     const config = {
       headers: { Authorization: `Bearer ${token}` },
@@ -39,21 +43,36 @@ export default function Review() {
     axios
     .get(`https://ynwahid.cloud.okteto.net/orders/${id}`, config)
     .then(({data}) => {
+      console.log(data)
       setService_id(data.data.service_id);
       setOrder_id(data.data.id);
     })
     .catch((err) => {
       console.log(err.response);
+      if(err.response.status === 401) {
+        Swal.fire({
+          title: "Your session has ended!",
+          text: "Please login again to continue.",
+          icon: "error",
+          showCancelButton: false,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Ok",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            router.push("/login");
+            localStorage.clear();
+          }
+        });
+      }
     })
+    }
   }, []);
 
   function validateReview(e){
     e.preventDefault();
-    if(name === '' && rating === 0 && review === '') {
+    if(rating === 0 && review === '') {
       Swal.fire('Invalid!', 'Data cannot be empty!', 'error')
-    }
-    else if (!/^[A-Za-z0-9](?!.*?\s$)(?![0-9]+$)[A-Za-z0-9\s]{3,30}$/gm.test(name)) {
-      Swal.fire('Invalid!','Name cannot contain spaces at the beginning and end, minimum 4 characters, and maximum 30 characters.','error')
     }
     else if (review.length >= 320) {
       Swal.fire('Invalid!', 'Maximum comentar is 320 characters.', 'error')
@@ -76,7 +95,7 @@ export default function Review() {
         review,
     }
     axios
-    .post(`https://ynwahid.cloud.okteto.net/reviews`, body, config)
+    .post(`https://ynwahid.cloud.okteto.net/reviews/jwt`, body, config)
     .then(({data}) => {
         if(data) {
         setRating(null);
@@ -89,6 +108,22 @@ export default function Review() {
     .catch((err) => {
         console.log(err.response)
         Swal.fire(`Failed add review!`, 'There seems to be a problem with our server :(', 'error');
+        if(err.response.status === 401) {
+          Swal.fire({
+            title: "Your session has ended!",
+            text: "Please login again to continue.",
+            icon: "error",
+            showCancelButton: false,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Ok",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              router.push("/login");
+              localStorage.clear();
+            }
+          });
+        }
     })
     .finally(() => {
       setLoading(false);
@@ -121,25 +156,12 @@ export default function Review() {
         className={` w-[700px] h-screen my-8 p-4 flex justify-center flex-col items-center ${styles.historyGlass}`}
       >
         {/* content */}
-        <h1 className=" text-5xl text-center  font-bold mb-12 ">
+        <h1 className=" text-5xl text-center font-bold mb-12 ">
           Thank you for using our service
         </h1>
         <div>
-          <h1 className=" text-3xl mb-3">Name</h1>
 
           <form className=" w-[528px]" action="#" method="POST">
-            <div>
-              <input
-                name="name"
-                type="text"
-                placeholder="input your name"
-                autoComplete="off"
-                required
-                value={name}
-                onChange={(e) => { setName(e.target.value)}}
-                className={` h-12 mb-5 form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700  bg-clip-padding border border-solid border-gray-300 rounded-lg transition ease-in-out m-0 focus:text-gray-700 focus:border-blue-600 focus:outline-none focus:bg-white ${styles.inputbg}`}
-              />
-            </div>
             <h1 className=" text-3xl mb-[-13px]">Rate</h1>
 
             <ReactStars {...starReview} 

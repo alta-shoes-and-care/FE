@@ -10,6 +10,22 @@ export const getAllService = () => {
     })
     .catch(err => {
       console.log(err.response);
+      if(err.response.status === 401) {
+        Swal.fire({
+          title: "Your session has ended!",
+          text: "Please login again to continue.",
+          icon: "error",
+          showCancelButton: false,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Ok",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            router.push("/login");
+            localStorage.clear();
+          }
+        });
+      }
     })
   }
 }
