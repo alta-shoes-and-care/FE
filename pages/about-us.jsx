@@ -1,11 +1,14 @@
 import React from "react";
 import Image from "next/image";
 import Profile from "../assets/profile.png";
-import {
-  AiFillGithub,
-  AiOutlineInstagram,
-  AiOutlineMail,
-} from "react-icons/ai";
+import FE_yusuf from "../assets/team/FE_yusuf.png";
+import FE_diyah from "../assets/team/FE_diyah.png";
+import BE_yusuf from "../assets/team/BE_yusuf.png";
+import BE_frans from "../assets/team/BE_frans.png";
+import QE_adhit from "../assets/team/QE_adhit.png";
+import QE_rendy from "../assets/team/QE_rendy.png";
+
+import { AiFillGithub, AiOutlineLinkedin, AiOutlineMail } from "react-icons/ai";
 
 function AboutUs() {
   return (
@@ -37,7 +40,7 @@ function AboutUs() {
         {/* card 1 */}
         <div className="mb-8">
           <div className=" w-[300px] h-[400px] relative ">
-            <Image src={Profile} layout="fill"></Image>
+            <Image src={FE_yusuf} layout="fill"></Image>
             <div className="w-[300px] h-[400px] bg-transparent border-[10px] border-blue-600 absolute z-10 ml-[20px] mt-[20px]"></div>
           </div>
 
@@ -46,13 +49,25 @@ function AboutUs() {
           </h1>
           <h1 className=" text-center mb-1">Frontend Developer</h1>
           <div className="flex justify-center">
-            <a className=" text-2xl mx-1 hover:animate-bounce" href="">
+            <a
+              className=" text-2xl mx-1 hover:animate-bounce"
+              href="https://github.com/myusufuntung"
+              target="_blank"
+            >
               <AiFillGithub />
             </a>
-            <a className=" text-2xl mx-1 hover:animate-bounce" href="">
-              <AiOutlineInstagram />
+            <a
+              className=" text-2xl mx-1 hover:animate-bounce"
+              href="https://www.linkedin.com/in/myusufuntung"
+              target="_blank"
+            >
+              <AiOutlineLinkedin />
             </a>
-            <a className=" text-2xl mx-1 hover:animate-bounce" href="">
+            <a
+              className=" text-2xl mx-1 hover:animate-bounce"
+              href="mailto:myusufuntung@gmail.com"
+              target="_blank"
+            >
               <AiOutlineMail />
             </a>
           </div>
@@ -60,7 +75,7 @@ function AboutUs() {
         {/* card 2 */}
         <div className="mb-8">
           <div className=" w-[300px] h-[400px] relative ">
-            <Image src={Profile} layout="fill"></Image>
+            <Image src={FE_diyah} layout="fill"></Image>
             <div className="w-[300px] h-[400px] bg-transparent border-[10px] border-orange-600 absolute z-10 ml-[20px] mt-[20px]"></div>
           </div>
 
@@ -69,13 +84,25 @@ function AboutUs() {
           </h1>
           <h1 className=" text-center mb-1">Frontend Developer</h1>
           <div className="flex justify-center">
-            <a className=" text-2xl mx-1 hover:animate-bounce" href="">
+            <a
+              className=" text-2xl mx-1 hover:animate-bounce"
+              href="https://www.github.com/diydiyydiyyy"
+              target="_blank"
+            >
               <AiFillGithub />
             </a>
-            <a className=" text-2xl mx-1 hover:animate-bounce" href="">
-              <AiOutlineInstagram />
+            <a
+              className=" text-2xl mx-1 hover:animate-bounce"
+              href="https://www.linkedin.com/in/chalimatussadiyah"
+              target="_blank"
+            >
+              <AiOutlineLinkedin />
             </a>
-            <a className=" text-2xl mx-1 hover:animate-bounce" href="">
+            <a
+              className=" text-2xl mx-1 hover:animate-bounce"
+              href="mailto:chalimatus.sadiyah.098@gmail.com"
+              target="_blank"
+            >
               <AiOutlineMail />
             </a>
           </div>
@@ -92,13 +119,25 @@ function AboutUs() {
           </h1>
           <h1 className=" text-center mb-1">Frontend Developer</h1>
           <div className="flex justify-center">
-            <a className=" text-2xl mx-1 hover:animate-bounce" href="">
+            <a
+              className=" text-2xl mx-1 hover:animate-bounce"
+              href=""
+              target="_blank"
+            >
               <AiFillGithub />
             </a>
-            <a className=" text-2xl mx-1 hover:animate-bounce" href="">
-              <AiOutlineInstagram />
+            <a
+              className=" text-2xl mx-1 hover:animate-bounce"
+              href=""
+              target="_blank"
+            >
+              <AiOutlineLinkedin />
             </a>
-            <a className=" text-2xl mx-1 hover:animate-bounce" href="">
+            <a
+              className=" text-2xl mx-1 hover:animate-bounce"
+              href=""
+              target="_blank"
+            >
               <AiOutlineMail />
             </a>
           </div>
@@ -111,20 +150,34 @@ function AboutUs() {
         {/* card 1 */}
         <div className="mb-8">
           <div className=" w-[300px] h-[400px] relative ">
-            <Image src={Profile} layout="fill"></Image>
-            <div className="w-[300px] h-[400px] bg-transparent border-[10px] border-blue-600 absolute z-10 ml-[20px] mt-[20px]"></div>
+            <Image src={BE_yusuf} layout="fill"></Image>
+            <div className="w-[300px] h-[400px] bg-transparent border-[10px] border-orange-600 absolute z-10 ml-[20px] mt-[20px]"></div>
           </div>
 
-          <h1 className="mt-8 text-xl font-semibold text-center">Yusuf</h1>
+          <h1 className="mt-8 text-xl font-semibold text-center">
+            Yusuf Nur Wahid
+          </h1>
           <h1 className=" text-center mb-1">Backend Developer</h1>
           <div className="flex justify-center">
-            <a className=" text-2xl mx-1 hover:animate-bounce" href="">
+            <a
+              className=" text-2xl mx-1 hover:animate-bounce"
+              href="https://github.com/ynwahid"
+              target="_blank"
+            >
               <AiFillGithub />
             </a>
-            <a className=" text-2xl mx-1 hover:animate-bounce" href="">
-              <AiOutlineInstagram />
+            <a
+              className=" text-2xl mx-1 hover:animate-bounce"
+              href="https://linkedIn.com/in/ynwahid"
+              target="_blank"
+            >
+              <AiOutlineLinkedin />
             </a>
-            <a className=" text-2xl mx-1 hover:animate-bounce" href="">
+            <a
+              className=" text-2xl mx-1 hover:animate-bounce"
+              href="mailto:yusufnurwahid.contact@gmail.com"
+              target="_blank"
+            >
               <AiOutlineMail />
             </a>
           </div>
@@ -132,20 +185,34 @@ function AboutUs() {
         {/* card 2 */}
         <div className="mb-8">
           <div className=" w-[300px] h-[400px] relative ">
-            <Image src={Profile} layout="fill"></Image>
-            <div className="w-[300px] h-[400px] bg-transparent border-[10px] border-orange-600 absolute z-10 ml-[20px] mt-[20px]"></div>
+            <Image src={BE_frans} layout="fill"></Image>
+            <div className="w-[300px] h-[400px] bg-transparent border-[10px] border-blue-600 absolute z-10 ml-[20px] mt-[20px]"></div>
           </div>
 
-          <h1 className="mt-8 text-xl font-semibold text-center">Frans</h1>
+          <h1 className="mt-8 text-xl font-semibold text-center">
+            Frans Ihsan
+          </h1>
           <h1 className=" text-center mb-1">Backend Developer</h1>
           <div className="flex justify-center">
-            <a className=" text-2xl mx-1 hover:animate-bounce" href="">
+            <a
+              className=" text-2xl mx-1 hover:animate-bounce"
+              href="https://github.com/fransihsan"
+              target="_blank"
+            >
               <AiFillGithub />
             </a>
-            <a className=" text-2xl mx-1 hover:animate-bounce" href="">
-              <AiOutlineInstagram />
+            <a
+              className=" text-2xl mx-1 hover:animate-bounce"
+              href="https://www.linkedin.com/in/fransihsan/"
+              target="_blank"
+            >
+              <AiOutlineLinkedin />
             </a>
-            <a className=" text-2xl mx-1 hover:animate-bounce" href="">
+            <a
+              className=" text-2xl mx-1 hover:animate-bounce"
+              href="mailto:fransihsan8888@gmail.com"
+              target="_blank"
+            >
               <AiOutlineMail />
             </a>
           </div>
@@ -158,20 +225,34 @@ function AboutUs() {
         {/* card 1 */}
         <div className="mb-8">
           <div className=" w-[300px] h-[400px] relative ">
-            <Image src={Profile} layout="fill"></Image>
+            <Image src={QE_adhit} layout="fill"></Image>
             <div className="w-[300px] h-[400px] bg-transparent border-[10px] border-blue-600 absolute z-10 ml-[20px] mt-[20px]"></div>
           </div>
 
-          <h1 className="mt-8 text-xl font-semibold text-center">Adhitya</h1>
+          <h1 className="mt-8 text-xl font-semibold text-center">
+            Adhitya Dwi Prananta
+          </h1>
           <h1 className=" text-center mb-1">Quality Engineer</h1>
           <div className="flex justify-center">
-            <a className=" text-2xl mx-1 hover:animate-bounce" href="">
+            <a
+              className=" text-2xl mx-1 hover:animate-bounce"
+              href="https://github.com/Adhitya87"
+              target="_blank"
+            >
               <AiFillGithub />
             </a>
-            <a className=" text-2xl mx-1 hover:animate-bounce" href="">
-              <AiOutlineInstagram />
+            <a
+              className=" text-2xl mx-1 hover:animate-bounce"
+              href="https://www.linkedin.com/in/adhitya-dwi-prananta-43b03856/"
+              target="_blank"
+            >
+              <AiOutlineLinkedin />
             </a>
-            <a className=" text-2xl mx-1 hover:animate-bounce" href="">
+            <a
+              className=" text-2xl mx-1 hover:animate-bounce"
+              href="mailto:prananta.adhitya87@gmail.com"
+              target="_blank"
+            >
               <AiOutlineMail />
             </a>
           </div>
@@ -179,20 +260,34 @@ function AboutUs() {
         {/* card 2 */}
         <div className="mb-8">
           <div className=" w-[300px] h-[400px] relative ">
-            <Image src={Profile} layout="fill"></Image>
+            <Image src={QE_rendy} layout="fill"></Image>
             <div className="w-[300px] h-[400px] bg-transparent border-[10px] border-orange-600 absolute z-10 ml-[20px] mt-[20px]"></div>
           </div>
 
-          <h1 className="mt-8 text-xl font-semibold text-center">Rendy</h1>
+          <h1 className="mt-8 text-xl font-semibold text-center">
+            Rendy Setiawan
+          </h1>
           <h1 className=" text-center mb-1">Quality Engineer</h1>
           <div className="flex justify-center">
-            <a className=" text-2xl mx-1 hover:animate-bounce" href="">
+            <a
+              className=" text-2xl mx-1 hover:animate-bounce"
+              target="_blank"
+              href="https://github.com/rndsetiawan"
+            >
               <AiFillGithub />
             </a>
-            <a className=" text-2xl mx-1 hover:animate-bounce" href="">
-              <AiOutlineInstagram />
+            <a
+              className=" text-2xl mx-1 hover:animate-bounce"
+              target="_blank"
+              href="https://www.linkedin.com/in/rndsetiawan/"
+            >
+              <AiOutlineLinkedin />
             </a>
-            <a className=" text-2xl mx-1 hover:animate-bounce" href="">
+            <a
+              className=" text-2xl mx-1 hover:animate-bounce"
+              target="_blank"
+              href="mailto:rendysetawan89@gmail.com"
+            >
               <AiOutlineMail />
             </a>
           </div>
@@ -204,16 +299,30 @@ function AboutUs() {
             <div className="w-[300px] h-[400px] bg-transparent border-[10px] border-blue-600 absolute z-10 ml-[20px] mt-[20px]"></div>
           </div>
 
-          <h1 className="mt-8 text-xl font-semibold text-center">Zahra</h1>
+          <h1 className="mt-8 text-xl font-semibold text-center">
+            Zahra Asri Septia
+          </h1>
           <h1 className=" text-center mb-1">Quality Engineer</h1>
           <div className="flex justify-center">
-            <a className=" text-2xl mx-1 hover:animate-bounce" href="">
+            <a
+              className=" text-2xl mx-1 hover:animate-bounce"
+              target="_blank"
+              href="https://github.com/zahrasept"
+            >
               <AiFillGithub />
             </a>
-            <a className=" text-2xl mx-1 hover:animate-bounce" href="">
-              <AiOutlineInstagram />
+            <a
+              className=" text-2xl mx-1 hover:animate-bounce"
+              target="_blank"
+              href="https://id.linkedin.com/in/zahraasriseptia"
+            >
+              <AiOutlineLinkedin />
             </a>
-            <a className=" text-2xl mx-1 hover:animate-bounce" href="">
+            <a
+              className=" text-2xl mx-1 hover:animate-bounce"
+              target="_blank"
+              href="mailto:zahraasriseptia@gmail.com"
+            >
               <AiOutlineMail />
             </a>
           </div>
