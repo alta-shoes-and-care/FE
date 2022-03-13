@@ -321,7 +321,7 @@ function NewItem() {
                 onClick={() => router.push("/admin")}
                 className="w-[240px] h-[50px] mt-10 mx-5 text-center text-[18px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium rounded-xl text-white bg-red-700 hover:bg-transparent hover:border-black hover:border-2 hover:text-black hover:font-bold focus:outline-none transition ease-linear duration-500"
               >
-                Cancel
+                Back
               </button>
               <button
                 onClick={validateButton}
