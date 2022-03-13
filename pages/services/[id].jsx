@@ -111,18 +111,18 @@ export default function services() {
 
     return (
         <section>
-            <div class="z-0 grid grid-cols-1 h-[650px] bg-cover mt-[-100px]" style={{backgroundImage: `url('${services.image}')`}}> 
-                <div className='z-1 w-[100vw] h-[650px] bg-[#000009] bg-opacity-30 text-center'>
+            <div class="z-0 grid grid-cols-1 h-screen bg-cover mt-[-100px]" style={{backgroundImage: `url('${services.image}')`}}> 
+                <div className='z-1 w-[100vw] h-screen bg-[#000009] bg-opacity-30 text-center'>
                     <div class="z-2 grid grid-cols-2 gap-4 bg-cover mt-[100px]">
                         {/* Desc Card */} 
-                        <div className='ml-[15vh] mt-[10vh] z-3 w-[75vh] h-[60vh] bg-[#ffffff] bg-opacity-90  text-left rounded-lg'>
+                        <div className='ml-[15vh] mt-[5vh] z-3 w-[75vh] h-auto bg-[#ffffff] bg-opacity-80  text-left rounded-lg pb-5'>
                             <p className="text-black bold text-4xl mt-[3.5vh] ml-[5vh]">
                                 {services.title}  
                             </p>
-                            <p className="text-black text-xl mt-[7.5vh] ml-[5vh] w-[65vh]"> 
+                            <p className="text-black object-bottom text-left text-lg mt-[5vh] ml-[5vh] w-[65vh]"> 
                                 {services.description}
                             </p>
-                            <h1 className="text-md italic ml-[5vh] mt-[15vh]"> Service may varry depend on shoes material<bintang className="text-red-600">*</bintang></h1>
+                                <p className="text-primary text-md italic pt-5 text-left ml-[5vh]"> Services may varry depend on shoes material<bintang className="text-red-600">*</bintang></p>
                         </div>
                         {/* Desc Card End*/}
                         {/* Price and Button*/}
@@ -136,7 +136,7 @@ export default function services() {
                     </div>
                 </div>
             </div>
-            <div class="grid grid-cols-1">
+            <div class="grid grid-cols-1 pt-2">
                 <Service />
             </div>
         </section>

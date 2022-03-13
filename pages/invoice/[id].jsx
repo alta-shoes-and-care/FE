@@ -103,8 +103,8 @@ export default function invoice() {
     
     return (
         <section>
-            <div className={`z-0 grid grid-cols-1 h-[650px] bg-cover mt-[-100px] ${style.bgImage2}  `}>  
-                <div className='z-1 w-[100vw] h-[650px] bg-[#000009] bg-opacity-0 text-left'>
+            <div className={`z-0 grid grid-cols-1 w-screen h-screen bg-cover mt-[-100px] ${style.bgImage2}  `}>  
+                <div className='z-1 w-[100vw] h-screen bg-[#000009] bg-opacity-0 text-left'>
                     <div class="z-2 grid grid-cols-1 gap-4 bg-cover mt-[100px]">
                         <div className="mt-[2vh]">
                             <p className="text-4xl text-center text-white">
@@ -112,7 +112,7 @@ export default function invoice() {
                             </p>
                         </div>
                         {/* Desc Card */}
-                        <div className='ml-[30vw] z-3 w-[40vw] h-[380px] bg-[#ffffff] bg-opacity-90  text-left rounded-lg'>
+                        <div className='ml-[30vw] z-3 w-[40vw] h-auto bg-[#ffffff] bg-opacity-90  text-left rounded-lg pb-5'>
                             <div className="grid grid-cols-1 text-left mt-[1vh] px-10 py-2">
                                 <p className="text-black text-center bold text-2xl">
                                     Service type: {invoice.service_title}  
@@ -128,10 +128,10 @@ export default function invoice() {
                             {/*quantity end*/}
                             {/*patment - phone number */}
                             <div className="grid grid-cols-2">
-                                <h1 className="text-left text-black bold text-lg mt-[2vh] ml-[4vw]">
+                                <h1 className="text-left text-black bold text-lg mt-[1vh] ml-[4vw]">
                                     Payment Method  : 
                                 </h1>
-                                <h1 className="text-left text-black bold text-lg mt-[2vh] ml-[4vw]">
+                                <h1 className="text-left text-black bold text-lg mt-[1vh] ml-[4vw]">
                                     Phone Number : 
                                 </h1>
                             </div>
