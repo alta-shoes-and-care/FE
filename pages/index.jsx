@@ -109,29 +109,41 @@ export default function Home() {
         <div className="w-full bg-cover bg-no-repeat bg-bg-vvm">
           <div className="w-full bg-[#f0f0f0] bg-cover bg-opacity-30 py-10 lg:px-36 flex lg:justify-between lg:flex-row flex-col items-center cursor-pointer">
             <div className="lg:w-80 lg:h-[400px] w-3/4 mb-5 bg-white bg-opacity-80 backdrop-blur-[10px] flex flex-col justify-center items-center text-center p-10 rounded-2xl hover:scale-105">
-              <h1 className="lg:text-[36px] text-[30px] text-black font-bold my-auto">Value</h1>
-              <p className="lg:text-[20px] text-[18px] text-black">
-              Respect <br/>
-              Responsibility <br/>
-              Caring <br/>
-              Excellence <br/>
-              Integrity <br/>
-              Innovation 
-              </p>
+              <div className="lg:h-[100px] h-auto">
+                <h1 className="lg:text-[36px] text-[30px] text-black font-bold my-auto">Value</h1>
+              </div>
+              <div className="lg:h-[300px] h-auto">
+                <p className="lg:text-[20px] text-[18px] text-black">
+                Respect <br/>
+                Responsibility <br/>
+                Caring <br/>
+                Excellence <br/>
+                Integrity <br/>
+                Innovation 
+                </p>
+              </div>
             </div>
 
             <div className="lg:w-80 lg:h-[400px] w-3/4 mb-5 bg-white bg-opacity-80 backdrop-blur-[10px] flex flex-col justify-center items-center text-center p-10 rounded-2xl hover:scale-105 cursor-pointer">
-              <h1 className="lg:text-[36px] text-[30px] text-black font-bold my-auto">Vision</h1>
-              <p className="lg:text-[20px] text-[18px] text-black">
-              To make footwear hygiene and shoe care a part of every individual's lifestyle by making S3 services available to everyone everywhere & have a positive environmental impact. 
-              </p>
+              <div className="lg:h-[100px] h-auto">
+                <h1 className="lg:text-[36px] text-[30px] text-black font-bold my-auto">Vision</h1>
+              </div>
+              <div className="lg:h-[300px] h-auto">
+                <p className="lg:text-[20px] text-[18px] text-black">
+                To make footwear hygiene and shoe care a part of every individual's lifestyle by making S3 services available to everyone everywhere & have a positive environmental impact. 
+                </p>
+              </div>
             </div>
 
             <div className="lg:w-80 lg:h-[400px] w-3/4 mb-5 bg-white bg-opacity-80 backdrop-blur-[10px] flex flex-col justify-center items-center text-center p-10 rounded-2xl hover:scale-105 cursor-pointer">
-              <h1 className="lg:text-[36px] text-[30px] text-black font-bold my-auto">Mission</h1>
-              <p className="lg:text-[20px] text-[18px] text-black">
-              To provide a world class professional footwear laundry & refurbishing service, of the highest quality & highest level of convenience to everyone, everywhere. 
-              </p>
+            <div className="lg:h-[100px] h-auto">
+                <h1 className="lg:text-[36px] text-[30px] text-black font-bold my-auto">Mission</h1>
+              </div>
+              <div className="lg:h-[300px] h-auto">
+                <p className="lg:text-[20px] text-[18px] text-black">
+                To provide a world class professional footwear laundry & refurbishing service, of the highest quality & highest level of convenience to everyone, everywhere. 
+                </p>
+              </div>
             </div>
           </div>
         </div>
