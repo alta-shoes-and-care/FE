@@ -299,7 +299,7 @@ function NewItem() {
               accept="image/png, image/jpeg, image/jpg"
               maxFiles={1}
               name="files"
-              labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
+              labelIdle='<span class="filepond--label-action">Browse File</span>'
             />
             <h1 className=" text-3xl mb-2">Description</h1>
             <textarea

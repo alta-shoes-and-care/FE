@@ -11,8 +11,10 @@ import "filepond/dist/filepond.min.css";
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
+import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 registerPlugin(FilePondPluginFileValidateSize);
+registerPlugin(FilePondPluginFileValidateType);
 
 function EditItem() {
   const router = useRouter();
@@ -311,6 +313,9 @@ function EditItem() {
 
             <h1 className=" text-3xl mb-2">Image</h1>
             <FilePond
+              dropOnPage={true}
+              dropValidation={true}
+              acceptedFileTypes={["image/png", "image/jpeg", "image/jpg"]}
               maxFileSize={500000}
               files={files}
               onupdatefiles={setFiles}
@@ -318,7 +323,7 @@ function EditItem() {
               accept="image/png, image/jpeg, image/jpg"
               maxFiles={1}
               name="files"
-              labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
+              labelIdle='<span class="filepond--label-action">Browse File</span>'
             />
             <h1 className=" text-3xl mb-2">Description</h1>
             <textarea
