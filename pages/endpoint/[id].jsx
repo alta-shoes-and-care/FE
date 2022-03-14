@@ -13,14 +13,6 @@ export default function endpoint() {
     const router = useRouter();
     let { id } = router.query;
     const [loading, setLoading] = useState(false);
-    const [endpoints, setEndpoints] = useState(false);
-
-    useEffect(() => {
-      setLoading(true);
-      if (!localStorage.getItem("token")) {
-        return router.push("/login");
-      }
-    })
 
     if (loading) {
         Swal.fire({
@@ -36,6 +28,7 @@ export default function endpoint() {
         });
     }
 
+    //put payment
     function refreshPage() {
         setLoading(true);
         const token = localStorage.getItem("token");
@@ -49,8 +42,8 @@ export default function endpoint() {
             config
             )
             .then(({ data }) => {
-            setEndpoints(data.data.is_paid);
-            console.log(data, "check status");
+            console.log(data, "berhasil put");
+            location.reload();
             })
             .catch((err) => {
             console.log(err, "error bang");
@@ -64,6 +57,63 @@ export default function endpoint() {
         setLoading(true);
         router.push(`/history-order`);
     }
+
+    const [invoice, setInvoice] = useState({
+      'service_title': ""
+      ,'qty': ""
+      ,'payment_method_name': ""
+      ,'city': ""
+      ,'phone': ""
+      ,'date': ""
+      ,'address': ""
+      ,'total': 0
+      ,'url': ""
+      ,'is_paid': ""
+    });
+    console.log(invoice)  
+
+    //get invoice
+    useEffect(() => {
+      setLoading(true);
+      if (!localStorage.getItem("token")) {
+          router.push("/login");
+      }
+      else if(id!=='undefined'){
+          const token = localStorage.getItem("token");
+          const config = {
+          headers: { Authorization: `Bearer ${token}` },
+          }; 
+          axios
+              .get(`https://ynwahid.cloud.okteto.net/orders/${id}`,config)
+              .then(({ data }) => {
+                  setInvoice(data.data)
+                  console.log(data.data,'berhasil get')
+              })
+              .catch((err) => {
+                  console.log(err, "error bang");
+                  if (err.response.status === 401) {
+                      Swal.fire({
+                        title: "Your session has ended!",
+                        text: "Please login again to continue.",
+                        icon: "error",
+                        showCancelButton: false,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Ok",
+                      }).then((result) => {
+                        if (result.isConfirmed) {
+                          router.push("/login");
+                          localStorage.clear();
+                        }
+                      });
+                    }
+              })
+              .finally(() => {
+                  setLoading(false);
+              });  
+          }
+      }, [id]);
+      
 
   return (
     <section>
@@ -79,8 +129,7 @@ export default function endpoint() {
                   Thankyou for using our services
                 </p>
                 <p className="text-gray-600 text-md text-center mt-[3vh]">
-                  If you already finished the payment, click refresh to check
-                  the payment status (do not refresh this page<dot className="text-red-600">*</dot>)
+                  If you already finished the payment, click refresh to check your payment status
                 </p>
               </div>
               <div className="grid grid-cols-1 text-center w-[20vw] mt-[1vh] ml-[10vw]">
@@ -98,7 +147,7 @@ export default function endpoint() {
                 <p className="text-black text-center bold text-2xl">
                   Payment Status :
                 </p>
-                {endpoints === true ? (
+                {invoice.is_paid === true ? (
                   <div className="text-green-600 text-center bold text-xl mt-[2vh]">
                     Payment is Completed
                   </div>
@@ -108,30 +157,26 @@ export default function endpoint() {
                   </div>
                 )}
               </div>
-              <div className="grid grid-cols-1 text-center w-[20vw] mt-[3vh] ml-[10vw]">
-                <button
-                  className="bg-[#175C8C] hover:bg-white text-white hover:text-black font-bold py-2 px-2 border border-black rounded-lg"
-                  onClick={handlehistory}
-                >
-                  <p className="text-md text-center rounded-xl">
-                    {" "}
-                    Order History{" "}
-                  </p>
-                </button>
-              </div>
-              <p className="text-gray-600 text-md text-center mt-[2.5vh]">
-                Click to check your order history
+              <p className="text-gray-600 text-md text-center mt-[5vh]">
+                Click
+                <beb  className=" px-1 italic underline text-primary cursor-pointer" onClick={handlehistory}>
+                    here
+                </beb>
+                to check your order history
               </p>
-              <p className="text-black text-md text-center mt-[1vh]">Or</p>
-              <p className="text-primary text-md text-center mt-[1vh]">
-                See our other services bellow on this page
+              <p className="text-gray-900 text-sm text-center mt-[1vh]">Or</p>
+              <p className="text-gray-600 text-md text-center mt-[1vh]">
+                See our 
+                <beb  className=" px-1 italic underline text-primary cursor-pointer" >
+                  other services 
+                </beb>
               </p>
             </div>
             {/* Desc Card End*/}
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-1 pt-2">
+      <div id="services" className="grid grid-cols-1 pt-2">
         <Service />
       </div>
     </section>

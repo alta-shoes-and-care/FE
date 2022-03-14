@@ -266,7 +266,7 @@ export default function formpayment(props) {
         <div className="z-1 w-[100vw] h-screen bg-[#000009] bg-opacity-30 text-center">
           <div className="z-2 grid grid-cols-1 gap-4 bg-cover">
             <div className="mt-[2.5vh]">
-              <p className="text-5xl text-white">Confirm your order</p>
+              <p className="py-3 text-5xl text-white">Confirm your order</p>
             </div>
 
             {/* Desc Card */}
@@ -297,10 +297,10 @@ export default function formpayment(props) {
                 </h1>
               </div>
 
-              <div className="grid grid-cols-3 ml-[0.5vw]">
+              <div className="grid grid-cols-3">
                 <div className={style.input}>
                   <select
-                    className="text-gray-500"
+                    className="text-gray-500 w-[10.5vw]"
                     value={payment_method_id}
                     onChange={(e) => {
                       setPayment_method_id(e.target.value);
@@ -372,10 +372,10 @@ export default function formpayment(props) {
                 </h1>
               </div>
 
-              <div className="grid grid-cols-3 ml-[0.5vw]">
+              <div className="grid grid-cols-3 ">
                 <div className={style.input}>
                   <select
-                    className="text-gray-500 w-[11.5vw]"
+                    className="text-gray-500 w-[10.5vw]"
                     value={city}
                     onChange={(e) => {
                       setCity(e.target.value);
