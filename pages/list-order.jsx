@@ -376,7 +376,7 @@ function ListOrder() {
                         <p className="text-xl mt-0.5 mr-1">
                           <FcCalendar />
                         </p>
-                        <p>{moment(el.date).format("Do MMMM YYYY")}</p>
+                        <p>{moment(el.date).format("D MMMM YYYY")}</p>
                       </div>
                       <div className=" flex">
                         <p className="text-xl mt-0.5 mr-1">
