@@ -164,37 +164,39 @@ export default function formpayment(props) {
   
   function handlevalidate(){
     if (
-      payment_method_id === ""
+      payment_method_id === 0
     ) {
-       validate1 = "Payment Method, "
+       validate1 = "Payment Method "
     }  
     if (
       city === ""
     ) {
-      validate2 = "City, "
+      validate2 = " City "
     } 
     if (
       phone === ""
     ) {
-      validate3 = "Phone Number, "
+      validate3 = " Phone Number "
     } 
     if (
       date === ""
     ) {
-      validate4 = "Date, "
+      validate4 = " Date "
     } 
     if (
-      qty === ""
+      qty === 0
     ) {
-       validate5 = "Quantity, "
+       validate5 = " Quantity "
     }
     if (
       address === ""
     ) {
-       validate6 = "Adress "
+       validate6 = " Adress"
     } 
 
-    validatetotal=`${validate1}${validate2}${validate3}${validate4}${validate5}${validate6}`
+    var string=`${validate1}${validate2}${validate3}${validate4}${validate5}${validate6}`
+    var string2=string.split('  ').join(', ');
+    validatetotal=string2
   }
  
  
@@ -203,19 +205,27 @@ export default function formpayment(props) {
     handlevalidate();
     
     if (
-      payment_method_id === "" ||
+      payment_method_id === "0" ||
       city === "" ||
       phone === "" ||
       date === "" ||
-      qty === "" ||
+      qty === "0" ||
       address === ""
     ) {
       Swal.fire(
         "Please fill out the form!",
-        `${validatetotal} can't be empty. Please fill out the empty fields.`,
+        `${validatetotal} form can't be empty. Please fill out the empty fields.`,
         "warning"
       );
-    } else {
+    } else if (
+      !/^[0-9]+(.[0-9]{0})?$/.test(phone)
+    ) {
+      Swal.fire("Invalid!", "Invalid Phone Number Format", "error");
+    } else if (
+      !/^[0-9]+(.[0-9]{0})?$/.test(qty)
+    ) {
+      Swal.fire("Invalid!", "Quantity cannot be Negative", "error");
+    }else {
       handleButton();
     }
   }
@@ -256,7 +266,7 @@ export default function formpayment(props) {
         <div className="z-1 w-[100vw] h-screen bg-[#000009] bg-opacity-30 text-center">
           <div className="z-2 grid grid-cols-1 gap-4 bg-cover">
             <div className="mt-[2.5vh]">
-              <p className="text-5xl text-white">Confirm your order</p>
+              <p className="py-3 text-5xl text-white">Confirm your order</p>
             </div>
 
             {/* Desc Card */}
@@ -287,10 +297,10 @@ export default function formpayment(props) {
                 </h1>
               </div>
 
-              <div className="grid grid-cols-3 ml-[0.5vw]">
+              <div className="grid grid-cols-3">
                 <div className={style.input}>
                   <select
-                    className="text-gray-500"
+                    className="text-gray-500 w-[10.5vw]"
                     value={payment_method_id}
                     onChange={(e) => {
                       setPayment_method_id(e.target.value);
@@ -338,8 +348,9 @@ export default function formpayment(props) {
                     placeholder="0"
                     autoComplete="off"
                     required
-                    className="mx-auto h-[30px] bg-transparent appearance-none relative block w-[5vw] px-3 py-2 border-2 border-primary placeholder-gray-500 text-gray-500 md:text-[18px] rounded-lg focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+                    className="mx-auto h-[30px] form-control bg-transparent appearance-none relative block w-[5vw] px-3 py-2 border-2 border-primary placeholder-gray-500 text-gray-500 md:text-[18px] rounded-lg focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
                     min="1"
+                    max="9"
                     value={qty}
                     onChange={(e) => {
                       setQty(e.target.value);
@@ -361,10 +372,10 @@ export default function formpayment(props) {
                 </h1>
               </div>
 
-              <div className="grid grid-cols-3 ml-[0.5vw]">
+              <div className="grid grid-cols-3 ">
                 <div className={style.input}>
                   <select
-                    className="text-gray-500 w-[11.5vw]"
+                    className="text-gray-500 w-[10.5vw]"
                     value={city}
                     onChange={(e) => {
                       setCity(e.target.value);

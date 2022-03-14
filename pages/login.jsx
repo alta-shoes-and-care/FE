@@ -35,22 +35,36 @@ function Login() {
     e.preventDefault();
 
     if (email === "" && password === "") {
-      Swal.fire("Invalid!", "Email / Password cannot be empty.", "error");
+      Swal.fire("Invalid!", "Email & Password cannot be empty.", "error");
+    } else if (email === "") {
+      Swal.fire("Invalid!", "Email cannot be empty.", "error");
+    } else if (password === "") {
+      Swal.fire("Invalid!", "Password cannot be empty.", "error");
+    } else if (
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email) &&
+      password === ""
+    ) {
+      Swal.fire(
+        "Invalid!",
+        "Email format is incorrect & Password cannot be empty.",
+        "error"
+      );
+    } else if (
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email) &&
+      password === ""
+    ) {
+      Swal.fire(
+        "Invalid!",
+        "Email cannot be empty & Password cannot contain spaces, minimum 5 characters, and maximum 8 characters.",
+        "error"
+      );
     } else if (
       !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email) &&
       !/^(?!.*\s).{5,8}$/.test(password)
     ) {
-      Swal.fire(
-        "Invalid!",
-        "Email / Password incorrect! please check and try again.",
-        "error"
-      );
+      Swal.fire("Invalid!", "Email & Password format is incorrect.", "error");
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
-      Swal.fire(
-        "Invalid!",
-        "Email format is not valid, email cannot contain spaces.",
-        "error"
-      );
+      Swal.fire("Invalid!", "Email format is incorrect.", "error");
     } else if (!/^(?!.*\s).{5,8}$/.test(password)) {
       Swal.fire(
         "Invalid!",
@@ -257,7 +271,7 @@ function Login() {
                     className="lg:h-[50px] h-[30px] lg:w-full w-[30%] mt-5 lg:mt-10 text-center mx-auto lg:text-[18px] text-[14px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium lg:rounded-xl rounded-md text-white bg-primary hover:bg-transparent hover:border-primary hover:border-2 hover:text-primary hover:font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                     onClick={() => router.push("/")}
                   >
-                    Oke
+                    OK
                   </button>
                 </div>
               </div>
