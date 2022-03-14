@@ -195,10 +195,13 @@ final-project-shoes-group-2
 <!-- CONTACT -->
 ## Contact
 * Muhammad Yusuf Untung Wahyudi 
-  [Github](https://github.com/myusufuntung) - [Linked in](https://www.linkedin.com/in/myusufuntung)
+  - [Github](https://github.com/myusufuntung) 
+  - [Linked in](https://www.linkedin.com/in/myusufuntung)
 * Aditya Fabio Hariawan 
-  [Github](https://github.com/fabioaditya) - [Linked in](https://www.linkedin.com/in/chalimatussadiyah)
+  - [Github](https://github.com/fabioaditya) 
+  - [Linked in](https://www.linkedin.com/in/)
 * Chalimatus Sa'diyah 
-  [Github](https://github.com/diydiyydiyyy) - [Linked in](https://github.com/myusufuntung)
+  - [Github](https://github.com/diydiyydiyyy) 
+  - [Linked in](https://www.linkedin.com/in/chalimatussadiyah)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
