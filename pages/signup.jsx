@@ -19,7 +19,7 @@ export default function Register() {
     e.preventDefault();
 
     if (name === '' && email === '' && password === '') {
-      Swal.fire('Invalid!', 'Data cannot be empty.', 'error')
+      Swal.fire('Invalid!', 'Data cannot be empty.', 'error');
     } 
     else if (name === '' && email === '') {
       Swal.fire('Invalid!', 'Name & Email cannot be empty.', 'error');
@@ -40,34 +40,34 @@ export default function Register() {
       Swal.fire('Invalid!', 'Password cannot be empty.', 'error');
     } 
     else if (!/^([A-Za-z]+ ?[A-Za-z]*){3,30}[A-Z-a-z]$/gm.test(name) && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email) && !/^(?!.*\s).{5,8}$/.test(password)) {
-      Swal.fire('Invalid!', 'Data is incorrect! please check and try again.', 'error');
+      Swal.fire('Invalid!', 'Data format is incorrect! please check and try again.', 'error');
     }  
     else if (!/^([A-Za-z]+ ?[A-Za-z]*){3,30}[A-Z-a-z]$/gm.test(name) && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
-      Swal.fire('Invalid!', 'Name / Email incorrect! please check and try again.', 'error');
+      Swal.fire('Invalid!', 'Name & Email format is incorrect! please check and try again.', 'error');
     }  
     else if (!/^([A-Za-z]+ ?[A-Za-z]*){3,30}[A-Z-a-z]$/gm.test(name) && !/^(?!.*\s).{5,8}$/.test(password)) {
-      Swal.fire('Invalid!', 'Name / Password incorrect! please check and try again.', 'error');
+      Swal.fire('Invalid!', 'Name & Password format is incorrect! please check and try again.', 'error');
     }  
     else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email) && !/^(?!.*\s).{5,8}$/.test(password)) {
-      Swal.fire('Invalid!', 'Email / Password incorrect! please check and try again.', 'error');
+      Swal.fire('Invalid!', 'Email & Password format is incorrect! please check and try again.', 'error');
     } 
     else if (!/^([A-Za-z]+ ?[A-Za-z]*){3,30}[A-Z-a-z]$/gm.test(name)) {
-      Swal.fire('Invalid!','Name cannot contain number, spaces at the beginning and end, minimum 4 characters, and maximum 30 characters.','error')
+      Swal.fire('Invalid!','Name cannot contain number, spaces at the beginning and end, minimum 4 characters, and maximum 30 characters.','error');
     } 
     else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
-      Swal.fire('Invalid!','Email format is not valid, email cannot contain spaces.','error')
+      Swal.fire('Invalid!','Email format is incorrect.','error');
     } 
     else if (!/^(?!.*\s).{5,8}$/.test(password)) {
-      Swal.fire('Invalid!','Password cannot contain spaces, minimum 5 characters, and maximum 8 characters.', 'error')
+      Swal.fire('Invalid!','Password cannot contain spaces, minimum 5 characters, and maximum 8 characters.', 'error');
     } 
     else {
-      handleRegister()
+      handleRegister();
     }
   }
 
   /* 
   nama boleh ada spasi, tetapi tidak boleh didepan dan belakang
-  nama boleh ada angka, tetapi tidak boleh jika angka semua
+  nama tidak boleh ada angka
   nama tidak boleh ada spesial karakter
   minimal 4, maksimal 30
 
@@ -103,7 +103,7 @@ export default function Register() {
         setName('');
         setEmail('');
         setPassword('');
-        Swal.fire(`Failed create account!`, 'The data you entered may already be registered', 'error');
+        Swal.fire(`Failed create account!`, 'The email you entered may already be registered', 'error');
       } else if(err.response.status === 401) {
         Swal.fire({
           title: "Your session has ended!",
@@ -143,7 +143,7 @@ export default function Register() {
       <div className='container min-h-screen min-w-full flex justify-center items-center text-center bg-[#f0f0f0] bg-opacity-30'>
         <div className='w-[70%] h-[50%] lg:w-[600px] lg:h-[600px] bg-white bg-opacity-50 backdrop-blur-[10px] my-auto flex justify-center items-center rounded-2xl'>
           <div>
-            <h1 className='font-bold text-[30px] lg:text-[40px] text-primary'>Welcome to S3</h1>
+            <h1 className='font-bold text-[30px] lg:text-[40px] text-primary'>Welcome!</h1>
             <h4 className='font-md text-[14px] lg:text-[20px] text-black'>Create new account by filling the form below.</h4>
 
             <form className="mt-8 w-[528px] mx-auto" action="#" method="POST">
