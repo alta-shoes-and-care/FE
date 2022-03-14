@@ -12,6 +12,16 @@ export default function formpayment(props) {
   const [loading, setLoading] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [newId, setnewId] = useState(0);
+  
+  //for validation
+  let validate1 = "";
+  let validate2 = "";
+  let validate3 = "";
+  let validate4 = "";
+  let validate5 = "";
+  let validate6 = "";
+  let validatetotal= "";
+
   const Toast = Swal.mixin({
     toast: true,
     position: "center",
@@ -85,7 +95,7 @@ export default function formpayment(props) {
     return Swal.fire({
       title: "Confirm your Order?",
       text: "",
-      icon: "warning",
+      icon: "question",
       showDenyButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
@@ -151,9 +161,47 @@ export default function formpayment(props) {
     });
   }
 
-  function validateButton() {
-    // validation for blank
+  
+  function handlevalidate(){
+    if (
+      payment_method_id === ""
+    ) {
+       validate1 = "Payment Method, "
+    }  
+    if (
+      city === ""
+    ) {
+      validate2 = "City, "
+    } 
+    if (
+      phone === ""
+    ) {
+      validate3 = "Phone Number, "
+    } 
+    if (
+      date === ""
+    ) {
+      validate4 = "Date, "
+    } 
+    if (
+      qty === ""
+    ) {
+       validate5 = "Quantity, "
+    }
+    if (
+      address === ""
+    ) {
+       validate6 = "Adress "
+    } 
 
+    validatetotal=`${validate1}${validate2}${validate3}${validate4}${validate5}${validate6}`
+  }
+ 
+ 
+  function validateButton() {
+
+    handlevalidate();
+    
     if (
       payment_method_id === "" ||
       city === "" ||
@@ -163,24 +211,9 @@ export default function formpayment(props) {
       address === ""
     ) {
       Swal.fire(
-        "Invalid!",
-        "Forms can't be empty, please fill out the blank fields.",
-        "error"
-      );
-
-      // validation kedua belum diganti
-    } else if (
-      payment_method_id === "" ||
-      city === "" ||
-      phone === "" ||
-      date === "" ||
-      qty === "" ||
-      address === ""
-    ) {
-      Swal.fire(
-        "Invalid!",
-        "Forms can't be empty, please fill out the blank fields.",
-        "error"
+        "Please fill out the form!",
+        `${validatetotal} can't be empty. Please fill out the empty fields.`,
+        "warning"
       );
     } else {
       handleButton();

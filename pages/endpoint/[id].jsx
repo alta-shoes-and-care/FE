@@ -34,7 +34,7 @@ export default function endpoint() {
             headers: { Authorization: `Bearer ${token}` },
             }; 
             axios
-                .get(`https://ynwahid.cloud.okteto.net/orders/${id}`,config)
+                .get(`https://ynwahid.cloud.okteto.net/orders/check-payment/${id}`,config)
                 .then(({ data }) => {
                     setInvoice(data.data)
                     console.log(data.data,'berhasil get')

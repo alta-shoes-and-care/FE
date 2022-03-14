@@ -64,7 +64,7 @@ function Login() {
           setEmail("");
           setPassword("");
           Swal.fire(
-            `Success login!`,
+            `Login success!`,
             "You can use our service now.",
             "success"
           );
