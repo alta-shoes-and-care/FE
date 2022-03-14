@@ -468,7 +468,7 @@ export default function formpayment(props) {
                     </h1>
                   </div>
                   <button
-                    className="ml-[2.5vw] bg-primary hover:bg-white text-white hover:text-primary font-bold py-2 px-3 border-2 border-primary rounded-lg mt-[1vh]"
+                    className="ml-[3.5vw] bg-primary hover:bg-white text-white hover:text-primary font-bold py-2 px-3 border-2 border-primary rounded-lg mt-[1vh]"
                     onClick={validateButton}
                   >
                     <p className="text-md text-center rounded-xl">
