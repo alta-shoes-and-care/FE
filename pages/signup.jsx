@@ -39,20 +39,20 @@ export default function Register() {
     else if (password === '') {
       Swal.fire('Invalid!', 'Password cannot be empty.', 'error');
     } 
-    else if (!/^[A-Za-z0-9](?!.*?\s$)(?![0-9]+$)[A-Za-z0-9\s]{3,30}$/gm.test(name) && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email) && !/^(?!.*\s).{5,8}$/.test(password)) {
+    else if (!/^([A-Za-z]+ ?[A-Za-z]*){3,30}[A-Z-a-z]$/gm.test(name) && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email) && !/^(?!.*\s).{5,8}$/.test(password)) {
       Swal.fire('Invalid!', 'Data is incorrect! please check and try again.', 'error');
     }  
-    else if (!/^[A-Za-z0-9](?!.*?\s$)(?![0-9]+$)[A-Za-z0-9\s]{3,30}$/gm.test(name) && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
+    else if (!/^([A-Za-z]+ ?[A-Za-z]*){3,30}[A-Z-a-z]$/gm.test(name) && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
       Swal.fire('Invalid!', 'Name / Email incorrect! please check and try again.', 'error');
     }  
-    else if (!/^[A-Za-z0-9](?!.*?\s$)(?![0-9]+$)[A-Za-z0-9\s]{3,30}$/gm.test(name) && !/^(?!.*\s).{5,8}$/.test(password)) {
+    else if (!/^([A-Za-z]+ ?[A-Za-z]*){3,30}[A-Z-a-z]$/gm.test(name) && !/^(?!.*\s).{5,8}$/.test(password)) {
       Swal.fire('Invalid!', 'Name / Password incorrect! please check and try again.', 'error');
     }  
     else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email) && !/^(?!.*\s).{5,8}$/.test(password)) {
       Swal.fire('Invalid!', 'Email / Password incorrect! please check and try again.', 'error');
     } 
-    else if (!/^[A-Za-z0-9](?!.*?\s$)(?![0-9]+$)[A-Za-z0-9\s]{3,30}$/gm.test(name)) {
-      Swal.fire('Invalid!','Name cannot contain spaces at the beginning and end, minimum 4 characters, and maximum 30 characters.','error')
+    else if (!/^([A-Za-z]+ ?[A-Za-z]*){3,30}[A-Z-a-z]$/gm.test(name)) {
+      Swal.fire('Invalid!','Name cannot contain number, spaces at the beginning and end, minimum 4 characters, and maximum 30 characters.','error')
     } 
     else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
       Swal.fire('Invalid!','Email format is not valid, email cannot contain spaces.','error')
