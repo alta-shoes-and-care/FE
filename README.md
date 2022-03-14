@@ -53,11 +53,17 @@ Nowadays, some people are very busy and don't even have time to clean their shoe
 
 ### Packages
 - [axios](https://www.npmjs.com/package/axios)
+- [filepond](https://www.npmjs.com/package/axios)
+- [filepond-plugin-file-validate-size](https://www.npmjs.com/package/filepond-plugin-file-validate-size)
+- [filepond-plugin-file-validate-type](https://www.npmjs.com/package/filepond-plugin-file-validate-type)
+- [filepond-plugin-image-exif-orientation](https://www.npmjs.com/package/filepond-plugin-image-exif-orientation)
+- [filepond-plugin-image-preview](https://www.npmjs.com/package/filepond-plugin-image-preview)
 - [framer-motion](https://www.npmjs.com/package/framer-motion)
 - [moment](https://www.npmjs.com/package/moment)
 - [next](https://www.npmjs.com/package/next)
 - [react](https://www.npmjs.com/package/react)
 - [react-dom](https://www.npmjs.com/package/react-dom)
+- [react-filepond](https://www.npmjs.com/package/react-filepond)
 - [react-icons](https://www.npmjs.com/package/react-icons)
 - [react-iframe](https://www.npmjs.com/package/react-iframe)
 - [react-loading](https://www.npmjs.com/package/react-loading)
@@ -73,7 +79,7 @@ Nowadays, some people are very busy and don't even have time to clean their shoe
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ### Deployment
-- [Netlify](https://s3-capstone.netlify.app/)
+- [Netlify](https://shoes-service-station.netlify.app/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -96,6 +102,15 @@ final-project-shoes-group-2
 │  │  ├─ logo.png
 │  │  ├─ new icon 1logo.png
 │  │  └─ new icon 1logo2x.png
+│  ├─ team
+│  │  ├─ BE_frans.png
+│  │  ├─ BE_yusuf.png
+│  │  ├─ FE_adit.png
+│  │  ├─ FE_diyah.png
+│  │  ├─ FE_yusuf.png
+│  │  ├─ QE_adhit.png
+│  │  ├─ QE_rendy.png
+│  │  └─ QE_zahra.png
 │  ├─ admin-bg1.png
 │  ├─ admin-bg2.png
 │  ├─ endpoint.png
@@ -119,26 +134,29 @@ final-project-shoes-group-2
 │  └─ Service.jsx
 ├─ pages
 │  ├─ admin
+│  │  ├─ [id].jsx
 │  │  ├─ index.jsx
-│  │  ├─ new-item.jsx
-│  │  └─ [id].jsx
+│  │  └─ new-item.jsx
 │  ├─ api
 │  │  └─ hello.js
+│  ├─ endpoint
+│  │  └─ [id].jsx
+│  ├─ invoice
+│  │  └─ [id].jsx
 │  ├─ payment
 │  │  └─ [id].jsx
 │  ├─ review
 │  │  └─ [id].jsx
 │  ├─ services
-│  │  ├─ list.jsx
 │  │  └─ [id].jsx
 │  ├─ _app.js
+│  ├─ 404.jsx
 │  ├─ about-us.jsx
 │  ├─ endpoint.jsx
 │  ├─ find-us.jsx
 │  ├─ form-payment.jsx
 │  ├─ history-order.jsx
 │  ├─ index.jsx
-│  ├─ invoice.jsx
 │  ├─ list-order.jsx
 │  ├─ login.jsx
 │  └─ signup.jsx
@@ -153,10 +171,14 @@ final-project-shoes-group-2
 │     ├─ getServiceReducer.jsx
 │     └─ index.jsx
 ├─ styles
+│  ├─ about.module.css
+│  ├─ admin.module.css
 │  ├─ formpayment.module.css
 │  ├─ globals.css
 │  ├─ History.module.css
-│  └─ Home.module.css
+│  ├─ Home.module.css
+│  ├─ ListOrder.module.css
+│  └─ navbar.module.css
 ├─ .eslintrc.json
 ├─ .gitignore
 ├─ next.config.js
@@ -172,8 +194,11 @@ final-project-shoes-group-2
 
 <!-- CONTACT -->
 ## Contact
-* Muhammad Yusuf Untung Wahyudi - [Github](https://github.com/myusufuntung) 
-* Aditya Fabio Hariawan - [Github](https://github.com/fabioaditya) 
-* Chalimatus Sa'diyah - [Github](https://github.com/diydiyydiyyy) 
+* Muhammad Yusuf Untung Wahyudi 
+  [Github](https://github.com/myusufuntung) - [Linked in](https://www.linkedin.com/in/myusufuntung)
+* Aditya Fabio Hariawan 
+  [Github](https://github.com/fabioaditya) - [Linked in](https://www.linkedin.com/in/chalimatussadiyah)
+* Chalimatus Sa'diyah 
+  [Github](https://github.com/diydiyydiyyy) - [Linked in](https://github.com/myusufuntung)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
