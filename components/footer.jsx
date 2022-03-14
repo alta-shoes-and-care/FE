@@ -2,6 +2,8 @@ import React from "react";
 import Navicon from "../assets/nav-icon.png";
 import Image from "next/image";
 import Link from "next/link";
+import styles from "../styles/navbar.module.css";
+
 import {
   FaFacebook,
   FaTwitter,
@@ -14,11 +16,15 @@ import { useRouter } from "next/router";
 function FooterComponent() {
   const router = useRouter();
   return (
-    <div className="flex justify-between px-5 lg:px-24 items-center py-2 border-t-2">
+    <div
+      className={`flex justify-between px-5 lg:px-24 items-center py-2 border-t-2 ${styles.footer}`}
+    >
       {/* logo nav */}
       <Link href="/">
         <a>
-          <div className="relative lg:h-20 lg:w-32 h-[70px] w-[120px] mb-3">
+          <div
+            className={`relative lg:h-20 lg:w-32 h-[70px] w-[120px] mb-3 ${styles.footerlogo}`}
+          >
             <Image src={Navicon} layout="fill" />
           </div>
         </a>

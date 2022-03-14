@@ -35,3 +35,18 @@
   background-size: cover;
   background-repeat: no-repeat;
 }
+
+@media only screen and (max-width: 480px) {
+  .container {
+    width: 400px;
+  }
+  .content {
+    width: 350px;
+  }
+  .status {
+    width: 135px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+  }
+}

@@ -1,9 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
-import styles from "../../styles/History.module.css";
+import styles from "../../styles/admin.module.css";
 import Loading from "../../components/Loading";
 import { useRouter } from "next/router";
+
 // filepond
 import { FilePond, registerPlugin } from "react-filepond";
 import FilePondPluginFileValidateSize from "filepond-plugin-file-validate-size";
@@ -244,14 +245,14 @@ function NewItem() {
   return (
     <div className={`flex justify-center items-center ${styles.adminbg}`}>
       <div
-        className={` w-[700px] h-auto my-8 p-4 py-12 flex justify-center flex-col items-center backdrop-blur-[5px] bg-[#ffffffd3] rounded-xl`}
+        className={`${styles.glass} w-[700px] h-auto my-8 p-4 py-12 flex justify-center flex-col items-center backdrop-blur-[5px] bg-[#ffffffd3] rounded-xl`}
       >
         {/* content */}
         <h1 className=" text-5xl text-center  font-bold mb-12 ">
           Add New Service
         </h1>
         <div>
-          <form className=" w-[528px]" action="#" method="POST">
+          <form className={`w-[528px]" action="#" method="POST ${styles.form}`}>
             <h1 className=" text-3xl mb-2">Service Title</h1>
             <div>
               <input

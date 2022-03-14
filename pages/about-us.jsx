@@ -7,7 +7,8 @@ import BE_yusuf from "../assets/team/BE_yusuf.png";
 import BE_frans from "../assets/team/BE_frans.png";
 import QE_adhit from "../assets/team/QE_adhit.png";
 import QE_rendy from "../assets/team/QE_rendy.png";
-
+import QE_zahra from "../assets/team/QE_zahra.png";
+import styles from "../styles/about.module.css";
 import { AiFillGithub, AiOutlineLinkedin, AiOutlineMail } from "react-icons/ai";
 
 function AboutUs() {
@@ -36,7 +37,7 @@ function AboutUs() {
       <h1 className=" text-4xl text-center my-3 mb-10">About Our Team</h1>
       <p className=" text-center text-2xl mb-8">Frontend Developer</p>
       {/* FE Card */}
-      <div className=" flex justify-around mb-10">
+      <div className={styles.container}>
         {/* card 1 */}
         <div className="mb-8">
           <div className=" w-[300px] h-[400px] relative ">
@@ -146,7 +147,7 @@ function AboutUs() {
 
       <p className=" text-center text-2xl mb-8">Backend Developer</p>
       {/* BE Card */}
-      <div className=" flex justify-around mb-10">
+      <div className={styles.container}>
         {/* card 1 */}
         <div className="mb-8">
           <div className=" w-[300px] h-[400px] relative ">
@@ -221,7 +222,7 @@ function AboutUs() {
 
       <p className=" text-center text-2xl mb-8">Quality Engineer</p>
       {/* QE Card */}
-      <div className=" flex justify-around mb-10">
+      <div className={styles.container}>
         {/* card 1 */}
         <div className="mb-8">
           <div className=" w-[300px] h-[400px] relative ">
@@ -295,7 +296,7 @@ function AboutUs() {
         {/* card 3 */}
         <div className="mb-8">
           <div className=" w-[300px] h-[400px] relative ">
-            <Image src={Profile} layout="fill"></Image>
+            <Image src={QE_zahra} layout="fill"></Image>
             <div className="w-[300px] h-[400px] bg-transparent border-[10px] border-blue-600 absolute z-10 ml-[20px] mt-[20px]"></div>
           </div>
 

@@ -107,7 +107,7 @@ function History() {
   return (
     <div className={`flex justify-center items-center ${styles.historybg}`}>
       <div
-        className={` rounded-xl w-[800px] h-screen overflow-y-scroll my-8 p-4 flex flex-col items-center backdrop-blur-[10px] bg-[#ffffff88]`}
+        className={` ${styles.container} rounded-xl w-[800px] h-screen overflow-y-scroll my-8 p-4 flex flex-col items-center backdrop-blur-[10px] bg-[#ffffff88]`}
       >
         <h1 className=" text-3xl text-center  font-bold my-3 ">
           Order History
@@ -120,12 +120,12 @@ function History() {
           <div className=" w-[700px] overflow-y-scroll flex flex-col items-center">
             {history.map((el, i) => (
               <div
-                className={` w-[630px] rounded-lg py-2 px-3 my-3 bg-white shadow-md`}
+                className={` ${styles.content} w-[630px] rounded-lg py-2 px-3 my-3 bg-white shadow-md`}
               >
                 <h1 className=" text-xl">{el.service_title}</h1>
                 <div className=" bg-gray-600 w-[200px] my-1 h-0.5"></div>
                 {/* status */}
-                <div className=" flex mt-1 justify-between">
+                <div className={`flex mt-1 justify-between ${styles.status}`}>
                   <div className=" flex">
                     <p className=" text-green-600 text-xl mt-0.5 mr-1">
                       <FaMoneyBillAlt />

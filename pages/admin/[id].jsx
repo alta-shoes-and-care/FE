@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import styles from "../../styles/History.module.css";
+import styles from "../../styles/admin.module.css";
 import Loading from "../../components/Loading";
 import { useRouter } from "next/router";
 import Swal from "sweetalert2";
@@ -283,14 +283,14 @@ function EditItem() {
   return (
     <div className={`flex justify-center items-center ${styles.adminbg2}`}>
       <div
-        className={` w-[700px] h-auto my-8 p-4 py-12 flex justify-center flex-col items-center backdrop-blur-[5px] bg-[#ffffffd3] rounded-xl`}
+        className={` ${styles.glass} w-[700px] h-auto my-8 p-4 py-12 flex justify-center flex-col items-center backdrop-blur-[5px] bg-[#ffffffd3] rounded-xl`}
       >
         {/* content */}
         <h1 className=" text-5xl text-center  font-bold mb-12 ">
           Edit Service
         </h1>
         <div>
-          <form className=" w-[528px]" action="#" method="PUT">
+          <form className={`${styles.form} w-[528px`}>
             <h1 className=" text-3xl mb-2">Service Title</h1>
             <div>
               <input
