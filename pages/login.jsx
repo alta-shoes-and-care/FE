@@ -35,13 +35,25 @@ function Login() {
     e.preventDefault();
 
     if (email === "" && password === "") {
-      Swal.fire("Invalid!", "Email / Password cannot be empty.", "error");
+      Swal.fire("Invalid!", "Email & Password cannot be empty.", "error");
     } 
+    else if (email === "") {
+      Swal.fire("Invalid!", "Email cannot be empty.", "error");
+    }
+    else if (password === "") {
+      Swal.fire("Invalid!", "Password cannot be empty.", "error");
+    }
+    else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email) && password === "") {
+      Swal.fire("Invalid!", "Email format is incorrect & Password cannot be empty.", "error");
+    }
+    else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email) && password === "") {
+      Swal.fire("Invalid!", "Email cannot be empty & Password cannot contain spaces, minimum 5 characters, and maximum 8 characters.", "error");
+    }
     else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email) && !/^(?!.*\s).{5,8}$/.test(password)) {
-      Swal.fire('Invalid!', 'Email / Password incorrect! please check and try again.', 'error');
+      Swal.fire('Invalid!', 'Email & Password format is incorrect.', 'error');
     } 
     else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
-      Swal.fire("Invalid!", "Email format is not valid, email cannot contain spaces.", "error");
+      Swal.fire("Invalid!", "Email format is incorrect.", "error");
     } 
     else if (!/^(?!.*\s).{5,8}$/.test(password)) {
       Swal.fire("Invalid!", "Password cannot contain spaces, minimum 5 characters, and maximum 8 characters.", "error");
