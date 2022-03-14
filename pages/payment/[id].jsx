@@ -266,7 +266,7 @@ export default function formpayment(props) {
                 <p className="text-black bold text-2xl">
                   Service type: {services.title}
                 </p>
-                <p className="text-black text-md mt-[1vh]">
+                <p className="text-gray-800 text-justify text-md mt-[1vh]">
                   {services.description}
                 </p>
               </div>
