@@ -199,18 +199,30 @@ function EditItem() {
         });
     }
   }
-  function handleData() {
-    const dataUpdate = {
-      id: +id,
-      title: title,
-      description: description,
-      price: +price,
-    };
 
-    console.log(dataUpdate);
+  function logdata(params) {
+    console.log(id);
+    console.log(title);
+    console.log(description);
+    console.log(price);
+    console.log(files);
   }
-
   function handleEdit(el) {
+    const formData = new FormData();
+    if (files.length == 0) {
+      formData.append("id", +id);
+      formData.append("title", title);
+      formData.append("description", description);
+      formData.append("price", +price);
+      formData.append("file", files);
+    }
+    if (files.length == 1) {
+      formData.append("id", +id);
+      formData.append("title", title);
+      formData.append("description", description);
+      formData.append("price", +price);
+      formData.append("file", files[0].file);
+    }
     return Swal.fire({
       title: "Update this service?",
       text: "",
@@ -225,19 +237,12 @@ function EditItem() {
         headers: { Authorization: `Bearer ${token}` },
       };
 
-      const dataUpdate = {
-        id: +id,
-        title: title,
-        description: description,
-        price: +price,
-      };
-
       if (result.isConfirmed) {
         setLoading(true);
         axios
           .put(
             `https://ynwahid.cloud.okteto.net/services/jwt`,
-            dataUpdate,
+            formData,
             config
           )
           .then(({ data }) => {
@@ -245,7 +250,6 @@ function EditItem() {
               icon: "success",
               title: "Success edit data",
             });
-            return editImage();
           })
           .catch((err) => {
             if (err.response.status === 401) {

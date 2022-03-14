@@ -36,31 +36,63 @@ function Login() {
 
     if (email === "" && password === "") {
       Swal.fire("Invalid!", "Email & Password cannot be empty.", "error");
-    } 
-    else if (email === "") {
+    } else if (email === "") {
       Swal.fire("Invalid!", "Email cannot be empty.", "error");
-    }
-    else if (password === "") {
+    } else if (password === "") {
       Swal.fire("Invalid!", "Password cannot be empty.", "error");
-    }
-    else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email) && password === "") {
-      Swal.fire("Invalid!", "Email format is incorrect & Password cannot be empty.", "error");
-    }
-    else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email) && password === "") {
-      Swal.fire("Invalid!", "Email cannot be empty & Password cannot contain spaces, minimum 5 characters, and maximum 8 characters.", "error");
-    }
-    else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email) && !/^(?!.*\s).{5,8}$/.test(password)) {
-      Swal.fire('Invalid!', 'Email & Password format is incorrect.', 'error');
-    } 
-    else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
+    } else if (
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email) &&
+      password === ""
+    ) {
+      Swal.fire(
+        "Invalid!",
+        "Email format is incorrect & Password cannot be empty.",
+        "error"
+      );
+    } else if (
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email) &&
+      password === ""
+    ) {
+      Swal.fire(
+        "Invalid!",
+        "Email cannot be empty & Password cannot contain spaces, minimum 5 characters, and maximum 8 characters.",
+        "error"
+      );
+    } else if (
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email) &&
+      !/^(?!.*\s).{5,8}$/.test(password)
+    ) {
+      Swal.fire("Invalid!", "Email & Password format is incorrect.", "error");
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
       Swal.fire("Invalid!", "Email format is incorrect.", "error");
-    } 
-    else if (!/^(?!.*\s).{5,8}$/.test(password)) {
-      Swal.fire("Invalid!", "Password cannot contain spaces, minimum 5 characters, and maximum 8 characters.", "error");
-    } 
-    else {
+    } else if (!/^(?!.*\s).{5,8}$/.test(password)) {
+      Swal.fire(
+        "Invalid!",
+        "Password cannot contain spaces, minimum 5 characters, and maximum 8 characters.",
+        "error"
+      );
+    } else {
       handleLogin();
     }
+  }
+
+  function hanldeSession(params) {
+    setTimeout(() => {
+      Swal.fire({
+        title: "Your session has ended!",
+        text: "Please login again to continue.",
+        icon: "error",
+        showCancelButton: false,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Ok",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          router.push("/login");
+          localStorage.clear();
+        }
+      });
+    }, 300000);
   }
 
   function handleLogin() {
@@ -83,6 +115,7 @@ function Login() {
           localStorage.setItem("token", data.data.token);
           localStorage.setItem("is_admin", data.data.is_admin);
           router.push("/");
+          return hanldeSession();
         }
       })
       .catch((err) => {
@@ -91,7 +124,7 @@ function Login() {
           setEmail("");
           setPassword("");
           Swal.fire(`Ooppss!!`, "Invalid Email / Password.", "error");
-        } else if(err.response.status === 401) {
+        } else if (err.response.status === 401) {
           Swal.fire({
             title: "Your session has ended!",
             text: "Please login again to continue.",
@@ -229,14 +262,15 @@ function Login() {
               <div className="w-[70%] h-[60%] lg:w-[600px] lg:h-[600px] bg-white bg-opacity-50 backdrop-blur-[10px] my-auto flex justify-center items-center rounded-2xl">
                 <div className="text-center mx-auto">
                   <h1 className="font-bold text-[30px] lg:text-[40px] text-primary">
-                  You are logged in!
+                    You are logged in!
                   </h1>
                   <h4 className="font-md text-[14px] lg:text-[20px] text-black">
-                  Please return to the landing page.
+                    Please return to the landing page.
                   </h4>
                   <button
-                  className="lg:h-[50px] h-[30px] lg:w-full w-[30%] mt-5 lg:mt-10 text-center mx-auto lg:text-[18px] text-[14px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium lg:rounded-xl rounded-md text-white bg-primary hover:bg-transparent hover:border-primary hover:border-2 hover:text-primary hover:font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
-                  onClick={() => router.push("/")}>
+                    className="lg:h-[50px] h-[30px] lg:w-full w-[30%] mt-5 lg:mt-10 text-center mx-auto lg:text-[18px] text-[14px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium lg:rounded-xl rounded-md text-white bg-primary hover:bg-transparent hover:border-primary hover:border-2 hover:text-primary hover:font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                    onClick={() => router.push("/")}
+                  >
                     OK
                   </button>
                 </div>
