@@ -1,0 +1,22 @@
+.adminbg {
+  background: url(../assets/admin-bg1.png);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.adminbg2 {
+  background: url(../assets/admin-bg2.png);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+@media only screen and (max-width: 480px) {
+  .glass {
+    width: 400px;
+  }
+  .form {
+    width: 390px;
+    padding: 7px;
+  }
+}

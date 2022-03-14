@@ -4,6 +4,7 @@ import Link from "next/link";
 import Swal from "sweetalert2";
 import Navicon from "../assets/nav-icon.png";
 import { useRouter } from "next/router";
+import styles from "../styles/navbar.module.css";
 
 function NavbarCompoent() {
   const router = useRouter();
@@ -41,7 +42,7 @@ function NavbarCompoent() {
       // token = false
       if (!localStorage.getItem("token")) {
         return (
-          <div className=" flex">
+          <div className={` flex ${styles.togglenav}`}>
             <h1 className="lg:mx-3 mx-1 lg:text-xl text-md text-primary hover:text-orange-600">
               <Link href="/find-us">
                 <a>Find Us</a>
@@ -124,7 +125,7 @@ function NavbarCompoent() {
         localStorage.getItem("token")
       ) {
         return (
-          <div className=" flex">
+          <div className={` flex ${styles.togglenav}`}>
             <h1 className="lg:mx-3 mx-1 lg:text-xl text-md text-primary hover:text-orange-600">
               <Link href="/find-us">
                 <a>Find Us</a>
@@ -201,7 +202,7 @@ function NavbarCompoent() {
         localStorage.getItem("token")
       ) {
         return (
-          <div className=" flex">
+          <div className={` flex ${styles.togglenav}`}>
             <h1 className="lg:mx-3 mx-1 lg:text-xl text-md text-primary hover:text-orange-600">
               <Link href="/find-us">
                 <a>Find Us</a>
@@ -248,7 +249,7 @@ function NavbarCompoent() {
 
               {showOption && (
                 <div
-                  className="origin-top-right absolute right-0 mt-2 lg:w-56 w-36 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"                
+                  className="origin-top-right absolute right-0 mt-2 lg:w-56 w-36 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
                   role="menu"
                   aria-orientation="vertical"
                   aria-labelledby="menu-button"
@@ -276,7 +277,9 @@ function NavbarCompoent() {
     }
   }
   return (
-    <div className=" flex justify-between lg:px-24 px-5 items-center shadow-md bg-white sticky top-0 z-10 ">
+    <div
+      className={`flex justify-between lg:px-24 px-5 items-center shadow-md bg-white sticky top-0 z-10 ${styles.navcontainer}`}
+    >
       {/* logo nav */}
       <Link href="/">
         <a>
