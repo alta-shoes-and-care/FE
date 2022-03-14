@@ -110,7 +110,7 @@ function History() {
         className={` rounded-xl w-[800px] h-screen overflow-y-scroll my-8 p-4 flex flex-col items-center backdrop-blur-[10px] bg-[#ffffff88]`}
       >
         <h1 className=" text-3xl text-center  font-bold my-3 ">
-          History Order
+          Order History
         </h1>
 
         {/* card */}

@@ -16,13 +16,14 @@ export default function endpoint() {
     let {id}=router.query
     const [loading, setLoading] = useState(false);
     let statuss="";
-    
-    const [invoice, setInvoice] = useState({
-        'is_paid': ""
-        ,'url': ""
+
+    const [endpoints, setEndpoints] = useState({
+        'is_paid': false,
+        'status': ""
     });
-    console.log(invoice)  
-    
+    console.log(endpoints)
+        
+
     useEffect(() => {
         setLoading(true);
         if (!localStorage.getItem("token")) {
@@ -36,7 +37,7 @@ export default function endpoint() {
             axios
                 .get(`https://ynwahid.cloud.okteto.net/orders/${id}`,config)
                 .then(({ data }) => {
-                    setInvoice(data.data)
+                    setEndpoints(data.data)
                     console.log(data.data,'berhasil get')
                 })
                 .catch((err) => {
@@ -63,8 +64,8 @@ export default function endpoint() {
                 });  
             }
         }, [id]);
-    
-
+        
+      
         if (loading) {
             Swal.fire({
               title: "Please Wait!",
@@ -79,7 +80,7 @@ export default function endpoint() {
             }); 
         }
     
-        if (invoice.is_paid == false ){
+        if (endpoints.is_paid == false ){
            statuss= <div className="text-red-600 text-center bold text-xl mt-[2vh]">Payment is Not Completed</div>
         }
         else {
@@ -87,7 +88,8 @@ export default function endpoint() {
         }
 
         function refreshPage() {
-            window.location.reload(false);
+            setLoading(true)
+            router.push(`/endpoint/${id}`)
           }
         
         function handlehistory(){
@@ -100,19 +102,19 @@ export default function endpoint() {
         <section>
             <div className={`z-0 grid grid-cols-1 h-screen bg-cover ${style.bgImage3}  `}>  
                 <div className='z-1 w-[100vw] h-screen bg-[#000009] bg-opacity-0 text-left'>
-                    <div class="z-2 grid grid-cols-1 gap-4 bg-cover">
+                    <div className="z-2 grid grid-cols-1 gap-4 bg-cover">
                         {/* Desc Card */}
                         <div className='ml-[20vw] mt-[10vh] z-3 w-[40vw] h-auto bg-[#ffffff] bg-opacity-80 hover:shadow-xl text-left rounded-lg pb-5'>
                             <div className="grid grid-cols-1 text-center px-10 py-3">
                                 <p className="text-black text-center bold text-4xl">
-                                    Thankyou for using our services {invoice.payment_status}
+                                    Thankyou for using our services
                                 </p>
                                 <p className="text-gray-600 text-md text-center mt-[3vh]"> 
                                     If you already finished the payment, click refresh to check the payment status
                                 </p>
                             </div>
                             <div className="grid grid-cols-1 text-center w-[20vw] mt-[1vh] ml-[10vw]">
-                                <button class="bg-[#175C8C] hover:bg-white text-white hover:text-black font-bold py-2 px-2 border border-black rounded-lg"
+                                <button className="bg-[#175C8C] hover:bg-white text-white hover:text-black font-bold py-2 px-2 border border-black rounded-lg"
                                 onClick={refreshPage}>
                                     <p className="text-md text-center rounded-xl"> Refresh Payment Status</p>
                                 </button>
@@ -124,7 +126,7 @@ export default function endpoint() {
                                 {statuss}
                             </div>
                             <div className="grid grid-cols-1 text-center w-[20vw] mt-[3vh] ml-[10vw]">
-                                <button class="bg-[#175C8C] hover:bg-white text-white hover:text-black font-bold py-2 px-2 border border-black rounded-lg"
+                                <button className="bg-[#175C8C] hover:bg-white text-white hover:text-black font-bold py-2 px-2 border border-black rounded-lg"
                                 onClick={handlehistory}>
                                     <p className="text-md text-center rounded-xl"> Order History </p>
                                 </button>
@@ -143,7 +145,7 @@ export default function endpoint() {
                     </div>
                 </div>
             </div>
-            <div class="grid grid-cols-1 pt-2">
+            <div className="grid grid-cols-1 pt-2">
                 <Service />
             </div>
         </section>

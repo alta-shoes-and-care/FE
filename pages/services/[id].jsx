@@ -13,7 +13,6 @@ export default function services() {
     const [loading, setLoading] = useState(false);
 
    
-
     useEffect(() => {
         setLoading(true);
         if (!localStorage.getItem("token")) {
@@ -77,7 +76,7 @@ export default function services() {
               return (
                 <button class="bg-[#175C8C] hover:bg-white text-white hover:text-black font-bold py-4 px-6 border border-black rounded-lg"
                 onClick={handleOrder2}>
-                    <p className="text-xl rounded-xl"> Book a service </p>
+                    <p className="text-xl rounded-xl"> Book this service </p>
                 </button>
               );
               // token = true & admin = false
@@ -86,7 +85,7 @@ export default function services() {
               return (
                 <button class="bg-[#175C8C] hover:bg-white text-white hover:text-black font-bold py-4 px-6 border border-black rounded-lg"
                 onClick={handleOrder} >
-                    <p className="text-xl rounded-xl"> Book a service </p>
+                    <p className="text-xl rounded-xl"> Book this service </p>
                 </button>
               );
             }    
