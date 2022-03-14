@@ -164,37 +164,39 @@ export default function formpayment(props) {
   
   function handlevalidate(){
     if (
-      payment_method_id === ""
+      payment_method_id === 0
     ) {
-       validate1 = "Payment Method, "
+       validate1 = "Payment Method "
     }  
     if (
       city === ""
     ) {
-      validate2 = "City, "
+      validate2 = " City "
     } 
     if (
       phone === ""
     ) {
-      validate3 = "Phone Number, "
+      validate3 = " Phone Number "
     } 
     if (
       date === ""
     ) {
-      validate4 = "Date, "
+      validate4 = " Date "
     } 
     if (
-      qty === ""
+      qty === 0
     ) {
-       validate5 = "Quantity, "
+       validate5 = " Quantity "
     }
     if (
       address === ""
     ) {
-       validate6 = "Adress "
+       validate6 = " Adress"
     } 
 
-    validatetotal=`${validate1}${validate2}${validate3}${validate4}${validate5}${validate6}`
+    var string=`${validate1}${validate2}${validate3}${validate4}${validate5}${validate6}`
+    var string2=string.split('  ').join(', ');
+    validatetotal=string2
   }
  
  
@@ -203,16 +205,16 @@ export default function formpayment(props) {
     handlevalidate();
     
     if (
-      payment_method_id === "" ||
+      payment_method_id === "0" ||
       city === "" ||
       phone === "" ||
       date === "" ||
-      qty === "" ||
+      qty === "0" ||
       address === ""
     ) {
       Swal.fire(
         "Please fill out the form!",
-        `${validatetotal} can't be empty. Please fill out the empty fields.`,
+        `${validatetotal} form can't be empty. Please fill out the empty fields.`,
         "warning"
       );
     } else {
