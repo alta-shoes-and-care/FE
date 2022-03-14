@@ -217,7 +217,15 @@ export default function formpayment(props) {
         `${validatetotal} form can't be empty. Please fill out the empty fields.`,
         "warning"
       );
-    } else {
+    } else if (
+      !/^[0-9]+(.[0-9]{0})?$/.test(phone)
+    ) {
+      Swal.fire("Invalid!", "Invalid Phone Number Format", "error");
+    } else if (
+      !/^[0-9]+(.[0-9]{0})?$/.test(qty)
+    ) {
+      Swal.fire("Invalid!", "Quantity cannot be Negative", "error");
+    }else {
       handleButton();
     }
   }
@@ -340,8 +348,9 @@ export default function formpayment(props) {
                     placeholder="0"
                     autoComplete="off"
                     required
-                    className="mx-auto h-[30px] bg-transparent appearance-none relative block w-[5vw] px-3 py-2 border-2 border-primary placeholder-gray-500 text-gray-500 md:text-[18px] rounded-lg focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+                    className="mx-auto h-[30px] form-control bg-transparent appearance-none relative block w-[5vw] px-3 py-2 border-2 border-primary placeholder-gray-500 text-gray-500 md:text-[18px] rounded-lg focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
                     min="1"
+                    max="9"
                     value={qty}
                     onChange={(e) => {
                       setQty(e.target.value);
