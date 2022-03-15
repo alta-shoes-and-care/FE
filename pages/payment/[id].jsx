@@ -37,9 +37,12 @@ export default function formpayment(props) {
   useEffect(() => {
     if (!localStorage.getItem("token")) {
       return router.push("/login");
-    } else if (id !== "undefined") {
+    } 
+    else if(localStorage.getItem("is_admin") == "true"){
+      return router.push("/404");
+    }
+    else if (id !== "undefined") {
       setLoading(true);
-
       axios
         .get(`https://ynwahid.cloud.okteto.net/services/${id}`)
         .then(({ data }) => {
@@ -80,7 +83,6 @@ export default function formpayment(props) {
     price: 0,
     user_id: 0,
   });
-  console.log(services);
 
   const [qty, setQty] = useState(0);
   const [payment_method_id, setPayment_method_id] = useState(0);
@@ -131,10 +133,11 @@ export default function formpayment(props) {
             });
             setTimeout(() => {
               router.push(`/invoice/${data.data.id}`);
-            }, 750);
+            }, 1000);
           })
           .catch((err) => {
-            Swal.fire("Order failed!", "catch error", "error");
+            Swal.fire("Order failed!", "Sorry, Something gone wrong. Please try again later.", "error");
+            console.log(err.response)
             if (err.response.status === 401) {
               Swal.fire({
                 title: "Your session has ended!",
@@ -151,6 +154,21 @@ export default function formpayment(props) {
                 }
               });
             }
+            else {
+              Swal.fire({
+                title:"Oops, Something gone wrong.",
+                text: "Please try again later.",
+                icon: "error",
+                showCancelButton: false,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Ok",
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  router.push("/");
+                }
+              });
+            }
           })
           .finally(() => {
             setConfirmLoading(false);
@@ -164,7 +182,8 @@ export default function formpayment(props) {
   
   function handlevalidate(){
     if (
-      payment_method_id === 0
+      payment_method_id === 0 ||
+      payment_method_id === ""
     ) {
        validate1 = "Payment Method "
     }  
@@ -205,11 +224,13 @@ export default function formpayment(props) {
     handlevalidate();
     
     if (
-      payment_method_id === "0" ||
+      payment_method_id === 0 ||
+      payment_method_id === "" ||
       city === "" ||
       phone === "" ||
       date === "" ||
-      qty === "0" ||
+      qty === 0 ||
+      qty === "" ||
       address === ""
     ) {
       Swal.fire(
@@ -328,7 +349,7 @@ export default function formpayment(props) {
                     placeholder="Phone Number"
                     autoComplete="off"
                     required
-                    className="h-[30px] bg-transparent appearance-none relative block w-full px-3 py-2 border-2 border-primary placeholder-gray-500 text-gray-500 md:text-[18px] rounded-lg focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+                    className="ml-[0.50vw] h-[30px] bg-transparent appearance-none relative block w-full px-3 py-2 border-2 border-primary placeholder-gray-500 text-gray-500 md:text-[18px] rounded-lg focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
                     value={phone}
                     onChange={(e) => {
                       setPhone(e.target.value);
@@ -413,7 +434,7 @@ export default function formpayment(props) {
                     placeholder="Pick Up Date"
                     autoComplete="off"
                     required
-                    className="ml-[0.1vw] h-[30px] bg-transparent appearance-none relative block w-full px-3 py-2 border-2 border-primary placeholder-gray-500 text-gray-500 md:text-[18px] rounded-lg focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+                    className="ml-[0.5vw] h-[30px] bg-transparent appearance-none relative block w-full px-3 py-2 border-2 border-primary placeholder-gray-500 text-gray-500 md:text-[18px] rounded-lg focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
                     value={date}
                     onChange={(e) => {
                       setDate(e.target.value);
@@ -468,7 +489,7 @@ export default function formpayment(props) {
                     </h1>
                   </div>
                   <button
-                    className="ml-[2.5vw] bg-primary hover:bg-white text-white hover:text-primary font-bold py-2 px-3 border-2 border-primary rounded-lg mt-[1vh]"
+                    className="ml-[3.5vw] bg-primary hover:bg-white text-white hover:text-primary font-bold py-2 px-3 border-2 border-primary rounded-lg mt-[1vh]"
                     onClick={validateButton}
                   >
                     <p className="text-md text-center rounded-xl">
