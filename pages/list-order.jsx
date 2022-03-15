@@ -424,7 +424,10 @@ function ListOrder() {
                       className={` flex justify-between w-[450px] ${styles.accept}`}
                     >
                       {/* accept */}
-                      {el.status === "accepted" ? (
+                      {el.status === "accepted" ||
+                      el.status === "on process" ||
+                      el.status === "delivering" ||
+                      el.status === "cancel" ? (
                         <button
                           disabled
                           onClick={() => handleAccept(el)}
@@ -441,7 +444,10 @@ function ListOrder() {
                         </button>
                       )}
                       {/* reject */}
-                      {el.status === "rejected" ? (
+                      {el.status === "rejected" ||
+                      el.status === "on process" ||
+                      el.status === "delivering" ||
+                      el.status === "cancel" ? (
                         <button
                           disabled
                           onClick={() => handleReject(el)}
@@ -458,7 +464,10 @@ function ListOrder() {
                         </button>
                       )}
                       {/* on process */}
-                      {el.status === "on process" ? (
+                      {el.status === "on process" ||
+                      el.status === "rejected" ||
+                      el.status === "delivering" ||
+                      el.status === "cancel" ? (
                         <button
                           disabled
                           onClick={() => handleOnprocess(el)}
@@ -476,7 +485,9 @@ function ListOrder() {
                       )}
 
                       {/* deliver */}
-                      {el.status === "delivering" ? (
+                      {el.status === "delivering" ||
+                      el.status === "rejected" ||
+                      el.status === "cancel" ? (
                         <button
                           disabled
                           onClick={() => handleDelivery(el)}
@@ -493,7 +504,9 @@ function ListOrder() {
                         </button>
                       )}
                       {/* cancel */}
-                      {el.status === "cancel" ? (
+                      {el.status === "cancel" ||
+                      el.status === "rejected" ||
+                      el.status === "delivering" ? (
                         <button
                           disabled
                           onClick={() => handleCancel(el)}

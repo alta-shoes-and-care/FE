@@ -54,7 +54,7 @@ function NewItem() {
   //  regex ^[0-9]+(.[0-9]{0})?$
   function validateButton(e) {
     e.preventDefault();
-    if (files.length === 0) {
+    if (files.length == 0) {
       if (
         description === "" &&
         title === "" &&
@@ -99,7 +99,13 @@ function NewItem() {
         );
       }
     }
-    if (files.length === 1) {
+    // image.length === 1
+    else if (
+      (files.length === 1 && files[0].fileExtension == "png") ||
+      (files.length === 1 && files[0].fileExtension == "jpg") ||
+      (files.length === 1 && files[0].fileExtension == "jpeg") ||
+      (files.length === 1 && files[0].fileExtension == "PNG")
+    ) {
       if (
         description === "" &&
         title === "" &&
@@ -161,6 +167,8 @@ function NewItem() {
       } else {
         handleButton();
       }
+    } else {
+      Swal.fire("Invalid file image!", "", "error");
     }
   }
 

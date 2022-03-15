@@ -108,7 +108,12 @@ function EditItem() {
         handleEdit();
       }
     }
-    if (files.length === 1) {
+    // image.length == 1
+    else if (
+      (files.length === 1 && files[0].fileExtension == "png") ||
+      (files.length === 1 && files[0].fileExtension == "jpg") ||
+      (files.length === 1 && files[0].fileExtension == "jpeg")
+    ) {
       if (
         description === "" &&
         title === "" &&
@@ -168,8 +173,10 @@ function EditItem() {
           "error"
         );
       } else {
-        handleEdit();
+        handleButton();
       }
+    } else {
+      Swal.fire("Invalid file image!", "", "error");
     }
   }
 
