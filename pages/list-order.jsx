@@ -52,7 +52,24 @@ function ListOrder() {
         console.log(data.data);
       })
       .catch((err) => {
-        console.log(err, "error");
+        if (err.response.status === 401) {
+          Swal.fire({
+            title: "Your session has ended!",
+            text: "Please login again to continue.",
+            icon: "error",
+            showCancelButton: false,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Ok",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              router.push("/login");
+              localStorage.clear();
+            }
+          });
+        } else {
+          Swal.fire("Ooppss!", "Sorry, the server is error.", "error");
+        }
       })
       .finally(() => {
         setLoading(false);
@@ -357,7 +374,9 @@ function ListOrder() {
                     className={` w-[450px] flex py-2 px-5 my-2 bg-white shadow-md rounded-lg ${styles.card1} `}
                   >
                     <div>
-                      <div className=" flex justify-between">
+                      <div
+                        className={`${styles.titleCard} flex justify-between`}
+                      >
                         <h1 className=" text-xl">{el.service_title}</h1>
                         <div className=" flex">
                           {el.is_paid ? (
@@ -521,7 +540,7 @@ function ListOrder() {
                       ) : (
                         <button
                           onClick={() => handleCancel(el)}
-                          className=" px-2 py-1 bg-white shadow-md rounded-md hover:text-green-500"
+                          className={`${styles.icon2} px-2 py-1 bg-white shadow-md rounded-md hover:text-green-500`}
                         >
                           Cancel
                         </button>
