@@ -37,7 +37,7 @@ function AboutUs() {
       <h1 className=" text-4xl text-center my-3 mb-10">About Our Team</h1>
       <p className=" text-center text-2xl mb-8">Frontend Developer</p>
       {/* FE Card */}
-      <div className={styles.container}>
+      <div className={`flex justify-around my-12 ${styles.container}`}>
         {/* card 1 */}
         <div className="mb-8">
           <div className=" w-[300px] h-[400px] relative ">
@@ -147,7 +147,7 @@ function AboutUs() {
 
       <p className=" text-center text-2xl mb-8">Backend Developer</p>
       {/* BE Card */}
-      <div className={styles.container}>
+      <div className={`flex justify-around my-12 ${styles.container}`}>
         {/* card 1 */}
         <div className="mb-8">
           <div className=" w-[300px] h-[400px] relative ">
@@ -222,7 +222,7 @@ function AboutUs() {
 
       <p className=" text-center text-2xl mb-8">Quality Engineer</p>
       {/* QE Card */}
-      <div className={styles.container}>
+      <div className={`flex justify-around my-12 ${styles.container}`}>
         {/* card 1 */}
         <div className="mb-8">
           <div className=" w-[300px] h-[400px] relative ">
