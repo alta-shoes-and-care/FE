@@ -126,6 +126,8 @@ function NewItem() {
           " File is too large and incorrect format on field Price",
           "error"
         );
+      } else if (!/^[0-9]+(.[0-9]{0})?$/.test(price)) {
+        Swal.fire("Invalid!", "Incorrect format on field Price", "error");
       } else if (files.length === 0) {
         Swal.fire(
           "Invalid!",
@@ -224,7 +226,7 @@ function NewItem() {
             } else {
               Swal.fire(
                 "Invalid!",
-                "The data you entered may already be registered",
+                "The title you entered may already be registered",
                 "error"
               );
             }

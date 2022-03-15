@@ -3,7 +3,7 @@ import styles from "../styles/ListOrder.module.css";
 import { FaMoneyBillAlt } from "react-icons/fa";
 import { FcCalendar } from "react-icons/fc";
 import { RiMessage2Line } from "react-icons/ri";
-import { AiOutlineNumber } from "react-icons/ai";
+import { AiOutlineNumber, AiOutlineShoppingCart } from "react-icons/ai";
 import Swal from "sweetalert2";
 import { useRouter } from "next/router";
 import axios from "axios";
@@ -49,6 +49,7 @@ function ListOrder() {
       .get(`https://ynwahid.cloud.okteto.net/orders`, config)
       .then(({ data }) => {
         setlistOrder(data.data);
+        console.log(data.data);
       })
       .catch((err) => {
         console.log(err, "error");
@@ -344,94 +345,174 @@ function ListOrder() {
           <div
             className={`h-[75vh] w-[1200px] flex flex-wrap overflow-y-scroll content-start ${styles.bgcard}`}
           >
-            {listOrder.map((el, i) => (
-              <div
-                key={i}
-                className={`p-3 mb-5 rounded-lg pl-3 bg-[#ffffffab] backdrop-blur-[5px] h-auto w-[480px] mx-3 transition ease-linear duration-1000 ]  ${styles.bgcard1}`}
-              >
+            {listOrder
+              .slice()
+              .reverse()
+              .map((el, i) => (
                 <div
-                  className={` w-[450px] flex py-2 px-5 my-2 bg-white shadow-md rounded-lg ${styles.card1} `}
+                  key={i}
+                  className={`p-3 mb-5 rounded-lg pl-3 bg-[#ffffffab] backdrop-blur-[5px] h-auto w-[480px] mx-3 transition ease-linear duration-1000 ]  ${styles.bgcard1}`}
                 >
-                  <div>
-                    <h1 className=" text-xl">{el.service_title}</h1>
-                    <div className=" bg-gray-600 w-[200px] my-1 h-0.5"></div>
-                    {/* status */}
-                    <div
-                      className={` flex justify-between w-[400px] ${styles.iconstatus}`}
-                    >
-                      <div className=" flex">
-                        <p className=" text-green-600 text-xl mt-0.5 mr-1">
-                          <FaMoneyBillAlt />
-                        </p>
-                        <p>
-                          Rp.{" "}
-                          <NumberFormat
-                            value={el.total}
-                            displayType={"text"}
-                            thousandSeparator={true}
-                          />
-                        </p>
+                  <div
+                    className={` w-[450px] flex py-2 px-5 my-2 bg-white shadow-md rounded-lg ${styles.card1} `}
+                  >
+                    <div>
+                      <div className=" flex justify-between">
+                        <h1 className=" text-xl">{el.service_title}</h1>
+                        <div className=" flex">
+                          {el.is_paid ? (
+                            <div className=" text-green-500 flex">
+                              <p className="text-xl mt-0.5 mr-1">
+                                <AiOutlineShoppingCart />
+                              </p>
+                              <p>Paid</p>
+                            </div>
+                          ) : (
+                            <div className=" text-red-500 flex">
+                              <p className="text-xl mt-0.5 mr-1">
+                                <AiOutlineShoppingCart />
+                              </p>
+                              <p>Not Paid</p>
+                            </div>
+                          )}
+                        </div>
                       </div>
-                      <div className=" flex">
-                        <p className="text-xl mt-0.5 mr-1">
-                          <FcCalendar />
-                        </p>
-                        <p>{moment(el.date).format("D MMMM YYYY")}</p>
-                      </div>
-                      <div className=" flex">
-                        <p className="text-xl mt-0.5 mr-1">
-                          <RiMessage2Line />
-                        </p>
-                        <p>{el.status}</p>
-                      </div>
-                      <div className=" flex">
-                        <p className="text-xl mt-0.5 mr-0.5">
-                          <AiOutlineNumber />
-                        </p>
-                        <p>{el.id}</p>
+
+                      <div className=" bg-gray-600 w-[200px] my-1 h-0.5"></div>
+                      {/* status */}
+                      <div
+                        className={` flex justify-between w-[400px] ${styles.iconstatus}`}
+                      >
+                        <div className=" flex">
+                          <p className=" text-green-600 text-xl mt-0.5 mr-1">
+                            <FaMoneyBillAlt />
+                          </p>
+                          <p>
+                            Rp.{" "}
+                            <NumberFormat
+                              value={el.total}
+                              displayType={"text"}
+                              thousandSeparator={true}
+                            />
+                          </p>
+                        </div>
+                        <div className=" flex">
+                          <p className="text-xl mt-0.5 mr-1">
+                            <FcCalendar />
+                          </p>
+                          <p>{moment(el.date).format("D MMM YYYY")}</p>
+                        </div>
+                        <div className=" flex">
+                          <p className="text-xl mt-0.5 mr-1">
+                            <RiMessage2Line />
+                          </p>
+                          <p>{el.status}</p>
+                        </div>
+
+                        <div className=" flex">
+                          <p className="text-xl mt-0.5 mr-0.5">
+                            <AiOutlineNumber />
+                          </p>
+                          <p>{el.id}</p>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                {/* edit status */}
-                <div className={` w-[450px] flex py-2  rounded-lg`}>
-                  <div
-                    className={` flex justify-between w-[450px] ${styles.accept}`}
-                  >
-                    <button
-                      onClick={() => handleAccept(el)}
-                      className=" px-2 py-1 bg-white shadow-md rounded-md hover:text-green-500"
+                  {/* edit status */}
+                  <div className={` w-[450px] flex py-2  rounded-lg`}>
+                    <div
+                      className={` flex justify-between w-[450px] ${styles.accept}`}
                     >
-                      Accept
-                    </button>
-                    <button
-                      onClick={() => handleReject(el)}
-                      className=" px-2 py-1 bg-white shadow-md rounded-md hover:text-green-500"
-                    >
-                      Reject
-                    </button>
-                    <button
-                      onClick={() => handleOnprocess(el)}
-                      className=" px-2 bg-white shadow-md rounded-md hover:text-green-500"
-                    >
-                      On Process
-                    </button>
-                    <button
-                      onClick={() => handleDelivery(el)}
-                      className=" px-2 bg-white shadow-md rounded-md hover:text-green-500"
-                    >
-                      Delivery
-                    </button>
-                    <button
-                      onClick={() => handleCancel(el)}
-                      className={`px-2 bg-white shadow-md rounded-md hover:text-red-500 ${styles.icon2}`}
-                    >
-                      Cancel
-                    </button>
+                      {/* accept */}
+                      {el.status === "accepted" ? (
+                        <button
+                          disabled
+                          onClick={() => handleAccept(el)}
+                          className=" px-2 py-1 bg-white shadow-md rounded-md text-gray-400"
+                        >
+                          Accept
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => handleAccept(el)}
+                          className=" px-2 py-1 bg-white shadow-md rounded-md hover:text-green-500"
+                        >
+                          Accept
+                        </button>
+                      )}
+                      {/* reject */}
+                      {el.status === "rejected" ? (
+                        <button
+                          disabled
+                          onClick={() => handleReject(el)}
+                          className=" px-2 py-1 bg-white shadow-md rounded-md text-gray-400"
+                        >
+                          Reject
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => handleReject(el)}
+                          className=" px-2 py-1 bg-white shadow-md rounded-md hover:text-green-500"
+                        >
+                          Reject
+                        </button>
+                      )}
+                      {/* on process */}
+                      {el.status === "on process" ? (
+                        <button
+                          disabled
+                          onClick={() => handleOnprocess(el)}
+                          className=" px-2 py-1 bg-white shadow-md rounded-md text-gray-400"
+                        >
+                          On Process
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => handleOnprocess(el)}
+                          className=" px-2 py-1 bg-white shadow-md rounded-md hover:text-green-500"
+                        >
+                          On Process
+                        </button>
+                      )}
+
+                      {/* deliver */}
+                      {el.status === "delivering" ? (
+                        <button
+                          disabled
+                          onClick={() => handleDelivery(el)}
+                          className=" px-2 py-1 bg-white shadow-md rounded-md text-gray-400"
+                        >
+                          Delivery
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => handleDelivery(el)}
+                          className=" px-2 py-1 bg-white shadow-md rounded-md hover:text-green-500"
+                        >
+                          Delivery
+                        </button>
+                      )}
+                      {/* cancel */}
+                      {el.status === "cancel" ? (
+                        <button
+                          disabled
+                          onClick={() => handleCancel(el)}
+                          className=" px-2 py-1 bg-white shadow-md rounded-md text-gray-400"
+                        >
+                          Cancel
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => handleCancel(el)}
+                          className=" px-2 py-1 bg-white shadow-md rounded-md hover:text-green-500"
+                        >
+                          Cancel
+                        </button>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
         </div>
       </div>
