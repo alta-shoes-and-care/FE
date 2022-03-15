@@ -152,6 +152,12 @@ function NewItem() {
           "Data can't be empty,please fill out the fields.",
           "error"
         );
+      } else if (title === "") {
+        Swal.fire(
+          "Invalid!",
+          "Data can't be empty,please fill out the fields.",
+          "error"
+        );
       } else if (files.length === 0) {
         Swal.fire(
           "Invalid!",
