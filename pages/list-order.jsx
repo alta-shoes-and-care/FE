@@ -465,6 +465,8 @@ function ListOrder() {
                       )}
                       {/* on process */}
                       {el.status === "on process" ||
+                      el.status === "pending" ||
+                      el.is_paid === false ||
                       el.status === "rejected" ||
                       el.status === "delivering" ||
                       el.status === "cancel" ? (
@@ -486,6 +488,8 @@ function ListOrder() {
 
                       {/* deliver */}
                       {el.status === "delivering" ||
+                      el.status === "pending" ||
+                      el.is_paid === false ||
                       el.status === "rejected" ||
                       el.status === "cancel" ? (
                         <button
