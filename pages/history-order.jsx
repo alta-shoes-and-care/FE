@@ -39,7 +39,24 @@ function History() {
         console.log(data.data, "masuk");
       })
       .catch((err) => {
-        console.log(err.response, "error");
+        if (err.response.status === 401) {
+          Swal.fire({
+            title: "Your session has ended!",
+            text: "Please login again to continue.",
+            icon: "error",
+            showCancelButton: false,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Ok",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              router.push("/login");
+              localStorage.clear();
+            }
+          });
+        } else {
+          Swal.fire("Ooppss!", "Sorry, the server is error.", "error");
+        }
       })
       .finally(() => {
         setLoading(false);
@@ -75,6 +92,7 @@ function History() {
             }, 2000);
           })
           .catch((err) => {
+            console.log(err.response);
             if (err.response.status === 401) {
               Swal.fire({
                 title: "Your session has ended!",
@@ -151,7 +169,10 @@ function History() {
                     </p>
                     <p>{el.status}</p>
                   </div>
-                  <div className=" flex">
+                  <div
+                    onClick={() => router.push(`/endpoint/${el.id}`)}
+                    className=" hover:cursor-pointer hover:text-gray-500 flex"
+                  >
                     <p className="text-xl mt-0.5 mr-1">
                       <AiOutlineShoppingCart />
                     </p>

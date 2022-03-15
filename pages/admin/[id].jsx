@@ -28,6 +28,7 @@ function EditItem() {
   const [loading, setLoading] = useState(false);
   const [files, setFiles] = useState([]);
 
+  // Sweet Alert
   const Toast = Swal.mixin({
     toast: true,
     position: "center",
@@ -40,6 +41,7 @@ function EditItem() {
     },
   });
 
+  // Get Service
   useEffect(() => {
     if (typeof window !== "undefined") {
       if (!localStorage.getItem("token")) {
@@ -55,7 +57,7 @@ function EditItem() {
     axios
       .get(`https://ynwahid.cloud.okteto.net/services/${id}`)
       .then(({ data }) => {
-        setProduct(data.data, "masuk");
+        setProduct(data.data);
         setTitle(data.data.title);
         setPrice(data.data.price);
         setDescription(data.data.description);
@@ -69,6 +71,7 @@ function EditItem() {
       });
   }, []);
 
+  // Validation Input
   function validateButton(e) {
     e.preventDefault();
     if (files.length === 0) {
@@ -186,42 +189,6 @@ function EditItem() {
     }
   }
 
-  function editImage() {
-    if (files.length === 1) {
-      const formData = new FormData();
-      formData.append("file", files[0].file);
-      const token = localStorage.getItem("token");
-      const config = {
-        headers: { Authorization: `Bearer ${token}` },
-        "Content-Type": "multipart/form-data",
-      };
-
-      axios
-        .put(
-          `https://ynwahid.cloud.okteto.net/services/jwt/${idProduct}`,
-          formData,
-          config
-        )
-        .then(({ data }) => {
-          console.log(data);
-        })
-        .catch((err) => {
-          console.log(err);
-          Swal.fire("Invalid!", "Forms can't be empty", "error");
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    }
-  }
-
-  function logdata(params) {
-    console.log(id);
-    console.log(title);
-    console.log(description);
-    console.log(price);
-    console.log(files);
-  }
   function handleEdit(el) {
     const formData = new FormData();
     if (files.length == 0) {
@@ -296,9 +263,11 @@ function EditItem() {
     });
   }
 
+  // Loading
   if (loading) {
     return <Loading />;
   }
+
   return (
     <div className={`flex justify-center items-center ${styles.adminbg2}`}>
       <div

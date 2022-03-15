@@ -3,6 +3,7 @@ import Image from "next/image";
 import Profile from "../assets/profile.png";
 import FE_yusuf from "../assets/team/FE_yusuf.png";
 import FE_diyah from "../assets/team/FE_diyah.png";
+import FE_aditya from "../assets/team/FE_aditya.png";
 import BE_yusuf from "../assets/team/BE_yusuf.png";
 import BE_frans from "../assets/team/BE_frans.png";
 import QE_adhit from "../assets/team/QE_adhit.png";
@@ -111,7 +112,7 @@ function AboutUs() {
         {/* card 3 */}
         <div className="mb-8">
           <div className=" w-[300px] h-[400px] relative ">
-            <Image src={Profile} layout="fill"></Image>
+            <Image src={FE_aditya} layout="fill"></Image>
             <div className="w-[300px] h-[400px] bg-transparent border-[10px] border-blue-600 absolute z-10 ml-[20px] mt-[20px]"></div>
           </div>
 
@@ -122,21 +123,21 @@ function AboutUs() {
           <div className="flex justify-center">
             <a
               className=" text-2xl mx-1 hover:animate-bounce"
-              href=""
+              href="https://github.com/fabioaditya"
               target="_blank"
             >
               <AiFillGithub />
             </a>
             <a
               className=" text-2xl mx-1 hover:animate-bounce"
-              href=""
+              href="https://www.linkedin.com/in/aditya-fabio-hariawan-8294011b8/"
               target="_blank"
             >
               <AiOutlineLinkedin />
             </a>
             <a
               className=" text-2xl mx-1 hover:animate-bounce"
-              href=""
+              href="mailto:fabioaditya1995@gmail.com"
               target="_blank"
             >
               <AiOutlineMail />
