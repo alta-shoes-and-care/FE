@@ -166,6 +166,12 @@ function EditItem() {
           "Image can't be empty,please choose image file.",
           "error"
         );
+      } else if (title === "") {
+        Swal.fire(
+          "Invalid!",
+          "Data can't be empty,please fill out the fields.",
+          "error"
+        );
       } else if (description === "") {
         Swal.fire(
           "Invalid!",
@@ -173,7 +179,7 @@ function EditItem() {
           "error"
         );
       } else {
-        handleButton();
+        handleEdit();
       }
     } else {
       Swal.fire("Invalid file image!", "", "error");
