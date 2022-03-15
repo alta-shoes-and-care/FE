@@ -15,25 +15,20 @@ export default function services() {
    
     useEffect(() => {
         setLoading(true);
-        if (!localStorage.getItem("token")) {
-            return router.push("/login");
-        }
-        else if(id!=='undefined'){
-            
-            axios
-                .get(`https://ynwahid.cloud.okteto.net/services/${id}`)
-                .then(({ data }) => {
-                    setLoading(true);
-                    setServices(data.data)
-                    console.log(data.data,'berhasil get')
-                })
-                .catch((err) => {
-                    console.log(err, "error bang");
-                })
-                .finally(() => {
-                    setLoading(false);
-                });  
-            }
+        axios
+            .get(`https://ynwahid.cloud.okteto.net/services/${id}`)
+            .then(({ data }) => {
+                setLoading(true);
+                setServices(data.data)
+                console.log(data.data,'berhasil get')
+            })
+            .catch((err) => {
+                console.log(err, "error bang");
+            })
+            .finally(() => {
+                setLoading(false);
+            });  
+    
         window.scrollTo(0,0)
         }, [id]);
 

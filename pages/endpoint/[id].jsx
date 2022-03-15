@@ -20,7 +20,7 @@ export default function endpoint() {
         html: "This may take a few seconds, please don't close this page.",
         allowOutsideClick: false,
         showConfirmButton: false,
-        timer: 1500,
+        timer: 750,
 
         willOpen: () => {
             Swal.showLoading();
@@ -30,32 +30,48 @@ export default function endpoint() {
 
     //put payment
     function refreshPage() {
-        setLoading(true);
-        const token = localStorage.getItem("token");
-        const config = {
-            headers: { Authorization: `Bearer ${token}` },
-        };
-        axios
-            .put(
-            `https://ynwahid.cloud.okteto.net/orders/check-payment/${id}`,
-            {},
-            config
-            )
-            .then(({ data }) => {
-            console.log(data, "berhasil put");
-            location.reload();
-            })
-            .catch((err) => {
-            console.log(err, "error bang");
-            })
-            .finally(() => {
-            setLoading(false);
-            });
+      const token = localStorage.getItem("token");
+      const config = {
+          headers: { Authorization: `Bearer ${token}` },
+      };
+      if(invoice.is_paid === true ){
+        Swal.fire({
+          title: "Your Payment already Completed",
+          text: "Thankyou for using our services :)",
+          icon: "info",
+          showCancelButton: false,
+          confirmButtonColor: "#3085d6",
+          confirmButtonText: "Ok",
+        })
+      }
+      else {
+      setLoading(true);
+      axios
+        .put(
+        `https://ynwahid.cloud.okteto.net/orders/check-payment/${id}`,
+        {},
+        config
+        )
+        .then(({ data }) => {
+        console.log(data, "berhasil put");
+        location.reload();
+        })
+        .catch((err) => {
+        console.log(err, "error bang");
+        })
+        .finally(() => {
+        setLoading(false);
+        });
+      }
     }
 
     function handlehistory() {
         setLoading(true);
         router.push(`/history-order`);
+    }
+
+    function handlePayment() {
+      window.open(`${invoice.url}`,"_blank")
     }
 
     const [invoice, setInvoice] = useState({
@@ -74,11 +90,14 @@ export default function endpoint() {
 
     //get invoice
     useEffect(() => {
-      setLoading(true);
       if (!localStorage.getItem("token")) {
           router.push("/login");
       }
+      else if(localStorage.getItem("is_admin") == "true"){
+        return router.push("/404");
+      }
       else if(id!=='undefined'){
+          setLoading(true);
           const token = localStorage.getItem("token");
           const config = {
           headers: { Authorization: `Bearer ${token}` },
@@ -145,7 +164,7 @@ export default function endpoint() {
               </div>
               <div className="grid grid-cols-1 text-center px-10 py-3">
                 <p className="text-black text-center bold text-2xl">
-                  Payment Status :
+                  Order #{id} Payment Status :
                 </p>
                 {invoice.is_paid === true ? (
                   <div className="text-green-600 text-center bold text-xl mt-[2vh]">
@@ -158,18 +177,18 @@ export default function endpoint() {
                 )}
               </div>
               <p className="text-gray-600 text-md text-center mt-[5vh]">
+                Forgot to pay? see you payment receipt
+                <beb  className=" px-1 italic underline text-primary cursor-pointer" onClick={handlePayment} >
+                  here
+                </beb>
+              </p>
+              <p className="text-gray-900 text-sm text-center mt-[1vh]">Or</p>
+              <p className="text-gray-600 text-md text-center mt-[1vh]">
                 Click
                 <beb  className=" px-1 italic underline text-primary cursor-pointer" onClick={handlehistory}>
                     here
                 </beb>
                 to check your order history
-              </p>
-              <p className="text-gray-900 text-sm text-center mt-[1vh]">Or</p>
-              <p className="text-gray-600 text-md text-center mt-[1vh]">
-                See our 
-                <beb  className=" px-1 italic underline text-primary cursor-pointer" >
-                  other services 
-                </beb>
               </p>
             </div>
             {/* Desc Card End*/}

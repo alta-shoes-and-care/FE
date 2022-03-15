@@ -25,14 +25,45 @@ export default function invoice() {
         ,'total': 0
         ,'url': ""
     });
-    console.log(invoice)  
     
+    const [history, sethistory] = useState([[]]);
+    console.log(history);
+  
     useEffect(() => {
-        setLoading(true);
+      if (typeof window !== "undefined") {
+        if (!localStorage.getItem("token")) {
+          router.push("/login");
+        }
+      }
+      setLoading(true);
+      const token = localStorage.getItem("token");
+      const config = {
+        headers: { Authorization: `Bearer ${token}` },
+      };
+      axios
+        .get(`https://ynwahid.cloud.okteto.net/orders/me`, config)
+        .then(({ data }) => {
+          sethistory(data.data);
+          console.log(data.data, "masuk");
+        })
+        .catch((err) => {
+          console.log(err.response, "error");
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }, []);
+
+
+    useEffect(() => {
         if (!localStorage.getItem("token")) {
             router.push("/login");
         }
+        else if(localStorage.getItem("is_admin") == "true"){
+            return router.push("/404");
+          }
         else if(id!=='undefined'){
+            setLoading(true);
             const token = localStorage.getItem("token");
             const config = {
             headers: { Authorization: `Bearer ${token}` },
@@ -45,22 +76,22 @@ export default function invoice() {
                 })
                 .catch((err) => {
                     console.log(err, "error bang");
-                    if (err.response.status === 401) {
-                        Swal.fire({
-                          title: "Your session has ended!",
-                          text: "Please login again to continue.",
-                          icon: "error",
-                          showCancelButton: false,
-                          confirmButtonColor: "#3085d6",
-                          cancelButtonColor: "#d33",
-                          confirmButtonText: "Ok",
-                        }).then((result) => {
-                          if (result.isConfirmed) {
-                            router.push("/login");
-                            localStorage.clear();
-                          }
-                        });
-                      }
+                    // if (err.response.status === 401) {
+                    //     Swal.fire({
+                    //       title: "Your session has ended!",
+                    //       text: "Please login again to continue.",
+                    //       icon: "error",
+                    //       showCancelButton: false,
+                    //       confirmButtonColor: "#3085d6",
+                    //       cancelButtonColor: "#d33",
+                    //       confirmButtonText: "Ok",
+                    //     }).then((result) => {
+                    //       if (result.isConfirmed) {
+                    //         router.push("/login");
+                    //         localStorage.clear();
+                    //       }
+                    //     });
+                    //   }
                 })
                 .finally(() => {
                     setLoading(false);
@@ -103,30 +134,42 @@ export default function invoice() {
     
     return (
         <section>
-            <div className={`z-0 grid grid-cols-1 w-screen h-screen bg-cover mt-[-100px] ${style.bgImage2}  `}>  
-                <div className='z-1 w-[100vw] h-screen bg-[#000009] bg-opacity-0 text-left'>
-                    <div class="z-2 grid grid-cols-1 gap-4 bg-cover mt-[100px]">
+            <div className={`bold z-0 grid grid-cols-1 w-screen h-screen bg-cover ${style.bgImage2}  `}>  
+                <div className='bold z-1 w-[100vw] h-screen bg-[#000009] bg-opacity-5 text-left'>
+                    <div class="z-2 grid grid-cols-1 gap-4 bg-cover ">
                         <div className="mt-[2vh]">
-                            <p className="text-4xl text-center text-white">
+                            <p className="text-5xl text-center text-white">
                                 Payment Invoice
                             </p>
                         </div>
                         {/* Desc Card */}
-                        <div className='ml-[30vw] z-3 w-[40vw] h-auto bg-[#ffffff] bg-opacity-90  text-left rounded-lg pb-5'>
-                            <div className="grid grid-cols-1 text-left mt-[1vh] px-10 py-2">
-                                <p className="text-black text-center bold text-2xl">
+                        <div className='ml-[30vw] z-3 w-[40vw] h-auto bg-[#ffffff] bg-opacity-90  text-left rounded-lg p-5'>
+                            
+                            <div className="grid grid-cols-1 center mb-2">
+                                <p className="text-black text-center bold text-3xl">
                                     Service type: {invoice.service_title}  
                                 </p>
                             </div>
-                            {/*Invoice Section */}
-                            {/*quantity */}
-                            <div className="grid grid-cols-1">
-                                <h1 className="text-center text-black bold text-lg mb-[2vh]">
-                                    Quantity (Pairs): <dom className="text-primary">{invoice.qty}</dom>
+                    
+                           
+                            <div className="grid grid-cols-2">
+                                <h1 className="text-left text-black bold text-lg  ml-[4vw]">
+                                    Order Number  : 
+                                </h1>
+                                <h1 className="text-left text-black bold text-lg ml-[4vw]">
+                                    Quantity (pairs) : 
                                 </h1>
                             </div>
-                            {/*quantity end*/}
-                            {/*patment - phone number */}
+                            <div className="grid grid-cols-2 mb-1">
+                                <h1 className="text-left text-primary bold text-md ml-[4vw]">
+                                    #{id}
+                                </h1>
+                                <h1 className="text-left text-primary bold text-md ml-[4vw]">
+                                    {invoice.qty}
+                                </h1>
+                            </div>
+                           
+                          
                             <div className="grid grid-cols-2">
                                 <h1 className="text-left text-black bold text-lg mt-[1vh] ml-[4vw]">
                                     Payment Method  : 
@@ -143,8 +186,7 @@ export default function invoice() {
                                     {invoice.phone}
                                 </h1>
                             </div>
-                            {/*payment-phone number end */}
-                            {/*city - pickup date*/}
+                           
                             <div className="grid grid-cols-2">
                                 <h1 className="text-left text-black bold text-lg mt-[2vh] ml-[4vw]">
                                     City  :
@@ -161,25 +203,22 @@ export default function invoice() {
                                     {moment(invoice.date).format('LL')}
                                 </div>
                             </div>
-                            {/*city - pickup date */}
-                            {/*Adress - Subtotal*/}
+                       
                             <div className="grid grid-cols-2">
                                 <h1 className="text-left text-black bold text-lg mt-[2vh] ml-[4vw]">
                                     Adress  :
                                 </h1>
                             </div>
-                            <div className="grid grid-cols-1 max-w-[38vw] mb-1">
-                                <h1 className="text-left text-primary bold text-md ml-[4vw]">
-                                    {invoice.address} 
+                            <div className="grid grid-cols-1  mb-1">
+                                <h1 className="text-justify text-primary bold text-md ml-[4vw] pr-[5vw] max-h-[15vh] overflow-hidden">
+                                    {invoice.address}
                                 </h1>
                             </div>
-                            {/*Adress - subtotal end*/}
-                            {/*Invoice end */}
+                          
                         </div>
-                        {/* Desc Card End*/}
-                        {/* Button Subtotal*/}
+                      
                         <div className="ml-[25vw] mt-[-1vh] text-center">
-                            <div className="bold text-xl">
+                            <div className="bold text-white text-2xl">
                                 Subtotal : <NumberFormat
                                 value={invoice.total}
                                 displayType={"text"}
@@ -194,7 +233,7 @@ export default function invoice() {
                                 <p className="text-md text-center rounded-xl"> Confirm Payment </p>
                             </button>
                         </div>
-                        {/* Button Subtotal end*/}
+
                     </div>
                 </div>
             </div>
