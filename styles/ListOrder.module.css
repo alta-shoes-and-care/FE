@@ -42,8 +42,12 @@
     width: 360px;
     display: flex;
     flex-wrap: wrap;
+    padding-right: 10px;
   }
   .icon2 {
     margin-top: 10px;
+  }
+  .titleCard {
+    width: 325px;
   }
 }
