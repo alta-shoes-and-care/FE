@@ -151,7 +151,10 @@ function History() {
                     </p>
                     <p>{el.status}</p>
                   </div>
-                  <div className=" flex">
+                  <div
+                    onClick={() => router.push(`/endpoint/${el.id}`)}
+                    className=" hover:cursor-pointer hover:text-gray-500 flex"
+                  >
                     <p className="text-xl mt-0.5 mr-1">
                       <AiOutlineShoppingCart />
                     </p>
