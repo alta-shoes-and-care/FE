@@ -3,7 +3,7 @@ import Image from "next/image";
 import Profile from "../assets/profile.png";
 import FE_yusuf from "../assets/team/FE_yusuf.png";
 import FE_diyah from "../assets/team/FE_diyah.png";
-import FE_aditya from "../assets/team/FE_aditya.png";
+import FE_aditya from "../assets/team/FE_adit.png";
 import BE_yusuf from "../assets/team/BE_yusuf.png";
 import BE_frans from "../assets/team/BE_frans.png";
 import QE_adhit from "../assets/team/QE_adhit.png";
