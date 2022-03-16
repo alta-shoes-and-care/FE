@@ -14,11 +14,14 @@
 Nowadays, some people are very busy and don't even have time to clean their shoes. Therefore we need a platform that is able to connect customers with shoes washing service provider.
 
   <p align="center">
-    DESIGN
+    PROTOTYPE FIGMA
     <br />
     <div id = "other-software-design"></div>
-    ·
-    <a href="https://www.figma.com/file/bSG0AWlCKrcXoG98z7lTyN/Shoes-and-Care?node-id=3%3A2">Figma</a>
+    -
+    <a href="https://www.figma.com/proto/bSG0AWlCKrcXoG98z7lTyN/Shoes-Service-Station?node-id=435%3A385&starting-point-node-id=435%3A385&scaling=scale-down">User</a>
+    <br />
+    -
+    <a href="https://www.figma.com/proto/bSG0AWlCKrcXoG98z7lTyN/Shoes-Service-Station?node-id=435%3A4747&starting-point-node-id=444%3A7083&scaling=scale-down">Admin</a>
   </p>
 </div>
 <br />
