@@ -20,13 +20,42 @@ export default function endpoint() {
         html: "This may take a few seconds, please don't close this page.",
         allowOutsideClick: false,
         showConfirmButton: false,
-        timer: 750,
+        timer: 1000,
 
         willOpen: () => {
             Swal.showLoading();
         },
         });
     }
+
+     // history for validate checker
+     const [history, setHistory] = useState([[]]);
+  
+     useEffect(() => {
+       if (typeof window !== "undefined") {
+         if (!localStorage.getItem("token")) {
+           router.push("/login");
+         }
+       }
+       setLoading(true);
+       const token = localStorage.getItem("token");
+       const config = {
+         headers: { Authorization: `Bearer ${token}` },
+       };
+       axios
+         .get(`https://ynwahid.cloud.okteto.net/orders/me`, config)
+         .then(({ data }) => {
+             setHistory(data.data);
+             console.log(data.data, "masuk");
+         })
+         .catch((err) => {
+           console.log(err.response, "error");
+         })
+         .finally(() => {
+             setLoading(false);
+         });
+     }, []);
+     // end load history
 
     //put payment
     function refreshPage() {
@@ -132,8 +161,23 @@ export default function endpoint() {
               });  
           }
       }, [id]);
-      
+  
+  if(history[0].user_id !== invoice.user_id
+    && history[0].user_id !== undefined 
+    && invoice.user_id !== undefined ) {
 
+    console.log("ga valid")
+    router.push("/404")
+  }
+  else if(history[0].user_id == invoice.user_id 
+      && history[0].user_id !== undefined 
+      && invoice.user_id !== undefined ) {
+
+      console.log("mantap valid")
+
+  }
+  
+    
   return (
     <section>
       <div

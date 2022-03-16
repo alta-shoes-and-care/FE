@@ -24,10 +24,11 @@ export default function invoice() {
         ,'address': ""
         ,'total': 0
         ,'url': ""
+        ,'user_id'  :id
     });
     
-    const [history, sethistory] = useState([[]]);
-    console.log(history);
+    // history for validate checker
+    const [history, setHistory] = useState([[]]);
   
     useEffect(() => {
       if (typeof window !== "undefined") {
@@ -43,19 +44,19 @@ export default function invoice() {
       axios
         .get(`https://ynwahid.cloud.okteto.net/orders/me`, config)
         .then(({ data }) => {
-          sethistory(data.data);
-          console.log(data.data, "masuk");
+            setHistory(data.data);
+            console.log(data.data, "masuk");
         })
         .catch((err) => {
           console.log(err.response, "error");
         })
         .finally(() => {
-          setLoading(false);
+            setLoading(false);
         });
     }, []);
-
-
-    useEffect(() => {
+    // end load history
+    
+     useEffect(() => {
         if (!localStorage.getItem("token")) {
             router.push("/login");
         }
@@ -76,24 +77,25 @@ export default function invoice() {
                 })
                 .catch((err) => {
                     console.log(err, "error bang");
-                    // if (err.response.status === 401) {
-                    //     Swal.fire({
-                    //       title: "Your session has ended!",
-                    //       text: "Please login again to continue.",
-                    //       icon: "error",
-                    //       showCancelButton: false,
-                    //       confirmButtonColor: "#3085d6",
-                    //       cancelButtonColor: "#d33",
-                    //       confirmButtonText: "Ok",
-                    //     }).then((result) => {
-                    //       if (result.isConfirmed) {
-                    //         router.push("/login");
-                    //         localStorage.clear();
-                    //       }
-                    //     });
-                    //   }
+                    if (err.response.status === 401) {
+                        Swal.fire({
+                          title: "Your session has ended!",
+                          text: "Please login again to continue.",
+                          icon: "error",
+                          showCancelButton: false,
+                          confirmButtonColor: "#3085d6",
+                          cancelButtonColor: "#d33",
+                          confirmButtonText: "Ok",
+                        }).then((result) => {
+                          if (result.isConfirmed) {
+                            router.push("/login");
+                            localStorage.clear();
+                          }
+                        });
+                      }
                 })
                 .finally(() => {
+                    hitung++;
                     setLoading(false);
                 });  
             }
@@ -106,7 +108,7 @@ export default function invoice() {
               html: "This may take a few seconds, please don't close this page.",
               allowOutsideClick: false,
               showConfirmButton: false,
-              timer:750,
+              timer:1000,
                 
               willOpen: () => {
                 Swal.showLoading();
@@ -131,6 +133,24 @@ export default function invoice() {
                 }
             });
         }
+
+
+        if(history[0].user_id !== invoice.user_id
+            && history[0].user_id !== undefined 
+            && invoice.user_id !== undefined ) {
+
+            console.log("ga valid")
+            router.push("/404")
+        }
+        else if(history[0].user_id == invoice.user_id 
+            && history[0].user_id !== undefined 
+            && invoice.user_id !== undefined ) {
+
+            console.log("mantap valid")
+
+        }
+
+   
     
     return (
         <section>

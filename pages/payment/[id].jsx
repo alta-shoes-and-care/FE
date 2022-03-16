@@ -279,6 +279,76 @@ export default function formpayment(props) {
         }); 
         }
 
+    //payment validation
+
+    // history for validate checker
+    const [history, setHistory] = useState([[]]);
+  
+    useEffect(() => {
+      if (typeof window !== "undefined") {
+        if (!localStorage.getItem("token")) {
+          router.push("/login");
+        }
+      }
+      setLoading(true);
+      const token = localStorage.getItem("token");
+      const config = {
+        headers: { Authorization: `Bearer ${token}` },
+      };
+      axios
+        .get(`https://ynwahid.cloud.okteto.net/orders/me`, config)
+        .then(({ data }) => {
+            setHistory(data.data);
+            console.log(data.data, "masuk");
+        })
+        .catch((err) => {
+          console.log(err.response, "error");
+          if (err.response.status === 401) {
+            Swal.fire({
+              title: "Your session has ended!",
+              text: "Please login again to continue.",
+              icon: "error",
+              showCancelButton: false,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Ok",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                router.push("/login");
+                localStorage.clear();
+              }
+            });
+          }
+        })
+        .finally(() => {
+            setLoading(false);
+        });
+    }, []);
+    // end load history
+
+    if( history[0].user_id !== undefined ) 
+    {
+      for(let i=0; i<history.length; i++)
+      {
+        if (history[i].is_paid == false)
+        {
+          Swal.fire({
+            title: "Oops sorry, we can't serve you right now",
+            text: "Please finish your last order payment first.",
+            icon: "warning",
+            showCancelButton: false,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Ok",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              router.push("/history-order");
+            }
+          });
+        }
+      }
+    }
+
   return (
     <section>
       <div
