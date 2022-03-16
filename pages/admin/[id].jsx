@@ -250,7 +250,11 @@ function EditItem() {
                 }
               });
             } else {
-              Swal.fire("Ooppss!", "Sorry, the server is error.", "error");
+              Swal.fire(
+                "Invalid!",
+                "The title you entered may already be registered",
+                "error"
+              );
             }
           })
           .finally(() => {
