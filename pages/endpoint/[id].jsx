@@ -97,7 +97,8 @@ export default function endpoint() {
       ,'address': ""
       ,'total': 0
       ,'url': ""
-      ,'is_paid': ""
+      ,'is_paid': false
+      ,'user_id'  : undefined
     });
     console.log(invoice)  
 
@@ -174,12 +175,12 @@ export default function endpoint() {
         <div className="z-1 w-[100vw] h-screen bg-[#000009] bg-opacity-0 text-left">
           <div className="z-2 grid grid-cols-1 gap-4 bg-cover">
             {/* Desc Card */}
-            <div className="ml-[20vw] mt-[10vh] z-3 w-[40vw] h-auto bg-[#ffffff] bg-opacity-80 hover:shadow-xl text-left rounded-lg pb-5">
+            <div className="container ml-[20vw] mt-[10vh] z-3 w-[40vw] h-auto bg-[#ffffff] bg-opacity-80 hover:shadow-xl text-left rounded-lg pb-5">
               <div className="grid grid-cols-1 text-center px-10 py-3">
                 <p className="text-black text-center bold text-4xl">
                   Thankyou for using our services
                 </p>
-                <p className="text-gray-600 text-md text-center mt-[3vh]">
+                <p className="text-gray-900 bold text-md text-center mt-[3vh]">
                   If you already finished the payment, click refresh to check your payment status
                 </p>
               </div>
@@ -208,14 +209,14 @@ export default function endpoint() {
                   </div>
                 )}
               </div>
-              <p className="text-gray-600 text-md text-center mt-[5vh]">
+              <p className="text-gray-900 text-md text-center mt-[5vh]">
                 Forgot to pay? see you payment receipt
                 <beb  className=" px-1 italic underline text-primary cursor-pointer" onClick={handlePayment} >
                   here
                 </beb>
               </p>
-              <p className="text-gray-900 text-sm text-center mt-[1vh]">Or</p>
-              <p className="text-gray-600 text-md text-center mt-[1vh]">
+              <p className="text-gray-900 bold text-sm text-center mt-[1vh]">Or</p>
+              <p className="text-gray-900 bold text-md text-center mt-[1vh]">
                 Click
                 <beb  className=" px-1 italic underline text-primary cursor-pointer" onClick={handlehistory}>
                     here

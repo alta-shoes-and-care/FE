@@ -122,7 +122,7 @@ export default function formpayment(props) {
           city: city,
           phone: phone,
         };
-
+        
         axios
           .post("https://ynwahid.cloud.okteto.net/orders", body, config)
           .then(({ data }) => {
@@ -131,10 +131,14 @@ export default function formpayment(props) {
             Swal.fire({
               icon: "success",
               title: "Order Success",
-            });
-            setTimeout(() => {
-              router.push(`/invoice/${data.data.id}`);
-            }, 1000);
+              confirmButtonText: "Ok",
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  setTimeout(() => {
+                    router.push(`/invoice/${data.data.id}`);
+                  }, 1000);
+                }
+              });
           })
           .catch((err) => {
             Swal.fire("Order failed!", "Sorry, Something gone wrong. Please try again later.", "error");
@@ -155,21 +159,6 @@ export default function formpayment(props) {
                 }
               });
             }
-            else {
-              Swal.fire({
-                title:"Oops, Something gone wrong.",
-                text: "Please try again later.",
-                icon: "error",
-                showCancelButton: false,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Ok",
-              }).then((result) => {
-                if (result.isConfirmed) {
-                  router.push("/");
-                }
-              });
-            }
           })
           .finally(() => {
             setConfirmLoading(false);
@@ -180,118 +169,7 @@ export default function formpayment(props) {
     });
   }
   
-  function handlevalidate(){
-    if (
-      payment_method_id === 0 ||
-      payment_method_id === ""
-    ) {
-       validate1 = "Payment Method "
-    }  
-    if (
-      city === ""
-    ) {
-      validate2 = " City "
-    } 
-    if (
-      phone === ""
-    ) {
-      validate3 = " Phone Number "
-    } 
-    if (
-      date === ""
-    ) {
-      validate4 = " Date "
-    } 
-    if (
-      qty === 0
-    ) {
-       validate5 = " Quantity "
-    }
-    if (
-      address === ""
-    ) {
-       validate6 = " Adress"
-    } 
-
-    var string=`${validate1}${validate2}${validate3}${validate4}${validate5}${validate6}`
-    var string2=string.split('  ').join(', ');
-    validatetotal=string2
-  }
- 
-  function validateButton() {
-    
-    //validate payment
-    if( history[0].user_id !== undefined ) 
-    {
-      for(let i=0; i<history.length; i++)
-      {
-        if (history[i].is_paid == false)
-        {
-          Swal.fire({
-            title: "You have unfinished order!",
-            text: "Do you want to see your order history?",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#175C8C",
-            cancelButtonColor: "#31d433",
-            confirmButtonText: "Go to history page",
-            cancelButtonText: "keep Ordering",
-          }).then((result) => {
-            if (result.isConfirmed) {
-              router.push("/history-order");
-            }
-  
-          });
-        }
-      }
-    }
-    // end validate payment
-
-    handlevalidate();
-    
-    if (
-      payment_method_id === 0 ||
-      payment_method_id === "" ||
-      city === "" ||
-      phone === "" ||
-      date === "" ||
-      qty === 0 ||
-      qty === "" ||
-      address === ""
-    ) {
-      Swal.fire(
-        "Please fill out the form!",
-        `${validatetotal} form can't be empty. Please fill out the empty fields.`,
-        "warning"
-      );
-    } else if (
-      !/^[0-9]+(.[0-9]{0})?$/.test(phone)
-    ) {
-      Swal.fire("Invalid!", "Invalid Phone Number Format", "error");
-    } else if (
-      !/^[0-9]+(.[0-9]{0})?$/.test(qty)
-    ) {
-      Swal.fire("Invalid!", "Quantity cannot be Negative", "error");
-    }else {
-      handleButton();
-    }
-  }
-
-    if (confirmLoading) {
-      Swal.fire({
-        title: "Please Wait!",
-        html: "This may take a few seconds, please don't close this page.",
-        allowOutsideClick: false,
-        showConfirmButton: false,
-        timer:3000,
-          
-        willOpen: () => {
-          Swal.showLoading();
-          },
-      }); 
-    }
-
-    //payment validation
+  //payment validation
 
     // history for validate checker
     const [history, setHistory] = useState([[]]);
@@ -339,6 +217,126 @@ export default function formpayment(props) {
     // end load history
   
   //end payment validation
+
+
+  function handlevalidate(){
+    if (
+      payment_method_id === 0 ||
+      payment_method_id === ""
+    ) {
+       validate1 = "Payment Method "
+    }  
+    if (
+      city === ""
+    ) {
+      validate2 = " City "
+    } 
+    if (
+      phone === ""
+    ) {
+      validate3 = " Phone Number "
+    } 
+    if (
+      date === ""
+    ) {
+      validate4 = " Date "
+    } 
+    if (
+      qty === 0
+    ) {
+       validate5 = " Quantity "
+    }
+    if (
+      address === ""
+    ) {
+       validate6 = " Adress"
+    } 
+
+    var string=`${validate1}${validate2}${validate3}${validate4}${validate5}${validate6}`
+    var string2=string.split('  ').join(', ');
+    validatetotal=string2
+  }
+
+  function validateButton() {
+
+    handlevalidate();
+    
+    if (
+      payment_method_id === 0 ||
+      payment_method_id === "" ||
+      city === "" ||
+      phone === "" ||
+      date === "" ||
+      qty === 0 ||
+      qty === "" ||
+      address === ""
+    ) {
+      Swal.fire(
+        "Please fill out the form!",
+        `${validatetotal} form can't be empty. Please fill out the empty fields.`,
+        "warning"
+      );
+    } else if (
+      !/^[0-9]+(.[0-9]{0})?$/.test(phone)
+    ) {
+      Swal.fire("Invalid!", "Invalid Phone Number Format", "error");
+    } else if (
+      !/^[0-9]+(.[0-9]{0})?$/.test(qty)
+    ) {
+      Swal.fire("Invalid!", "Quantity cannot be Negative", "error");
+    }else {
+      handleButton();
+    }
+  }
+
+    if (confirmLoading) {
+      Swal.fire({
+        title: "Please Wait!",
+        html: "This may take a few seconds, please don't close this page.",
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        timer:3000,
+          
+        willOpen: () => {
+          Swal.showLoading();
+          },
+      }); 
+    }
+
+    function validatepayment(){
+      //validate payment
+      if( history[0].user_id !== undefined ) 
+      {
+        for(let i=0; i<history.length; i++)
+        {
+          if (history[i].is_paid == false)
+          {
+            Swal.fire({
+              title: "You have unfinished order!",
+              text: "Do you want to see your order history?",
+              icon: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#175C8C",
+              cancelButtonColor: "#31d433",
+              confirmButtonText: "Go to history page",
+              cancelButtonText: "keep Ordering",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                router.push("/history-order");
+              }
+              else {
+                validateButton();
+              }
+            });
+          }
+        }
+      }
+      else {
+        validateButton();
+      }
+      // end validate payment
+    }
+
   
   if (loading) {
     return (<Loading/>)
@@ -353,12 +351,12 @@ export default function formpayment(props) {
         <div className="z-1 w-[100vw] h-screen bg-[#000009] bg-opacity-30 text-center">
           <div className="z-2 grid grid-cols-1 gap-4 bg-cover">
             <div className="mt-[2.5vh]">
-              <p className="py-3 text-5xl text-white">Confirm your order</p>
+              <p className="pt-3 py-2 text-5xl text-white">Confirm your order</p>
             </div>
 
             {/* Desc Card */}
 
-            <div className="my-auto ml-[25vw] z-3 w-[50vw] h-auto bg-[#ffffff] bg-opacity-80 text-left rounded-lg pb-5">
+            <div className="container my-auto ml-[25vw] z-3 w-[50vw] h-auto bg-[#ffffff] bg-opacity-80 text-left rounded-lg pb-5">
               <div className="grid grid-cols-1 text-center mt-[0.5vh]  px-10 py-2">
                 <p className="text-black bold text-2xl">
                   Service type: {services.title}
@@ -370,13 +368,13 @@ export default function formpayment(props) {
 
               {/*form Section */}
 
-              {/*patment - phone number - quantity */}
+              {/*payment - phone number - quantity */}
 
               <div className="grid grid-cols-3 mt-[1vh]">
                 <h1 className="text-left text-[#175C8C] bold text-lg ml-[3vw]">
                   Payment Method<dot className="text-red-600">*</dot>
                 </h1>
-                <h1 className="text-left text-[#175C8C] bold text-lg ml-[0.7vw]">
+                <h1 className="text-left text-[#175C8C] bold text-lg ">
                   Phone Number<dot className="text-red-600">*</dot>
                 </h1>
                 <h1 className="text-left text-[#175C8C] bold text-lg ml-[3vw]">
@@ -385,15 +383,15 @@ export default function formpayment(props) {
               </div>
 
               <div className="grid grid-cols-3">
-                <div className={style.input}>
+                <div className="">
                   <select
-                    className="text-gray-500 w-[10.5vw]"
+                    className="ml-10 lg:h-[50px] h-[30px] w-[11.5vw] bg-transparent appearance-none lg:rounded-xl rounded-md relative px-2 py-2 border-2 border-primary placeholder-gray-700 text-black lg:text-[18px] text-[15px] focus:outline-none focus:ring-primary focus:border-primary focus:z-10"
                     value={payment_method_id}
                     onChange={(e) => {
                       setPayment_method_id(e.target.value);
                     }}
                   >
-                    <option value={0} disabled="true">
+                    <option className="bg-transparent appearance-none" value={0} disabled="true">
                       Choose Payment
                     </option>
                     <option value={1}>BCA Click Pay</option>
@@ -415,7 +413,7 @@ export default function formpayment(props) {
                     placeholder="Phone Number"
                     autoComplete="off"
                     required
-                    className="ml-[0.50vw] h-[30px] bg-transparent appearance-none relative block w-full px-3 py-2 border-2 border-primary placeholder-gray-500 text-gray-500 md:text-[18px] rounded-lg focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+                    className="lg:h-[50px] h-[30px] lg:w-full w-[50%] bg-transparent appearance-none lg:rounded-xl rounded-md relative px-3 py-2 border-2 border-primary placeholder-gray-700 text-black lg:text-[18px] text-[15px] focus:outline-none focus:ring-primary focus:border-primary focus:z-10W"
                     value={phone}
                     onChange={(e) => {
                       setPhone(e.target.value);
@@ -435,7 +433,7 @@ export default function formpayment(props) {
                     placeholder="0"
                     autoComplete="off"
                     required
-                    className="mx-auto h-[30px] form-control bg-transparent appearance-none relative block w-[5vw] px-3 py-2 border-2 border-primary placeholder-gray-500 text-gray-500 md:text-[18px] rounded-lg focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+                    className="ml-[9vw] lg:h-[50px] h-[30px] w-0.5% bg-transparent appearance-none lg:rounded-xl rounded-md relative px-3 py-2 border-2 border-primary placeholder-gray-700 text-black lg:text-[18px] text-[15px] focus:outline-none focus:ring-primary focus:border-primary focus:z-10"
                     min="1"
                     max="9"
                     value={qty}
@@ -451,18 +449,18 @@ export default function formpayment(props) {
               {/*city - pickup date*/}
 
               <div className="grid grid-cols-3">
-                <h1 className="text-left text-[#175C8C] bold text-lg ml-[3vw]">
+                <h1 className="pt-2 text-left text-[#175C8C] bold text-lg ml-[3vw]">
                   City<dot className="text-red-600">*</dot>
                 </h1>
-                <h1 className="text-left text-[#175C8C] bold text-lg ml-[0.7vw]">
+                <h1 className="pt-2 text-left text-[#175C8C] bold text-lg">
                   Pick-Up Date<dot className="text-red-600">*</dot>
                 </h1>
               </div>
 
               <div className="grid grid-cols-3 ">
-                <div className={style.input}>
+                <div className="">
                   <select
-                    className="text-gray-500 w-[10.5vw]"
+                    className="ml-10 lg:h-[50px] h-[30px] w-[11.5vw] bg-transparent appearance-none lg:rounded-xl rounded-md relative px-2 py-2 border-2 border-primary placeholder-gray-700 text-black lg:text-[18px] text-[15px] focus:outline-none focus:ring-primary focus:border-primary focus:z-10"
                     value={city}
                     onChange={(e) => {
                       setCity(e.target.value);
@@ -500,7 +498,7 @@ export default function formpayment(props) {
                     placeholder="Pick Up Date"
                     autoComplete="off"
                     required
-                    className="ml-[0.5vw] h-[30px] bg-transparent appearance-none relative block w-full px-3 py-2 border-2 border-primary placeholder-gray-500 text-gray-500 md:text-[18px] rounded-lg focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+                    className="lg:h-[50px] h-[30px] lg:w-full w-[50%] bg-transparent appearance-none lg:rounded-xl rounded-md relative px-3 py-2 border-2 border-primary placeholder-gray-700 text-black lg:text-[18px] text-[15px] focus:outline-none focus:ring-primary focus:border-primary focus:z-10"
                     value={date}
                     onChange={(e) => {
                       setDate(e.target.value);
@@ -514,7 +512,7 @@ export default function formpayment(props) {
               {/*Address - Subtotal*/}
 
               <div className="grid grid-cols-2">
-                <h1 className="text-left text-[#175C8C] bold text-lg ml-[3vw]">
+                <h1 className="pt-2 text-left text-[#175C8C] bold text-lg ml-[3vw]">
                   Address <dot className="text-red-600">*</dot>
                 </h1>
               </div>
@@ -532,7 +530,7 @@ export default function formpayment(props) {
                     placeholder="Address"
                     autoComplete="off"
                     required
-                    className="h-[20vh] bg-transparent appearance-none relative block w-[30.5vw] px-3 py-2 border-2 border-primary placeholder-gray-500 text-gray-500 md:text-[18px] rounded-lg focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm"
+                    className="h-[25vh] w-[30.5vw] bg-transparent appearance-none lg:rounded-xl rounded-md relative px-3 py-2 border-2 border-primary placeholder-gray-700 text-black lg:text-[18px] text-[15px] focus:outline-none focus:ring-primary focus:border-primary focus:z-10"
                     value={address}
                     onChange={(e) => {
                       setAddress(e.target.value);
@@ -540,7 +538,7 @@ export default function formpayment(props) {
                   />
                 </div>
 
-                <div className="ml-[7vw]">
+                <div className="ml-[5vw] text-center">
                   <div className="">
                     <p className="text-2xl text-center bold">Subtotal</p>
                     <h1 className="text-2xl text-center bold">
@@ -555,8 +553,8 @@ export default function formpayment(props) {
                     </h1>
                   </div>
                   <button
-                    className="ml-[3.5vw] bg-primary hover:bg-white text-white hover:text-primary font-bold py-2 px-3 border-2 border-primary rounded-lg mt-[1vh]"
-                    onClick={validateButton}
+                    className="ml-[3.5vw] lg:h-[50px] h-[30px] w-[12vw] mt-5 lg:mt-10 text-center lg:text-[18px] text-[15px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium lg:rounded-xl rounded-md text-white bg-primary hover:bg-transparent hover:border-primary hover:border-2 hover:text-primary hover:font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                    onClick={validatepayment}
                   >
                     <p className="text-md text-center rounded-xl">
                       {" "}

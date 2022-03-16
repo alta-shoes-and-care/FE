@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import axios from "axios";
 import NumberFormat from 'react-number-format';
 import Swal from "sweetalert2";
+import Loading from "../../components/Loading";
 
 export default function services() {
 
@@ -88,17 +89,7 @@ export default function services() {
     }
 
     if (loading) {
-        Swal.fire({
-          title: "Please Wait!",
-          html: "This may take a few seconds, please don't close this page.",
-          allowOutsideClick: false,
-          showConfirmButton: false,
-          timer:750,
-            
-          willOpen: () => {
-            Swal.showLoading();
-           },
-        }); 
+        return (<Loading/>)
     }
 
     
