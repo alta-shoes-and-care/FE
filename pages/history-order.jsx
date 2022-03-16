@@ -136,67 +136,75 @@ function History() {
           <div></div>
         ) : (
           <div className=" w-[700px] overflow-y-scroll flex flex-col items-center">
-            {history.map((el, i) => (
-              <div
-                className={` ${styles.content} w-[630px] rounded-lg py-2 px-3 my-3 bg-white shadow-md`}
-              >
-                <h1 className=" text-xl">{el.service_title}</h1>
-                <div className=" bg-gray-600 w-[200px] my-1 h-0.5"></div>
-                {/* status */}
-                <div className={`flex mt-1 justify-between ${styles.status}`}>
-                  <div className=" flex">
-                    <p className=" text-green-600 text-xl mt-0.5 mr-1">
-                      <FaMoneyBillAlt />
-                    </p>
-                    <p>
-                      Rp.{" "}
-                      <NumberFormat
-                        value={el.total}
-                        displayType={"text"}
-                        thousandSeparator={true}
-                      />
-                    </p>
-                  </div>
-                  <div className=" flex">
-                    <p className="text-xl mt-0.5 mr-1">
-                      <FcCalendar />
-                    </p>
-                    <p>{moment(el.date).format("D MMMM YYYY")}</p>
-                  </div>
-                  <div className=" flex">
-                    <p className="text-xl mt-0.5 mr-1">
-                      <RiMessage2Line />
-                    </p>
-                    <p>{el.status}</p>
-                  </div>
-                  <div
-                    onClick={() => router.push(`/endpoint/${el.id}`)}
-                    className=" hover:cursor-pointer hover:text-gray-500 flex"
-                  >
-                    <p className="text-xl mt-0.5 mr-1">
-                      <AiOutlineShoppingCart />
-                    </p>
-                    <p>{el.is_paid ? "Paid" : "Not Paid"}</p>
-                  </div>
-                  <div className=" flex">
-                    <p className="text-xl mt-0.5 mr-0.5">
-                      <AiOutlineNumber />
-                    </p>
-                    <p>{el.id}</p>
-                  </div>
-                  {el.status === "delivering" ? (
-                    <div className=" flex hover:text-primary">
-                      <p className="text-xl mt-0.5 mr-0.5">
-                        <AiOutlineFileDone />
+            {history
+              .slice()
+              .sort((a, b) => {
+                return b.id - a.id;
+              })
+              .map((el, i) => (
+                <div
+                  onClick={() => router.push(`/endpoint/${el.id}`)}
+                  className={` ${styles.content} w-[630px] rounded-lg py-2 px-3 my-3 bg-white shadow-md`}
+                >
+                  <h1 className=" text-xl">{el.service_title}</h1>
+                  <div className=" bg-gray-600 w-[200px] my-1 h-0.5"></div>
+                  {/* status */}
+                  <div className={`flex mt-1 justify-between ${styles.status}`}>
+                    <div className=" flex">
+                      <p className=" text-green-600 text-xl mt-0.5 mr-1">
+                        <FaMoneyBillAlt />
                       </p>
-                      <button onClick={() => handleConfirm(el)}>Confirm</button>
+                      <p>
+                        Rp.{" "}
+                        <NumberFormat
+                          value={el.total}
+                          displayType={"text"}
+                          thousandSeparator={true}
+                        />
+                      </p>
                     </div>
-                  ) : (
-                    <div></div>
-                  )}
+                    <div className=" flex">
+                      <p className="text-xl mt-0.5 mr-1">
+                        <FcCalendar />
+                      </p>
+                      <p>{moment(el.date).format("D MMMM YYYY")}</p>
+                    </div>
+                    <div className=" flex">
+                      <p className="text-xl mt-0.5 mr-1">
+                        <RiMessage2Line />
+                      </p>
+                      <p>{el.status}</p>
+                    </div>
+                    <div
+                      onClick={() => router.push(`/endpoint/${el.id}`)}
+                      className=" hover:cursor-pointer hover:text-gray-500 flex"
+                    >
+                      <p className="text-xl mt-0.5 mr-1">
+                        <AiOutlineShoppingCart />
+                      </p>
+                      <p>{el.is_paid ? "Paid" : "Not Paid"}</p>
+                    </div>
+                    <div className=" flex">
+                      <p className="text-xl mt-0.5 mr-0.5">
+                        <AiOutlineNumber />
+                      </p>
+                      <p>{el.id}</p>
+                    </div>
+                    {el.status === "delivering" ? (
+                      <div className=" flex hover:text-gray-500">
+                        <p className="text-xl mt-0.5 mr-0.5">
+                          <AiOutlineFileDone />
+                        </p>
+                        <button onClick={() => handleConfirm(el)}>
+                          Confirm
+                        </button>
+                      </div>
+                    ) : (
+                      <div></div>
+                    )}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
         )}
       </div>
