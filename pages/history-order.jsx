@@ -3,6 +3,7 @@ import styles from "../styles/History.module.css";
 import { FaMoneyBillAlt } from "react-icons/fa";
 import { FcCalendar } from "react-icons/fc";
 import { RiMessage2Line } from "react-icons/ri";
+import { MdOutlineRateReview } from "react-icons/md";
 import {
   AiOutlineNumber,
   AiOutlineFileDone,
@@ -199,7 +200,19 @@ function History() {
                         </button>
                       </div>
                     ) : (
-                      <div></div>
+                      <></>
+                    )}
+                    {el.status === "done" ? (
+                      <div className=" flex hover:text-gray-500 ">
+                        <p className="text-xl mt-0.5 mr-0.5">
+                          <MdOutlineRateReview />
+                        </p>
+                        <button onClick={() => router.push(`/review/${el.id}`)}>
+                          Review
+                        </button>
+                      </div>
+                    ) : (
+                      <></>
                     )}
                   </div>
                 </div>
