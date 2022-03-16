@@ -87,21 +87,21 @@ function EditItem() {
         description === ""
       ) {
         Swal.fire("Invalid!", "Incorrect format on field Price", "error");
-      } else if (!/^[0-9]+(.[0-9]{0})?$/.test(price)) {
-        Swal.fire("Invalid!", "Incorrect format on field Price", "error");
       } else if (title === "") {
         Swal.fire(
           "Invalid!",
           "Data can't be empty,please fill out the fields.",
           "error"
         );
-      } else if (description === "") {
+      } else if (price === "") {
         Swal.fire(
           "Invalid!",
           "Data can't be empty,please fill out the fields.",
           "error"
         );
-      } else if (price === "") {
+      } else if (!/^[0-9]+(.[0-9]{0})?$/.test(price)) {
+        Swal.fire("Invalid!", "Incorrect format on field Price", "error");
+      } else if (description === "") {
         Swal.fire(
           "Invalid!",
           "Data can't be empty,please fill out the fields.",
@@ -143,6 +143,12 @@ function EditItem() {
           " File is too large and incorrect format on field Price",
           "error"
         );
+      } else if (price == "") {
+        Swal.fire(
+          "Invalid!",
+          "Data can't be empty,please fill out the fields.",
+          "error"
+        );
       } else if (!/^[0-9]+(.[0-9]{0})?$/.test(price)) {
         Swal.fire("Invalid!", "Incorrect format on field Price", "error");
       } else if (files.length === 0) {
@@ -155,12 +161,6 @@ function EditItem() {
         Swal.fire(
           "Invalid!",
           "File is too large, maximum size is 500 Kb.",
-          "error"
-        );
-      } else if (price == "") {
-        Swal.fire(
-          "Invalid!",
-          "Data can't be empty,please fill out the fields.",
           "error"
         );
       } else if (files.length === 0) {

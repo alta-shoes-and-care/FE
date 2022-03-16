@@ -364,7 +364,9 @@ function ListOrder() {
           >
             {listOrder
               .slice()
-              .reverse()
+              .sort((a, b) => {
+                return b.id - a.id;
+              })
               .map((el, i) => (
                 <div
                   key={i}
@@ -378,7 +380,7 @@ function ListOrder() {
                         className={`${styles.titleCard} flex justify-between`}
                       >
                         <h1 className=" text-xl">{el.service_title}</h1>
-                        <div className=" flex">
+                        <div className=" flex items-center">
                           {el.is_paid ? (
                             <div className=" text-green-500 flex">
                               <p className="text-xl mt-0.5 mr-1">
