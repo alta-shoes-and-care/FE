@@ -29,7 +29,7 @@ export default function endpoint() {
     }
 
      // history for validate checker
-     const [history, sethistory] = useState([[]]);
+     const [history, setHistory] = useState([[]]);
   
      useEffect(() => {
        if (typeof window !== "undefined") {
@@ -45,7 +45,7 @@ export default function endpoint() {
        axios
          .get(`https://ynwahid.cloud.okteto.net/orders/me`, config)
          .then(({ data }) => {
-             sethistory(data.data);
+             setHistory(data.data);
              console.log(data.data, "masuk");
          })
          .catch((err) => {
