@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import NumberFormat from "react-number-format";
 import Swal from "sweetalert2";
+import Loading from "../../components/Loading";
 
 export default function formpayment(props) {
   const router = useRouter();
@@ -178,7 +179,6 @@ export default function formpayment(props) {
       }
     });
   }
-
   
   function handlevalidate(){
     if (
@@ -218,8 +218,34 @@ export default function formpayment(props) {
     validatetotal=string2
   }
  
- 
   function validateButton() {
+    
+    //validate payment
+    if( history[0].user_id !== undefined ) 
+    {
+      for(let i=0; i<history.length; i++)
+      {
+        if (history[i].is_paid == false)
+        {
+          Swal.fire({
+            title: "You have unfinished order!",
+            text: "Do you want to see your order history?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#175C8C",
+            cancelButtonColor: "#31d433",
+            confirmButtonText: "Go to history page",
+            cancelButtonText: "keep Ordering",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              router.push("/history-order");
+            }
+  
+          });
+        }
+      }
+    }
+    // end validate payment
 
     handlevalidate();
     
@@ -251,33 +277,19 @@ export default function formpayment(props) {
     }
   }
 
-  if (loading) {
-    Swal.fire({
-      title: "Please Wait!",
-      html: "This may take a few seconds, please don't close this page.",
-      allowOutsideClick: false,
-      showConfirmButton: false,
-      timer:750,
-        
-      willOpen: () => {
-        Swal.showLoading();
-       },
-    }); 
-    }
-
     if (confirmLoading) {
-        Swal.fire({
-          title: "Please Wait!",
-          html: "This may take a few seconds, please don't close this page.",
-          allowOutsideClick: false,
-          showConfirmButton: false,
-          timer:3000,
-            
-          willOpen: () => {
-            Swal.showLoading();
-           },
-        }); 
-        }
+      Swal.fire({
+        title: "Please Wait!",
+        html: "This may take a few seconds, please don't close this page.",
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        timer:3000,
+          
+        willOpen: () => {
+          Swal.showLoading();
+          },
+      }); 
+    }
 
     //payment validation
 
@@ -325,29 +337,13 @@ export default function formpayment(props) {
         });
     }, []);
     // end load history
+  
+  //end payment validation
+  
+  if (loading) {
+    return (<Loading/>)
+  }
 
-    if( history[0].user_id !== undefined ) 
-    {
-      for(let i=0; i<history.length; i++)
-      {
-        if (history[i].is_paid == false)
-        {
-          Swal.fire({
-            title: "Oops sorry, we can't serve you right now",
-            text: "Please finish your last order payment first.",
-            icon: "warning",
-            showCancelButton: false,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Ok",
-          }).then((result) => {
-            if (result.isConfirmed) {
-              router.push("/history-order");
-            }
-          });
-        }
-      }
-    }
 
   return (
     <section>

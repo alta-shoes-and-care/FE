@@ -1,32 +1,16 @@
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
 import style from "../../styles/formpayment.module.css";
 
 import { useRouter } from "next/router";
 import axios from "axios";
-import NumberFormat from "react-number-format";
-import moment from "moment";
 import Swal from "sweetalert2";
 import Service from "../../components/Service";
+import Loading from "../../components/Loading";
 
 export default function endpoint() {
     const router = useRouter();
     let { id } = router.query;
     const [loading, setLoading] = useState(false);
-
-    if (loading) {
-        Swal.fire({
-        title: "Please Wait!",
-        html: "This may take a few seconds, please don't close this page.",
-        allowOutsideClick: false,
-        showConfirmButton: false,
-        timer: 1000,
-
-        willOpen: () => {
-            Swal.showLoading();
-        },
-        });
-    }
 
      // history for validate checker
      const [history, setHistory] = useState([[]]);
@@ -177,6 +161,10 @@ export default function endpoint() {
 
   }
   
+  if (loading) {
+    return (<Loading/>)
+  }
+
     
   return (
     <section>

@@ -6,7 +6,7 @@ import axios from "axios";
 import NumberFormat from 'react-number-format';
 import moment from "moment";
 import Swal from "sweetalert2";
-
+import Loading from "../../components/Loading";
 
 export default function invoice() {
 
@@ -95,26 +95,10 @@ export default function invoice() {
                       }
                 })
                 .finally(() => {
-                    hitung++;
                     setLoading(false);
                 });  
             }
         }, [id]);
-    
-
-        if (loading) {
-            Swal.fire({
-              title: "Please Wait!",
-              html: "This may take a few seconds, please don't close this page.",
-              allowOutsideClick: false,
-              showConfirmButton: false,
-              timer:1000,
-                
-              willOpen: () => {
-                Swal.showLoading();
-               },
-            }); 
-        }
     
         function handleButton(){
             return Swal.fire({
@@ -150,7 +134,10 @@ export default function invoice() {
 
         }
 
-   
+    if (loading) {
+        return (<Loading/>)
+        }
+    
     
     return (
         <section>
