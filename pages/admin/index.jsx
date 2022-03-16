@@ -163,7 +163,7 @@ function Admin() {
             >
               <div>
                 <img
-                  className=" w-[70px] h-[70px] mr-5 rounded-md"
+                  className=" w-[90px] h-[70px] mr-5 rounded-md"
                   src={el.image}
                   alt=""
                 />

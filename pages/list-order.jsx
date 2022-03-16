@@ -4,6 +4,7 @@ import { FaMoneyBillAlt } from "react-icons/fa";
 import { FcCalendar } from "react-icons/fc";
 import { RiMessage2Line } from "react-icons/ri";
 import { AiOutlineNumber, AiOutlineShoppingCart } from "react-icons/ai";
+import { MdLocationOn } from "react-icons/md";
 import Swal from "sweetalert2";
 import { useRouter } from "next/router";
 import axios from "axios";
@@ -436,6 +437,13 @@ function ListOrder() {
                           </p>
                           <p>{el.id}</p>
                         </div>
+                      </div>
+                      <div className=" flex flex-col">
+                        <div className="flex">
+                          <div className=" mr-2">Address : </div>
+                          <div className=" w-[300px]">{el.address}</div>
+                        </div>
+                        <div>Contact : {el.phone} </div>
                       </div>
                     </div>
                   </div>

@@ -144,7 +144,7 @@ function History() {
               .map((el, i) => (
                 <div
                   onClick={() => router.push(`/endpoint/${el.id}`)}
-                  className={` ${styles.content} w-[630px] rounded-lg py-2 px-3 my-3 bg-white shadow-md`}
+                  className={` ${styles.content} w-[630px] rounded-lg py-2 px-3 my-3 bg-white shadow-md hover:cursor-pointer`}
                 >
                   <h1 className=" text-xl">{el.service_title}</h1>
                   <div className=" bg-gray-600 w-[200px] my-1 h-0.5"></div>
