@@ -24,7 +24,7 @@ export default function invoice() {
         ,'address': ""
         ,'total': 0
         ,'url': ""
-        ,'user_id'  :id
+        ,'user_id'  : undefined
     });
     
     // history for validate checker
@@ -122,14 +122,18 @@ export default function invoice() {
         if(history[0].user_id !== invoice.user_id
             && history[0].user_id !== undefined 
             && invoice.user_id !== undefined ) {
-
+            
+            console.log(history[0].user_id)
+            console.log(invoice.user_id)
             console.log("ga valid")
             router.push("/404")
         }
         else if(history[0].user_id == invoice.user_id 
             && history[0].user_id !== undefined 
             && invoice.user_id !== undefined ) {
-
+            
+            console.log(history[0].user_id)
+            console.log(invoice.user_id)
             console.log("mantap valid")
 
         }
@@ -150,7 +154,7 @@ export default function invoice() {
                             </p>
                         </div>
                         {/* Desc Card */}
-                        <div className='ml-[30vw] z-3 w-[40vw] h-auto bg-[#ffffff] bg-opacity-90  text-left rounded-lg p-5'>
+                        <div className='container ml-[30vw] z-3 w-[40vw] h-auto bg-[#ffffff] bg-opacity-90  text-left rounded-lg p-5'>
                             
                             <div className="grid grid-cols-1 center mb-2">
                                 <p className="text-black text-center bold text-3xl">
