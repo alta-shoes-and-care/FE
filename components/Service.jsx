@@ -13,7 +13,7 @@ export default function Service() {
   const listService = useSelector(({getServiceReducer}) => getServiceReducer)
 
   useEffect(() => {
-    console.log(listService)
+    // console.log(listService)
   }, [listService]);
 
   return (

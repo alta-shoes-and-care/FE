@@ -22,7 +22,6 @@ export default function Review() {
   const [review, setReview] = useState('');
   const [service_id, setService_id] = useState(0);
   const [order_id, setOrder_id] = useState(0);
-
   const [loading, setLoading] = useState(false);
 
   const ratingChanged = (value) => {
@@ -33,39 +32,44 @@ export default function Review() {
   useEffect(() => {
 
   if (!localStorage.getItem("token")) {
-    return router.push("/login");
+    return router.push("/404");
   } 
-  else if(id!=='undefined'){
-    const token = localStorage.getItem("token");
-    const config = {
-      headers: { Authorization: `Bearer ${token}` },
-    };
-    axios
-    .get(`https://ynwahid.cloud.okteto.net/orders/${id}`, config)
-    .then(({data}) => {
-      console.log(data)
-      setService_id(data.data.service_id);
-      setOrder_id(data.data.id);
-    })
-    .catch((err) => {
-      console.log(err.response);
-      if(err.response.status === 401) {
-        Swal.fire({
-          title: "Your session has ended!",
-          text: "Please login again to continue.",
-          icon: "error",
-          showCancelButton: false,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Ok",
-        }).then((result) => {
-          if (result.isConfirmed) {
-            router.push("/login");
-            localStorage.clear();
-          }
-        });
-      }
-    })
+  else if(localStorage.getItem("token") && id == "undefined") {
+    return router.push('/404')
+  }
+
+  else if (id !== 'undefined') {
+  const token = localStorage.getItem("token");
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+    
+      axios
+      .get(`https://ynwahid.cloud.okteto.net/orders/${id}`, config)
+      .then(({data}) => {
+        console.log(data)
+        setService_id(data.data.service_id);
+        setOrder_id(data.data.id);
+      })
+      .catch((err) => {
+        console.log(err.response);
+        if(err.response.status === 401) {
+          Swal.fire({
+            title: "Your session has ended!",
+            text: "Please login again to continue.",
+            icon: "error",
+            showCancelButton: false,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Ok",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              router.push("/login");
+              localStorage.clear();
+            }
+          });
+        }
+      })
     }
   }, []);
 
