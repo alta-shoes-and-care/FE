@@ -3,12 +3,9 @@
 # SHOES SERVICE STATION - FE3
 
 <!-- PROJECT LOGO -->
+
 <div align="center">
-<img
-  src="https://i.imgur.com/5JACEh6.png"
-  alt="Alt text"
-  title="Optional title"
-  style="display: inline-block; margin: 0 auto; max-width: 250px">
+<img src="assets/logo/logo.png" alt="Logo" width="500" height="auto">
 
 ## About the Project
 Nowadays, some people are very busy and don't even have time to clean their shoes. Therefore we need a platform that is able to connect customers with shoes washing service provider.
