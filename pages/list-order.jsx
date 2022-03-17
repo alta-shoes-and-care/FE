@@ -456,6 +456,7 @@ function ListOrder() {
                       {el.status === "accepted" ||
                       el.status === "on process" ||
                       el.status === "delivering" ||
+                      el.status === "rejected" ||
                       el.status === "cancel" ? (
                         <button
                           disabled
@@ -474,6 +475,7 @@ function ListOrder() {
                       )}
                       {/* reject */}
                       {el.status === "rejected" ||
+                      el.status === "accepted" ||
                       el.status === "on process" ||
                       el.status === "delivering" ||
                       el.status === "cancel" ? (
@@ -520,6 +522,7 @@ function ListOrder() {
                       el.status === "pending" ||
                       el.is_paid === false ||
                       el.status === "rejected" ||
+                      el.status === "accepted" ||
                       el.status === "cancel" ? (
                         <button
                           disabled
