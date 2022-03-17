@@ -10,10 +10,27 @@ import Loading from "../../components/Loading";
 export default function formpayment(props) {
   const router = useRouter();
   let { id } = router.query;
+
+  const [qty, setQty] = useState(0);
+  const [newId, setnewId] = useState(0);
+  const [payment_method_id, setPayment_method_id] = useState(0);
+  const [date, setDate] = useState("");
+  const [city, setCity] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
   const [loading, setLoading] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
-  const [newId, setnewId] = useState(0);
-  
+  const [history, setHistory] = useState([[]]);
+  const [services, setServices] = useState({
+    city: "",
+    description: "",
+    id: 0,
+    name: "",
+    price: 0,
+    user_id: 0,
+  });
+  const total = qty * services.price;
+
   //for validation
   let validate1 = "";
   let validate2 = "";
@@ -21,35 +38,32 @@ export default function formpayment(props) {
   let validate4 = "";
   let validate5 = "";
   let validate6 = "";
-  let validatetotal= "";
-
-  const Toast = Swal.mixin({
-    toast: true,
-    position: "center",
-    showConfirmButton: false,
-    timer: 1000,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-      toast.addEventListener("mouseenter", Swal.stopTimer);
-      toast.addEventListener("mouseleave", Swal.resumeTimer);
-    },
-  });
+  let validatetotal = "";
 
   useEffect(() => {
     if (!localStorage.getItem("token")) {
       return router.push("/login");
-    } 
-    else if(localStorage.getItem("is_admin") == "true"){
+    } else if (localStorage.getItem("is_admin") == "true") {
       return router.push("/404");
-    }
-    else if (id !== "undefined") {
+    } else if (id) {
       setLoading(true);
+      const token = localStorage.getItem("token");
+      const config = {
+        headers: { Authorization: `Bearer ${token}` },
+      };
       axios
         .get(`https://ynwahid.cloud.okteto.net/services/${id}`)
         .then(({ data }) => {
           setServices(data.data);
           setnewId(data.data.id);
-          console.log(data.data, "berhasil get");
+          return axios.get(
+            `https://ynwahid.cloud.okteto.net/orders/me`,
+            config
+          );
+        })
+        .then(({ data }) => {
+          setHistory(data.data);
+          console.log(data.data, "masuk");
         })
         .catch((err) => {
           console.log(err, "error bang");
@@ -71,29 +85,12 @@ export default function formpayment(props) {
           }
         })
         .finally(() => {
-            setLoading(false);
-        })
+          setLoading(false);
+        });
     }
   }, [id]);
 
-  const [services, setServices] = useState({
-    city: "",
-    description: "",
-    id: 0,
-    name: "",
-    price: 0,
-    user_id: 0,
-  });
-
-  const [qty, setQty] = useState(0);
-  const [payment_method_id, setPayment_method_id] = useState(0);
-  const [date, setDate] = useState("");
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [phone, setPhone] = useState("");
-  const total = qty * services.price;
-  const service_id = +id;
-
+  // Button Handle
   function handleButton() {
     return Swal.fire({
       title: "Confirm your Order?",
@@ -106,12 +103,10 @@ export default function formpayment(props) {
     }).then((result) => {
       if (result.isConfirmed) {
         setConfirmLoading(true);
-
         const token = localStorage.getItem("token");
         const config = {
           headers: { Authorization: `Bearer ${token}` },
         };
-
         const body = {
           service_id: newId,
           qty: +qty,
@@ -122,7 +117,6 @@ export default function formpayment(props) {
           city: city,
           phone: phone,
         };
-        
         axios
           .post("https://ynwahid.cloud.okteto.net/orders", body, config)
           .then(({ data }) => {
@@ -134,17 +128,21 @@ export default function formpayment(props) {
               confirmButtonText: "Ok",
               confirmButtonColor: "#3085d6",
               allowOutsideClick: false,
-              }).then((result) => {
-                if (result.isConfirmed) {
-                  setTimeout(() => {
-                    router.push(`/invoice/${data.data.id}`);
-                  }, 1000);
-                }
-              });
+            }).then((result) => {
+              if (result.isConfirmed) {
+                setTimeout(() => {
+                  router.push(`/invoice/${data.data.id}`);
+                }, 1000);
+              }
+            });
           })
           .catch((err) => {
-            Swal.fire("Order failed!", "Sorry, Something gone wrong. Please try again later.", "error");
-            console.log(err.response)
+            Swal.fire(
+              "Order failed!",
+              "Sorry, Something gone wrong. Please try again later.",
+              "error"
+            );
+            console.log(err.response);
             if (err.response.status === 401) {
               Swal.fire({
                 title: "Your session has ended!",
@@ -171,100 +169,35 @@ export default function formpayment(props) {
       }
     });
   }
-  
-  //payment validation
 
-    // history for validate checker
-    const [history, setHistory] = useState([[]]);
-  
-    useEffect(() => {
-      if (typeof window !== "undefined") {
-        if (!localStorage.getItem("token")) {
-          router.push("/login");
-        }
-      }
-      setLoading(true);
-      const token = localStorage.getItem("token");
-      const config = {
-        headers: { Authorization: `Bearer ${token}` },
-      };
-      axios
-        .get(`https://ynwahid.cloud.okteto.net/orders/me`, config)
-        .then(({ data }) => {
-            setHistory(data.data);
-            console.log(data.data, "masuk");
-        })
-        .catch((err) => {
-          console.log(err.response, "error");
-          if (err.response.status === 401) {
-            Swal.fire({
-              title: "Your session has ended!",
-              text: "Please login again to continue.",
-              icon: "error",
-              showCancelButton: false,
-              confirmButtonColor: "#3085d6",
-              cancelButtonColor: "#d33",
-              confirmButtonText: "Ok",
-              allowOutsideClick: false,
-            }).then((result) => {
-              if (result.isConfirmed) {
-                router.push("/login");
-                localStorage.clear();
-              }
-            });
-          }
-        })
-        .finally(() => {
-            setLoading(false);
-        });
-    }, []);
-    // end load history
-  
-  //end payment validation
-
-
-  function handlevalidate(){
-    if (
-      payment_method_id === 0 ||
-      payment_method_id === ""
-    ) {
-       validate1 = "Payment Method "
-    }  
-    if (
-      city === ""
-    ) {
-      validate2 = " City "
-    } 
-    if (
-      phone === ""
-    ) {
-      validate3 = " Phone Number "
-    } 
-    if (
-      date === ""
-    ) {
-      validate4 = " Date "
-    } 
-    if (
-      qty === 0
-    ) {
-       validate5 = " Quantity "
+  function handlevalidate() {
+    if (payment_method_id === 0 || payment_method_id === "") {
+      validate1 = "Payment Method ";
     }
-    if (
-      address === ""
-    ) {
-       validate6 = " Adress"
-    } 
+    if (city === "") {
+      validate2 = " City ";
+    }
+    if (phone === "") {
+      validate3 = " Phone Number ";
+    }
+    if (date === "") {
+      validate4 = " Date ";
+    }
+    if (qty === 0) {
+      validate5 = " Quantity ";
+    }
+    if (address === "") {
+      validate6 = " Adress";
+    }
 
-    var string=`${validate1}${validate2}${validate3}${validate4}${validate5}${validate6}`
-    var string2=string.split('  ').join(', ');
-    validatetotal=string2
+    var string = `${validate1}${validate2}${validate3}${validate4}${validate5}${validate6}`;
+    var string2 = string.split("  ").join(", ");
+    validatetotal = string2;
   }
 
   function validateButton() {
-
     handlevalidate();
-    
+
     if (
       payment_method_id === 0 ||
       payment_method_id === "" ||
@@ -280,70 +213,64 @@ export default function formpayment(props) {
         `${validatetotal} form can't be empty. Please fill out the empty fields.`,
         "warning"
       );
-    } else if (
-      !/^[0-9]+(.[0-9]{0})?$/.test(phone)
-    ) {
+    } else if (!/^[0-9]+(.[0-9]{0})?$/.test(phone)) {
       Swal.fire("Invalid!", "Invalid Phone Number Format", "error");
-    } else if (
-      !/^[0-9]+(.[0-9]{0})?$/.test(qty)
-    ) {
+    } else if (!/^[0-9]+(.[0-9]{0})?$/.test(qty)) {
       Swal.fire("Invalid!", "Quantity cannot be Negative", "error");
-    }else {
+    } else {
       handleButton();
     }
   }
 
-    if (confirmLoading) {
-      Swal.fire({
-        title: "Please Wait!",
-        html: "This may take a few seconds, please don't close this page.",
-        allowOutsideClick: false,
-        showConfirmButton: false,
-        timer:3000,
-          
-        willOpen: () => {
-          Swal.showLoading();
-          },
-      }); 
-    }
-
-    function validatepayment(){
-      //validate payment
-      if( history[0].user_id !== undefined ) 
-      {
-        if (history[history.length-1].is_paid == false)
-        {
-          Swal.fire({
-            title: "Your last order payment haven't finished!",
-            text: "Do you want to see your order history?",
-            icon: "warning",
-            showCancelButton: true,
-            cancelmButtonColor: "#175C8C",
-            confirmButtonColor: "#31d433",
-            cancelButtonText: "Go to history page",
-            confirmButtonText: "keep Ordering",
-            allowOutsideClick: false,
-          }).then((result) => {
-            if (result.isConfirmed) {
-              validateButton();
-            }
-            else {
-              router.push("/history-order");
-            }
-          });
-        }
+  function validatepayment() {
+    if (history[0].user_id !== undefined) {
+      if (history[history.length - 1].is_paid == false) {
+        Swal.fire({
+          title: "Your last order payment haven't finished!",
+          text: "Do you want to see your order history?",
+          icon: "warning",
+          showCancelButton: true,
+          cancelmButtonColor: "#175C8C",
+          confirmButtonColor: "#31d433",
+          cancelButtonText: "Go to history page",
+          confirmButtonText: "keep Ordering",
+          allowOutsideClick: false,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            validateButton();
+          } else {
+            router.push("/history-order");
+          }
+        });
       }
-      else {
-        validateButton();
-      }
-      // end validate payment
+    } else {
+      validateButton();
     }
-
-  
-  if (loading) {
-    return (<Loading/>)
   }
 
+  //button handle end
+
+  //Loading section
+
+  if (confirmLoading) {
+    Swal.fire({
+      title: "Please Wait!",
+      html: "This may take a few seconds, please don't close this page.",
+      allowOutsideClick: false,
+      showConfirmButton: false,
+      timer: 3000,
+
+      willOpen: () => {
+        Swal.showLoading();
+      },
+    });
+  }
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  //loading end
 
   return (
     <section>
@@ -353,7 +280,9 @@ export default function formpayment(props) {
         <div className="z-1 w-[100vw] h-screen bg-[#000009] bg-opacity-30 text-center">
           <div className="z-2 grid grid-cols-1 gap-4 bg-cover">
             <div className="mt-[2.5vh]">
-              <p className="pt-3 py-2 text-5xl text-white">Confirm your order</p>
+              <p className="pt-3 py-2 text-5xl text-white">
+                Confirm your order
+              </p>
             </div>
 
             {/* Desc Card */}
@@ -393,12 +322,20 @@ export default function formpayment(props) {
                       setPayment_method_id(e.target.value);
                     }}
                   >
-                    <option className="bg-transparent appearance-none" value={0} disabled="true">
+                    <option
+                      className="bg-transparent appearance-none"
+                      value={0}
+                      disabled="true"
+                    >
                       Choose Payment
                     </option>
                     <option value={1}>BCA Click Pay</option>
-                    <option value={2} disabled="true">Payment 2</option>
-                    <option value={3} disabled="true">Payment 3</option>
+                    <option value={2} disabled="true">
+                      Payment 2
+                    </option>
+                    <option value={3} disabled="true">
+                      Payment 3
+                    </option>
                   </select>
                 </div>
 
