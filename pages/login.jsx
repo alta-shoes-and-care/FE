@@ -86,7 +86,6 @@ function Login() {
 			.post('https://ynwahid.cloud.okteto.net/login', body)
 			.then(({ data }) => {
 				if (data) {
-					console.log(data);
 					setEmail('');
 					setPassword('');
 					Swal.fire(
@@ -104,7 +103,6 @@ function Login() {
 			})
 			.catch((err) => {
 				if (err) {
-					console.log(err.response.status);
 					setEmail('');
 					setPassword('');
 					Swal.fire(`Ooppss!!`, 'Invalid Email / Password.', 'error');
