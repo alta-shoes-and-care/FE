@@ -106,19 +106,26 @@ export default function services() {
       >
         <div className="z-1 w-[100vw] h-screen bg-[#000009] bg-opacity-30 text-center">
           <div class="z-2 grid grid-cols-2 gap-4 bg-cover mt-[100px]">
-            
             {/* Desc Card */}
             <div className="ml-[15vh] mt-[5vh] z-3 w-[75vh] h-auto bg-[#ffffff] bg-opacity-80  text-left rounded-lg pb-5">
-              <p className="text-black bold text-4xl mt-[3.5vh] ml-[5vh]">
+              <p className="text-black bold text-4xl mt-[3.5vh] px-10">
                 {services.title}
               </p>
-              <p className="text-black object-bottom text-left text-lg mt-[5vh] ml-[5vh] w-[65vh]">
+              <p className="text-black text-left text-lg mt-[5vh] px-10 ">
                 {services.description}
               </p>
-              <p className="text-primary text-md italic pt-5 text-left ml-[5vh]">
-                {" "}
+              <p className="text-black text-md pt-5 text-left px-10">
+                Maximum pick-up service for same-day order at 18.00. Any order
+                after that will be picked up the next day
+                <bintang className="text-red-600">*</bintang>
+              </p>
+              <p className="text-primary text-md bold italic pt-5 text-left px-10">
                 Services may varry depend on shoes material
                 <bintang className="text-red-600">*</bintang>
+              </p>
+              <p className="text-black text-sm bold pt-10 text-right px-10">
+                <bintang className="text-red-600">*</bintang>
+                Term and condition applied
               </p>
             </div>
             {/* Desc Card End*/}
@@ -138,11 +145,10 @@ export default function services() {
               {orderbutton()}
             </div>
             {/* Price and Button end*/}
-
           </div>
         </div>
       </div>
-      <div class="grid grid-cols-1 pt-2">
+      <div class="mt-7 grid grid-cols-1 pt-2">
         <Service />
       </div>
     </section>
