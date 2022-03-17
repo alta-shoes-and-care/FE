@@ -1,57 +1,101 @@
-<div id="top"></div>
+<div align="center">
 
-# SHOES SERVICE STATION - FE3
+<h1>Shoes Service Station</h1>
+
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/alta-shoes-and-care/FE)
 
 <!-- PROJECT LOGO -->
 
-<div align="center">
-<img src="assets/logo/logo.png" alt="Logo" width="500" height="auto">
+<img src="assets/logo/logo.png" alt="Logo" width="500" height="auto" />
+</div>
 
 ## About the Project
 Nowadays, some people are very busy and don't even have time to clean their shoes. Therefore we need a platform that is able to connect customers with shoes washing service provider.
 
-  <p align="center">
-    PROTOTYPE FIGMA
-    <br />
-    <div id = "other-software-design"></div>
-    -
-    <a href="https://www.figma.com/proto/bSG0AWlCKrcXoG98z7lTyN/Shoes-Service-Station?node-id=435%3A385&starting-point-node-id=435%3A385&scaling=scale-down">User</a>
-    <br />
-    -
-    <a href="https://www.figma.com/proto/bSG0AWlCKrcXoG98z7lTyN/Shoes-Service-Station?node-id=435%3A4747&starting-point-node-id=444%3A7083&scaling=scale-down">Admin</a>
-  </p>
-</div>
-<br />
+## Collaboration 
+  - [Trello (Work Management Tool)](https://trello.com/)
+  - [GitHub (Version Control System Platform)](https://github.com/alta-shoes-and-care/)
 
-<!-- TABLE OF CONTENTS -->
-## Table of Contents
-1. [About the Project](#about-the-project)
-2. [Table of Contents](#table-of-contents)
-3. [Tech Stack](#tech-stack)
-    - [Framework](#framework)
-    - [Code Standart](#code-standart)
-    - [Packages](#packages)
-    - [Deployment](#deployment)
-    - [Collaboration](#collaboration)
-4. [Folder Structure](#code-structure)
-5. [Contact](#contact)
+  ### Backend
+
+  - [Github Repository for the Backend team](https://github.com/alta-shoes-and-care/BE.git)
+  - [Swagger OpenAPI](https://app.swaggerhub.com/apis/ynwahid/ide/1.0.0)
+
+  ### Quality Engineer
+
+  - [Github Repository for the QE team](https://github.com/alta-shoes-and-care/QE.git)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-## Tech Stack
-### Framework
-- [NextJS (ReactJS Framework)](https://nextjs.org/)
-- [Tailwind (CSS Framework)](https://tailwindcss.com/)
+## Prototype Figma
+- [User](https://www.figma.com/proto/bSG0AWlCKrcXoG98z7lTyN/Shoes-Service-Station?node-id=435%3A385&starting-point-node-id=435%3A385&scaling=scale-down)
+- [Admin](https://www.figma.com/proto/bSG0AWlCKrcXoG98z7lTyN/Shoes-Service-Station?node-id=435%3A385&starting-point-node-id=435%3A385&scaling=scale-down)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-### Code Standart
+## Code Standart
 - [Airbnb](https://airbnb.io/javascript/react/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-### Packages
+## Deployment
+- [Netlify](https://shoes-service-station.netlify.app/)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+## Features
+
+-   Sign up
+-   Login
+-   Logout
+
+  #### As User
+
+  - View the main page
+  - View service list and details
+  - Ordering services
+  - View order history
+  - Added review orders
+
+  #### As Admin
+
+  - Added new services
+  - Editing service
+  - Delete services
+  - View a list of orders
+  - Receive orders
+  - Reject orders
+  - Change order status (on process, delivery, cancel)
+
+  <p align="right">(<a href="#top">back to top</a>)</p>
+
+## Installation
+
+Clone this project
+
+```sh
+git clone https://github.com/alta-shoes-and-care/FE.git
+cd FE
+```
+
+#### Install
+
+```sh
+npm install
+```
+
+#### Usage
+
+```sh
+npm run dev
+```
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+## Built With
+- [NextJS (ReactJS Framework)](https://nextjs.org/)
+- [TailwindCSS](https://tailwindcss.com/)
 - [axios](https://www.npmjs.com/package/axios)
 - [filepond](https://www.npmjs.com/package/axios)
 - [filepond-plugin-file-validate-size](https://www.npmjs.com/package/filepond-plugin-file-validate-size)
@@ -75,17 +119,6 @@ Nowadays, some people are very busy and don't even have time to clean their shoe
 - [redux-thunk](https://www.npmjs.com/package/redux-thunk)
 - [sweetalert2](https://www.npmjs.com/package/sweetalert2)
 - [swiper](https://www.npmjs.com/package/swiper)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-### Deployment
-- [Netlify](https://shoes-service-station.netlify.app/)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-### Collaboration 
-- [Trello (Work Management Tool)](https://trello.com/)
-- [GitHub (Version Control System Platform)](https://github.com/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -193,7 +226,7 @@ final-project-shoes-group-2
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- CONTACT -->
-## Contact
+## Author
 * Muhammad Yusuf Untung Wahyudi 
   - [Github](https://github.com/myusufuntung) 
   - [Linked in](https://www.linkedin.com/in/myusufuntung)
