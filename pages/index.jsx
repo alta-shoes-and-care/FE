@@ -20,7 +20,7 @@ export default function Home() {
     .get(`https://ynwahid.cloud.okteto.net/reviews/`)
     .then(({data}) => {
       setReviews(data.data);
-      console.log(data)
+      // console.log(data)
     })
     .catch((err) => {
       console.log(err.response);

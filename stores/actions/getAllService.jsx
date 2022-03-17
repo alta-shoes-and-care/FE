@@ -5,7 +5,7 @@ export const getAllService = () => {
     axios
     .get('https://ynwahid.cloud.okteto.net/services')
     .then(({data}) => {
-      console.log(data.data)
+      // console.log(data.data)
       dispatch(setService(data.data))
     })
     .catch(err => {
