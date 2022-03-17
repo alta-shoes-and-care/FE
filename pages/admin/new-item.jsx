@@ -4,6 +4,8 @@ import Swal from "sweetalert2";
 import styles from "../../styles/admin.module.css";
 import Loading from "../../components/Loading";
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import allstore from "../../stores/actions/index";
 
 // filepond
 import { FilePond, registerPlugin } from "react-filepond";
@@ -24,7 +26,8 @@ function NewItem() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const [files, setFiles] = useState([]);
-  console.log(files);
+
+  const dispatch = useDispatch();
 
   const Toast = Swal.mixin({
     toast: true,
@@ -217,9 +220,11 @@ function NewItem() {
               icon: "success",
               title: "Success add new service",
             });
+
             setTimeout(() => {
               router.push("/admin");
             }, 2000);
+            return dispatch(allstore.getAllService());
           })
           .catch((err) => {
             if (err.response.status === 401) {

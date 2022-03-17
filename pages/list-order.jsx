@@ -4,18 +4,23 @@ import { FaMoneyBillAlt } from "react-icons/fa";
 import { FcCalendar } from "react-icons/fc";
 import { RiMessage2Line } from "react-icons/ri";
 import { AiOutlineNumber, AiOutlineShoppingCart } from "react-icons/ai";
-import { MdLocationOn } from "react-icons/md";
 import Swal from "sweetalert2";
 import { useRouter } from "next/router";
 import axios from "axios";
 import Loading from "../components/Loading";
 import NumberFormat from "react-number-format";
 import moment from "moment";
+import { useSelector, useDispatch } from "react-redux";
+import allstore from "../stores/actions/index";
 
 function ListOrder() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [listOrder, setlistOrder] = useState([[]]);
+
+  const listOrders = useSelector(
+    ({ getListOrderReducer }) => getListOrderReducer
+  );
 
   const Toast = Swal.mixin({
     toast: true,
@@ -30,6 +35,7 @@ function ListOrder() {
   });
 
   useEffect(() => {
+    console.log(listOrders, "masukk");
     if (typeof window !== "undefined") {
       if (!localStorage.getItem("token")) {
         router.push("/404");
@@ -50,7 +56,7 @@ function ListOrder() {
       .get(`https://ynwahid.cloud.okteto.net/orders`, config)
       .then(({ data }) => {
         setlistOrder(data.data);
-        console.log(data.data);
+        console.log(data.data, "masuk!");
       })
       .catch((err) => {
         if (err.response.status === 401) {

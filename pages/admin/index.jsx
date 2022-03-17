@@ -6,11 +6,16 @@ import Swal from "sweetalert2";
 import { useRouter } from "next/router";
 import Loading from "../../components/Loading";
 import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import allstore from "../../stores/actions/index";
 
 function Admin() {
   const [loading, setLoading] = useState(false);
+
   const router = useRouter();
-  const [product, setProduct] = useState([]);
+  const dispatch = useDispatch();
+
+  const listService = useSelector(({ getServiceReducer }) => getServiceReducer);
 
   const Toast = Swal.mixin({
     toast: true,
@@ -24,21 +29,6 @@ function Admin() {
     },
   });
 
-  function getData() {
-    axios
-      .get("https://ynwahid.cloud.okteto.net/services")
-      .then(({ data }) => {
-        setProduct(data.data);
-        console.log(data);
-      })
-      .catch((err) => {
-        console.log(err, "error");
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }
-
   useEffect(() => {
     if (typeof window !== "undefined") {
       if (!localStorage.getItem("token")) {
@@ -50,20 +40,6 @@ function Admin() {
         router.push("/404");
       }
     }
-
-    setLoading(true);
-    axios
-      .get("https://ynwahid.cloud.okteto.net/services")
-      .then(({ data }) => {
-        setProduct(data.data);
-        console.log(data);
-      })
-      .catch((err) => {
-        console.log(err, "error");
-      })
-      .finally(() => {
-        setLoading(false);
-      });
   }, []);
 
   function handleDelete(el) {
@@ -92,7 +68,10 @@ function Admin() {
               icon: "success",
               title: "Deleted",
             });
-            return getData();
+            return dispatch(allstore.getAllService());
+          })
+          .then((data) => {
+            console.log(data, "get all data");
           })
           .catch((err) => {
             if (err.response.status === 401) {
@@ -120,6 +99,7 @@ function Admin() {
       }
     });
   }
+
   function handleEdit(el) {
     router.push(`/admin/${el.id}`);
   }
@@ -156,7 +136,7 @@ function Admin() {
         </button>
         {/* Card */}
         <div className=" h-[75vh] overflow-y-scroll w-full transition ease-linear duration-1000">
-          {product.map((el, i) => (
+          {listService.map((el, i) => (
             <div
               key={i}
               className={` lg:w-[800px] flex py-2 px-3 my-3 bg-[#ffffffec] rounded-lg transition ease-linear duration-1000 hover:bg-[#ffffff98] `}
