@@ -175,7 +175,7 @@ function History() {
                       <p>{el.status}</p>
                     </div>
                     <div
-                      onClick={() => router.push(`/endpoint/${el.id}`)}
+                      onClick={() => router.push(`/status_payment/${el.id}`)}
                       className=" hover:cursor-pointer hover:text-gray-500 flex"
                     >
                       <p className="text-xl mt-0.5 mr-1">

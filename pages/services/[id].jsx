@@ -79,7 +79,7 @@ export default function services() {
             } 
             else if (localStorage.getItem("is_admin") == "false" && localStorage.getItem("token")) {
               return (
-                <button class="bg-[#175C8C] hover:bg-white text-white hover:text-black font-bold py-4 px-6 border border-black rounded-lg"
+                <button class="bg-[#175C8C] hover:bg-white hover:bg-opacity-60 text-white hover:text-black font-bold py-4 px-6 border border-black rounded-lg"
                 onClick={handleOrder} >
                     <p className="text-xl rounded-xl"> Book this service </p>
                 </button>

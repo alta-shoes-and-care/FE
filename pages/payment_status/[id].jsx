@@ -186,7 +186,7 @@ export default function endpoint() {
               </div>
               <div className="grid grid-cols-1 text-center w-[20vw] mt-[1vh] ml-[10vw]">
                 <button
-                  className="bg-[#175C8C] hover:bg-white text-white hover:text-black font-bold py-2 px-2 border border-black rounded-lg"
+                  className="bg-[#175C8C] hover:bg-white hover:bg-opacity-0 text-white hover:text-black font-bold py-2 px-2 border border-black rounded-lg"
                   onClick={refreshPage}
                 >
                   <p className="text-md text-center rounded-xl">

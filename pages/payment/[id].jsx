@@ -132,6 +132,8 @@ export default function formpayment(props) {
               icon: "success",
               title: "Order Success",
               confirmButtonText: "Ok",
+              confirmButtonColor: "#3085d6",
+              allowOutsideClick: false,
               }).then((result) => {
                 if (result.isConfirmed) {
                   setTimeout(() => {
@@ -152,6 +154,7 @@ export default function formpayment(props) {
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
                 confirmButtonText: "Ok",
+                allowOutsideClick: false,
               }).then((result) => {
                 if (result.isConfirmed) {
                   router.push("/login");
@@ -202,6 +205,7 @@ export default function formpayment(props) {
               confirmButtonColor: "#3085d6",
               cancelButtonColor: "#d33",
               confirmButtonText: "Ok",
+              allowOutsideClick: false,
             }).then((result) => {
               if (result.isConfirmed) {
                 router.push("/login");
@@ -307,28 +311,26 @@ export default function formpayment(props) {
       //validate payment
       if( history[0].user_id !== undefined ) 
       {
-        for(let i=0; i<history.length; i++)
+        if (history[history.length-1].is_paid == false)
         {
-          if (history[i].is_paid == false)
-          {
-            Swal.fire({
-              title: "You have unfinished order!",
-              text: "Do you want to see your order history?",
-              icon: "warning",
-              showCancelButton: true,
-              confirmButtonColor: "#175C8C",
-              cancelButtonColor: "#31d433",
-              confirmButtonText: "Go to history page",
-              cancelButtonText: "keep Ordering",
-            }).then((result) => {
-              if (result.isConfirmed) {
-                router.push("/history-order");
-              }
-              else {
-                validateButton();
-              }
-            });
-          }
+          Swal.fire({
+            title: "Your last order payment haven't finished!",
+            text: "Do you want to see your order history?",
+            icon: "warning",
+            showCancelButton: true,
+            cancelmButtonColor: "#175C8C",
+            confirmButtonColor: "#31d433",
+            cancelButtonText: "Go to history page",
+            confirmButtonText: "keep Ordering",
+            allowOutsideClick: false,
+          }).then((result) => {
+            if (result.isConfirmed) {
+              validateButton();
+            }
+            else {
+              router.push("/history-order");
+            }
+          });
         }
       }
       else {
@@ -553,7 +555,7 @@ export default function formpayment(props) {
                     </h1>
                   </div>
                   <button
-                    className="ml-[3.5vw] lg:h-[50px] h-[30px] w-[12vw] mt-5 lg:mt-10 text-center lg:text-[18px] text-[15px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium lg:rounded-xl rounded-md text-white bg-primary hover:bg-transparent hover:border-primary hover:border-2 hover:text-primary hover:font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                    className="ml-[3.5vw] lg:h-[50px] h-[30px] w-[12vw] mt-5 lg:mt-10 text-center lg:text-[18px] text-[15px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium lg:rounded-xl rounded-md text-white bg-primary hover:bg-transparent hover:bg-opacity-0 hover:border-primary hover:border-2 hover:text-primary hover:font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                     onClick={validatepayment}
                   >
                     <p className="text-md text-center rounded-xl">
