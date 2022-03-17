@@ -10,6 +10,7 @@ export default function Layout({ children }) {
 
   useEffect(() => {
     dispatch(allStore.getAllService());
+    dispatch(allStore.getListOrders());
   }, [dispatch]);
 
   return (

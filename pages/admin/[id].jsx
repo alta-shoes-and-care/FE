@@ -4,6 +4,9 @@ import styles from "../../styles/admin.module.css";
 import Loading from "../../components/Loading";
 import { useRouter } from "next/router";
 import Swal from "sweetalert2";
+import { useDispatch } from "react-redux";
+import allstore from "../../stores/actions/index";
+
 // filepond
 import { FilePond, registerPlugin } from "react-filepond";
 import FilePondPluginFileValidateSize from "filepond-plugin-file-validate-size";
@@ -27,6 +30,8 @@ function EditItem() {
   const [idProduct, setidProduct] = useState("");
   const [loading, setLoading] = useState(false);
   const [files, setFiles] = useState([]);
+
+  const dispatch = useDispatch();
 
   // Sweet Alert
   const Toast = Swal.mixin({
@@ -232,6 +237,7 @@ function EditItem() {
               icon: "success",
               title: "Success edit data",
             });
+            return dispatch(allstore.getAllService());
           })
           .catch((err) => {
             if (err.response.status === 401) {
