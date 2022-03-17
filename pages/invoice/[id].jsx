@@ -58,7 +58,7 @@ export default function invoice() {
               text: "Please login again to continue.",
               icon: "error",
               showCancelButton: false,
-              confirmButtonColor: "#3085d6",
+              confirmButtonColor: "#175C8C",
               cancelButtonColor: "#d33",
               confirmButtonText: "Ok",
             }).then((result) => {
@@ -97,7 +97,7 @@ export default function invoice() {
       text: "",
       icon: "question",
       showDenyButton: true,
-      confirmButtonColor: "#3085d6",
+      confirmButtonColor: "#175C8C",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes",
     }).then((result) => {

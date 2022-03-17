@@ -46,7 +46,7 @@ function History() {
             text: "Please login again to continue.",
             icon: "error",
             showCancelButton: false,
-            confirmButtonColor: "#3085d6",
+            confirmButtonColor: "#175C8C",
             cancelButtonColor: "#d33",
             confirmButtonText: "Ok",
           }).then((result) => {
@@ -70,7 +70,7 @@ function History() {
       text: "",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
+      confirmButtonColor: "#175C8C",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes",
     }).then((result) => {
@@ -100,7 +100,7 @@ function History() {
                 text: "Please login again to continue.",
                 icon: "error",
                 showCancelButton: false,
-                confirmButtonColor: "#3085d6",
+                confirmButtonColor: "#175C8C",
                 cancelButtonColor: "#d33",
                 confirmButtonText: "Ok",
               }).then((result) => {
@@ -176,7 +176,7 @@ function History() {
                       <p>{el.status}</p>
                     </div>
                     <div
-                      onClick={() => router.push(`/status_payment/${el.id}`)}
+                      onClick={() => router.push(`/payment_status/${el.id}`)}
                       className=" hover:cursor-pointer hover:text-gray-500 flex"
                     >
                       <p className="text-xl mt-0.5 mr-1">
