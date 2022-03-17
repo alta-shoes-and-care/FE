@@ -112,7 +112,7 @@ export default function invoice() {
               }).then((result) => {
                 if (result.isConfirmed) {
                   setLoading(true);
-                  router.push(`/endpoint/${id}`)
+                  router.push(`/payment_status/${id}`)
                   window.open(`${invoice.url}`,"_blank")
                 }
             });

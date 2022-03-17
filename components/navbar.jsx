@@ -138,7 +138,7 @@ function NavbarCompoent() {
             </h1>
             <h1 className="lg:mx-3 mx-1 lg:text-xl text-md text-primary hover:text-orange-600">
               <Link href="/history-order">
-                <a>Order</a>
+                <a>My Orders</a>
               </Link>
             </h1>
 
