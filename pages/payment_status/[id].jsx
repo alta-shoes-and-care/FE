@@ -147,7 +147,7 @@ export default function endpoint() {
         <div className="z-1 w-[100vw] h-screen bg-[#000009] bg-opacity-0 text-left">
           <div className="z-2 grid grid-cols-1 gap-4 bg-cover">
             {/* Desc Card */}
-            <div className="container ml-[20vw] mt-[10vh] z-3 w-[40vw] h-auto bg-[#ffffff] bg-opacity-80 hover:shadow-xl text-left rounded-lg pb-5">
+            <div className="container ml-[22vw] mt-[16vh] z-3 w-[40vw] h-auto bg-[#ffffff] bg-opacity-80 hover:shadow-xl text-left rounded-lg pb-5">
               <div className="grid grid-cols-1 text-center px-10 py-3">
                 <p className="text-black text-center bold text-4xl">
                   Thankyou for using our services
@@ -209,7 +209,7 @@ export default function endpoint() {
           </div>
         </div>
       </div>
-      <div id="services" className="grid grid-cols-1 pt-2">
+      <div id="services" className="mt-8 grid grid-cols-1 pt-2">
         <Service />
       </div>
     </section>

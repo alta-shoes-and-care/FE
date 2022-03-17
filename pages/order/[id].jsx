@@ -63,7 +63,6 @@ export default function formpayment(props) {
         })
         .then(({ data }) => {
           setHistory(data.data);
-          console.log(data.data, "masuk");
         })
         .catch((err) => {
           console.log(err, "error bang");
@@ -94,7 +93,6 @@ export default function formpayment(props) {
   function handleButton() {
     return Swal.fire({
       title: "Confirm your Order?",
-      text: "",
       icon: "question",
       showDenyButton: true,
       confirmButtonColor: "#3085d6",
@@ -120,8 +118,6 @@ export default function formpayment(props) {
         axios
           .post("https://ynwahid.cloud.okteto.net/orders", body, config)
           .then(({ data }) => {
-            console.log(data, "diisi apa gitu");
-
             Swal.fire({
               icon: "success",
               title: "Order Success",
@@ -225,6 +221,7 @@ export default function formpayment(props) {
   function validatepayment() {
     if (history[0].user_id !== undefined) {
       if (history[history.length - 1].is_paid == false) {
+        console.log("cilik ba");
         Swal.fire({
           title: "Your last order payment haven't finished!",
           text: "Do you want to see your order history?",
@@ -242,9 +239,9 @@ export default function formpayment(props) {
             router.push("/history-order");
           }
         });
+      } else {
+        validateButton();
       }
-    } else {
-      validateButton();
     }
   }
 
@@ -275,21 +272,19 @@ export default function formpayment(props) {
   return (
     <section>
       <div
-        className={`z-0 grid grid-cols-1 h-screen bg-cover  ${style.bgImage}  `}
+        className={`z-0 grid grid-cols-1 h-[110vh] bg-cover  ${style.bgImage}  `}
       >
-        <div className="z-1 w-[100vw] h-screen bg-[#000009] bg-opacity-30 text-center">
+        <div className="z-1 w-[100vw] h-[110vh] bg-[#000009] bg-opacity-30 text-center">
           <div className="z-2 grid grid-cols-1 gap-4 bg-cover">
             <div className="mt-[2.5vh]">
-              <p className="pt-3 py-2 text-5xl text-white">
-                Confirm your order
-              </p>
+              <p className="py-4 text-5xl text-white">Confirm your order</p>
             </div>
 
             {/* Desc Card */}
 
             <div className="container my-auto ml-[25vw] z-3 w-[50vw] h-auto bg-[#ffffff] bg-opacity-80 text-left rounded-lg pb-5">
-              <div className="grid grid-cols-1 text-center mt-[0.5vh]  px-10 py-2">
-                <p className="text-black bold text-2xl">
+              <div className="grid grid-cols-1 text-center mt-[0.5vh]  px-10 py-5">
+                <p className="text-black bold text-3xl mb-2">
                   Service type: {services.title}
                 </p>
                 <p className="text-gray-800 text-justify text-md mt-[1vh]">

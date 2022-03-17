@@ -121,11 +121,13 @@ export default function invoice() {
         <div className="bold z-1 w-[100vw] h-screen bg-[#000009] bg-opacity-5 text-left">
           <div className="z-2 grid grid-cols-1 gap-4 bg-cover ">
             <div className="mt-[2vh]">
-              <p className="text-5xl text-center text-white">Payment Invoice</p>
+              <p className="py-4 text-5xl text-center text-white">
+                Payment Invoice
+              </p>
             </div>
             {/* Desc Card */}
-            <div className="container ml-[30vw] z-3 w-[40vw] h-auto bg-[#ffffff] bg-opacity-90  text-left rounded-lg p-5">
-              <div className="grid grid-cols-1 center mb-2">
+            <div className="py-5 container ml-[30vw] z-3 w-[40vw] h-auto bg-[#ffffff] bg-opacity-90  text-left rounded-lg p-5">
+              <div className="grid grid-cols-1 center pb-5">
                 <p className="text-black text-center bold text-3xl">
                   Service type: {invoice.service_title}
                 </p>
@@ -199,7 +201,7 @@ export default function invoice() {
             </div>
 
             <div className="ml-[25vw] mt-[-1vh] text-center">
-              <div className="bold text-white text-2xl">
+              <div className="py-1 bold text-white text-3xl">
                 Subtotal :{" "}
                 <NumberFormat
                   value={invoice.total}
@@ -210,7 +212,7 @@ export default function invoice() {
                 />
               </div>
               <button
-                className="mt-[1vh] ml-[3vw] bg-[#175C8C] hover:bg-white text-white hover:text-black font-bold py-2 px-3 border border-black rounded-lg"
+                className="mt-[1vh] ml-[3vw] bg-[#175C8C] hover:bg-white text-white hover:text-black font-bold py-3 px-4 border border-black rounded-xl"
                 onClick={handleButton}
                 type="button"
               >
