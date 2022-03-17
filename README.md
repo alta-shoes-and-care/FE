@@ -10,62 +10,67 @@
 </div>
 
 ## About the Project
+
 Nowadays, some people are very busy and don't even have time to clean their shoes. Therefore we need a platform that is able to connect customers with shoes washing service provider.
 
-## Collaboration 
-  - [Trello (Work Management Tool)](https://trello.com/)
-  - [GitHub (Version Control System Platform)](https://github.com/alta-shoes-and-care/)
+## Collaboration
 
-  ### Backend
+- [Trello (Work Management Tool)](https://trello.com/)
+- [GitHub (Version Control System Platform)](https://github.com/alta-shoes-and-care/)
 
-  - [Github Repository for the Backend team](https://github.com/alta-shoes-and-care/BE.git)
-  - [Swagger OpenAPI](https://app.swaggerhub.com/apis/ynwahid/ide/1.0.0)
+### Backend
 
-  ### Quality Engineer
+- [Github Repository for the Backend team](https://github.com/alta-shoes-and-care/BE.git)
+- [Swagger OpenAPI](https://app.swaggerhub.com/apis/ynwahid/ide/1.0.0)
 
-  - [Github Repository for the QE team](https://github.com/alta-shoes-and-care/QE.git)
+### Quality Engineer
+
+- [Github Repository for the QE team](https://github.com/alta-shoes-and-care/QE.git)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Prototype Figma
+
 - [User](https://www.figma.com/proto/bSG0AWlCKrcXoG98z7lTyN/Shoes-Service-Station?node-id=435%3A385&starting-point-node-id=435%3A385&scaling=scale-down)
 - [Admin](https://www.figma.com/proto/bSG0AWlCKrcXoG98z7lTyN/Shoes-Service-Station?node-id=435%3A385&starting-point-node-id=435%3A385&scaling=scale-down)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Code Standart
+
 - [Airbnb](https://airbnb.io/javascript/react/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Deployment
+
 - [Netlify](https://shoes-service-station.netlify.app/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Features
 
--   Sign up
--   Login
--   Logout
+- Sign up
+- Login
+- Logout
 
-  #### As User
+#### As User
 
-  - View the main page
-  - View service list and details
-  - Ordering services
-  - View order history
-  - Added review orders
+- View the main page
+- View service list and details
+- Ordering services
+- View order history
+- Added review orders
 
-  #### As Admin
+#### As Admin
 
-  - Added new services
-  - Editing service
-  - Delete services
-  - View a list of orders
-  - Receive orders
-  - Reject orders
-  - Change order status (on process, delivery, cancel)
+- Added new services
+- Editing service
+- Delete services
+- View a list of orders
+- Receive orders
+- Reject orders
+- Change order status (on process, delivery, cancel)
 
   <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -92,8 +97,8 @@ npm run dev
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
 ## Built With
+
 - [NextJS (ReactJS Framework)](https://nextjs.org/)
 - [TailwindCSS](https://tailwindcss.com/)
 - [axios](https://www.npmjs.com/package/axios)
@@ -226,15 +231,17 @@ final-project-shoes-group-2
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- CONTACT -->
+
 ## Author
-* Muhammad Yusuf Untung Wahyudi 
-  - [Github](https://github.com/myusufuntung) 
+
+- Muhammad Yusuf Untung Wahyudi
+  - [Github](https://github.com/myusufuntung)
   - [Linked in](https://www.linkedin.com/in/myusufuntung)
-* Aditya Fabio Hariawan 
-  - [Github](https://github.com/fabioaditya) 
+- Aditya Fabio Hariawan
+  - [Github](https://github.com/fabioaditya)
   - [Linked in](https://www.linkedin.com/in/)
-* Chalimatus Sa'diyah 
-  - [Github](https://github.com/diydiyydiyyy) 
+- Chalimatus Sa'diyah
+  - [Github](https://github.com/diydiyydiyyy)
   - [Linked in](https://www.linkedin.com/in/chalimatussadiyah)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
