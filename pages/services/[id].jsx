@@ -45,7 +45,7 @@ export default function services() {
       title: `Are you sure wanna book this services? (${services.title}) `,
       text: "Please confirm your order",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
+      confirmButtonColor: "#175C8C",
       cancelButtonColor: "#eeeee",
       confirmButtonText: "Book This Services",
       cancelButtonText: "Keep Looking",

@@ -58,7 +58,7 @@ export default function endpoint() {
               text: "Please login again to continue.",
               icon: "error",
               showCancelButton: false,
-              confirmButtonColor: "#3085d6",
+              confirmButtonColor: "#175C8C",
               cancelButtonColor: "#d33",
               confirmButtonText: "Ok",
             }).then((result) => {
@@ -103,7 +103,7 @@ export default function endpoint() {
         text: "Thankyou for using our services :)",
         icon: "info",
         showCancelButton: false,
-        confirmButtonColor: "#3085d6",
+        confirmButtonColor: "#175C8C",
         confirmButtonText: "Ok",
       });
     } else {
