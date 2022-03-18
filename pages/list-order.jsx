@@ -2,8 +2,14 @@ import React, { useEffect, useState } from "react";
 import styles from "../styles/ListOrder.module.css";
 import { FaMoneyBillAlt } from "react-icons/fa";
 import { FcCalendar } from "react-icons/fc";
-import { RiMessage2Line, RiAccountBoxFill, RiMapPinFill } from "react-icons/ri";
+import {
+  RiMessage2Line,
+  RiAccountBoxFill,
+  RiMapPinFill,
+  RiExchangeDollarLine,
+} from "react-icons/ri";
 import { AiOutlineNumber, AiOutlineShoppingCart } from "react-icons/ai";
+import { GoChecklist } from "react-icons/go";
 import Swal from "sweetalert2";
 import { useRouter } from "next/router";
 import axios from "axios";
@@ -296,6 +302,50 @@ function ListOrder() {
     });
   }
 
+  function handleRefund(el) {
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+    setLoading(true);
+    axios
+      .put(
+        `https://ynwahid.cloud.okteto.net/orders/refund/${el.id}`,
+        {},
+        config
+      )
+      .then(({ data }) => {
+        Toast.fire({
+          icon: "success",
+          title: "successful refund",
+        });
+        return dispatch(allstore.getListOrders());
+      })
+      .catch((err) => {
+        if (err.response.status === 401) {
+          Swal.fire({
+            title: "Your session has ended!",
+            text: "Please login again to continue.",
+            icon: "error",
+            showCancelButton: false,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Ok",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              router.push("/login");
+              localStorage.clear();
+            }
+          });
+        } else {
+          Swal.fire("Ooppss!", "Sorry, the server is error.", "error");
+        }
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }
+
   if (loading) {
     return <Loading />;
   }
@@ -342,6 +392,38 @@ function ListOrder() {
                         className={`${styles.titleCard} flex justify-between`}
                       >
                         <h1 className=" text-xl">{el.service_title}</h1>
+                        {/* refund */}
+                        <div className=" flex items-center ml-16">
+                          {el.has_refunded ? (
+                            <div className=" text-green-500 flex">
+                              <p className="text-xl mt-0.5 mr-1">
+                                <GoChecklist />
+                              </p>
+                              <p>Refunded</p>
+                            </div>
+                          ) : (
+                            <></>
+                          )}
+                        </div>
+                        {/* Button Refund */}
+                        <div
+                          className=" flex items-center hover:cursor-pointer"
+                          onClick={() => handleRefund(el)}
+                        >
+                          {el.status == "cancel" &&
+                          el.is_paid &&
+                          !el.has_refunded ? (
+                            <div className=" text-red-500 flex">
+                              <p className="text-xl mt-0.5 mr-1">
+                                <RiExchangeDollarLine />
+                              </p>
+                              <p>Refund</p>
+                            </div>
+                          ) : (
+                            <></>
+                          )}
+                        </div>
+                        {/* is paid */}
                         <div className=" flex items-center">
                           {el.is_paid ? (
                             <div className=" text-green-500 flex">
@@ -370,7 +452,7 @@ function ListOrder() {
                           <p className=" text-primary text-xl mt-0.5 mr-1">
                             <RiAccountBoxFill />
                           </p>
-                          <p>Name : Joko</p>
+                          <p>Name : {el.user_name}</p>
                         </div>
 
                         <div className=" flex">
