@@ -52,24 +52,6 @@ function ListOrder() {
     }
   }, []);
 
-  function getOrder(params) {
-    const token = localStorage.getItem("token");
-    const config = {
-      headers: { Authorization: `Bearer ${token}` },
-    };
-    axios
-      .get(`https://ynwahid.cloud.okteto.net/orders`, config)
-      .then(({ data }) => {
-        setlistOrder(data.data);
-      })
-      .catch((err) => {
-        console.log(err, "error");
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }
-
   function handleAccept(el) {
     const token = localStorage.getItem("token");
     const config = {
@@ -113,6 +95,7 @@ function ListOrder() {
         setLoading(false);
       });
   }
+
   function handleOnprocess(el) {
     const token = localStorage.getItem("token");
     const config = {
@@ -200,6 +183,7 @@ function ListOrder() {
         setLoading(false);
       });
   }
+
   function handleCancel(el) {
     return Swal.fire({
       title: "Cancel this order?",
@@ -255,6 +239,7 @@ function ListOrder() {
       }
     });
   }
+
   function handleReject(el) {
     return Swal.fire({
       title: "Reject this order?",
@@ -314,6 +299,7 @@ function ListOrder() {
   if (loading) {
     return <Loading />;
   }
+
   return (
     <div className={` ${styles.adminbg2}`}>
       <div
@@ -461,6 +447,7 @@ function ListOrder() {
                           Accept
                         </button>
                       )}
+
                       {/* reject */}
                       {el.status === "rejected" ||
                       el.status === "accepted" ||
@@ -482,6 +469,7 @@ function ListOrder() {
                           Reject
                         </button>
                       )}
+
                       {/* on process */}
                       {el.status === "on process" ||
                       el.status === "pending" ||
@@ -527,6 +515,7 @@ function ListOrder() {
                           Delivery
                         </button>
                       )}
+
                       {/* cancel */}
                       {el.status === "cancel" ||
                       el.status === "rejected" ||

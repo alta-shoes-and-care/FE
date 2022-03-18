@@ -111,7 +111,9 @@ function Admin() {
   return (
     <div className={`lg:grid grid-cols-4  ${styles.adminbg} flex flex-col`}>
       {/* left */}
-      <div className=" lg:pl-24 flex flex-col flex-wrap content-center">
+      <div
+        className={`lg:pl-24 flex flex-col flex-wrap content-center ${styles.left}`}
+      >
         <button className="w-[150px] h-[40px] my-4 mt-16 text-center text-[18px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium rounded-lg text-white bg-primary hover:bg-transparent hover:border-primary hover:border-2 hover:text-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary  transition ease-linear duration-500">
           Product
         </button>

@@ -13,8 +13,10 @@
   }
   .left {
     padding-left: 0;
-    display: grid;
-    justify-content: center;
+    justify-content: space-around;
+    display: flex;
+    align-items: flex-end;
+    width: 355px;
   }
   .right {
     width: auto;

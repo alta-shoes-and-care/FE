@@ -49,4 +49,12 @@
     flex-wrap: wrap;
     align-content: center;
   }
+  .left {
+    flex-direction: row;
+    margin-left: 20px;
+    justify-content: space-around;
+    display: flex;
+    align-items: flex-end;
+    width: 355px;
+  }
 }
