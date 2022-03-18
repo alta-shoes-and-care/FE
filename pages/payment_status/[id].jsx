@@ -132,7 +132,18 @@ export default function endpoint() {
   }
 
   function handlePayment() {
-    window.open(`${invoice.url}`, "_blank");
+    if (invoice.is_paid == false) {
+      window.open(`${invoice.url}`, "_blank");
+    } else {
+      Swal.fire({
+        title: "Your Payment already Completed",
+        text: "Thankyou for using our services :)",
+        icon: "info",
+        showCancelButton: false,
+        confirmButtonColor: "#175C8C",
+        confirmButtonText: "Ok",
+      });
+    }
   }
 
   if (loading || !isValid) {

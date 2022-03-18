@@ -90,6 +90,8 @@ export default function formpayment(props) {
   }, [id]);
 
   // Button Handle
+
+
   function handleButton() {
     return Swal.fire({
       title: "Confirm your Order?",
@@ -126,9 +128,7 @@ export default function formpayment(props) {
               allowOutsideClick: false,
             }).then((result) => {
               if (result.isConfirmed) {
-                setTimeout(() => {
-                  router.push(`/invoice/${data.data.id}`);
-                }, 1000);
+                router.push(`/invoice/${data.data.id}`);
               }
             });
           })
@@ -221,7 +221,6 @@ export default function formpayment(props) {
   function validatepayment() {
     if (history[0].user_id !== undefined) {
       if (history[history.length - 1].is_paid == false) {
-        console.log("cilik ba");
         Swal.fire({
           title: "Your last order payment haven't finished!",
           text: "Do you want to see your order history?",
@@ -242,9 +241,9 @@ export default function formpayment(props) {
       } else {
         validateButton();
       }
-    }
-    else {
+    } else {
       validateButton();
+    }
   }
 
   //button handle end
