@@ -12,47 +12,9 @@ export default function Layout({ children }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(allStore.getAllService())
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((err) => {
-        Swal.fire({
-          title: "Your session has ended!",
-          text: "Please login again to continue.",
-          icon: "error",
-          showCancelButton: false,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Ok",
-        }).then((result) => {
-          if (result.isConfirmed) {
-            router.push("/login");
-            localStorage.clear();
-          }
-        });
-      });
+    dispatch(allStore.getAllService());
 
-    dispatch(allStore.getListOrders())
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((err) => {
-        Swal.fire({
-          title: "Your session has ended!",
-          text: "Please login again to continue.",
-          icon: "error",
-          showCancelButton: false,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Ok",
-        }).then((result) => {
-          if (result.isConfirmed) {
-            router.push("/login");
-            localStorage.clear();
-          }
-        });
-      });
+    dispatch(allStore.getListOrders());
   }, [dispatch]);
 
   return (
