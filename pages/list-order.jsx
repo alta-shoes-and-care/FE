@@ -406,19 +406,6 @@ function ListOrder() {
                         </div>
 
                         <div className=" flex">
-                          <p className="text-xl mt-0.5 mr-1">
-                            <RiMessage2Line />
-                          </p>
-                          <p>Status Order : {el.status}</p>
-                        </div>
-
-                        <div className=" flex">
-                          <p className="text-xl mt-0.5 mr-0.5">
-                            <AiOutlineNumber />
-                          </p>
-                          <p>Orders Id : {el.id}</p>
-                        </div>
-                        <div className=" flex">
                           <p className=" text-green-600 text-xl mt-0.5 mr-1">
                             <FaMoneyBillAlt />
                           </p>
@@ -430,6 +417,20 @@ function ListOrder() {
                               thousandSeparator={true}
                             />
                           </p>
+                        </div>
+
+                        <div className=" flex">
+                          <p className="text-xl mt-0.5 mr-0.5">
+                            <AiOutlineNumber />
+                          </p>
+                          <p>Orders Id : {el.id}</p>
+                        </div>
+
+                        <div className=" flex">
+                          <p className="text-xl mt-0.5 mr-1">
+                            <RiMessage2Line />
+                          </p>
+                          <p>Status Order : {el.status}</p>
                         </div>
                       </div>
                     </div>
