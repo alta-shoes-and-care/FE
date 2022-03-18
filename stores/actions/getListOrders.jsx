@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import Swal from "sweetalert2";
 export const getListOrders = () => {
   return (dispatch) => {
     return new Promise((resolve, reject) => {
@@ -29,7 +29,7 @@ export const getListOrders = () => {
               confirmButtonText: "Ok",
             }).then((result) => {
               if (result.isConfirmed) {
-                router.push("/login");
+                // router.push("/login");
                 localStorage.clear();
               }
             });
