@@ -21,7 +21,7 @@ export default function Service() {
 				Our Services
 			</h1>
 
-			<div className='mt-6 flex flex-row flex-wrap justify-between items-baseline space-y-5 lg:space-y-0 lg:grid lg:grid-cols-4 lg:gap-x-3'>
+			<div className='mt-6 flex flex-row flex-wrap justify-evenly items-baseline space-y-5 lg:space-y-0 lg:grid lg:grid-cols-4 lg:gap-x-3'>
 				{listService.map((el, i) => (
 					<div key={i}>
 						<Link href={`/services/${el.id}`}>

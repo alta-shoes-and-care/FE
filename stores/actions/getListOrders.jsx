@@ -1,14 +1,17 @@
 import axios from "axios";
 import Swal from "sweetalert2";
-
-export const getAllService = () => {
+export const getListOrders = () => {
   return (dispatch) => {
     return new Promise((resolve, reject) => {
+      const token = localStorage.getItem("token");
+      const config = {
+        headers: { Authorization: `Bearer ${token}` },
+      };
       axios
-        .get("https://ynwahid.cloud.okteto.net/services")
+        .get(`https://ynwahid.cloud.okteto.net/orders`, config)
         .then(({ data }) => {
-          console.log(data.data);
-          dispatch(setService(data.data));
+          console.log(data.data, "data admin");
+          dispatch(setOrders(data.data));
           resolve(data.data);
         })
 
@@ -38,9 +41,9 @@ export const getAllService = () => {
   };
 };
 
-export const setService = (payload) => {
+export const setOrders = (payload) => {
   return {
-    type: "SET_LIST_SERVICE",
+    type: "SET_LIST_ORDERS",
     payload,
   };
 };

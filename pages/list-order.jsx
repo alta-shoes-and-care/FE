@@ -2,8 +2,14 @@ import React, { useEffect, useState } from "react";
 import styles from "../styles/ListOrder.module.css";
 import { FaMoneyBillAlt } from "react-icons/fa";
 import { FcCalendar } from "react-icons/fc";
-import { RiMessage2Line } from "react-icons/ri";
+import {
+  RiMessage2Line,
+  RiAccountBoxFill,
+  RiMapPinFill,
+  RiExchangeDollarLine,
+} from "react-icons/ri";
 import { AiOutlineNumber, AiOutlineShoppingCart } from "react-icons/ai";
+import { GoChecklist } from "react-icons/go";
 import Swal from "sweetalert2";
 import { useRouter } from "next/router";
 import axios from "axios";
@@ -16,10 +22,11 @@ import allstore from "../stores/actions/index";
 function ListOrder() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [listOrder, setlistOrder] = useState([[]]);
+
+  const dispatch = useDispatch();
 
   const listOrders = useSelector(
-    ({ getListOrderReducer }) => getListOrderReducer
+    ({ getListOrdersReducer }) => getListOrdersReducer
   );
 
   const Toast = Swal.mixin({
@@ -35,7 +42,10 @@ function ListOrder() {
   });
 
   useEffect(() => {
-    console.log(listOrders, "masukk");
+    console.log(listOrders, "halooooo");
+  }, [listOrders]);
+
+  useEffect(() => {
     if (typeof window !== "undefined") {
       if (!localStorage.getItem("token")) {
         router.push("/404");
@@ -46,60 +56,7 @@ function ListOrder() {
         router.push("/404");
       }
     }
-
-    setLoading(true);
-    const token = localStorage.getItem("token");
-    const config = {
-      headers: { Authorization: `Bearer ${token}` },
-    };
-    axios
-      .get(`https://ynwahid.cloud.okteto.net/orders`, config)
-      .then(({ data }) => {
-        setlistOrder(data.data);
-        console.log(data.data, "masuk!");
-      })
-      .catch((err) => {
-        if (err.response.status === 401) {
-          Swal.fire({
-            title: "Your session has ended!",
-            text: "Please login again to continue.",
-            icon: "error",
-            showCancelButton: false,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Ok",
-          }).then((result) => {
-            if (result.isConfirmed) {
-              router.push("/login");
-              localStorage.clear();
-            }
-          });
-        } else {
-          Swal.fire("Ooppss!", "Sorry, the server is error.", "error");
-        }
-      })
-      .finally(() => {
-        setLoading(false);
-      });
   }, []);
-
-  function getOrder(params) {
-    const token = localStorage.getItem("token");
-    const config = {
-      headers: { Authorization: `Bearer ${token}` },
-    };
-    axios
-      .get(`https://ynwahid.cloud.okteto.net/orders`, config)
-      .then(({ data }) => {
-        setlistOrder(data.data);
-      })
-      .catch((err) => {
-        console.log(err, "error");
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }
 
   function handleAccept(el) {
     const token = localStorage.getItem("token");
@@ -118,7 +75,7 @@ function ListOrder() {
           icon: "success",
           title: "Success update status",
         });
-        return getOrder();
+        return dispatch(allstore.getListOrders());
       })
       .catch((err) => {
         if (err.response.status === 401) {
@@ -144,6 +101,7 @@ function ListOrder() {
         setLoading(false);
       });
   }
+
   function handleOnprocess(el) {
     const token = localStorage.getItem("token");
     const config = {
@@ -161,7 +119,7 @@ function ListOrder() {
           icon: "success",
           title: "Success update status",
         });
-        return getOrder();
+        return dispatch(allstore.getListOrders());
       })
       .catch((err) => {
         if (err.response.status === 401) {
@@ -205,7 +163,7 @@ function ListOrder() {
           icon: "success",
           title: "Success update status",
         });
-        return getOrder();
+        return dispatch(allstore.getListOrders());
       })
       .catch((err) => {
         if (err.response.status === 401) {
@@ -231,6 +189,7 @@ function ListOrder() {
         setLoading(false);
       });
   }
+
   function handleCancel(el) {
     return Swal.fire({
       title: "Cancel this order?",
@@ -258,7 +217,7 @@ function ListOrder() {
               icon: "success",
               title: "Success update status",
             });
-            return getOrder();
+            return dispatch(allstore.getListOrders());
           })
           .catch((err) => {
             if (err.response.status === 401) {
@@ -286,6 +245,7 @@ function ListOrder() {
       }
     });
   }
+
   function handleReject(el) {
     return Swal.fire({
       title: "Reject this order?",
@@ -313,7 +273,7 @@ function ListOrder() {
               icon: "success",
               title: "Success update status",
             });
-            return getOrder();
+            return dispatch(allstore.getListOrders());
           })
           .catch((err) => {
             if (err.response.status === 401) {
@@ -342,9 +302,54 @@ function ListOrder() {
     });
   }
 
+  function handleRefund(el) {
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+    setLoading(true);
+    axios
+      .put(
+        `https://ynwahid.cloud.okteto.net/orders/refund/${el.id}`,
+        {},
+        config
+      )
+      .then(({ data }) => {
+        Toast.fire({
+          icon: "success",
+          title: "successful refund",
+        });
+        return dispatch(allstore.getListOrders());
+      })
+      .catch((err) => {
+        if (err.response.status === 401) {
+          Swal.fire({
+            title: "Your session has ended!",
+            text: "Please login again to continue.",
+            icon: "error",
+            showCancelButton: false,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Ok",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              router.push("/login");
+              localStorage.clear();
+            }
+          });
+        } else {
+          Swal.fire("Ooppss!", "Sorry, the server is error.", "error");
+        }
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }
+
   if (loading) {
     return <Loading />;
   }
+
   return (
     <div className={` ${styles.adminbg2}`}>
       <div
@@ -369,7 +374,7 @@ function ListOrder() {
           <div
             className={`h-[75vh] w-[1200px] flex flex-wrap overflow-y-scroll content-start ${styles.bgcard}`}
           >
-            {listOrder
+            {listOrders
               .slice()
               .sort((a, b) => {
                 return b.id - a.id;
@@ -387,6 +392,38 @@ function ListOrder() {
                         className={`${styles.titleCard} flex justify-between`}
                       >
                         <h1 className=" text-xl">{el.service_title}</h1>
+                        {/* refund */}
+                        <div className=" flex items-center ml-16">
+                          {el.has_refunded ? (
+                            <div className=" text-green-500 flex">
+                              <p className="text-xl mt-0.5 mr-1">
+                                <GoChecklist />
+                              </p>
+                              <p>Refunded</p>
+                            </div>
+                          ) : (
+                            <></>
+                          )}
+                        </div>
+                        {/* Button Refund */}
+                        <div
+                          className=" flex items-center hover:cursor-pointer"
+                          onClick={() => handleRefund(el)}
+                        >
+                          {el.status == "cancel" &&
+                          el.is_paid &&
+                          !el.has_refunded ? (
+                            <div className=" text-red-500 flex">
+                              <p className="text-xl mt-0.5 mr-1">
+                                <RiExchangeDollarLine />
+                              </p>
+                              <p>Refund</p>
+                            </div>
+                          ) : (
+                            <></>
+                          )}
+                        </div>
+                        {/* is paid */}
                         <div className=" flex items-center">
                           {el.is_paid ? (
                             <div className=" text-green-500 flex">
@@ -409,14 +446,39 @@ function ListOrder() {
                       <div className=" bg-gray-600 w-[200px] my-1 h-0.5"></div>
                       {/* status */}
                       <div
-                        className={` flex justify-between w-[400px] ${styles.iconstatus}`}
+                        className={` flex flex-col w-[400px] ${styles.iconstatus}`}
                       >
+                        <div className=" flex">
+                          <p className=" text-primary text-xl mt-0.5 mr-1">
+                            <RiAccountBoxFill />
+                          </p>
+                          <p>Name : {el.user_name}</p>
+                        </div>
+
+                        <div className=" flex">
+                          <p className=" text-primary text-xl mt-0.5 mr-1">
+                            <RiMapPinFill />
+                          </p>
+                          <p>
+                            Address : {el.address}, {el.city}.
+                          </p>
+                        </div>
+
+                        <div className=" flex">
+                          <p className="text-xl mt-0.5 mr-1">
+                            <FcCalendar />
+                          </p>
+                          <p>
+                            Pickup Date : {moment(el.date).format("D MMM YYYY")}
+                          </p>
+                        </div>
+
                         <div className=" flex">
                           <p className=" text-green-600 text-xl mt-0.5 mr-1">
                             <FaMoneyBillAlt />
                           </p>
                           <p>
-                            Rp.{" "}
+                            Total : Rp.{" "}
                             <NumberFormat
                               value={el.total}
                               displayType={"text"}
@@ -424,32 +486,20 @@ function ListOrder() {
                             />
                           </p>
                         </div>
-                        <div className=" flex">
-                          <p className="text-xl mt-0.5 mr-1">
-                            <FcCalendar />
-                          </p>
-                          <p>{moment(el.date).format("D MMM YYYY")}</p>
-                        </div>
-                        <div className=" flex">
-                          <p className="text-xl mt-0.5 mr-1">
-                            <RiMessage2Line />
-                          </p>
-                          <p>{el.status}</p>
-                        </div>
 
                         <div className=" flex">
                           <p className="text-xl mt-0.5 mr-0.5">
                             <AiOutlineNumber />
                           </p>
-                          <p>{el.id}</p>
+                          <p>Orders Id : {el.id}</p>
                         </div>
-                      </div>
-                      <div className=" flex flex-col">
-                        <div className="flex">
-                          <div className=" mr-2">Address : </div>
-                          <div className=" w-[300px]">{el.address}</div>
+
+                        <div className=" flex">
+                          <p className="text-xl mt-0.5 mr-1">
+                            <RiMessage2Line />
+                          </p>
+                          <p>Status Order : {el.status}</p>
                         </div>
-                        <div>Contact : {el.phone} </div>
                       </div>
                     </div>
                   </div>
@@ -479,6 +529,7 @@ function ListOrder() {
                           Accept
                         </button>
                       )}
+
                       {/* reject */}
                       {el.status === "rejected" ||
                       el.status === "accepted" ||
@@ -500,6 +551,7 @@ function ListOrder() {
                           Reject
                         </button>
                       )}
+
                       {/* on process */}
                       {el.status === "on process" ||
                       el.status === "pending" ||
@@ -545,6 +597,7 @@ function ListOrder() {
                           Delivery
                         </button>
                       )}
+
                       {/* cancel */}
                       {el.status === "cancel" ||
                       el.status === "rejected" ||

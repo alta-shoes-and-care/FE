@@ -54,7 +54,7 @@ function NewItem() {
     }
   }, []);
 
-  //  regex ^[0-9]+(.[0-9]{0})?$
+  //  Validation Input User
   function validateButton(e) {
     e.preventDefault();
     if (files.length == 0) {

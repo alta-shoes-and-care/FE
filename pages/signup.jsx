@@ -172,7 +172,7 @@ export default function Register() {
 					'url(https://images.unsplash.com/photo-1509472290917-08d8d47c5fca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80)',
 			}}>
 			<div className='container min-h-screen min-w-full flex justify-center items-center text-center bg-[#f0f0f0] bg-opacity-30'>
-				<div className='w-[70%] h-[50%] lg:w-[600px] lg:h-[600px] bg-white bg-opacity-50 backdrop-blur-[10px] my-auto flex justify-center items-center rounded-2xl'>
+				<div className='w-[400px] h-[350px] lg:w-[600px] lg:h-[600px] bg-white bg-opacity-50 backdrop-blur-[10px] my-auto flex justify-center items-center rounded-2xl'>
 					<div>
 						<h1 className='font-bold text-[30px] lg:text-[40px] text-primary'>
 							Welcome!
@@ -243,7 +243,7 @@ export default function Register() {
 
 							<div className='flex justify-center'>
 								<button
-									className='lg:h-[50px] h-[30px] lg:w-[50%] w-[30%] mt-5 lg:mt-10 text-center lg:text-[18px] text-[15px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium lg:rounded-xl rounded-md text-white bg-primary hover:bg-transparent hover:border-primary hover:border-2 hover:text-primary hover:font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary'
+									className='lg:h-[50px] h-[30px] lg:w-[50%] w-[100px] mt-5 lg:mt-10 text-center lg:text-[18px] text-[15px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium lg:rounded-xl rounded-md text-white bg-primary hover:bg-transparent hover:border-primary hover:border-2 hover:text-primary hover:font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary'
 									onClick={validateRegister}>
 									Sign up
 								</button>

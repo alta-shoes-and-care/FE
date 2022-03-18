@@ -35,6 +35,7 @@ export default function Review() {
 		} else if (localStorage.getItem('is_admin') == 'true') {
 			return router.push('/404');
 		} else if (id) {
+			setLoading(true);
 			const token = localStorage.getItem('token');
 			const config = {
 				headers: { Authorization: `Bearer ${token}` },
@@ -42,12 +43,17 @@ export default function Review() {
 			axios
 				.get(`https://ynwahid.cloud.okteto.net/orders/${id}`, config)
 				.then(({ data }) => {
-					if (localStorage.getItem('user_id') == data.data.user_id) {
-						setService_id(data.data.service_id);
-						setOrder_id(data.data.id);
-						setIsValid(true);
-					} else if (localStorage.getItem('user_id') !== data.data.user_id) {
-						router.push('/404');
+					if (data) {
+						if (localStorage.getItem('user_id') == data.data.user_id) {
+							setService_id(data.data.service_id);
+							setOrder_id(data.data.id);
+							console.log(data);
+							setIsValid(true);
+						} else {
+							router.push('/404');
+						}
+					} else {
+						return <></>;
 					}
 				})
 				.catch((err) => {
@@ -72,23 +78,26 @@ export default function Review() {
 				.finally(() => {
 					setLoading(false);
 				});
-		} else {
-			router.push('/404');
 		}
 	}, [id]);
 
 	function validateReview(e) {
 		e.preventDefault();
-		if (rating === 0 && review === '') {
-			Swal.fire('Invalid!', 'Data cannot be empty!', 'error');
+		if (rating === null && review === '') {
+			Swal.fire('Invalid!', 'Rating and Comment cannot be empty!', 'error');
+		} else if (rating === null) {
+			Swal.fire('Invalid!', 'Rating cannot be empty!', 'error');
+		} else if (review === '') {
+			Swal.fire('Invalid!', 'Comment cannot be empty!', 'error');
 		} else if (review.length >= 320) {
-			Swal.fire('Invalid!', 'Maximum comentar is 320 characters.', 'error');
+			Swal.fire('Invalid!', 'Maximum comment is 320 characters.', 'error');
 		} else {
 			handleReview();
 		}
 	}
 
 	function handleReview() {
+		setLoading(true);
 		const token = localStorage.getItem('token');
 		const config = {
 			headers: { Authorization: `Bearer ${token}` },
@@ -103,8 +112,6 @@ export default function Review() {
 			.post(`https://ynwahid.cloud.okteto.net/reviews/jwt`, body, config)
 			.then(({ data }) => {
 				if (data) {
-					setRating(null);
-					setReview('');
 					Swal.fire(`Thankyou!`, 'Your review means a lot to us :)', 'success');
 					router.push('/history-order');
 				}
@@ -167,7 +174,7 @@ export default function Review() {
 							className={`form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700  bg-clip-padding border border-solid border-gray-300 rounded-lg transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none ${styles.inputbg}`}
 							id='exampleFormControlTextarea1'
 							rows='3'
-							placeholder='Your message'></textarea>
+							placeholder='Your comment'></textarea>
 
 						<div className='flex justify-center'>
 							<button
