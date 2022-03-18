@@ -1,6 +1,6 @@
 <div align="center">
 
-<h1>Shoes Service Station</h1>
+<h1>Welcome to Shoes Service Station👋</h1>
 
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/alta-shoes-and-care/FE)
 
@@ -9,52 +9,52 @@
 <img src="assets/logo/logo.png" alt="Logo" width="500" height="auto" />
 </div>
 
-## About the Project
+## 📝 About the Project
 
 Nowadays, some people are very busy and don't even have time to clean their shoes. Therefore we need a platform that is able to connect customers with shoes washing service provider.
 
-## Collaboration
+## 🌐 DEMO (Deployment)
 
-- [Trello (Work Management Tool)](https://trello.com/)
-- [GitHub (Version Control System Platform)](https://github.com/alta-shoes-and-care/)
-
-### Backend
-
-- [Github Repository for the Backend team](https://github.com/alta-shoes-and-care/BE.git)
-- [Swagger OpenAPI](https://app.swaggerhub.com/apis/ynwahid/ide/1.0.0)
-
-### Quality Engineer
-
-- [Github Repository for the QE team](https://github.com/alta-shoes-and-care/QE.git)
+- [Netlify](https://shoes-service-station.netlify.app/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-## Prototype Figma
+## 🎨 Prototype Figma
 
 - [User](https://www.figma.com/proto/bSG0AWlCKrcXoG98z7lTyN/Shoes-Service-Station?node-id=435%3A385&starting-point-node-id=435%3A385&scaling=scale-down)
 - [Admin](https://www.figma.com/proto/bSG0AWlCKrcXoG98z7lTyN/Shoes-Service-Station?node-id=435%3A385&starting-point-node-id=435%3A385&scaling=scale-down)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-## Code Standart
+## 🤝 Collaboration
+
+- [Trello (Work Management Tool)](https://trello.com/)
+- [GitHub (Version Control System Platform)](https://github.com/alta-shoes-and-care/)
+
+### ⚙ Backend
+
+- [Github Repository for the Backend team](https://github.com/alta-shoes-and-care/BE.git)
+- [Swagger OpenAPI](https://app.swaggerhub.com/apis/ynwahid/ide/1.0.0)
+
+### 🔎 Quality Engineer
+
+- [Github Repository for the QE team](https://github.com/alta-shoes-and-care/QE.git)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+## 🔑 Code Standart
 
 - [Airbnb](https://airbnb.io/javascript/react/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-## Deployment
-
-- [Netlify](https://shoes-service-station.netlify.app/)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-## Features
+## 🔮 Features
 
 - Sign up
 - Login
 - Logout
 
-#### As User
+#### 🌟 As User
 
 - View the main page
 - View service list and details
@@ -62,7 +62,7 @@ Nowadays, some people are very busy and don't even have time to clean their shoe
 - View order history
 - Added review orders
 
-#### As Admin
+#### ✨ As Admin
 
 - Added new services
 - Editing service
@@ -74,7 +74,7 @@ Nowadays, some people are very busy and don't even have time to clean their shoe
 
   <p align="right">(<a href="#top">back to top</a>)</p>
 
-## Installation
+## 🧰 Installation
 
 Clone this project
 
@@ -83,13 +83,13 @@ git clone https://github.com/alta-shoes-and-care/FE.git
 cd FE
 ```
 
-#### Install
+#### ⌛ Install
 
 ```sh
 npm install
 ```
 
-#### Usage
+#### 🚀 Usage
 
 ```sh
 npm run dev
@@ -97,7 +97,7 @@ npm run dev
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-## Built With
+## 🛠️ Built With
 
 - [NextJS (ReactJS Framework)](https://nextjs.org/)
 - [TailwindCSS](https://tailwindcss.com/)
@@ -127,7 +127,7 @@ npm run dev
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-## Folder Structure
+## 📁 Folder Structure
 
 ```sh
 final-project-shoes-group-2
@@ -232,7 +232,7 @@ final-project-shoes-group-2
 
 <!-- CONTACT -->
 
-## Author
+## 🤖 Author
 
 - Muhammad Yusuf Untung Wahyudi
   - [Github](https://github.com/myusufuntung)
