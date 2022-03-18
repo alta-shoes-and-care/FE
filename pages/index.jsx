@@ -19,7 +19,6 @@ export default function Home() {
 			.get(`https://ynwahid.cloud.okteto.net/reviews/`)
 			.then(({ data }) => {
 				setReviews(data.data);
-				// console.log(data)
 			})
 			.catch((err) => {
 				console.log(err.response);
@@ -56,24 +55,31 @@ export default function Home() {
 				<h1 className='font-bold text-black text-[36px] lg:text-[48px] text-center mb-8 '>
 					What is everyone saying?
 				</h1>
-				<div className='lg:flex lg:justify-evenly lg:flex-row lg:flex-wrap flex flex-col items-center my-auto'>
-					{reviews
-						.slice(-3)
-						.reverse()
-						.map((el, i) => (
-							<div
-								key={i}
-								className='border border-primary rounded-2xl w-3/4 h-auto mb-4 lg:h-[250px] lg:m-2 lg:w-1/4 p-5 text-center flex items-center flex-col'>
-								<h2 className='font-bold text-[24px]'>{el.name}</h2>
-								<div className='flex justify-center'>
-									<ReactStars size={30} value={el.rating} edit={false} />
+
+				{!reviews[0] ? (
+					<div>
+						<h2 className='text-center italic'>no reviews yet.</h2>
+					</div>
+				) : (
+					<div className='lg:flex lg:justify-evenly lg:flex-row lg:flex-wrap flex flex-col items-center my-auto'>
+						{reviews
+							.slice(-3)
+							.reverse()
+							.map((el, i) => (
+								<div
+									key={i}
+									className='border border-primary rounded-2xl w-3/4 h-auto mb-4 lg:h-[250px] lg:m-2 lg:w-1/4 p-5 text-center flex items-center flex-col'>
+									<h2 className='font-bold text-[24px]'>{el.name}</h2>
+									<div className='flex justify-center'>
+										<ReactStars size={30} value={el.rating} edit={false} />
+									</div>
+									<blockquote className='italic font-thin text-[18px]'>
+										"{el.review}"
+									</blockquote>
 								</div>
-								<blockquote className='italic font-thin text-[18px]'>
-									"{el.review}"
-								</blockquote>
-							</div>
-						))}
-				</div>
+							))}
+					</div>
+				)}
 			</div>
 
 			<div className='w-full bg-[#f0f0f0] lg:py-20 py-10'>

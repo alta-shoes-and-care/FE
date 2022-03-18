@@ -30,7 +30,6 @@ export default function Review() {
 	};
 
 	useEffect(() => {
-		let abortController = new AbortController();
 		if (!localStorage.getItem('token')) {
 			return router.push('/login');
 		} else if (localStorage.getItem('is_admin') == 'true') {
@@ -52,7 +51,6 @@ export default function Review() {
 					} else {
 						router.push('/404');
 					}
-					abortController.abort();
 				})
 				.catch((err) => {
 					console.log(err.response);
