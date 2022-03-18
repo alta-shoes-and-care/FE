@@ -73,7 +73,7 @@ function Login() {
 					localStorage.clear();
 				}
 			});
-		}, 300000);
+		}, 1800000);
 	}
 
 	function handleLogin() {

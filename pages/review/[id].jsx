@@ -43,13 +43,17 @@ export default function Review() {
 			axios
 				.get(`https://ynwahid.cloud.okteto.net/orders/${id}`, config)
 				.then(({ data }) => {
-					if (localStorage.getItem('user_id') == data.data.user_id) {
-						setService_id(data.data.service_id);
-						setOrder_id(data.data.id);
-						console.log(data);
-						setIsValid(true);
+					if (data) {
+						if (localStorage.getItem('user_id') == data.data.user_id) {
+							setService_id(data.data.service_id);
+							setOrder_id(data.data.id);
+							console.log(data);
+							setIsValid(true);
+						} else {
+							router.push('/404');
+						}
 					} else {
-						router.push('/404');
+						return <></>;
 					}
 				})
 				.catch((err) => {

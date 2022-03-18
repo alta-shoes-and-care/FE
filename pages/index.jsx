@@ -22,7 +22,9 @@ export default function Home() {
 			})
 			.catch((err) => {
 				console.log(err.response);
-				if (err.response.status === 401) {
+				if (err.response.status === 500) {
+					return <></>;
+				} else if (err.response.status === 401) {
 					Swal.fire({
 						title: 'Your session has ended!',
 						text: 'Please login again to continue.',
