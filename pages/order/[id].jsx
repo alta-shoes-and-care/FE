@@ -89,82 +89,82 @@ export default function formpayment(props) {
 		}
 	}, [id]);
 
-	// Button Handle
-	function handleButton() {
-		return Swal.fire({
-			title: 'Confirm your Order?',
-			icon: 'question',
-			showDenyButton: true,
-			confirmButtonColor: '#3085d6',
-			cancelButtonColor: '#d33',
-			confirmButtonText: 'Yes',
-		}).then((result) => {
-			if (result.isConfirmed) {
-				setConfirmLoading(true);
-				const token = localStorage.getItem('token');
-				const config = {
-					headers: { Authorization: `Bearer ${token}` },
-				};
-				const body = {
-					service_id: newId,
-					qty: +qty,
-					total: +total,
-					payment_method_id: +payment_method_id,
-					date: date,
-					address: address,
-					city: city,
-					phone: phone,
-				};
-				axios
-					.post('https://ynwahid.cloud.okteto.net/orders', body, config)
-					.then(({ data }) => {
-						Swal.fire({
-							icon: 'success',
-							title: 'Order Success',
-							confirmButtonText: 'Ok',
-							confirmButtonColor: '#3085d6',
-							allowOutsideClick: false,
-						}).then((result) => {
-							if (result.isConfirmed) {
-								setTimeout(() => {
-									router.push(`/invoice/${data.data.id}`);
-								}, 1000);
-							}
-						});
-					})
-					.catch((err) => {
-						Swal.fire(
-							'Order failed!',
-							'Sorry, Something gone wrong. Please try again later.',
-							'error'
-						);
-						console.log(err.response);
-						if (err.response.status === 401) {
-							Swal.fire({
-								title: 'Your session has ended!',
-								text: 'Please login again to continue.',
-								icon: 'error',
-								showCancelButton: false,
-								confirmButtonColor: '#3085d6',
-								cancelButtonColor: '#d33',
-								confirmButtonText: 'Ok',
-								allowOutsideClick: false,
-							}).then((result) => {
-								if (result.isConfirmed) {
-									router.push('/login');
-									localStorage.clear();
-								}
-							});
-						}
-					})
-					.finally(() => {
-						setConfirmLoading(false);
-					});
-			} else if (result.isDenied) {
-				setConfirmLoading(false);
-			}
-		});
-	}
+  // Button Handle
+
+
+  function handleButton() {
+    return Swal.fire({
+      title: "Confirm your Order?",
+      icon: "question",
+      showDenyButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setConfirmLoading(true);
+        const token = localStorage.getItem("token");
+        const config = {
+          headers: { Authorization: `Bearer ${token}` },
+        };
+        const body = {
+          service_id: newId,
+          qty: +qty,
+          total: +total,
+          payment_method_id: +payment_method_id,
+          date: date,
+          address: address,
+          city: city,
+          phone: phone,
+        };
+        axios
+          .post("https://ynwahid.cloud.okteto.net/orders", body, config)
+          .then(({ data }) => {
+            Swal.fire({
+              icon: "success",
+              title: "Order Success",
+              confirmButtonText: "Ok",
+              confirmButtonColor: "#3085d6",
+              allowOutsideClick: false,
+            }).then((result) => {
+              if (result.isConfirmed) {
+                router.push(`/invoice/${data.data.id}`);
+              }
+            });
+          })
+          .catch((err) => {
+            Swal.fire(
+              "Order failed!",
+              "Sorry, Something gone wrong. Please try again later.",
+              "error"
+            );
+            console.log(err.response);
+            if (err.response.status === 401) {
+              Swal.fire({
+                title: "Your session has ended!",
+                text: "Please login again to continue.",
+                icon: "error",
+                showCancelButton: false,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Ok",
+                allowOutsideClick: false,
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  router.push("/login");
+                  localStorage.clear();
+                }
+              });
+            }
+          })
+          .finally(() => {
+            setConfirmLoading(false);
+          });
+      } else if (result.isDenied) {
+        setConfirmLoading(false);
+      }
+    });
+  }
 
 	function handlevalidate() {
 		if (payment_method_id === 0 || payment_method_id === '') {
@@ -218,34 +218,33 @@ export default function formpayment(props) {
 		}
 	}
 
-	function validatepayment() {
-		if (history[0].user_id !== undefined) {
-			if (history[history.length - 1].is_paid == false) {
-				console.log('cilik ba');
-				Swal.fire({
-					title: "Your last order payment haven't finished!",
-					text: 'Do you want to see your order history?',
-					icon: 'warning',
-					showCancelButton: true,
-					cancelmButtonColor: '#383130git',
-					confirmButtonColor: '#175C8C',
-					cancelButtonText: 'Go to history page',
-					confirmButtonText: 'keep Ordering',
-					allowOutsideClick: false,
-				}).then((result) => {
-					if (result.isConfirmed) {
-						validateButton();
-					} else {
-						router.push('/history-order');
-					}
-				});
-			} else {
-				validateButton();
-			}
-		} else {
-			validateButton();
-		}
-	}
+  function validatepayment() {
+    if (history[0].user_id !== undefined) {
+      if (history[history.length - 1].is_paid == false) {
+        Swal.fire({
+          title: "Your last order payment haven't finished!",
+          text: "Do you want to see your order history?",
+          icon: "warning",
+          showCancelButton: true,
+          cancelmButtonColor: "#383130git",
+          confirmButtonColor: "#175C8C",
+          cancelButtonText: "Go to history page",
+          confirmButtonText: "keep Ordering",
+          allowOutsideClick: false,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            validateButton();
+          } else {
+            router.push("/history-order");
+          }
+        });
+      } else {
+        validateButton();
+      }
+    } else {
+      validateButton();
+    }
+  }
 
 	//button handle end
 
