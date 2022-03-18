@@ -243,6 +243,8 @@ export default function formpayment(props) {
         validateButton();
       }
     }
+    else {
+      validateButton();
   }
 
   //button handle end
