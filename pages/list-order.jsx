@@ -42,8 +42,8 @@ function ListOrder() {
   });
 
   useEffect(() => {
-    console.log(listOrders, "halooooo");
-  }, [listOrders]);
+    dispatch(allstore.getListOrders());
+  }, [dispatch]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
