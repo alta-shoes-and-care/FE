@@ -18,7 +18,6 @@ export default function formpayment(props) {
   const [city, setCity] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
-  const payment_method_name = "Gopay";
   const [loading, setLoading] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [history, setHistory] = useState([[]]);
@@ -31,6 +30,7 @@ export default function formpayment(props) {
     user_id: 0,
   });
   const total = qty * services.price;
+  const payment_method_name = "";
 
   //for validation
   let validate1 = "";
@@ -328,10 +328,13 @@ export default function formpayment(props) {
                     </option>
                     <option value={1}>BCA Click Pay</option>
                     <option value={2} disabled="true">
-                      Payment 2
+                      BCA Klikpay
                     </option>
                     <option value={3} disabled="true">
-                      Payment 3
+                      CIMB Clicks
+                    </option>
+                    <option value={3} disabled="true">
+                      Danamon Online
                     </option>
                   </select>
                 </div>
