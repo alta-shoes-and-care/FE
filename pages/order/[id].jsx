@@ -210,7 +210,7 @@ export default function formpayment(props) {
         `${validatetotal} form can't be empty. Please fill out the empty fields.`,
         "warning"
       );
-    } else if (!/^[0-9]+(.[0-9]{0})?$/.test(phone)) {
+    } else if (!/^[0-9]+[0-9]*$/gm.test(phone)) {
       Swal.fire("Invalid!", "Invalid Phone Number Format", "error");
     } else if (!/^[0-9]+(.[0-9]{0})?$/.test(qty)) {
       Swal.fire("Invalid!", "Quantity cannot use symbol", "error");
