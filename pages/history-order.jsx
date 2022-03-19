@@ -55,8 +55,6 @@ function History() {
               localStorage.clear();
             }
           });
-        } else {
-          Swal.fire("Ooppss!", "Sorry, the server is error.", "error");
         }
       })
       .finally(() => {
