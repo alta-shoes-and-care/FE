@@ -18,6 +18,7 @@ export default function formpayment(props) {
 	const [city, setCity] = useState('');
 	const [phone, setPhone] = useState('');
 	const [address, setAddress] = useState('');
+	const payment_method_name = 'Gopay';
 	const [loading, setLoading] = useState(false);
 	const [confirmLoading, setConfirmLoading] = useState(false);
 	const [history, setHistory] = useState([[]]);
@@ -111,6 +112,7 @@ export default function formpayment(props) {
 					qty: +qty,
 					total: +total,
 					payment_method_id: +payment_method_id,
+					payment_method_name: payment_method_name,
 					date: date,
 					address: address,
 					city: city,
@@ -208,10 +210,10 @@ export default function formpayment(props) {
 				`${validatetotal} form can't be empty. Please fill out the empty fields.`,
 				'warning'
 			);
-		} else if (!/^[1-9]+[0-9]?$/.test(phone)) {
+		} else if (!/^[0-9]+[0-9]*$/gm.test(phone)) {
 			Swal.fire('Invalid!', 'Invalid Phone Number Format', 'error');
-		} else if (!/^[1-9]+[0-9]?$/.test(qty)) {
-			Swal.fire('Invalid!', 'Quantity cannot be Negative', 'error');
+		} else if (!/^[0-9]+(.[0-9]{0})?$/.test(qty)) {
+			Swal.fire('Invalid!', 'Quantity cannot use symbol', 'error');
 		} else {
 			handleButton();
 		}
@@ -422,7 +424,7 @@ export default function formpayment(props) {
 									</label>
 									<input
 										id="pickupdate"
-										name="setTodaysDate"
+										name="pickupdate"
 										min={new Date().toISOString().split('T')[0]}
 										type="date"
 										maxLength="100"
