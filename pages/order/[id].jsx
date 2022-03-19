@@ -346,7 +346,7 @@ export default function formpayment(props) {
                   <input
                     id="phonenumber"
                     name="phonenumber"
-                    type="text"
+                    type="tel"
                     inputMode="numeric"
                     maxLength="13"
                     placeholder="Phone Number"
@@ -432,6 +432,7 @@ export default function formpayment(props) {
                   <input
                     id="pickupdate"
                     name="pickupdate"
+                    min={new Date().toISOString().split("T")[0]}
                     type="date"
                     maxLength="100"
                     placeholder="Pick Up Date"
