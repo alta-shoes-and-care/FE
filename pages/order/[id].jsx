@@ -30,7 +30,7 @@ export default function formpayment(props) {
     user_id: 0,
   });
   const total = qty * services.price;
-  const payment_method_name = "";
+  let payment_method_name = "";
 
   //for validation
   let validate1 = "";
@@ -93,6 +93,7 @@ export default function formpayment(props) {
   // Button Handle
 
   function handleButton() {
+    paymentname(payment_method_id);
     return Swal.fire({
       title: "Confirm your Order?",
       icon: "question",
@@ -165,6 +166,20 @@ export default function formpayment(props) {
         setConfirmLoading(false);
       }
     });
+  }
+
+  function paymentname(payment_method_id) {
+    if (payment_method_id == 2) {
+      payment_method_name = "Gopay";
+    } else if (payment_method_id == 3) {
+      payment_method_name = "BCA Klikpay";
+    } else if (payment_method_id == 4) {
+      payment_method_name = "Danamon Online";
+    } else if (payment_method_id == 5) {
+      payment_method_name = "Cimb Clicks";
+    } else {
+      payment_method_name = "Gopay";
+    }
   }
 
   function handlevalidate() {
@@ -326,16 +341,10 @@ export default function formpayment(props) {
                     >
                       Choose Payment
                     </option>
-                    <option value={1}>BCA Click Pay</option>
-                    <option value={2} disabled="true">
-                      BCA Klikpay
-                    </option>
-                    <option value={3} disabled="true">
-                      CIMB Clicks
-                    </option>
-                    <option value={3} disabled="true">
-                      Danamon Online
-                    </option>
+                    <option value={2}>Gopay</option>
+                    <option value={3}>BCA Klikpay</option>
+                    <option value={4}>Danamon Online</option>
+                    <option value={5}>Cimb Clicks</option>
                   </select>
                 </div>
 
