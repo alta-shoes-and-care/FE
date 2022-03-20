@@ -104,7 +104,9 @@ export default function invoice() {
       if (result.isConfirmed) {
         setLoading(true);
         router.push(`/payment_status/${id}`);
-        window.open(`${invoice.url}`, "_blank");
+        if (invoice.is_paid == false) {
+          window.open(`${invoice.url}`, "_blank");
+        }
       }
     });
   }
