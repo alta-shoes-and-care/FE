@@ -144,7 +144,16 @@ function History() {
                 <div
                   className={` ${styles.content} w-[630px] rounded-lg py-2 px-3 my-3 bg-white shadow-md`}
                 >
-                  <h1 className=" text-xl">{el.service_title}</h1>
+                  <div className=" flex justify-between">
+                    <h1 className=" text-xl">{el.service_title}</h1>
+
+                    {el.has_refunded ? (
+                      <p className=" text-red-500">REFUNDED</p>
+                    ) : (
+                      <></>
+                    )}
+                  </div>
+
                   <div className=" bg-gray-600 w-[200px] my-1 h-0.5"></div>
                   {/* status */}
                   <div className={`flex mt-1 justify-between ${styles.status}`}>

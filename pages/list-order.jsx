@@ -410,9 +410,12 @@ function ListOrder() {
                           className=" flex items-center hover:cursor-pointer"
                           onClick={() => handleRefund(el)}
                         >
-                          {el.status == "cancel" &&
-                          el.is_paid &&
-                          !el.has_refunded ? (
+                          {(el.status == "cancel" &&
+                            el.is_paid &&
+                            !el.has_refunded) ||
+                          (el.status == "rejected" &&
+                            el.is_paid &&
+                            !el.has_refunded) ? (
                             <div className=" text-red-500 flex">
                               <p className="text-xl mt-0.5 mr-1">
                                 <RiExchangeDollarLine />
