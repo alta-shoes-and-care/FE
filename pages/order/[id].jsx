@@ -66,7 +66,6 @@ export default function formpayment(props) {
           setHistory(data.data);
         })
         .catch((err) => {
-          console.log(err, "error bang");
           if (err.response.status === 401) {
             Swal.fire({
               title: "Your session has ended!",
@@ -140,7 +139,6 @@ export default function formpayment(props) {
               "Sorry, Something gone wrong. Please try again later.",
               "error"
             );
-            console.log(err.response);
             if (err.response.status === 401) {
               Swal.fire({
                 title: "Your session has ended!",
@@ -195,7 +193,7 @@ export default function formpayment(props) {
     if (date === "") {
       validate4 = " Date ";
     }
-    if (qty === 0) {
+    if (qty === 0 || qty === "") {
       validate5 = " Quantity ";
     }
     if (address === "") {
@@ -209,6 +207,17 @@ export default function formpayment(props) {
 
   function validateButton() {
     handlevalidate();
+    var check = date;
+    var today = new Date();
+    var today2 = today.toISOString().substr(0, 10);
+    let validatedate = true;
+
+    var d1 = Date.parse(today2);
+    var d2 = Date.parse(check);
+
+    if (d2 < d1) {
+      validatedate = false;
+    }
 
     if (
       payment_method_id === 0 ||
@@ -229,6 +238,12 @@ export default function formpayment(props) {
       Swal.fire("Invalid!", "Invalid Phone Number Format", "error");
     } else if (!/^[0-9]+(.[0-9]{0})?$/.test(qty)) {
       Swal.fire("Invalid!", "Quantity cannot use symbol", "error");
+    } else if (validatedate == false) {
+      Swal.fire(
+        "Invalid!",
+        "Make sure you choose a right date to order (you cannot choose past date)",
+        "error"
+      );
     } else {
       handleButton();
     }
@@ -236,7 +251,10 @@ export default function formpayment(props) {
 
   function validatepayment() {
     if (history[0].user_id !== undefined) {
-      if (history[history.length - 1].is_paid == false) {
+      if (
+        history[history.length - 1].is_paid == false &&
+        history[history.length - 1].status != "cancel"
+      ) {
         Swal.fire({
           title: "Your last order payment haven't finished!",
           text: "Do you want to see your order history?",
