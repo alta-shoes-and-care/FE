@@ -66,7 +66,7 @@ export default function services() {
       if (!localStorage.getItem("token")) {
         return (
           <button
-            class="bg-[#175C8C] hover:bg-white text-white hover:text-black font-bold py-4 px-6 border border-black rounded-lg"
+            class="bg-[#175C8C] hover:bg-white hover:bg-opacity-60 text-white hover:text-black font-bold lg:py-4 lg:px-6 md:py-4 md:px-6 py-2 px-3 border border-black rounded-lg"
             onClick={handleOrder2}
           >
             <p className="text-xl rounded-xl"> Book this service </p>
@@ -79,7 +79,7 @@ export default function services() {
       ) {
         return (
           <button
-            class="bg-[#175C8C] hover:bg-white hover:bg-opacity-60 text-white hover:text-black font-bold py-4 px-6 border border-black rounded-lg"
+            class="bg-[#175C8C] hover:bg-white hover:bg-opacity-60 text-white hover:text-black font-bold lg:py-4 lg:px-6 md:py-4 md:px-6 py-1 px-2 border border-black rounded-lg"
             onClick={handleOrder}
           >
             <p className="text-xl rounded-xl"> Book this service </p>
@@ -107,19 +107,19 @@ export default function services() {
         <div className="z-1 w-[100vw] h-screen bg-[#000009] bg-opacity-30 text-center">
           <div class="z-2 grid grid-cols-2 gap-4 bg-cover mt-[100px]">
             {/* Desc Card */}
-            <div className="ml-[15vh] mt-[5vh] z-3 w-[75vh] h-auto bg-[#ffffff] bg-opacity-80  text-left rounded-lg pb-5">
-              <p className="text-black bold text-4xl mt-[3.5vh] px-10">
+            <div className="lg:ml-[15vh] lg:mt-[6vh] mt-[2vh] mb-[2vh] z-3 lg:w-[75vh] w-[100vw] h-auto bg-[#ffffff] bg-opacity-80  text-left rounded-lg pb-5">
+              <p className="text-black bold lg:text-4xl text-2xl mt-[3.5vh] px-10">
                 {services.title}
               </p>
-              <p className="text-black text-left text-lg mt-[5vh] px-10 ">
+              <p className="text-black text-left lg:text-lg text-sm mt-[5vh] px-10 ">
                 {services.description}
               </p>
-              <p className="text-black text-md pt-5 text-left px-10">
+              <p className="text-black lg:text-md text-sm pt-5 text-left px-10">
                 Maximum pick-up service for same-day order at 18.00. Any order
                 after that will be picked up the next day
                 <bintang className="text-red-600">*</bintang>
               </p>
-              <p className="text-primary text-md bold italic pt-5 text-left px-10">
+              <p className="text-primary lg:text-md text-sm bold italic pt-5 text-left px-10">
                 Services may varry depend on shoes material
                 <bintang className="text-red-600">*</bintang>
               </p>
@@ -131,8 +131,8 @@ export default function services() {
             {/* Desc Card End*/}
 
             {/* Price and Button*/}
-            <div class="z-4 object-bottom ml-[5vh]">
-              <p className="z-5 text-white text-6xl mt-[55vh] mb-[3vh]">
+            <div class="z-4 object-bottom lg:ml-[5vh] ml-[-5vh] pb-5 lg:pb-0">
+              <p className="z-5 lg:text-white text-black lg:text-6xl text-3xl lg:mt-[55vh] mt-[66vh] mb-[3vh]">
                 <NumberFormat
                   value={services.price}
                   displayType={"text"}
