@@ -307,7 +307,7 @@ export default function formpayment(props) {
   return (
     <section>
       <div
-        className={`z-0 grid grid-cols-1 lg:h-[110vh] h-screen bg-cover  ${style.bgImage}  `}
+        className={`z-0 grid grid-cols-1 lg:h-[110vh] h-[80vh] bg-cover  ${style.bgImage}  `}
       >
         <div className="z-1 w-[100vw] h-[110vh] bg-[#000009] bg-opacity-30 text-center">
           <div className="z-2 grid grid-cols-1 gap-4 bg-cover">
