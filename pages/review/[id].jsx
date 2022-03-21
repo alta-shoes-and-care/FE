@@ -120,7 +120,7 @@ export default function Review() {
 				console.log(err.response);
 				Swal.fire(
 					`Failed add review!`,
-					'There seems to be a problem with our server :(',
+					'Looks like you already reviewed this order.',
 					'error'
 				);
 				if (err.response.status === 401) {
