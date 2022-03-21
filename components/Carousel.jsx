@@ -32,18 +32,18 @@ export default function Carousel() {
 					clickable: true,
 				}}
 				modules={[Autoplay, EffectFade, Navigation, Pagination]}
-				className='mySwiper'>
+				className="mySwiper">
 				<SwiperSlide>
-					<div className=''>
+					<div className="">
 						<Image
 							src={s1}
-							alt='Slide 1'
-							layout='fill'
-							className='relative brightness-50'
+							alt="Slide 1"
+							layout="fill"
+							className="relative brightness-50"
 						/>
-						<div className='absolute text-white font-bold flex items-center justify-center flex-col text-center w-screen h-[350px] md:h-[650px]'>
-							<h2 className='md:text-4xl text-2xl'>Welcome to</h2>
-							<h1 className='md:text-6xl text-4xl uppercase'>
+						<div className="absolute text-white font-bold flex items-center justify-center flex-col text-center w-screen h-[280px] md:h-[650px]">
+							<h2 className="md:text-4xl text-[22px]">Welcome to</h2>
+							<h1 className="md:text-6xl text-[25px] uppercase">
 								Shoes Service Station
 							</h1>
 						</div>
@@ -54,15 +54,15 @@ export default function Carousel() {
 					<div>
 						<Image
 							src={s2}
-							alt='Slide 2'
-							layout='fill'
-							className='relative brightness-50'
+							alt="Slide 2"
+							layout="fill"
+							className="relative brightness-50"
 						/>
-						<div className='absolute text-white font-bold flex items-center justify-center flex-col text-center w-screen h-[350px] md:h-[650px]'>
-							<h1 className='md:text-6xl text-4xl uppercase'>
+						<div className="absolute text-white font-bold flex items-center justify-center flex-col text-center w-screen h-[280px] md:h-[650px]">
+							<h1 className="md:text-6xl text-[25px] uppercase">
 								respect your shoes
 							</h1>
-							<h2 className='md:text-4xl text-2xl'>
+							<h2 className="md:text-4xl text-[22px]">
 								We'll be there to care for your loved ones when you cannot.
 							</h2>
 						</div>
@@ -73,15 +73,15 @@ export default function Carousel() {
 					<div>
 						<Image
 							src={s3}
-							alt='Slide 3'
-							layout='fill'
-							className='relative brightness-50'
+							alt="Slide 3"
+							layout="fill"
+							className="relative brightness-50"
 						/>
-						<div className='absolute text-white font-bold flex items-center justify-center flex-col text-center w-screen h-[350px] md:h-[650px]'>
-							<h1 className='md:text-6xl text-4xl uppercase'>
+						<div className="absolute text-white font-bold flex items-center justify-center flex-col text-center w-screen h-[280px] md:h-[650px]">
+							<h1 className="md:text-6xl text-[25px] uppercase">
 								Make your shoes look better
 							</h1>
-							<h2 className='md:text-4xl text-2xl'>Wear it with pride.</h2>
+							<h2 className="md:text-4xl text-[22px]">Wear it with pride.</h2>
 						</div>
 					</div>
 				</SwiperSlide>
@@ -90,7 +90,7 @@ export default function Carousel() {
 			<style jsx global>{`
 				.swiper {
 					width: 100%;
-					height: 350px;
+					height: 280px;
 				}
 
 				.swiper-slide {
@@ -100,13 +100,28 @@ export default function Carousel() {
 				.swiper-slide img {
 					display: block;
 					width: 100%;
-					height: 350px;
+					height: 280px;
+				}
+
+				.swiper-button-next,
+				.swiper-button-prev,
+				.swiper-button-disabled,
+				.swiper-button-disabled {
+					opacity: 0 !important;
 				}
 
 				@media (min-width: 768px) {
 					.swiper,
 					.swiper-slide img {
 						height: 670px;
+					}
+					.swiper-button-next,
+					.swiper-button-prev {
+						opacity: 1 !important;
+					}
+					.swiper-button-disabled,
+					.swiper-button-disabled {
+						opacity: 0.3 !important;
 					}
 				}
 			`}</style>

@@ -49,11 +49,9 @@ export default function Review() {
 							setOrder_id(data.data.id);
 							console.log(data);
 							setIsValid(true);
-						} else {
-							router.push('/404');
+						} else if (localStorage.getItem('user_id') !== data.data.user_id) {
+							return router.push('/404');
 						}
-					} else {
-						return <></>;
 					}
 				})
 				.catch((err) => {
@@ -73,6 +71,8 @@ export default function Review() {
 								localStorage.clear();
 							}
 						});
+					} else {
+						router.push('/404');
 					}
 				})
 				.finally(() => {
@@ -120,7 +120,7 @@ export default function Review() {
 				console.log(err.response);
 				Swal.fire(
 					`Failed add review!`,
-					'There seems to be a problem with our server :(',
+					'Looks like you already reviewed this order.',
 					'error'
 				);
 				if (err.response.status === 401) {
@@ -154,33 +154,33 @@ export default function Review() {
 			<div
 				className={` w-[700px] h-screen my-8 p-4 flex justify-center flex-col items-center ${styles.historyGlass}`}>
 				{/* content */}
-				<h1 className=' text-5xl text-center font-bold mb-12 '>
+				<h1 className=" text-5xl text-center font-bold mb-12 ">
 					Thank you for using our service
 				</h1>
 				<div>
-					<form className=' w-[528px]' action='#' method='POST'>
-						<h1 className=' text-3xl mb-[-13px]'>Rate</h1>
+					<form className=" w-[528px]" action="#" method="POST">
+						<h1 className=" text-3xl mb-[-13px]">Rate</h1>
 
 						<ReactStars {...starReview} onChange={ratingChanged} />
 
-						<h1 className=' text-3xl mb-3'>Comment</h1>
+						<h1 className=" text-3xl mb-3">Comment</h1>
 						<textarea
 							required
-							maxLength='320'
+							maxLength="320"
 							value={review}
 							onChange={(e) => {
 								setReview(e.target.value);
 							}}
 							className={`form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700  bg-clip-padding border border-solid border-gray-300 rounded-lg transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none ${styles.inputbg}`}
-							id='exampleFormControlTextarea1'
-							rows='3'
-							placeholder='Your comment'></textarea>
+							id="exampleFormControlTextarea1"
+							rows="3"
+							placeholder="Your comment"></textarea>
 
-						<div className='flex justify-center'>
+						<div className="flex justify-center">
 							<button
-								type='submit'
+								type="submit"
 								onClick={validateReview}
-								className='w-[250px] h-[50px] mt-10 text-center text-[18px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium rounded-xl text-white bg-primary hover:bg-transparent hover:border-primary hover:border-2 hover:text-primary hover:font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary  transition ease-linear duration-500'>
+								className="w-[250px] h-[50px] mt-10 text-center text-[18px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium rounded-xl text-white bg-primary hover:bg-transparent hover:border-primary hover:border-2 hover:text-primary hover:font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary  transition ease-linear duration-500">
 								Submit
 							</button>
 						</div>
