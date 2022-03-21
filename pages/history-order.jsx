@@ -152,6 +152,11 @@ function History() {
                     ) : (
                       <></>
                     )}
+                    {!el.has_refunded && el.status == "done" ? (
+                      <p className=" text-green-600">COMPLETE</p>
+                    ) : (
+                      <></>
+                    )}
                   </div>
 
                   <div className=" bg-gray-600 w-[200px] my-1 h-0.5"></div>
@@ -198,8 +203,8 @@ function History() {
                       <p>{el.id}</p>
                     </div>
                     {el.status === "delivering" ? (
-                      <div className=" flex hover:text-gray-500">
-                        <p className="text-xl mt-0.5 mr-0.5">
+                      <div className=" flex text-green-600 ">
+                        <p className="text-xl mt-0.5 mr-0.5 ">
                           <AiOutlineFileDone />
                         </p>
                         <button onClick={() => handleConfirm(el)}>
