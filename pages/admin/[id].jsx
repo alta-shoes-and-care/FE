@@ -237,6 +237,11 @@ function EditItem() {
               icon: "success",
               title: "Success edit data",
             });
+
+            setTimeout(() => {
+              router.push("/admin");
+            }, 2000);
+
             return dispatch(allstore.getAllService());
           })
           .catch((err) => {
