@@ -104,7 +104,9 @@ export default function invoice() {
       if (result.isConfirmed) {
         setLoading(true);
         router.push(`/payment_status/${id}`);
-        window.open(`${invoice.url}`, "_blank");
+        if (invoice.is_paid == false) {
+          window.open(`${invoice.url}`, "_blank");
+        }
       }
     });
   }
@@ -116,7 +118,7 @@ export default function invoice() {
   return (
     <section>
       <div
-        className={`bold z-0 grid grid-cols-1 w-screen h-screen bg-cover ${style.bgImage2}  `}
+        className={`bold z-0 grid grid-cols-1 lg:w-screen lg:h-screen h-[700px] w-screen bg-cover ${style.bgImage2}  `}
       >
         <div className="bold z-1 w-[100vw] h-screen bg-[#000009] bg-opacity-5 text-left">
           <div className="z-2 grid grid-cols-1 gap-4 bg-cover ">
@@ -126,7 +128,7 @@ export default function invoice() {
               </p>
             </div>
             {/* Desc Card */}
-            <div className="py-5 container ml-[30vw] z-3 w-[40vw] h-auto bg-[#ffffff] bg-opacity-90  text-left rounded-lg p-5">
+            <div className="py-5 container lg:ml-[30vw] z-3 lg:w-[40vw] h-auto w-screen bg-[#ffffff] bg-opacity-90  text-left rounded-lg p-5">
               <div className="grid grid-cols-1 center pb-5">
                 <p className="text-black text-center bold text-3xl">
                   Service type: {invoice.service_title}
@@ -201,7 +203,7 @@ export default function invoice() {
             </div>
 
             <div className="ml-[25vw] mt-[-1vh] text-center">
-              <div className="py-1 bold text-white text-3xl">
+              <div className="py-3 bold text-white text-3xl">
                 Subtotal :{" "}
                 <NumberFormat
                   value={invoice.total}

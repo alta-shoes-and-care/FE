@@ -307,22 +307,24 @@ export default function formpayment(props) {
   return (
     <section>
       <div
-        className={`z-0 grid grid-cols-1 h-[110vh] bg-cover  ${style.bgImage}  `}
+        className={`z-0 grid grid-cols-1 lg:h-[110vh] h-[80vh] bg-cover  ${style.bgImage}  `}
       >
         <div className="z-1 w-[100vw] h-[110vh] bg-[#000009] bg-opacity-30 text-center">
           <div className="z-2 grid grid-cols-1 gap-4 bg-cover">
             <div className="mt-[2.5vh]">
-              <p className="py-4 text-5xl text-white">Confirm your order</p>
+              <p className="py-4 lg:text-5xl text-3xl text-white">
+                Confirm your order
+              </p>
             </div>
 
             {/* Desc Card */}
 
-            <div className="container my-auto ml-[25vw] z-3 w-[50vw] h-auto bg-[#ffffff] bg-opacity-80 text-left rounded-lg pb-5">
-              <div className="grid grid-cols-1 text-center mt-[0.5vh]  px-10 py-5">
-                <p className="text-black bold text-3xl mb-2">
+            <div className="container my-auto lg:ml-[25vw] z-3 lg:w-[50vw] w-screen h-auto bg-[#ffffff] bg-opacity-80 text-left rounded-lg pb-5">
+              <div className="grid grid-cols-1 text-center mt-[0.5vh]  lg:px-10 px-4 py-5 ">
+                <p className="text-black bold lg:text-3xl text-xl mb-2">
                   Service type: {services.title}
                 </p>
-                <p className="text-gray-800 text-justify text-md mt-[1vh]">
+                <p className="text-gray-800 text-justify lg:text-md text-sm mt-[1vh]">
                   {services.description}
                 </p>
               </div>
@@ -332,13 +334,13 @@ export default function formpayment(props) {
               {/*payment - phone number - quantity */}
 
               <div className="grid grid-cols-3 mt-[1vh]">
-                <h1 className="text-left text-[#175C8C] bold text-lg ml-[3vw]">
+                <h1 className="text-left text-[#175C8C] bold lg:text-lg text-sm ml-[3vw]">
                   Payment Method<dot className="text-red-600">*</dot>
                 </h1>
-                <h1 className="text-left text-[#175C8C] bold text-lg ">
+                <h1 className="text-left text-[#175C8C] bold lg:text-lg text-sm ">
                   Phone Number<dot className="text-red-600">*</dot>
                 </h1>
-                <h1 className="text-left text-[#175C8C] bold text-lg ml-[3vw]">
+                <h1 className="text-left text-[#175C8C] bold lg:text-lg text-sm ml-[3vw]">
                   Quantity<dot className="text-red-600">*</dot>
                 </h1>
               </div>
@@ -346,7 +348,7 @@ export default function formpayment(props) {
               <div className="grid grid-cols-3">
                 <div className="">
                   <select
-                    className="ml-10 lg:h-[50px] h-[30px] w-[11.5vw] bg-transparent appearance-none lg:rounded-xl rounded-md relative px-2 py-2 border-2 border-primary placeholder-gray-700 text-black lg:text-[18px] text-[15px] focus:outline-none focus:ring-primary focus:border-primary focus:z-10"
+                    className="lg:ml-10 ml-[3vw] lg:h-[50px] h-[35px] lg:w-[11.5vw] w-[25vw] bg-transparent appearance-none lg:rounded-xl rounded-md relative px-2 py-2 border-2 border-primary placeholder-gray-700 text-black lg:text-[18px] text-[10px] focus:outline-none focus:ring-primary focus:border-primary focus:z-10"
                     value={payment_method_id}
                     onChange={(e) => {
                       setPayment_method_id(e.target.value);
@@ -379,7 +381,7 @@ export default function formpayment(props) {
                     placeholder="Phone Number"
                     autoComplete="off"
                     required
-                    className="lg:h-[50px] h-[30px] lg:w-full w-[50%] bg-transparent appearance-none lg:rounded-xl rounded-md relative px-3 py-2 border-2 border-primary placeholder-gray-700 text-black lg:text-[18px] text-[15px] focus:outline-none focus:ring-primary focus:border-primary focus:z-10W"
+                    className="lg:h-[50px] h-[35px] lg:w-full w-[32vw] bg-transparent appearance-none lg:rounded-xl rounded-md relative px-3 py-2 border-2 border-primary placeholder-gray-700 text-black lg:text-[18px] text-[10px] focus:outline-none focus:ring-primary focus:border-primary focus:z-10W"
                     value={phone}
                     onChange={(e) => {
                       setPhone(e.target.value);
@@ -399,7 +401,7 @@ export default function formpayment(props) {
                     placeholder="0"
                     autoComplete="off"
                     required
-                    className="ml-[9vw] lg:h-[50px] h-[30px] w-0.5% bg-transparent appearance-none lg:rounded-xl rounded-md relative px-3 py-2 border-2 border-primary placeholder-gray-700 text-black lg:text-[18px] text-[15px] focus:outline-none focus:ring-primary focus:border-primary focus:z-10"
+                    className="ml-[9vw] lg:h-[50px] h-[35px] w-0.5% bg-transparent appearance-none lg:rounded-xl rounded-md relative px-3 py-2 border-2 border-primary placeholder-gray-700 text-black lg:text-[18px] text-[10px] focus:outline-none focus:ring-primary focus:border-primary focus:z-10"
                     min="1"
                     max="9"
                     value={qty}
@@ -415,10 +417,10 @@ export default function formpayment(props) {
               {/*city - pickup date*/}
 
               <div className="grid grid-cols-3">
-                <h1 className="pt-2 text-left text-[#175C8C] bold text-lg ml-[3vw]">
+                <h1 className="pt-2 text-left text-[#175C8C] bold lg:text-lg text-sm ml-[3vw]">
                   City<dot className="text-red-600">*</dot>
                 </h1>
-                <h1 className="pt-2 text-left text-[#175C8C] bold text-lg">
+                <h1 className="pt-2 text-left text-[#175C8C] bold lg:text-lg text-sm">
                   Pick-Up Date<dot className="text-red-600">*</dot>
                 </h1>
               </div>
@@ -426,7 +428,7 @@ export default function formpayment(props) {
               <div className="grid grid-cols-3 ">
                 <div className="">
                   <select
-                    className="ml-10 lg:h-[50px] h-[30px] w-[11.5vw] bg-transparent appearance-none lg:rounded-xl rounded-md relative px-2 py-2 border-2 border-primary placeholder-gray-700 text-black lg:text-[18px] text-[15px] focus:outline-none focus:ring-primary focus:border-primary focus:z-10"
+                    className="lg:ml-10 ml-[3vw] lg:h-[50px] h-[35px] lg:w-[11.5vw] w-[25vw] bg-transparent appearance-none lg:rounded-xl rounded-md relative px-2 py-2 border-2 border-primary placeholder-gray-700 text-black lg:text-[18px] text-[10px] focus:outline-none focus:ring-primary focus:border-primary focus:z-10"
                     value={city}
                     onChange={(e) => {
                       setCity(e.target.value);
@@ -465,7 +467,7 @@ export default function formpayment(props) {
                     placeholder="Pick Up Date"
                     autoComplete="off"
                     required
-                    className="lg:h-[50px] h-[30px] lg:w-full w-[50%] bg-transparent appearance-none lg:rounded-xl rounded-md relative px-3 py-2 border-2 border-primary placeholder-gray-700 text-black lg:text-[18px] text-[15px] focus:outline-none focus:ring-primary focus:border-primary focus:z-10"
+                    className="lg:h-[50px] h-[35px] lg:w-full w-[32vw] bg-transparent appearance-none lg:rounded-xl rounded-md relative px-3 py-2 border-2 border-primary placeholder-gray-700 text-black lg:text-[18px] text-[10px] focus:outline-none focus:ring-primary focus:border-primary focus:z-10"
                     value={date}
                     onChange={(e) => {
                       setDate(e.target.value);
@@ -479,12 +481,12 @@ export default function formpayment(props) {
               {/*Address - Subtotal*/}
 
               <div className="grid grid-cols-2">
-                <h1 className="pt-2 text-left text-[#175C8C] bold text-lg ml-[3vw]">
+                <h1 className="pt-2 text-left text-[#175C8C] bold lg:text-lg text-sm ml-[3vw]">
                   Address <dot className="text-red-600">*</dot>
                 </h1>
               </div>
 
-              <div className="grid grid-cols-2 ml-[6vh]">
+              <div className="grid grid-cols-2 lg:ml-[6vh] ml-[3vw]">
                 <div className="">
                   <label htmlFor="Address" className="sr-only">
                     Address
@@ -497,7 +499,7 @@ export default function formpayment(props) {
                     placeholder="Address"
                     autoComplete="off"
                     required
-                    className="h-[25vh] w-[30.5vw] bg-transparent appearance-none lg:rounded-xl rounded-md relative px-3 py-2 border-2 border-primary placeholder-gray-700 text-black lg:text-[18px] text-[15px] focus:outline-none focus:ring-primary focus:border-primary focus:z-10"
+                    className="lg:h-[25vh] h-[12vh] lg:w-[30.5vw] w-[55vw] bg-transparent appearance-none lg:rounded-xl rounded-md relative lg:px-3 lg:py-2 border-2 border-primary placeholder-gray-700 text-black lg:text-[18px] text-[10px] focus:outline-none focus:ring-primary focus:border-primary focus:z-10"
                     value={address}
                     onChange={(e) => {
                       setAddress(e.target.value);
@@ -507,8 +509,10 @@ export default function formpayment(props) {
 
                 <div className="ml-[5vw] text-center">
                   <div className="">
-                    <p className="text-2xl text-center bold">Subtotal</p>
-                    <h1 className="text-2xl text-center bold">
+                    <p className="lg:text-2xl text-lg text-center bold">
+                      Subtotal
+                    </p>
+                    <h1 className="lg:text-2xl text-lg text-center bold">
                       <NumberFormat
                         value={total}
                         displayType={"text"}
@@ -520,10 +524,10 @@ export default function formpayment(props) {
                     </h1>
                   </div>
                   <button
-                    className="ml-[3.5vw] lg:h-[50px] h-[30px] w-[12vw] mt-5 lg:mt-10 text-center lg:text-[18px] text-[15px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium lg:rounded-xl rounded-md text-white bg-primary hover:bg-transparent hover:bg-opacity-0 hover:border-primary hover:border-2 hover:text-primary hover:font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                    className="lg:ml-[3.5vw] ml-[8vw] lg:h-[50px] h-[30px] lg:w-[12vw] w-[30vw] mt-5 lg:mt-10 text-center lg:text-[18px] text-[15px] items-center group relative flex justify-center py-2 px-4 border border-transparent font-medium lg:rounded-xl rounded-md text-white bg-primary hover:bg-transparent hover:bg-opacity-0 hover:border-primary hover:border-2 hover:text-primary hover:font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                     onClick={validatepayment}
                   >
-                    <p className="text-md text-center rounded-xl">
+                    <p className="lg:text-md text-sm text-center rounded-xl">
                       {" "}
                       Confirm Order{" "}
                     </p>

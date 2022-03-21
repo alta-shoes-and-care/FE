@@ -153,22 +153,22 @@ export default function endpoint() {
   return (
     <section>
       <div
-        className={`z-0 grid grid-cols-1 h-screen bg-cover ${style.bgImage3}  `}
+        className={`z-0 grid grid-cols-1 lg:h-screen h-[80vh] bg-cover ${style.bgImage3}  `}
       >
         <div className="z-1 w-[100vw] h-screen bg-[#000009] bg-opacity-0 text-left">
           <div className="z-2 grid grid-cols-1 gap-4 bg-cover">
             {/* Desc Card */}
-            <div className="container ml-[22vw] mt-[16vh] z-3 w-[40vw] h-auto bg-[#ffffff] bg-opacity-80 hover:shadow-xl text-left rounded-lg pb-5">
+            <div className="container lg:ml-[22vw] ml-[10vw] lg:mt-[16vh] mt-[8vh] z-3 lg:w-[40vw] w-full h-auto bg-[#ffffff] bg-opacity-80 hover:shadow-xl text-left rounded-lg pb-5">
               <div className="grid grid-cols-1 text-center px-10 py-3">
-                <p className="text-black text-center bold text-4xl">
+                <p className="text-black text-center bold lg:text-4xl text-3xl">
                   Thankyou for using our services
                 </p>
-                <p className="text-gray-900 bold text-md text-center mt-[3vh]">
+                <p className="text-gray-900 bold lg:text-md text-sm text-center mt-[3vh]">
                   If you already finished the payment, click refresh to check
                   your payment status
                 </p>
               </div>
-              <div className="grid grid-cols-1 text-center w-[20vw] mt-[1vh] ml-[10vw]">
+              <div className="grid grid-cols-1 text-center lg:w-[20vw] w-[70vw] mt-[1vh] lg:ml-[10vw] ml-[15vw]">
                 <button
                   className="bg-[#175C8C] hover:bg-white hover:bg-opacity-0 text-white hover:text-black font-bold py-2 px-2 border border-black rounded-lg"
                   onClick={refreshPage}
@@ -179,7 +179,7 @@ export default function endpoint() {
                   </p>
                 </button>
               </div>
-              <div className="grid grid-cols-1 text-center px-10 py-3">
+              <div className="grid grid-cols-1 text-center lg:px-10 lg:py-3 py-10 ">
                 <p className="text-black text-center bold text-2xl">
                   Order #{id} Payment Status :
                 </p>
@@ -193,7 +193,7 @@ export default function endpoint() {
                   </div>
                 )}
               </div>
-              <p className="text-gray-900 text-md text-center mt-[5vh]">
+              <p className="text-gray-900 text-md text-center lg:mt-[5vh] mt-0">
                 Forgot to pay? see you payment receipt
                 <beb
                   className=" px-1 italic underline text-primary cursor-pointer"
