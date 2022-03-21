@@ -77,35 +77,37 @@ const data = [
 export default function FindUs() {
 	return (
 		<div
-			className='bg-no-repeat bg-cover'
+			className="bg-no-repeat bg-cover"
 			style={{
 				backgroundImage:
 					'url(https://images.unsplash.com/photo-1581007036738-f2fabcd681c4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80)',
 			}}>
-			<div className='container mx-auto py-8 divide-y-[1px] divide-gray-500'>
+			<div className="container mx-auto py-8 divide-y-[1px] divide-gray-500">
 				<div>
-					<h1 className='lg:text-[48px] text-[36px] text-white font-bold text-center'>
+					<h1 className="lg:text-[48px] text-[36px] text-white font-bold text-center">
 						Find Us
 					</h1>
-					<h2 className='font-medium text-white lg:text-[24px] text-[18px] text-center mb-10'>
+					<h2 className="font-medium text-white lg:text-[24px] text-[18px] text-center mb-10">
 						Our branches throughout Indonesia :
 					</h2>
 				</div>
 
-				<div className='flex flex-col lg:flex-row lg:flex-wrap mx-auto lg:w-3/4 w-full'>
+				<div className="flex flex-col lg:flex-row lg:flex-wrap mx-auto lg:w-3/4 w-full">
 					{data.map((el, i) => (
-						<div className='mt-10 mx-auto flex justify-between lg:w-[45%] w-[80%] rounded-md bg-white bg-opacity-80 backdrop-blur-[7px] drop-shadow hover:bg-opacity-90 cursor-pointer'>
-							<div className='w-1/5 pl-5 pt-1'>
-								<FaMapMarkerAlt className='lg:w-[45px] w-[30px] lg:h-[60px] h-[45px] text-primary' />
+						<div
+							key={i}
+							className="mt-10 mx-auto flex justify-between lg:w-[45%] w-[80%] rounded-md bg-white bg-opacity-90 backdrop-blur-[10px] drop-shadow cursor-pointer">
+							<div className="w-1/5 flex justify-center items-center">
+								<FaMapMarkerAlt className="lg:w-[45px] w-[30px] lg:h-[60px] h-[45px] text-primary" />
 							</div>
 
-							<div className='w-4/5 py-5'>
-								<p className='lg:text-[18px] text-[16px] font-semibold'>
+							<div className="w-4/5 py-5">
+								<p className="lg:text-[18px] text-[16px] font-semibold">
 									{el.branch}
 								</p>
-								<p className='lg:text-[18px] text-[16px]'>{el.address}</p>
-								<p className='lg:text[18px] text-[16px]'>
-									<FaEnvelope className='text-primary inline' /> {el.email}
+								<p className="lg:text-[18px] text-[16px]">{el.address}</p>
+								<p className="lg:text[18px] text-[16px]">
+									<FaEnvelope className="text-primary inline" /> {el.email}
 								</p>
 							</div>
 						</div>
