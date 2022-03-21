@@ -140,7 +140,6 @@ function Login() {
     });
   }
 
-<<<<<<< HEAD
   function returnLogin() {
     if (typeof window !== "undefined") {
       if (!localStorage.getItem("token")) {
@@ -152,8 +151,8 @@ function Login() {
                 "url(https://images.unsplash.com/photo-1495555961986-6d4c1ecb7be3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80)",
             }}
           >
-            <div className="container min-h-screen min-w-full flex justify-center text-center bg-[#f0f0f0] bg-opacity-30">
-              <div className="w-[70%] h-[50%] lg:w-[600px] lg:h-[600px] bg-white bg-opacity-50 backdrop-blur-[10px] my-auto flex justify-center items-center rounded-2xl">
+            <div className="container min-h-screen min-w-full flex justify-center text-center bg-[#f0f0f0] bg-opacity-30 bg-fixed">
+              <div className="w-[400px] h-[400px] lg:w-[600px] lg:h-[600px] bg-white bg-opacity-50 backdrop-blur-[10px] my-auto flex justify-center items-center rounded-2xl bg-fixed">
                 <div>
                   <h1 className="font-bold text-[30px] lg:text-[40px] text-primary">
                     Welcome back!
@@ -161,27 +160,6 @@ function Login() {
                   <h4 className="font-md text-[14px] lg:text-[20px] text-black">
                     Login to your account.
                   </h4>
-=======
-	function returnLogin() {
-		if (typeof window !== 'undefined') {
-			if (!localStorage.getItem('token')) {
-				return (
-					<div
-						className="container min-h-screen min-w-full flex justify-center text-center bg-cover bg-no-repeat"
-						style={{
-							backgroundImage:
-								'url(https://images.unsplash.com/photo-1495555961986-6d4c1ecb7be3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80)',
-						}}>
-						<div className="container min-h-screen min-w-full flex justify-center text-center bg-[#f0f0f0] bg-opacity-30 bg-fixed">
-							<div className="w-[400px] h-[400px] lg:w-[600px] lg:h-[600px] bg-white bg-opacity-50 backdrop-blur-[10px] my-auto flex justify-center items-center rounded-2xl bg-fixed">
-								<div>
-									<h1 className="font-bold text-[30px] lg:text-[40px] text-primary">
-										Welcome back!
-									</h1>
-									<h4 className="font-md text-[14px] lg:text-[20px] text-black">
-										Login to your account.
-									</h4>
->>>>>>> cb969634cb25761028a074d3d527c09e3212feb5
 
                   <form
                     className="mt-8 w-[528px] mx-auto"
