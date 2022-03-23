@@ -54,7 +54,7 @@ Nowadays, some people are very busy and don't even have time to clean their shoe
 - Login
 - Logout
 
-#### 🌟 As User
+### 🌟 As User
 
 - View the main page
 - View service list and details
@@ -62,7 +62,7 @@ Nowadays, some people are very busy and don't even have time to clean their shoe
 - View order history
 - Added review orders
 
-#### ✨ As Admin
+### ✨ As Admin
 
 - Added new services
 - Editing service
@@ -101,29 +101,28 @@ npm run dev
 
 - [NextJS (ReactJS Framework)](https://nextjs.org/)
 - [TailwindCSS](https://tailwindcss.com/)
-- [axios](https://www.npmjs.com/package/axios)
-- [filepond](https://www.npmjs.com/package/axios)
-- [filepond-plugin-file-validate-size](https://www.npmjs.com/package/filepond-plugin-file-validate-size)
-- [filepond-plugin-file-validate-type](https://www.npmjs.com/package/filepond-plugin-file-validate-type)
-- [filepond-plugin-image-exif-orientation](https://www.npmjs.com/package/filepond-plugin-image-exif-orientation)
-- [filepond-plugin-image-preview](https://www.npmjs.com/package/filepond-plugin-image-preview)
-- [framer-motion](https://www.npmjs.com/package/framer-motion)
-- [moment](https://www.npmjs.com/package/moment)
-- [next](https://www.npmjs.com/package/next)
-- [react](https://www.npmjs.com/package/react)
-- [react-dom](https://www.npmjs.com/package/react-dom)
-- [react-filepond](https://www.npmjs.com/package/react-filepond)
-- [react-icons](https://www.npmjs.com/package/react-icons)
-- [react-iframe](https://www.npmjs.com/package/react-iframe)
-- [react-loading](https://www.npmjs.com/package/react-loading)
-- [react-number-format](https://www.npmjs.com/package/react-number-format)
-- [react-rating-stars-component](https://www.npmjs.com/package/react-react-rating-stars-component)
-- [react-redux](https://www.npmjs.com/package/react-redux)
-- [react-simple-image-viewer](https://www.npmjs.com/package/react-simple-image-viewer)
-- [redux](https://www.npmjs.com/package/redux)
-- [redux-thunk](https://www.npmjs.com/package/redux-thunk)
-- [sweetalert2](https://www.npmjs.com/package/sweetalert2)
-- [swiper](https://www.npmjs.com/package/swiper)
+- [Axios](https://www.npmjs.com/package/axios)
+- [Filepond](https://www.npmjs.com/package/axios)
+- [Filepond Plugin File Validate Size](https://www.npmjs.com/package/filepond-plugin-file-validate-size)
+- [Filepond Plugin File Validate Type](https://www.npmjs.com/package/filepond-plugin-file-validate-type)
+- [Filepond Plugin Image Exif Orientation](https://www.npmjs.com/package/filepond-plugin-image-exif-orientation)
+- [Filepond Plugin Image Preview](https://www.npmjs.com/package/filepond-plugin-image-preview)
+- [Framer Motion](https://www.npmjs.com/package/framer-motion)
+- [Moment](https://www.npmjs.com/package/moment)
+- [Next](https://www.npmjs.com/package/next)
+- [React](https://www.npmjs.com/package/react)
+- [React Dom](https://www.npmjs.com/package/react-dom)
+- [React Filepond](https://www.npmjs.com/package/react-filepond)
+- [React Icons](https://www.npmjs.com/package/react-icons)
+- [React Loading](https://www.npmjs.com/package/react-loading)
+- [React Number Format](https://www.npmjs.com/package/react-number-format)
+- [React Rating Stars Component](https://www.npmjs.com/package/react-react-rating-stars-component)
+- [React Redux](https://www.npmjs.com/package/react-redux)
+- [React Simple Image Viewer](https://www.npmjs.com/package/react-simple-image-viewer)
+- [Redux](https://www.npmjs.com/package/redux)
+- [Redux Thunk](https://www.npmjs.com/package/redux-thunk)
+- [Sweetalert2](https://www.npmjs.com/package/sweetalert2)
+- [Swiper](https://www.npmjs.com/package/swiper)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -232,7 +231,7 @@ final-project-shoes-group-2
 
 <!-- CONTACT -->
 
-## 🤖 Author
+## 👽 Author
 
 - Muhammad Yusuf Untung Wahyudi
   - [Github](https://github.com/myusufuntung)
