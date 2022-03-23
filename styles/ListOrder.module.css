@@ -1,0 +1,55 @@
+.adminbg2 {
+  background: url(../assets/admin-bg2.png);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+@media only screen and (max-width: 480px) {
+  .bgblur {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .left {
+    padding-left: 0;
+    justify-content: space-around;
+    display: flex;
+    align-items: flex-end;
+    width: 355px;
+  }
+  .right {
+    width: auto;
+    display: flex;
+  }
+  .bgcard {
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    width: auto;
+  }
+  .bgcard1 {
+    width: 375px;
+  }
+  .card1 {
+    width: auto;
+    padding: 5px;
+  }
+  .iconstatus {
+    width: 237px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .accept {
+    width: 360px;
+    display: flex;
+    flex-wrap: wrap;
+    padding-right: 10px;
+  }
+  .icon2 {
+    margin-top: 10px;
+  }
+  .titleCard {
+    width: 325px;
+  }
+}
